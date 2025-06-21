@@ -1,5 +1,4 @@
 import footerStyles from "@/styles/footer.module.scss";
-import { Mail } from 'lucide-react';
 
 const Footer = () => {
   return (

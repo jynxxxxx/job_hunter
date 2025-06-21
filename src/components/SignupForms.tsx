@@ -48,7 +48,7 @@ const SignupForm = () => {
     }
 
     // 1. Check for existing email
-    const { data: emailData, error: emailError } = await supabase
+    const { data: emailData } = await supabase
       .from("waitlist")
       .select("email")
       .eq("email", form.email)
@@ -73,7 +73,7 @@ const SignupForm = () => {
     const filePath = `${emailPrefix}_${timestamp}_${sanitizedFilename}`;
 
     console.log(filePath)
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from("resumes")
       .upload(filePath, form.resume, {
         cacheControl: "3600",
