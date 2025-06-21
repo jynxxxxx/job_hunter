@@ -11,7 +11,7 @@ const features = [
   {
     icon: Target,
     title: "지원서 추적기",
-    description: "모든 지원 현황과 마감일을 한눈에 관리하세요. 놓친 기회는 이제 없습니다.",
+    description: "모든 지원 현황과 마감일을 한눈에 관리하세요. 이제 놓치는 기회란 없습니다.",
     color: "green"
   },
   {
@@ -61,7 +61,7 @@ const Features = () => {
                 <feature.icon className={featureStyles.icon}/>
                 <h3 className={featureStyles.cardTitle}>{feature.title}</h3>
               </div>
-              <p className={featureStyles.cardDescription}>{feature.description}</p>
+              {/* <p className={featureStyles.cardDescription}>{feature.description}</p> */}
             </div>
           ))}
         </div>

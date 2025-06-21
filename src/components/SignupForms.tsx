@@ -7,7 +7,7 @@ import { CheckCircle, Clock, Users } from "lucide-react";
 import signUpStyles from "@/styles/signup.module.scss";
 
 const SignupForm = () => {
-  const [signedUp, setSignedUp] = useState(238);
+  const [signedUp, setSignedUp] = useState(268);
   const [form, setForm] = useState<{ email: string; resume: File | null }>({
     email: "",
     resume: null,
@@ -17,7 +17,7 @@ const SignupForm = () => {
     const { count } = await supabase
       .from("waitlist")
       .select("*", { count: "exact", head: true });
-    setSignedUp(238 + (count ?? 0));
+    setSignedUp(268 + (count ?? 0));
   }
 
   useEffect(() => {
@@ -108,30 +108,40 @@ const SignupForm = () => {
 
   return (
     <section className={signUpStyles.ctn} id="signup-forms">
-      <div className={signUpStyles.badge}>
+      {/* <div className={signUpStyles.badge}>
         <Clock className={signUpStyles.icon} />
-        <span>얼리 액세스 마감 임박 • 500명 한정</span>
-      </div>
+        <span>사전 등록 마감 임박 • 500명 한정</span>
+      </div> */}
 
-      <h2 className={signUpStyles.title}>지금 바로 얼리 액세스 신청하기</h2>
+      <h2 className={signUpStyles.title}>지금 바로 사전 등록 신청하기</h2>
       <p className={signUpStyles.subtitle}>
-        7월 정식 출시 전, 선착순 500명에게 드리는 특별 혜택
+        선착순 500명에게 드리는 특별 혜택
       </p>
-             <div className={signUpStyles.benefitctn}>
-          <div className={signUpStyles.benefit}>
-            <CheckCircle className={signUpStyles.checkIcon} />
-            합격 자소서 구조 템플릿
-          </div>
-          <div className={signUpStyles.benefit}>
-            <CheckCircle className={signUpStyles.checkIcon} />
-            카카오, 현대차, 삼성전자 등 대기업 선배들에게 이력서 피드백
-          </div>
-          <div className={signUpStyles.benefit}>
-            <CheckCircle className={signUpStyles.checkIcon} />
-            정식 출시 후 1개월 무료 이용
-          </div>
+      <div className={signUpStyles.benefitctn}>
+        <div className={signUpStyles.disclaimer}> 
+          ①, ②는 사전 등록자 1회 한정. 신청후 72시간내에 전달.
         </div>
-        <div className={signUpStyles.scenario}><strong>현재 {signedUp}명이 신청했습니다.</strong></div>
+        <div className={signUpStyles.benefit}>
+          <div className={signUpStyles.numberIcon}>
+            1
+          </div>
+          합격자 자소서 템플릿
+        </div>
+        <div className={signUpStyles.benefit}>
+          <div className={signUpStyles.numberIcon}>
+            2
+          </div>
+          대기업 선배들에게 이력서 피드백
+        </div>
+        <div className={signUpStyles.benefit}>
+          <div className={signUpStyles.numberIcon}>
+            3
+          </div>
+          정식 출시 후 1개월간 
+          <br />바로지원 서비스 무료
+        </div>
+      </div>
+      <div className={signUpStyles.scenario}><strong>현재 {signedUp}명이 신청했습니다.</strong></div>
 
       <div className={signUpStyles.progressbox}>
         <div className={signUpStyles.progressinfo}>
@@ -175,7 +185,7 @@ const SignupForm = () => {
             />
           </div>
           <button className={signUpStyles.btn}>
-            얼리 액세스 신청하기
+            사전 등록 신청하기
           </button>
         </div>
       </form>

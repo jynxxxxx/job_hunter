@@ -3,6 +3,7 @@
 .ctn{
   background-color: $light;
   padding: 7rem 5rem;
+  color: $dark;
 }
 
 .header{
@@ -30,7 +31,8 @@
   align-items: center;
   height: 100%;
   gap: 0.5rem;
-  text-align: center
+  text-align: center;
+  color: black
 }
 
 .icon {
