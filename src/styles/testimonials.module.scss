@@ -1,0 +1,122 @@
+@use './variables.scss' as *;
+
+.ctn {
+  padding: 6rem 0rem;
+  font-family: $kr-font;
+  background-color: $primary;
+}
+
+.header {
+  margin-bottom: 4rem;
+  padding-left: 7rem;
+
+  h2 {
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+}
+
+.carouselWrapper {
+  overflow: hidden;
+  width: 100vw;
+  padding: 1rem 0;
+}
+
+.carouselTrack {
+  display: flex;
+  width: fit-content;
+  gap: 2rem;
+  animation: scroll-left 80s linear infinite;
+}
+
+.card {
+  width: 30vw;
+  background-color: white;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  font-family: $sub-font;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.icon{
+  margin-right: 0.2rem;
+  margin-bottom: 1rem;
+  color: #FACC1F;
+  fill:currentColor
+}
+
+.tag{
+  display: flex;
+  width: 100%;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
+.letter{
+  margin-top: auto;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem; 
+  margin-right: 1rem;
+}
+
+.name{
+  margin-right: auto;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color:#4b5563
+}
+
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0 1.2rem;
+
+    h2 {
+      font-size: 1.7rem; 
+    }
+
+    p{
+      font-size: 1.5rem; 
+    }
+  }
+
+  .card {
+    width: 70vw;
+  }
+
+  .disclaimer {
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .header {
+    padding-left: 3rem;
+  }
+}
