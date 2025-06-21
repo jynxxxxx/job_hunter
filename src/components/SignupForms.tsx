@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from 'sonner';
-import { CheckCircle, Clock, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import signUpStyles from "@/styles/signup.module.scss";
 
 const SignupForm = () => {
