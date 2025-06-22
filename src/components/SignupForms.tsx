@@ -42,11 +42,10 @@ const SignupForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
 
-    if (!form.email || !form.resume) {
-      toast.error("이메일과 이력서를 모두 제출해주세요.");
+    if (!form.email) {
+      toast.error("이메일을 입력해주세요.");
       return;
     }
-
     // 1. Check for existing email
     const { data: emailData } = await supabase
       .from("waitlist")
@@ -59,32 +58,33 @@ const SignupForm = () => {
       return;
     }
 
+    let filePath = null;
+
     if (form.resume) {
-      console.log("File size in bytes:", form.resume.size);
-      console.log("File size in kilobytes:", form.resume.size / 1024);
-    }
-    if (form.resume.size > 5 * 1024 * 1024) { // 5MB limit
-      toast.error("이 파일은 너무 큽니다. 최대 허용 용량은 50MB입니다.");
-      return;
-    }
-    const timestamp = Date.now();
-    const emailPrefix = form.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '_');
-    const sanitizedFilename = form.resume.name.replace(/\s/g, "_");
-    const filePath = `${emailPrefix}_${timestamp}_${sanitizedFilename}`;
+      if (form.resume.size > 5 * 1024 * 1024) { // 5MB limit
+        toast.error("이 파일은 너무 큽니다. 최대 허용 용량은 50MB입니다.");
+        return;
+      }
 
-    console.log(filePath)
-    const { error: uploadError } = await supabase.storage
-      .from("resumes")
-      .upload(filePath, form.resume, {
-        cacheControl: "3600",
-        upsert: false,
-        contentType: form.resume.type || undefined,
-      });
+      const timestamp = Date.now();
+      const emailPrefix = form.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '_');
+      const sanitizedFilename = form.resume.name.replace(/\s/g, "_");
+      filePath = `${emailPrefix}_${timestamp}_${sanitizedFilename}`;
 
-    if (uploadError) {
-      console.error("Upload error:", uploadError);
-      toast.error("이력서 업로드에 실패했습니다.");
-      return;
+      console.log(filePath)
+      const { error: uploadError } = await supabase.storage
+        .from("resumes")
+        .upload(filePath, form.resume, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: form.resume.type || undefined,
+        });
+
+      if (uploadError) {
+        console.error("Upload error:", uploadError);
+        toast.error("이력서 업로드에 실패했습니다.");
+        return;
+      }
     }
 
     const { error: insertError } = await supabase
@@ -174,13 +174,12 @@ const SignupForm = () => {
         <div className={signUpStyles.rowTwo}>
           <div className={signUpStyles.fileInput}>
             <label>
-              이력서:
+              이력서: (선택사항)
             </label>
             <input
               type="file"
               name="resume"
               onChange={handleChange}
-              required
             />
           </div>
           <button className={signUpStyles.btn}>
