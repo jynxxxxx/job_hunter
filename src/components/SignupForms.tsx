@@ -28,11 +28,11 @@ const SignupForm = () => {
     const { name, value, files } = e.target;
     if (name === "resume") {
       const file = files && files[0];
-      if (file && file.type === "application/pdf") {
+      if (file) {
         setForm(f => ({ ...f, resume: file }));
       } else {
         setForm(f => ({ ...f, resume: null }));
-        toast.error("Please upload a PDF file.");
+        toast.error("이력서 업로드 중 문제가 발생했습니다.");
       }
     } else {
       setForm(f => ({ ...f, [name]: value }));
@@ -78,7 +78,7 @@ const SignupForm = () => {
       .upload(filePath, form.resume, {
         cacheControl: "3600",
         upsert: false,
-        contentType: "application/pdf",
+        contentType: form.resume.type || undefined,
       });
 
     if (uploadError) {
@@ -174,12 +174,11 @@ const SignupForm = () => {
         <div className={signUpStyles.rowTwo}>
           <div className={signUpStyles.fileInput}>
             <label>
-              이력서 (PDF 파일만 가능):
+              이력서:
             </label>
             <input
               type="file"
               name="resume"
-              accept="application/pdf"
               onChange={handleChange}
               required
             />
