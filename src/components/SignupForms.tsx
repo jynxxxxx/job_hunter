@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabase/client";
 import { toast } from 'sonner';
 import { Users } from "lucide-react";
 import signUpStyles from "@/styles/signup.module.scss";
@@ -180,6 +180,7 @@ const SignupForm = () => {
               type="file"
               name="resume"
               onChange={handleChange}
+              className="bg-white px-4 py-2 w-[fit-content] rounded-lg hover:font-bold"
             />
           </div>
           <button className={signUpStyles.btn}>

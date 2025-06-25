@@ -1,16 +1,19 @@
+"use client"
 
-import { Toaster } from 'sonner';
 import HeroSection from '../components/HeroSection';
 import SignupForm from '../components/SignupForms';
 import Features from '../components/Features';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
 import Effects from '@/components/Effects';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
+  const { setJustSignedOut } = useAuth();
+  setJustSignedOut(false); // reset flag if redirected from logout
+
   return (
     <>
-      <Toaster position="top-center" />
       <HeroSection />
       <Features />
       <Testimonials />

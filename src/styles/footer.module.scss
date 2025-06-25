@@ -14,14 +14,15 @@
 .logo {
   font-size: 1.8rem; 
   font-weight: 700;
-  font-family: $kr-font;
   color: white;
 }
 
 .tagline {
   font-family: monospace;
-  font-size: 0/8rem; 
+  font-size: 0.8rem; 
   color: #aec0d6; 
+  display: flex;
+  gap: 0.5rem
 }
 
 .bottomSection {

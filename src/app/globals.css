@@ -1,10 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import "tailwindcss";
 
+@theme {
+  --color-primary: #e0ebf3;
+  --color-light: #f9f9f9;
+  --color-dark: #082f70;
+    --color-bright: #26bcd4;
+}
 
 :root {
   --background: #ffffff;
-  --foreground: #1a2a43;
-  --font-nanum-gothic: 'Nanum Gothic', sans-serif;
+  --foreground: #082f70;
+  --font-noto-sans: "Noto Sans KR", sans-serif;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -23,15 +30,13 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-nanum-gothic);
+  font-family: var(--font-noto-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 a {

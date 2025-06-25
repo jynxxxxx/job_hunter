@@ -81,7 +81,7 @@ const Testimonials = () => {
         <div className={testimonialStyles.carouselTrack}>
           {[...testimonials, ...testimonials].map((testimonial, index) => (
             <div className={testimonialStyles.card} key={index}>
-              <div style={{width: '100%'}}>
+              <div style={{width: '100%', display: 'flex'}}>
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className={testimonialStyles.icon} />
                 ))}
