@@ -75,8 +75,8 @@ export default function AuthForm() {
   };
 
   return (
-    <>
-      <div className="max-w-md mx-auto mt-28 p-4 border rounded-md shadow-md">
+    <div className='h-[90vh]] flex items-center justify-center bg-primary'>
+      <div className="bg-white w-md mx-auto my-28 p-4 border rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">
           {mode === 'signup' ? '회원가입' : '로그인'}
         </h2>
@@ -152,6 +152,6 @@ export default function AuthForm() {
           </button>
         </p>
       </div>
-    </>
+    </div>
   );
 }

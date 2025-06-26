@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
+import { Toaster } from 'sonner';
+import { AuthProvider } from "@/context/AuthContext";
+import { UserDataProvider } from '@/context/UserDataContext';
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "바로지원",
@@ -8,13 +13,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body >
-        {children}
+        <AuthProvider>
+          <UserDataProvider>
+            <Toaster position="top-center" />
+            <Header />
+              {children}
+            <Footer />
+          </UserDataProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -5,7 +5,8 @@
   --color-primary: #e0ebf3;
   --color-light: #f9f9f9;
   --color-dark: #082f70;
-    --color-bright: #26bcd4;
+  --color-bright: #26bcd4;
+  --color-extraDark: #153052
 }
 
 :root {
@@ -33,6 +34,7 @@ body {
   font-family: var(--font-noto-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 * {

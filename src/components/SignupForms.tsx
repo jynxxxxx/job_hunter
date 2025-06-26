@@ -71,7 +71,6 @@ const SignupForm = () => {
       const sanitizedFilename = form.resume.name.replace(/\s/g, "_");
       filePath = `${emailPrefix}_${timestamp}_${sanitizedFilename}`;
 
-      console.log(filePath)
       const { error: uploadError } = await supabase.storage
         .from("resumes")
         .upload(filePath, form.resume, {

@@ -17,15 +17,6 @@ const HeroSection = () => {
 
   return (
     <>
-      <div className={heroStyles.header}>
-        바로지원
-        {/* <img
-          alt="logo"
-          className={heroStyles.logo}
-          src="/logo.png"
-        /> */}
-
-      </div>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
           채용 스트레스, 

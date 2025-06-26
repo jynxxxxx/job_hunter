@@ -1,0 +1,190 @@
+@use './variables.scss' as *;
+
+.tab{
+  text-align: center;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  &:hover {
+    transform: scale(1.03);
+    text-decoration: underline;
+  }
+}
+
+.active{
+  background-color: white;
+  font-weight: 800;
+  &:hover {
+    transform: scale(1);
+  }
+}
+
+.title{
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: $extraDark;
+}
+
+.grid{
+  width:95%;
+  display:grid;
+  grid-template-columns: 2fr 1.5fr;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.leftSide{
+  background: rgba(255, 255, 255, 0.549);
+  padding: 2rem 1.5rem;
+  border-radius: 2rem;
+}
+
+.rightSide{
+  margin:2rem 0 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap:7rem;
+  width: 102%;
+}
+
+.answerCtn{
+  border: 1px gray solid;
+  border-radius: 10px;
+  width: 100%;
+  padding: 2rem 1rem;
+  background-color: white;
+  min-height: 50vh;
+}
+
+.formctn{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 2rem 3rem 0;
+  border-right: 1px gray solid;
+}
+
+.stepGroup{
+  display: flex;
+  flex-direction: column;
+}
+
+.question{
+  font-weight: 700;
+  padding-bottom:0.5rem;
+  font-size: 1.2rem;
+}
+
+.radioCard{
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-left: 1.5rem;
+}
+
+.checkCard{
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-left: 1.5rem;
+}
+
+.free{
+  border-bottom: 1px rgb(152, 150, 150) solid;
+  padding-bottom: 1rem;
+}
+
+.freeField{
+  border: 1px gray solid;
+  padding: 4px;
+  border-radius: 8px;
+  margin-left:6px;
+}
+
+.draft{
+  margin-left: 1.5rem;
+  padding: 1rem;
+  border: 1px gray solid;
+  border-radius: 8px;
+  width: 93%;
+  background-color: white;
+}
+
+.btnctn{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.btn{
+  background-color: $dark;
+  color: white;
+  margin-left: auto;
+  padding: 0.5rem 2.5rem;
+  border-radius: 9px;
+  margin-right: 2rem;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &:disabled {
+    background: #7a7a7a;
+    color: #ebe9e9;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+@keyframes dots {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+}
+
+.animatedDots::after {
+  display: inline-block;
+  content: "";
+  animation: dots 1.2s steps(4, start) infinite;
+  white-space: pre;
+}
+
+@media (max-width: 950px) {
+  .grid {
+    grid-template-columns: 1fr; 
+  }
+
+  .rightSide{
+    margin:2rem 0 3rem 0;
+  }
+
+  .formctn{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 0 3rem 0;
+    border-bottom: 1px gray solid;
+    border-right: none;
+  }
+
+  .radioCard, .checkCard{
+    margin-left: 0
+  }
+}
