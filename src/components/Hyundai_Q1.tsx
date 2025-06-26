@@ -151,7 +151,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.jobTypeFree || "" }
             onChange={(e) => handleFreeForm("jobTypeFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div> */}
         <div className="grid grid-cols-[1fr_1.5fr_1.5fr] pt-[1rem] pb-[2rem] ml-[1.5rem]">
@@ -248,15 +248,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
         <h2 className={hdStyles.question}>
           2. 내가 자동차 기술 일을 잘할 수 있다고 생각하는 이유는? (최대 3개)
         </h2>
-        <div className={hdStyles.free}>
-          <textarea
-            className={hdStyles.draft}
-            rows={3}
-            value={ form.skillReasonsFree || "" }
-            onChange={(e) => handleFreeForm("skillReasonsFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
-          />
-        </div>
         <div className={hdStyles.checkCard}>
           {skillOptions.map((skill) => (
             <div key={skill}>
@@ -273,18 +264,18 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             </div>
           ))}
         </div>
-
-        {/* 3. futureMobility (checkbox with 기타 input) */}
-        <h2 className={hdStyles.question}>3. 미래 자동차는 어떤 모습이라 생각하나요? (최대 4개)</h2>
         <div className={hdStyles.free}>
           <textarea
             className={hdStyles.draft}
             rows={3}
-            value={ form.futureMobilityFree || "" }
-            onChange={(e) => handleFreeForm("futureMobilityFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
+            value={ form.skillReasonsFree || "" }
+            onChange={(e) => handleFreeForm("skillReasonsFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
+
+        {/* 3. futureMobility (checkbox with 기타 input) */}
+        <h2 className={hdStyles.question}>3. 미래 자동차는 어떤 모습이라 생각하나요? (최대 4개)</h2>
         <div className={hdStyles.checkCard}>
           {futureOptions.map((mobility) => (
             <div key={mobility}>
@@ -301,18 +292,18 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             </div>
           ))}
         </div>
-
-        {/* 4. personalStrengths (checkbox with 기타 input) */}
-        <h2 className={hdStyles.question}>4. 나만의 특별한 강점 (최대 3개)</h2>
         <div className={hdStyles.free}>
           <textarea
             className={hdStyles.draft}
             rows={3}
-            value={ form.personalStrengthsFree || "" }
-            onChange={(e) => handleFreeForm("personalStrengthsFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
+            value={ form.futureMobilityFree || "" }
+            onChange={(e) => handleFreeForm("futureMobilityFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
+
+        {/* 4. personalStrengths (checkbox with 기타 input) */}
+        <h2 className={hdStyles.question}>4. 나만의 특별한 강점 (최대 3개)</h2>
         <div className={hdStyles.checkCard}>
           {strengthOptions.map((strength) => (
             <div key={strength}>
@@ -330,6 +321,15 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
               </label>
             </div>
           ))}
+        </div>
+        <div className={hdStyles.free}>
+          <textarea
+            className={hdStyles.draft}
+            rows={3}
+            value={ form.personalStrengthsFree || "" }
+            onChange={(e) => handleFreeForm("personalStrengthsFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
+          />
         </div>
 
         <h2 className={hdStyles.question}>5. 기존 자소서 초안이 있다면 여기에 입력해주세요. 이를 바탕으로 작성해드립니다.</h2>

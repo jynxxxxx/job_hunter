@@ -79,8 +79,7 @@
 }
 
 .radioCard{
-  margin-top: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
@@ -88,8 +87,7 @@
 }
 
 .checkCard{
-  margin-top: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -97,8 +95,9 @@
 }
 
 .free{
-  border-bottom: 1px rgb(152, 150, 150) solid;
-  padding-bottom: 1rem;
+  // border-top: 1px rgb(152, 150, 150) solid;
+  // padding-top: 1rem;
+  margin-bottom:2rem;
 }
 
 .freeField{

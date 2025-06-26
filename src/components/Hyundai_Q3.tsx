@@ -143,15 +143,6 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
       </div>   
       <div className={hdStyles.leftSide}>  
         <h2 className={hdStyles.question}>1. 내가 스스로 세운 목표는?</h2>
-        <div className={hdStyles.free}>
-          <textarea
-            className={hdStyles.draft}
-            rows={3}
-            value={ form.goalFree || "" }
-            onChange={(e) => handleFreeForm("goalFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
-          />
-        </div>
         <div className={hdStyles.radioCard}>
           {goalOptions.map((goal) => (
             <div key={goal}>
@@ -169,17 +160,17 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             </div>
           ))}
         </div>
-
-        <h2 className={hdStyles.question}>2. 이 목표를 왜 세웠나요? (최대 2개)</h2>
         <div className={hdStyles.free}>
           <textarea
             className={hdStyles.draft}
             rows={3}
-            value={ form.reasonsFree || "" }
-            onChange={(e) => handleFreeForm("reasonsFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
+            value={ form.goalFree || "" }
+            onChange={(e) => handleFreeForm("goalFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
+
+        <h2 className={hdStyles.question}>2. 이 목표를 왜 세웠나요? (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {reasonOptions.map((reason) => (
             <div key={reason}>
@@ -195,17 +186,17 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             </div>
           ))}
         </div>
-
-        <h2 className={hdStyles.question}>3. 목표 달성 중 어려웠던 점은? (최대 3개)</h2>
         <div className={hdStyles.free}>
           <textarea
             className={hdStyles.draft}
             rows={3}
-            value={ form.difficultiesFree || "" }
-            onChange={(e) => handleFreeForm("difficultiesFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
+            value={ form.reasonsFree || "" }
+            onChange={(e) => handleFreeForm("reasonsFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
+
+        <h2 className={hdStyles.question}>3. 목표 달성 중 어려웠던 점은? (최대 3개)</h2>
         <div className={hdStyles.checkCard}>
           {difficultyOptions.map((diff) => (
             <div key={diff}>
@@ -223,17 +214,17 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             </div>
           ))}
         </div>
-
-        <h2 className={hdStyles.question}>4. 이 어려움을 어떻게 해결했나요? (최대 3개)</h2>
         <div className={hdStyles.free}>
           <textarea
             className={hdStyles.draft}
             rows={3}
-            value={ form.solutionsFree || "" }
-            onChange={(e) => handleFreeForm("solutionsFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
+            value={ form.difficultiesFree || "" }
+            onChange={(e) => handleFreeForm("difficultiesFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
+
+        <h2 className={hdStyles.question}>4. 이 어려움을 어떻게 해결했나요? (최대 3개)</h2>
         <div className={hdStyles.checkCard}>
           {solutionOptions.map((sol) => (
             <div key={sol}>
@@ -251,17 +242,17 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             </div>
           ))}
         </div>
-          
-        <h2 className={hdStyles.question}>5. 이 경험에서 배운 점은? (최대 3개)</h2>
         <div className={hdStyles.free}>
           <textarea
             className={hdStyles.draft}
             rows={3}
-            value={ form.lessonsFree || "" }
-            onChange={(e) => handleFreeForm("lessonsFree", e.target.value)}
-            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
+            value={ form.solutionsFree || "" }
+            onChange={(e) => handleFreeForm("solutionsFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
+          
+        <h2 className={hdStyles.question}>5. 이 경험에서 배운 점은? (최대 3개)</h2>
         <div className={hdStyles.checkCard}>
           {lessonOptions.map((lesson) => (
             <div key={lesson}>
@@ -276,6 +267,15 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
               </label>
             </div>
           ))}
+        </div>
+        <div className={hdStyles.free}>
+          <textarea
+            className={hdStyles.draft}
+            rows={3}
+            value={ form.lessonsFree || "" }
+            onChange={(e) => handleFreeForm("lessonsFree", e.target.value)}
+            placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
+          />
         </div>
 
         <h2 className={hdStyles.question}>6. 기존 자소서 초안이 있다면 여기에 입력해주세요. 이를 바탕으로 작성해드립니다.</h2>
