@@ -12,7 +12,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={footerStyles.bottomSection}>
-        <p>© 2025 바로지원. All rights reserved. Made with ❤️ for Korean job seekers</p>
+        <p>2025 드림패스(주). All rights reserved.</p>
       </div>
     </footer>
   );

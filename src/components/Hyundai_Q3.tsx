@@ -138,7 +138,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
     <form className={hdStyles.formctn}>
       <div className='flex gap-[1rem] items-center text-gray-500 pb-[0.5rem] w-[90%] mx-auto'>
         <div className='text-xl'>※</div> 
-        <div className='text-center'>아래는 선택 입력입니다. 두 항목 모두 작성해도 되고, 하나만 해도, 건너뛰어도 괜찮아요. 하지만 자세히 적을수록 자소서 퀄리티는 확실히 올라갑니다!</div>
+        <div className='text-center'>자신의 경험을 기입하는 것은 필수는 아닙니다. 하지만, 자신의 경험과 생각을 자세히 서술하면 합격률이 최대 3배까지 올라갑니다.</div>
         <div className='text-xl'>※</div>
       </div>   
       <div className={hdStyles.leftSide}>  
@@ -149,7 +149,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.goalFree || "" }
             onChange={(e) => handleFreeForm("goalFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.radioCard}>
@@ -177,7 +177,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.reasonsFree || "" }
             onChange={(e) => handleFreeForm("reasonsFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.checkCard}>
@@ -203,7 +203,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.difficultiesFree || "" }
             onChange={(e) => handleFreeForm("difficultiesFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.checkCard}>
@@ -231,7 +231,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.solutionsFree || "" }
             onChange={(e) => handleFreeForm("solutionsFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.checkCard}>
@@ -259,7 +259,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.lessonsFree || "" }
             onChange={(e) => handleFreeForm("lessonsFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.checkCard}>
@@ -291,7 +291,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
 
         <div className={hdStyles.btnctn}>
           <button className={hdStyles.btn} type="button" onClick={handleUpload} disabled={waiting}>
-            나의 자소서 생선하기
+            나만의 자기소개서 생성하기
           </button>
         </div>
       </div>

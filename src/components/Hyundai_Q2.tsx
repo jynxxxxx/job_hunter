@@ -159,7 +159,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.workExperienceFree || "" }
             onChange={(e) => handleFreeForm("workExperienceFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.radioCard}>
@@ -187,7 +187,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.problemsFacedFree || "" }
             onChange={(e) => handleFreeForm("problemsFacedFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.checkCard}>
@@ -215,7 +215,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.myRolesFree || "" }
             onChange={(e) => handleFreeForm("myRolesFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.checkCard}>
@@ -241,7 +241,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.outcomeFree || "" }
             onChange={(e) => handleFreeForm("outcomeFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.radioCard}>
@@ -269,7 +269,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
             rows={3}
             value={ form.weaknessesFree || "" }
             onChange={(e) => handleFreeForm("weaknessesFree", e.target.value)}
-            placeholder="자유롭게 입력하세요"
+            placeholder="아래 경험을 선택 후, 관련 자신의 경험에 대해 자유롭게 써주세요."
           />
         </div>
         <div className={hdStyles.checkCard}>
@@ -331,7 +331,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
 
         <div className={hdStyles.btnctn}>
           <button className={hdStyles.btn} type="button" onClick={handleUpload} disabled={waiting}>
-            나의 자소서 생선하기
+            나만의 자기소개서 생성하기
           </button>
         </div>
       </div>
