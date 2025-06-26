@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import hdStyles from "@/styles/hyundai.module.scss";
 
 type JobTypeFree = string;
@@ -90,17 +90,8 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
   const [jobLevel2, setJobLevel2] = useState<string | null>(null);
   const [jobLevel3, setJobLevel3] = useState<string | null>(null);
 
-  // Handle radio selection for jobType including 기타 with text input
-  const handleJobTypeChange = (value: string) => {
-    if (value === "기타") {
-      setForm((f) => ({ ...f, jobType: "", }));
-    } else {
-      setForm((f) => ({ ...f, jobType: value }));
-    }
-  };
-
   // Checkbox toggle with max limit and 기타 handling
-  const handleCheckbox = (field: keyof MobilityForm, value: string, max: number, options: string[]) => {
+  const handleCheckbox = (field: keyof MobilityForm, value: string, max: number) => {
     const current = form[field] as string[];
     if (current.includes(value)) {
       setForm({ ...form, [field]: current.filter((v) => v !== value) });
@@ -127,13 +118,13 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
       finalJobType = jobLevel1
     } else ( finalJobType = null )
 
-    const data = {
-      ...form,
-      jobTypeToggle: finalJobType,
-      draft: draft
-    }
+    // const data = {
+    //   ...form,
+    //   jobTypeToggle: finalJobType,
+    //   draft: draft
+    // }
 
-    const timeout = setTimeout(() => {
+    const _timeout = setTimeout(() => {
       // setAnswer(`Q1 ${JSON.stringify(data)}`)
       setAnswer("We're still in the testing phase currently...")
       setWaiting(false)
@@ -275,7 +266,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   type="checkbox"
                   value={skill}
                   checked={form.skillReasonsToggle.includes(skill)}
-                  onChange={() => handleCheckbox("skillReasonsToggle", skill, MAX.skills, skillOptions)}
+                  onChange={() => handleCheckbox("skillReasonsToggle", skill, MAX.skills)}
                 />
                 {skill}
               </label>
@@ -303,7 +294,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   type="checkbox"
                   value={mobility}
                   checked={form.futureMobilityToggle.includes(mobility)}
-                  onChange={() => handleCheckbox("futureMobilityToggle", mobility, MAX.future, futureOptions)}
+                  onChange={() => handleCheckbox("futureMobilityToggle", mobility, MAX.future)}
                 />
                 {mobility}
               </label>
@@ -332,7 +323,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   value={strength}
                   checked={form.personalStrengthsToggle.includes(strength)}
                   onChange={() =>
-                    handleCheckbox("personalStrengthsToggle", strength, MAX.strengths, strengthOptions)
+                    handleCheckbox("personalStrengthsToggle", strength, MAX.strengths)
                   }
                 />
                 {strength}

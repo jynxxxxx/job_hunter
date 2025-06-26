@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import hdStyles from "@/styles/hyundai.module.scss";
 
 type GoalFree = string;
@@ -100,7 +100,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
   const [form, setForm] = useState<Question3Form>(defaultForm);
   const [draft, setDraft] = useState("")
 
-  const handleCheckbox = (field: keyof Question3Form, value: string, max: number, options: string[]) => {
+  const handleCheckbox = (field: keyof Question3Form, value: string, max: number) => {
     const current = form[field] as string[];
     if (current.includes(value)) {
       setForm({ ...form, [field]: current.filter((v) => v !== value) });
@@ -116,14 +116,14 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
 
   const handleUpload = () => {
     setWaiting(true)
-    const data = {
-      ...form,
-      draft: draft
-    }
+    // const data = {
+    //   ...form,
+    //   draft: draft
+    // }
 
     document.getElementById("top")?.scrollIntoView()
     
-    const timeout = setTimeout(() => {
+    const _timeout = setTimeout(() => {
       // setAnswer(`Q3 ${JSON.stringify(data)}`)
       setAnswer("We're still in the testing phase currently...")
       setWaiting(false)
@@ -188,7 +188,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   style={{marginRight: "6px"}}
                   type="checkbox"
                   checked={form.reasonsToggle.includes(reason)}
-                  onChange={() => handleCheckbox("reasonsToggle", reason, MAX.reasons, reasonOptions)}
+                  onChange={() => handleCheckbox("reasonsToggle", reason, MAX.reasons)}
                 />
                 {reason}
               </label>
@@ -215,7 +215,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   type="checkbox"
                   checked={form.difficultiesToggle.includes(diff)}
                   onChange={() =>
-                    handleCheckbox("difficultiesToggle", diff, MAX.difficulties, difficultyOptions)
+                    handleCheckbox("difficultiesToggle", diff, MAX.difficulties)
                   }
                 />
                 {diff}
@@ -243,7 +243,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   type="checkbox"
                   checked={form.solutionsToggle.includes(sol)}
                   onChange={() =>
-                    handleCheckbox("solutionsToggle", sol, MAX.solutions, solutionOptions)
+                    handleCheckbox("solutionsToggle", sol, MAX.solutions)
                   }
                 />
                 {sol}
@@ -270,7 +270,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   style={{marginRight: "6px"}}
                   type="checkbox"
                   checked={form.lessonsToggle.includes(lesson)}
-                  onChange={() => handleCheckbox("lessonsToggle", lesson, MAX.lessons, lessonOptions)}
+                  onChange={() => handleCheckbox("lessonsToggle", lesson, MAX.lessons)}
                 />
                 {lesson}
               </label>

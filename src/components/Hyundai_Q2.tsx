@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import hdStyles from "@/styles/hyundai.module.scss";
 
 type WorkExperienceFree = string;
@@ -110,7 +110,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
   const [draft, setDraft] = useState("")
 
   // Checkbox toggle with max limit and 기타 handling
-  const handleCheckbox = (field: keyof CollaborationForm, value: string, max: number, options: string[]) => {
+  const handleCheckbox = (field: keyof CollaborationForm, value: string, max: number) => {
     const current = form[field] as string[];
     if (current.includes(value)) {
       setForm({ ...form, [field]: current.filter((v) => v !== value) });
@@ -128,12 +128,12 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
     document.getElementById("top")?.scrollIntoView()
     
     setWaiting(true)
-    const data = {
-      ...form,
-      draft: draft
-    }
+    // const data = {
+    //   ...form,
+    //   draft: draft
+    // }
 
-    const timeout = setTimeout(() => {
+    const _timeout = setTimeout(() => {
       // setAnswer(`Q2 ${JSON.stringify(data)}`)|
       setAnswer("We're still in the testing phase currently...")
       setWaiting(false)
@@ -199,7 +199,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   type="checkbox"
                   checked={form.problemsFacedToggle.includes(item)}
                   onChange={() =>
-                    handleCheckbox("problemsFacedToggle", item, MAX.problems, problemOptions)
+                    handleCheckbox("problemsFacedToggle", item, MAX.problems)
                   }
                 />
                 {item}
@@ -226,7 +226,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   style={{marginRight: "6px"}}
                   type="checkbox"
                   checked={form.myRolesToggle.includes(item)}
-                  onChange={() => handleCheckbox("myRolesToggle", item, MAX.roles, roleOptions)}
+                  onChange={() => handleCheckbox("myRolesToggle", item, MAX.roles)}
                 />
                 {item}
               </label>
@@ -281,7 +281,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   type="checkbox"
                   checked={form.weaknessesToggle.includes(item)}
                   onChange={() =>
-                    handleCheckbox("weaknessesToggle", item, MAX.weaknesses, weaknessOptions)
+                    handleCheckbox("weaknessesToggle", item, MAX.weaknesses)
                   }
                 />
                 {item}
@@ -309,7 +309,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
                   type="checkbox"
                   checked={form.overcomeEffortsToggle.includes(item)}
                   onChange={() =>
-                    handleCheckbox("overcomeEffortsToggle", item, MAX.efforts, effortOptions)
+                    handleCheckbox("overcomeEffortsToggle", item, MAX.efforts)
                   }
                 />
                 {item}
