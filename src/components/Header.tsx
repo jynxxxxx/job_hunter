@@ -19,9 +19,9 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleLoginClick = () => {
-    router.push('/login');
-  };
+  // const handleLoginClick = () => {
+  //   router.push('/login');
+  // };
 
   const handleLogoutClick = async () => {
     setJustSignedOut(true);

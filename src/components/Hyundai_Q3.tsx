@@ -123,7 +123,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
 
     document.getElementById("top")?.scrollIntoView()
     
-    const _timeout = setTimeout(() => {
+    setTimeout(() => {
       // setAnswer(`Q3 ${JSON.stringify(data)}`)
       setAnswer("We're still in the testing phase currently...")
       setWaiting(false)

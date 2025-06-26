@@ -133,7 +133,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
     //   draft: draft
     // }
 
-    const _timeout = setTimeout(() => {
+    setTimeout(() => {
       // setAnswer(`Q2 ${JSON.stringify(data)}`)|
       setAnswer("We're still in the testing phase currently...")
       setWaiting(false)

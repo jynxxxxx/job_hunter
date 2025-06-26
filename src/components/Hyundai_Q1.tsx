@@ -108,15 +108,15 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
   const handleUpload = () => {
     document.getElementById("top")?.scrollIntoView()
     setWaiting(true)
-    let finalJobType = null
+    // let finalJobType = null
 
-    if (jobLevel3 !== ""){
-      finalJobType = jobLevel3
-    } else if (jobLevel2 !== ""){
-      finalJobType = jobLevel2
-    } else if (jobLevel1 !== ""){
-      finalJobType = jobLevel1
-    } else ( finalJobType = null )
+    // if (jobLevel3 !== ""){
+    //   finalJobType = jobLevel3
+    // } else if (jobLevel2 !== ""){
+    //   finalJobType = jobLevel2
+    // } else if (jobLevel1 !== ""){
+    //   finalJobType = jobLevel1
+    // } else ( finalJobType = null )
 
     // const data = {
     //   ...form,
@@ -124,7 +124,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
     //   draft: draft
     // }
 
-    const _timeout = setTimeout(() => {
+    setTimeout(() => {
       // setAnswer(`Q1 ${JSON.stringify(data)}`)
       setAnswer("We're still in the testing phase currently...")
       setWaiting(false)
