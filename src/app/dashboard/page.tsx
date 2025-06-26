@@ -16,14 +16,14 @@ export default function Dashboard() {
 
   return (
     <AuthCheck>
-      <div className='p-[0.5rem] pt-[6rem] sm:p-[2rem] sm:pt-[6rem] bg-gradient-to-r from-primary to-[#f5f6f9]'>
+      <div className='p-[0.5rem] pt-[6rem] sm:p-[2rem] sm:pt-[6rem] bg-gradient-to-r from-primary to-[#f5f6f9] relative'>
         <h1 
           style={{  textShadow: '1px 2px 6px rgba(255, 255, 255, 0.9)' }}
           className='font-extrabold text-xl pb-8 text-center text-bright text-[1.6rem]'
         >
           {userData?.name ?  `${userData.name}의` : ""} 현대자동차 자소서 드림패스
         </h1>
-        <div className='flex w-[95%] mx-auto bg-gray-300 p-[0.2rem] rounded-[0.5rem] mb-8 '>
+        <div className='flex w-[95%] mx-auto bg-gray-300 p-[0.2rem] rounded-[0.5rem] mb-8'>
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q1' ? hdStyles.active : ''}`}
             onClick={() => {
@@ -123,6 +123,44 @@ export default function Dashboard() {
             )}
           </div>
         </div>
+        {!userData?.hasPaid && (activeTab === 'Q2' ||activeTab === 'Q3') && (      
+          <>
+            <div className={hdStyles.paywallOverlay}></div>
+            <div className={hdStyles.paywallMessage}>
+              <h2>🔒 프리미엄 콘텐츠입니다</h2>
+              <div className='w-full bg-[#F9F9FB] rounded-xl py-4 px-4 '>
+                <div className='font-extrabold text-center pb-4 text-xl'>자소서가 도움이 되었나요?</div>
+                <div className='flex justify-around gap-6'>
+                  <div className='flex flex-col items-center justify-center gap-2'>
+                    <p>
+                      조금 더 다듬고 싶으시다면, ₩30,000으로<br />
+                      전문가가 여러분의 자소서를 기반으로 <strong>더 설득력 있고 완성도 높게</strong> 개선해드립니다.<br />
+                      <strong>최대 3회까지 수정도</strong> 포함되어 있어요.
+                    </p>
+
+                    <p>
+                      오른쪽 QR코드나 계좌번호로 입금해주시면,<br />
+                      <strong>입금시 메모에 이메일 주소를 꼭 남겨주세요!</strong> 그래야 어떤 분이 보내주셨는지 확인하고 도와드릴 수 있습니다.
+                      더 나은 결과물을 위해 정성껏 도와드릴게요. 감사합니다!
+                    </p>
+                  </div>
+                  <div className='flex flex-col items-center justify-center gap-2 mr-4'>
+                    <img
+                      src="/qr.png"
+                      alt="Donate via QR Code"
+                      className='w-[13rem]'
+                    />
+                    <div>
+                      <div className='text-sm text-center text-black'>카카오뱅크</div>
+                      <div className='font-extrabold text-center text-black'>3333016420692</div>
+                      <div className='text-center text-black'>문인욱 </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </AuthCheck>
   )

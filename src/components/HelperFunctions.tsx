@@ -11,7 +11,8 @@ export const ensureUserProfile = async (user: any, name: string) => {
         {
           email: user.email,
           name: user.displayName || name,
-          hasPaid: false
+          hasPaid: false,
+          generation_count: 0,
         },
         { merge: true } // Use merge: true to avoid overwriting if partial data exists
       );

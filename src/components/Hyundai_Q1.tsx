@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import { doc, getDoc, updateDoc, increment } from 'firebase/firestore';
+import { db } from "@/lib/firebase";
 import hdStyles from "@/styles/hyundai.module.scss";
+import { useAuth } from "@/context/AuthContext";
+import { useUserData } from "@/context/UserDataContext";
+import { toast } from "sonner";
 
 type JobTypeFree = string;
 type JobTypeToggle = string;
@@ -83,7 +88,40 @@ const defaultForm: MobilityForm = {
   personalStrengthsToggle: [],
 };
 
-const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: string) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+const dummyResults = {
+  data: {
+    "core_keywords": [
+        "반복 작업 집중력",
+        "불량 원인 판별 능력",
+        "꼼꼼한 품질 관리",
+        "차체 공정 이해도",
+        "협업 중심의 책임감"
+      ],
+      "key_experiences": [
+        "반복되는 작업 속에서도 실수 없이 결과물을 완성하며 팀 내 품질 기준을 높인 경험",
+        "생산라인에서 불량이 발생했을 때 원인을 빠르게 분석하고 개선방안을 제시한 경험",
+        "협업 중 타인의 실수까지 함께 점검하고 해결책을 함께 찾았던 상황"
+      ],
+      "applicant_character": "작업의 반복 속에서도 실수 없이 품질을 지키는, 차체 공정의 ‘정밀 조율자’",
+      "outline": [
+        "모빌리티 기술인력이란, 단순한 작업자가 아닌 품질과 안전을 책임지는 사람이라고 생각함. 반복 작업에서도 집중력을 잃지 않는 자신이 그에 부합한다고 판단함.",
+        "반복작업에서도 실수 없이 작업을 해내는 성실함과 집중력을 갖추고 있음. 불량이 발생했을 때 원인을 빠르게 파악해 해결한 경험이 있어, 협업에서도 신뢰를 받음.",
+        "특히 차체 공정은 수많은 부품이 결합되는 정밀한 작업이 필요한 영역이며, 반복되는 용접·결합 과정에서 실수를 줄이는 집중력과 불량 판별 능력이 중요한 만큼 자신의 강점이 잘 맞는 공정임.",
+        "미래 모빌리티가 발전하더라도, 차량의 최종 품질은 여전히 사람의 꼼꼼한 확인과 판단에 달려 있다고 생각하며, 이 역할을 책임지고 싶음.",
+        "현대자동차의 ‘끈기’, ‘협력’, ‘고객 최우선’ 가치에 부합하는 자세로, 차체 공정의 마지막 품질 책임을 맡는 구성원이 되고 싶다는 포부로 마무리."
+      ],
+      "review_from_interviewer": [
+        "단순한 반복 작업자라기보다, 생산 공정의 ‘정확도’와 ‘완성도’를 책임질 수 있는 인재라는 인상이 강하게 듭니다.",
+        "실제 작업 경험이나 자격증 언급은 없지만, 불량 원인을 판단하고 개선한 사례에서 기술 감각이 드러나며 신뢰감을 줍니다.",
+        "기억에 남는 건 ‘사람이 끝까지 책임져야 한다’는 표현입니다. 자동화가 늘어나는 상황에서도 본인의 역할을 명확히 정의한 점이 인상 깊습니다."
+      ]
+  }
+  
+}
+
+const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: any ) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+  const { authUser } = useAuth()
+  const { userData }  = useUserData()
   const [form, setForm] = useState<MobilityForm>(defaultForm);
   const [draft, setDraft] = useState("")
   const [jobLevel1, setJobLevel1] = useState<string | null>(null);
@@ -105,9 +143,27 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
     setForm((f) => ({ ...f, [field]: value }))
   }
 
-  const handleUpload = () => {
+  const handleUpload = async() => {
     document.getElementById("top")?.scrollIntoView()
-    setWaiting(true)
+    let hasPaid
+    let genCount
+    if (!authUser) {
+      toast.error("로그인이 필요합니다."); // "Login required."
+      return;
+    }
+
+    try {
+      const userDoc = await getDoc(doc(db, 'users', authUser.uid));
+      genCount = userDoc.exists() && userDoc.data().generation_count
+      hasPaid = userDoc.exists() && userDoc.data().hasPaid === true;
+    } catch {
+      toast.error("사용자 정보를 불러오는 중 오류가 발생했습니다.")
+    }
+
+    if (genCount > 2 && !userData?.hasPaid) {
+      toast.error("무료 이용 횟수(3회)를 모두 사용하셨습니다. 더 많은 자소서를 원하신다면 결제를 진행해주세요.")
+      return;
+    }
     // let finalJobType = null
 
     // if (jobLevel3 !== ""){
@@ -126,9 +182,20 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
 
     setTimeout(() => {
       // setAnswer(`Q1 ${JSON.stringify(data)}`)
-      setAnswer("We're still in the testing phase currently...")
+      setAnswer(dummyResults)
       setWaiting(false)
     }, 3000)
+
+    try {
+        const userRef = doc(db, 'users', authUser.uid);
+        await updateDoc(userRef, {
+          generation_count: increment(1)
+        });
+      } catch (e) {
+        console.error("생성 횟수 업데이트에 실패했습니다.");
+      }
+
+
   }
 
   // useEffect(() => {

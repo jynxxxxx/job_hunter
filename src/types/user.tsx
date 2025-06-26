@@ -41,4 +41,6 @@ export interface CustomUserProfile {
   parsedResumeData?: ParsedResume;   // The structured data from your API for the active resume
   resumeStorageUrl?: string;  // URL to the active resume's PDF in Firebase Storage
   resumeUploadDate?:  string; 
+  hasPaid?: boolean;
+  generation_count?: number;
 }
