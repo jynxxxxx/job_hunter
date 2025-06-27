@@ -110,7 +110,17 @@ const defaultForm: CollaborationForm = {
   overcomeEffortsToggle: [],
 };
 
-const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: string) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+interface HyundaiOutputProps {
+  result: {
+    core_keywords: string[];
+    key_experiences: string[];
+    applicant_character: string;
+    outline: string[];
+    review_from_interviewer: string[];
+  };
+}
+
+const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: HyundaiOutputProps | null) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<CollaborationForm>(defaultForm);
@@ -160,7 +170,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
 
     setTimeout(() => {
       // setAnswer(`Q2 ${JSON.stringify(data)}`)|
-      setAnswer("We're still in the testing phase currently...")
+      setAnswer(null)
       setWaiting(false)
     }, 3000)
   }

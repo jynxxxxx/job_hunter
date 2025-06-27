@@ -101,7 +101,18 @@ const defaultForm: Question3Form = {
   lessonsToggle: [],
 };
 
-const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: string) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+
+interface HyundaiOutputProps {
+  result: {
+    core_keywords: string[];
+    key_experiences: string[];
+    applicant_character: string;
+    outline: string[];
+    review_from_interviewer: string[];
+  };
+}
+
+const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: HyundaiOutputProps | null) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<Question3Form>(defaultForm);
@@ -151,7 +162,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: st
     
     setTimeout(() => {
       // setAnswer(`Q3 ${JSON.stringify(data)}`)
-      setAnswer("We're still in the testing phase currently...")
+      setAnswer(null)
       setWaiting(false)
     }, 3000)
   }

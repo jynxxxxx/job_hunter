@@ -7,13 +7,26 @@ import Hyundai_Q1 from '@/components/Hyundai_Q1';
 import Hyundai_Q2 from '@/components/Hyundai_Q2';
 import Hyundai_Q3 from '@/components/Hyundai_Q3';
 import hdStyles from "@/styles/hyundai.module.scss";
+import HyundaiResult from '@/components/HyundaiResults';
+
+interface HyundaiOutputProps {
+  result: {
+    core_keywords: string[];
+    key_experiences: string[];
+    applicant_character: string;
+    outline: string[];
+    review_from_interviewer: string[];
+  };
+}
 
 export default function Dashboard() {
   const { userData } = useUserData()
   const [activeTab, setActiveTab] = useState('Q1');
-  const [answer, setAnswer] = useState<string>('');
+  const [answer, setAnswer] = useState<HyundaiOutputProps | null>(null);
   const [waiting, setWaiting]= useState(false)
 
+
+  console.log(userData)
   return (
     <AuthCheck>
       <div className='p-[0.5rem] pt-[6rem] sm:p-[2rem] sm:pt-[6rem] bg-gradient-to-r from-primary to-[#f5f6f9] relative'>
@@ -27,7 +40,7 @@ export default function Dashboard() {
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q1' ? hdStyles.active : ''}`}
             onClick={() => {
-              setAnswer("")
+              setAnswer(null)
               setActiveTab('Q1')
             }}
           >
@@ -36,7 +49,7 @@ export default function Dashboard() {
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q2' ? hdStyles.active : ''}`}
             onClick={() => {
-              setAnswer("")
+              setAnswer(null)
               setActiveTab('Q2')
             }}
           >
@@ -45,7 +58,7 @@ export default function Dashboard() {
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q3' ? hdStyles.active : ''}`}
             onClick={() => {
-              setAnswer("")
+              setAnswer(null)
               setActiveTab('Q3')
             }}
           >
@@ -79,15 +92,16 @@ export default function Dashboard() {
                   잠시만 기다려주세요
                 </div>
               ) : (
-                <textarea
-                  value={answer}
-                  placeholder="여기에 AI가 작성한 자소서가 표시됩니다."
-                  rows={10}
-                  disabled = {!answer || answer === ""}
-                  className={hdStyles.answerCtn}
-                  onChange={e => setAnswer(e.target.value)}
-                />
-              )}   
+                answer
+                  ? <div className={hdStyles.answerCtn}><HyundaiResult {...answer} /></div>
+                  : <textarea
+                      value=""
+                      placeholder="여기에 AI가 작성한 자소서가 표시됩니다."
+                      rows={10}
+                      disabled
+                      className={hdStyles.answerCtn}
+                    />
+              )}
             </div>
             {answer && (
               <div className='w-[105%] ml-[-1rem] bg-[#F9F9FB] rounded-xl py-4 pl-4 mb-[2rem]'>

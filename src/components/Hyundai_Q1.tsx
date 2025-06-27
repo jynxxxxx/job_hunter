@@ -5,6 +5,7 @@ import hdStyles from "@/styles/hyundai.module.scss";
 import { useAuth } from "@/context/AuthContext";
 import { useUserData } from "@/context/UserDataContext";
 import { toast } from "sonner";
+import { generateOutline } from "@/app/api/generate";
 
 type JobTypeFree = string;
 type JobTypeToggle = string;
@@ -144,7 +145,10 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
   }
 
   const handleUpload = async() => {
+    setWaiting(true)
     document.getElementById("top")?.scrollIntoView()
+
+
     let hasPaid
     let genCount
     if (!authUser) {
@@ -164,38 +168,51 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
       toast.error("무료 이용 횟수(3회)를 모두 사용하셨습니다. 더 많은 자소서를 원하신다면 결제를 진행해주세요.")
       return;
     }
-    // let finalJobType = null
 
-    // if (jobLevel3 !== ""){
-    //   finalJobType = jobLevel3
-    // } else if (jobLevel2 !== ""){
-    //   finalJobType = jobLevel2
-    // } else if (jobLevel1 !== ""){
-    //   finalJobType = jobLevel1
-    // } else ( finalJobType = null )
+    let finalJobType = null
 
-    // const data = {
-    //   ...form,
-    //   jobTypeToggle: finalJobType,
-    //   draft: draft
-    // }
+    if (jobLevel3 !== ""){
+      finalJobType = jobLevel3
+    } else if (jobLevel2 !== ""){
+      finalJobType = jobLevel2
+    } else if (jobLevel1 !== ""){
+      finalJobType = jobLevel1
+    } else ( finalJobType = "" )
 
-    setTimeout(() => {
-      // setAnswer(`Q1 ${JSON.stringify(data)}`)
-      setAnswer(dummyResults)
-      setWaiting(false)
-    }, 3000)
+    const data = {
+      ...form,
+      jobTypeFree:"없음",
+      jobTypeToggle: [finalJobType],
+      draft: draft
+    }
+
+    const sanitizedData = {
+      jobType_free: data.jobTypeFree,
+      jobType_toggle: data.jobTypeToggle ,
+      skillReasons_free: data.skillReasonsFree, 
+      skillReasons_toggle: data.skillReasonsToggle, 
+      futureMobility_free: data.futureMobilityFree, 
+      futureMobility_toggle: data.futureMobilityToggle, 
+      personalStrengths_free: data.personalStrengthsFree, 
+      personalStrengths_toggle: data.personalStrengthsToggle, 
+      draft: data.draft || ""
+    };
+    // console.log("sending data", sanitizedData)
+   
 
     try {
-        const userRef = doc(db, 'users', authUser.uid);
-        await updateDoc(userRef, {
-          generation_count: increment(1)
-        });
-      } catch (e) {
-        console.error("생성 횟수 업데이트에 실패했습니다.");
-      }
-
-
+      const result = await generateOutline(sanitizedData)
+      console.log(result)
+      setAnswer(result)
+      const userRef = doc(db, 'users', authUser.uid);
+      await updateDoc(userRef, {
+        generation_count: increment(1)
+      });
+    } catch (e) {
+      console.error("생성 횟수 업데이트에 실패했습니다.");
+    } finally {
+      setWaiting(false)
+    }
   }
 
   // useEffect(() => {
