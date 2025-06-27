@@ -1,5 +1,4 @@
 export async function generateOutline(formData: any) {
-  console.log("form", JSON.stringify(formData))
   const response = await fetch("http://3.135.187.169:8000/generate", {
     method: "POST",
     headers: {
