@@ -105,19 +105,26 @@ export default function Dashboard() {
             </div>
             {answer && (
               <div className='w-[105%] ml-[-1rem] bg-[#F9F9FB] rounded-xl py-4 pl-4 mb-[2rem]'>
-                <div className='font-extrabold text-center pb-4 text-xl'>자소서가 도움이 되었나요?</div>
+                <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
                 <div className='flex justify-around gap-6'>
                   <div className='flex flex-col items-center justify-center gap-4'>
                     <p>
-                      조금 더 다듬고 싶으시다면, ₩30,000으로<br />
-                      전문가가 여러분의 자소서를 기반으로 <strong>더 설득력 있고 완성도 높게</strong> 개선해드립니다.<br />
-                      <strong>최대 3회까지 수정도</strong> 포함되어 있어요.
+                      <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
+                      전문가가 여러분의 자소서를 기반으로 1번 문항 뿐만 아니라, 2번/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
+                      지금 신청 시 선착순 10명 1만원 (현재 6/10명 신청 중) + 만족 못할 시 100% 환불 보장!<br />
+                      ※ 일반가 3만원
                     </p>
 
                     <p>
-                      오른쪽 QR코드나 계좌번호로 입금해주시면,<br />
-                      <strong>입금시 메모에 이메일 주소를 꼭 남겨주세요!</strong> 그래야 어떤 분이 보내주셨는지 확인하고 도와드릴 수 있습니다.
-                      더 나은 결과물을 위해 정성껏 도와드릴게요. 감사합니다!
+                     <strong>서비스 신청 방안</strong><br />
+                     <div className='flex flex-col'>
+                      {/* <div>① ???????????????????</div>
+                       <div>② 하단 계좌번호 또는 카카오페이로 입금합니다.</div> */}
+                        <div>① 하단 계좌번호 또는 카카오페이로 입금합니다.</div>
+                        <div>③ 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
+                        <div>④ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
+                      </div>
+                      <p className='mt-[1rem]'><strong>계좌번호랑 QR 코드 여기에</strong></p>
                     </p>
                   </div>
                   <div className='flex flex-col items-center justify-center gap-4 mr-4'>
@@ -147,15 +154,22 @@ export default function Dashboard() {
                 <div className='flex justify-around gap-6'>
                   <div className='flex flex-col items-center justify-center gap-2'>
                     <p>
-                      조금 더 다듬고 싶으시다면, ₩30,000으로<br />
-                      전문가가 여러분의 자소서를 기반으로 <strong>더 설득력 있고 완성도 높게</strong> 개선해드립니다.<br />
-                      <strong>최대 3회까지 수정도</strong> 포함되어 있어요.
+                      <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
+                      전문가가 여러분의 자소서를 기반으로 1번 문항 뿐만 아니라, 2번/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
+                      지금 신청 시 선착순 10명 1만원 (현재 6/10명 신청 중) + 만족 못할 시 100% 환불 보장!<br />
+                      ※ 일반가 3만원
                     </p>
 
                     <p>
-                      오른쪽 QR코드나 계좌번호로 입금해주시면,<br />
-                      <strong>입금시 메모에 이메일 주소를 꼭 남겨주세요!</strong> 그래야 어떤 분이 보내주셨는지 확인하고 도와드릴 수 있습니다.
-                      더 나은 결과물을 위해 정성껏 도와드릴게요. 감사합니다!
+                     <strong>서비스 신청 방안</strong><br />
+                     <div className='flex flex-col'>
+                      {/* <div>① ???????????????????</div>
+                       <div>② 하단 계좌번호 또는 카카오페이로 입금합니다.</div> */}
+                        <div>① 하단 계좌번호 또는 카카오페이로 입금합니다.</div>
+                        <div>③ 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
+                        <div>④ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
+                      </div>
+                      <p className='mt-[1rem]'><strong>계좌번호랑 QR 코드 여기에</strong></p>
                     </p>
                   </div>
                   <div className='flex flex-col items-center justify-center gap-2 mr-4'>
