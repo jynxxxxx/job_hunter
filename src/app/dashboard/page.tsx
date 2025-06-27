@@ -27,9 +27,6 @@ export default function Dashboard() {
   const [answer, setAnswer] = useState<HyundaiOutputProps | null>(null);
   const [waiting, setWaiting]= useState(false)
 
-
-  // console.log(userData)
-
   return (
     <AuthCheck>
       <div className='p-[0.5rem] pt-[6rem] sm:p-[2rem] sm:pt-[6rem] bg-gradient-to-r from-primary to-[#f5f6f9] relative'>
@@ -146,7 +143,7 @@ export default function Dashboard() {
             )}
           </div>
         </div>
-        {(authUser?.uid !== "06Gv8BB5rHMwA5kliQSFkkspNmH3" &&
+        {/* {(authUser?.uid !== "06Gv8BB5rHMwA5kliQSFkkspNmH3" &&
           authUser?.uid !== "ZIGXAp1AIbhdK1pYXmlyZixwCGo2" &&
           authUser?.uid !== "rmscjf8643@gmail.com")  && (activeTab === 'Q2' ||activeTab === 'Q3') && ( 
           <>
@@ -191,7 +188,7 @@ export default function Dashboard() {
               </div>
             </div>
           </>
-        )}
+        )} */}
       </div>
     </AuthCheck>
   )
