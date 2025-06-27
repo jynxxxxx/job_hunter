@@ -42,4 +42,12 @@
     padding: 0;
     margin-bottom: 1rem;
   }
+
+  .tagline {
+    font-family: monospace;
+    font-size: 0.7rem; 
+    color: #aec0d6; 
+    display: flex;
+    gap: 0.1rem
+  }
 }
