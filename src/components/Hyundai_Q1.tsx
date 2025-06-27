@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { doc, getDoc, updateDoc, increment } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from "@/lib/firebase";
 import hdStyles from "@/styles/hyundai.module.scss";
 import { useAuth } from "@/context/AuthContext";
@@ -114,7 +114,36 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
     setForm((f) => ({ ...f, [field]: value }))
   }
 
-  const handleUpload = async() => {
+  const handleUpload = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let finalJobType = null
+
+    if (jobLevel3 !== ""){
+      finalJobType = jobLevel3
+    } else if (jobLevel2 !== ""){
+      finalJobType = jobLevel2
+    } else if (jobLevel1 !== ""){
+      finalJobType = jobLevel1
+    } else ( finalJobType = "" )
+
+    if (
+      !finalJobType||
+      (form.skillReasonsToggle.length === 0) || 
+      (!form.skillReasonsFree) ||
+      (form.futureMobilityToggle.length === 0) || 
+      (!form.futureMobilityFree) ||
+      (form.personalStrengthsToggle.length === 0) || 
+      (!form.personalStrengthsFree)
+    ) {
+      toast.error("모든 필수 항목을 입력하거나 선택해주세요.");
+      setWaiting(false);
+      return;
+    }
+
+
+
+
     setWaiting(true)
     document.getElementById("top")?.scrollIntoView()
 
@@ -138,16 +167,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
       toast.error("무료 이용 횟수(3회)를 모두 사용하셨습니다. 더 많은 자소서를 원하신다면 결제를 진행해주세요.")
       return;
     }
-
-    let finalJobType = null
-
-    if (jobLevel3 !== ""){
-      finalJobType = jobLevel3
-    } else if (jobLevel2 !== ""){
-      finalJobType = jobLevel2
-    } else if (jobLevel1 !== ""){
-      finalJobType = jobLevel1
-    } else ( finalJobType = "" )
 
     const data = {
       ...form,
@@ -173,6 +192,14 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
     try {
       const result = await generateOutline(sanitizedData)
       setAnswer(result)
+      await addDoc(
+        collection(db, 'users', authUser.uid, 'generations'),
+        {
+          createdAt: serverTimestamp(),
+          input: sanitizedData,
+          result: result.result
+        }
+      );
       const userRef = doc(db, 'users', authUser.uid);
       await updateDoc(userRef, {
         generation_count: increment(1)
@@ -189,7 +216,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
   // }, [form]);
 
   return (
-    <form className={hdStyles.formctn}>
+    <form className={hdStyles.formctn} onSubmit={handleUpload}>
       <div className='flex gap-[1rem] items-center text-gray-500 pb-[0.5rem] w-[90%] mx-auto'>
         <div className='text-xl'>※</div> 
         <div className='text-center'>자신의 경험을 기입하는 것은 필수는 아닙니다. 하지만, 자신의 경험과 생각을 자세히 서술하면 합격률이 최대 3배까지 올라갑니다.</div>
@@ -213,7 +240,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
                       setJobLevel1(job)
                       setJobLevel2("")
                     }}
-                    required
                   />
                   {job}
                 </label>
@@ -246,7 +272,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
                         setJobLevel3("")
                       }}
                       style={{ marginRight: '6px' }}
-                      required
                     />
                     {job2}
                   </label>
@@ -266,7 +291,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
                         setJobLevel3("")
                       }}
                       style={{ marginRight: '6px' }}
-                      required
                     />
                     {job2}
                   </label>
@@ -292,7 +316,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
                       checked={jobLevel3 === job3}
                       onChange={() => setJobLevel3(job3)}
                       style={{ marginRight: '6px' }}
-                      required
                     />
                     {job3}
                   </label>
@@ -316,7 +339,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
                   value={skill}
                   checked={form.skillReasonsToggle.includes(skill)}
                   onChange={() => handleCheckbox("skillReasonsToggle", skill, MAX.skills)}
-                  required
                 />
                 {skill}
               </label>
@@ -330,7 +352,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
             value={ form.skillReasonsFree || "" }
             onChange={(e) => handleFreeForm("skillReasonsFree", e.target.value)}
             placeholder="기타 항목이나 추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
-            required
           />
         </div>
 
@@ -346,7 +367,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
                   value={mobility}
                   checked={form.futureMobilityToggle.includes(mobility)}
                   onChange={() => handleCheckbox("futureMobilityToggle", mobility, MAX.future)}
-                  required
                 />
                 {mobility}
               </label>
@@ -360,7 +380,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
             value={ form.futureMobilityFree || "" }
             onChange={(e) => handleFreeForm("futureMobilityFree", e.target.value)}
             placeholder="기타 항목이나 추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
-            required
           />
         </div>
 
@@ -378,7 +397,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
                   onChange={() =>
                     handleCheckbox("personalStrengthsToggle", strength, MAX.strengths)
                   }
-                  required
                 />
                 {strength}
               </label>
@@ -392,7 +410,6 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
             value={ form.personalStrengthsFree || "" }
             onChange={(e) => handleFreeForm("personalStrengthsFree", e.target.value)}
             placeholder="기타 항목이나 추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
-            required
           />
         </div>
 
@@ -410,8 +427,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
         <div className={hdStyles.btnctn}>
           <button 
             className={hdStyles.btn} 
-            type="button" 
-            onClick={handleUpload} 
+            type="submit" 
             disabled={waiting}
           >
             나만의 자기소개서 생성하기
