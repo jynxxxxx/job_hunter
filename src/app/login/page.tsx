@@ -21,6 +21,7 @@ export default function AuthForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [checked, setChecked] = useState(false);
   const [mode, setMode] = useState<'signup' | 'login'>('login');
 
 
@@ -46,6 +47,23 @@ export default function AuthForm() {
 
   const emailSignup = async () => {
     try {
+      if (!checked) {
+        toast.error('개인정보 수집 및 이용에 동의해 주세요.');
+        return
+      }
+      if (!name) {
+        toast.error('성함을 입력해 주세요.');
+        return
+      }
+      if (!email) {
+        toast.error('이메일을 입력해 주세요.');
+        return
+      }
+      if (!password) {
+        toast.error('비밀번호를 입력해 주세요.');
+        return
+      }
+
       const result = await createUserWithEmailAndPassword(auth, email, password);
 
       if (result.user) {
@@ -95,7 +113,7 @@ export default function AuthForm() {
           {mode === 'signup' ? (
             <input
               type="text"
-              placeholder="성"
+              placeholder="성함"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-4/5 px-4 py-2 mb-2 border rounded-full"
@@ -120,6 +138,32 @@ export default function AuthForm() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+        </div>
+        <div className="flex flex-col justify-center px-2">
+          {mode === 'signup' ? (
+            <>
+            <div className='text-xs text-gray-500 bg'>
+            <strong>[개인정보 취급 위탁에 대한 동의]</strong><br/>
+            본인 확인 서비스 및 이력서 작성 및 관리 서비스 제공을 위해 개인정보 취급 위탁 동의를 받고자 합니다. 아래 보기에서 동의 여부를 선택해 주세요.
+            <ul className='list-disc pl-8'>
+              <li>수탁자: 드림패스(주)</li>
+              <li>개인정보 수집 및 이용 목적: 회원가입 등에 필요한 본인확인 서비스, 이력서 작성 및 관리 서비스 제공</li>
+              <li>수집하는 개인정보 항목: 이름, 이메일 주소</li>
+              <li>개인정보 보유 및 이용 기간: 수집 일로부터 3년</li>
+            </ul>
+            ※ 귀하께서는 동의하지 않을 권리가 있습니다. 동의하지 않을 경우, 서비스 이용이 제한될 수 있습니다.
+            </div>
+              <label className='ml-auto mb-8'>
+                <input
+                  style={{marginRight: "6px"}}
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => setChecked(!checked)}
+                />
+                동의합니다
+              </label>
+              </>
+          ) : ("")}
         </div>
 
         <div className="flex justify-center">

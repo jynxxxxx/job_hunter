@@ -97,7 +97,7 @@ export default function Dashboard() {
                   ? <div className={hdStyles.answerCtn}><HyundaiResult {...answer} /></div>
                   : <textarea
                       value=""
-                      placeholder="여기에 AI가 작성한 자소서가 표시됩니다."
+                      placeholder="여기에 AI가 작성한 가이드가 표시됩니다."
                       rows={10}
                       disabled
                       className={hdStyles.answerCtn}
@@ -122,8 +122,8 @@ export default function Dashboard() {
                       {/* <div>① ???????????????????</div>
                        <div>② 하단 계좌번호 또는 카카오페이로 입금합니다.</div> */}
                         <div>① 하단 계좌번호 또는 카카오페이로 입금합니다.</div>
-                        <div>③ 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
-                        <div>④ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
+                        <div>② 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
+                        <div>③ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
                       </div>
                     </p>
                     <div className='flex items-center justify-center gap-4 mr-4'>
@@ -163,10 +163,10 @@ export default function Dashboard() {
                      <strong>서비스 신청 방안</strong><br />
                      <div className='flex flex-col'>
                       {/* <div>① ???????????????????</div>
-                       <div>② 하단 계좌번호 또는 카카오페이로 입금합니다.</div> */}
+                       <div>②③ ④하단 계좌번호 또는 카카오페이로 입금합니다.</div> */}
                         <div>① 하단 계좌번호 또는 카카오페이로 입금합니다.</div>
-                        <div>③ 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
-                        <div>④ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
+                        <div>② 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
+                        <div>③ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
                       </div>
                       
                     </p>
