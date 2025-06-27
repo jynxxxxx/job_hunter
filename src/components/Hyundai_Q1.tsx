@@ -3,7 +3,6 @@ import { doc, getDoc, updateDoc, increment } from 'firebase/firestore';
 import { db } from "@/lib/firebase";
 import hdStyles from "@/styles/hyundai.module.scss";
 import { useAuth } from "@/context/AuthContext";
-import { useUserData } from "@/context/UserDataContext";
 import { toast } from "sonner";
 import { generateOutline } from "@/app/api/generate";
 
@@ -94,7 +93,6 @@ const defaultForm: MobilityForm = {
 
 const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: any ) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
-  const { userData }  = useUserData()
   const [form, setForm] = useState<MobilityForm>(defaultForm);
   const [draft, setDraft] = useState("")
   const [jobLevel1, setJobLevel1] = useState<string | null>(null);
