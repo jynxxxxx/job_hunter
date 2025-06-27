@@ -175,7 +175,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
     <form className={hdStyles.formctn}>
       <div className='flex gap-[1rem] items-center text-gray-500 pb-[0.5rem] w-[90%] mx-auto'>
         <div className='text-xl'>※</div> 
-        <div className='text-center'>자신의 경험을 기입하는 것은 필수는 아닙니다. 하지만, 자신의 경험과 생각을 자세히 서술하면 합격률이 최대 3배까지 올라갑니다.</div>
+        <div className='text-center'>개인의 경험을 최대한 자세하게 작성해 주세요.</div>
         <div className='text-xl'>※</div>
       </div>   
       <div className={hdStyles.leftSide}>  
