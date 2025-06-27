@@ -38,7 +38,11 @@ const Header = () => {
   return (
     <div className={`absolute w-full top-0 left-0 z-50 h-[4rem] font-bold text-dark flex items-center justify-between`}>
       <div className="text-[1.7rem] pl-[2rem] cursor-pointer" onClick={() => router.push('/')}>
-        바로지원
+        <img
+          src="/logo.png"
+          alt="바로지원"
+          className='h-[3.5rem]'
+        />
       </div>
 
     {pathname === '/' ? (

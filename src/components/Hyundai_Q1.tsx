@@ -27,9 +27,9 @@ interface MobilityForm {
 }
 
 const MAX = {
-  skills: 3,
-  future: 4,
-  strengths: 3,
+  skills: 2,
+  future: 2,
+  strengths: 2,
 };
 
 const jobOptions = {
@@ -327,7 +327,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
 
         {/* 2. skillReasons (checkbox with 기타 input) */}
         <h2 className={hdStyles.question}>
-          2. 내가 자동차 기술 일을 잘할 수 있다고 생각하는 이유는? (최대 3개)
+          2. 내가 자동차 기술 일을 잘할 수 있다고 생각하는 이유는? (최대 2개)
         </h2>
         <div className={hdStyles.checkCard}>
           {skillOptions.map((skill) => (
@@ -356,7 +356,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
         </div>
 
         {/* 3. futureMobility (checkbox with 기타 input) */}
-        <h2 className={hdStyles.question}>3. 미래 자동차는 어떤 모습이라 생각하나요? (최대 4개)</h2>
+        <h2 className={hdStyles.question}>3. 미래 자동차는 어떤 모습이라 생각하나요? (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {futureOptions.map((mobility) => (
             <div key={mobility}>
@@ -384,7 +384,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
         </div>
 
         {/* 4. personalStrengths (checkbox with 기타 input) */}
-        <h2 className={hdStyles.question}>4. 나만의 특별한 강점 (최대 3개)</h2>
+        <h2 className={hdStyles.question}>4. 나만의 특별한 강점 (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {strengthOptions.map((strength) => (
             <div key={strength}>
