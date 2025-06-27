@@ -37,11 +37,11 @@ const Header = () => {
 
   return (
     <div className={`absolute w-full top-0 left-0 z-50 h-[4rem] font-bold text-dark flex items-center justify-between`}>
-      <div className="text-[1.7rem] pl-[2rem] cursor-pointer" onClick={() => router.push('/')}>
+      <div className="text-[1.7rem] pl-4 sm:pl-[2rem] cursor-pointer" onClick={() => router.push('/')}>
         <img
           src="/logo.png"
           alt="바로지원"
-          className='h-[3.5rem]'
+          className='h-[2.5rem] md:h-[3.5rem]'
         />
       </div>
 
@@ -49,14 +49,14 @@ const Header = () => {
       isAuthenticated ? (
         <div
           onClick={() => router.push('/dashboard')}
-          className="text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
+          className="text-[1rem] md:text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
         >
           대시보드
         </div>
       ) : (
         <div
           onClick={handleLoginClick}
-          className="text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
+          className="text-[1rem] md:text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
         >
           로그인
         </div>
@@ -67,7 +67,7 @@ const Header = () => {
       ):(
         <div
           onClick={handleLogoutClick}
-          className="text-[1rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
+          className="text-[0.8rem] md:text-[1rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
         >
           로그아웃
         </div>

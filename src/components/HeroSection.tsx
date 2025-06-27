@@ -2,9 +2,19 @@
 
 import { useRouter } from 'next/navigation';
 import heroStyles from "@/styles/hero.module.scss";
+import { useAuth } from '@/context/AuthContext';
 
 const HeroSection = () => {
   const router = useRouter();
+  const { authUser } = useAuth()
+
+  const handleStart = () => {
+    if (authUser) {
+      router.push('/dashboard');
+    } else {
+      router.push('/login');
+    }
+  };
 
   return (
     <>
@@ -19,7 +29,7 @@ const HeroSection = () => {
 
         <button
           className={heroStyles.herobtn}
-          onClick={() => router.push('/login')}
+          onClick={handleStart}
         >
           시작하기 →
         </button>
