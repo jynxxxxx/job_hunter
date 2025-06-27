@@ -111,7 +111,7 @@ export default function Dashboard() {
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
                       전문가가 여러분의 자소서를 기반으로 1번 문항 뿐만 아니라, 2번/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
                       지금 신청 시 선착순 10명 2차 early bird 20,000원 (현재 3/10명 신청 중) + 만족 못할 시 100% 환불 보장!<br />
-                      <span style={{ textDecoration: 'line-through'}}>1차 early bird 마감 (10/10명)</span><br />
+                      <span style={{ textDecoration: 'line-through'}}>1차 early bird 10,000원 마감 (10/10명)</span><br />
                       ※ 일반가 3만원
                     </p>
 
@@ -155,7 +155,7 @@ export default function Dashboard() {
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
                       전문가가 여러분의 자소서를 기반으로 1번 문항 뿐만 아니라, 2번/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
                       지금 신청 시 선착순 10명 2차 early bird 20,000원 (현재 3/10명 신청 중) + 만족 못할 시 100% 환불 보장!<br />
-                      <span style={{ textDecoration: 'line-through'}}>1차 early bird 마감 (10/10명)</span><br />
+                      <span style={{ textDecoration: 'line-through'}}>1차 early bird 10,000원 (10/10명 마감)</span><br />
                       ※ 일반가 3만원 ※ 
                     </p>
                     <p>
