@@ -66,7 +66,6 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   }, [authUser?.uid]);
 
   useEffect(() => {
-    console.log("refreshing again")
     fetchUserData();
   }, [fetchUserData]);
 
