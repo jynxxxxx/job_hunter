@@ -4,7 +4,6 @@ import { doc, updateDoc, increment, collection, addDoc, serverTimestamp } from '
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
-import { useUserData } from "@/context/UserDataContext";
 import { generateOutline } from "@/app/api/generate";
 
 type GoalFree = string;
@@ -115,7 +114,7 @@ interface HyundaiOutputProps {
 
 const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: HyundaiOutputProps | null) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
-  const { userData}  = useUserData()
+  // const { userData}  = useUserData()
   const [form, setForm] = useState<Question3Form>(defaultForm);
   const [draft, setDraft] = useState("")
 
