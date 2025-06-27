@@ -176,6 +176,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
     }
 
     const sanitizedData = {
+      question_id: 1,
       jobType_free: data.jobTypeFree,
       jobType_toggle: data.jobTypeToggle ,
       skillReasons_free: data.skillReasonsFree, 
@@ -430,7 +431,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
             type="submit" 
             disabled={waiting}
           >
-            나만의 자기소개서 생성하기
+            나만의 가이드 생성하기
           </button>
         </div>
       </div>

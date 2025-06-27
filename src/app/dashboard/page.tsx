@@ -84,11 +84,11 @@ export default function Dashboard() {
           <div className={hdStyles.rightSide}>
             <div >
               <div id="top" className={`${hdStyles.question} text-center`}>
-                드림패스 AI가 생성한 자소서
+                드림패스 AI가 생성한 가이드
               </div>
               {waiting ? (
                 <div className={hdStyles.answerCtn}>
-                  자소서 생성중<span className={hdStyles.animatedDots}></span>
+                  가이드 생성중<span className={hdStyles.animatedDots}></span>
                   <br />
                   잠시만 기다려주세요
                 </div>
@@ -123,7 +123,7 @@ export default function Dashboard() {
                        <div>② 하단 계좌번호 또는 카카오페이로 입금합니다.</div> */}
                         <div>① 하단 계좌번호 또는 카카오페이로 입금합니다.</div>
                         <div>② 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
-                        <div>③ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
+                        <div>③ 최대 8시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
                       </div>
                     </p>
                     <div className='flex items-center justify-center gap-4 mr-4'>
@@ -166,7 +166,7 @@ export default function Dashboard() {
                        <div>②③ ④하단 계좌번호 또는 카카오페이로 입금합니다.</div> */}
                         <div>① 하단 계좌번호 또는 카카오페이로 입금합니다.</div>
                         <div>② 바로지원 팀에서 입금 결과를 확인 후 작업을 진행합니다.</div>
-                        <div>③ 최대 24시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
+                        <div>③ 최대 8시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능)</div>
                       </div>
                       
                     </p>
