@@ -54,7 +54,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         };
         setUserData(updatedData);
       } else {
-        setUserData(null);
+        setUserData(data);
       }
     } catch (error) {
       console.error('Error fetching user or resume data from Firestore:', error);
@@ -66,6 +66,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   }, [authUser?.uid]);
 
   useEffect(() => {
+    console.log("refreshing again")
     fetchUserData();
   }, [fetchUserData]);
 

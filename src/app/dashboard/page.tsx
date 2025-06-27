@@ -24,9 +24,6 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('Q1');
   const [answer, setAnswer] = useState<HyundaiOutputProps | null>(null);
   const [waiting, setWaiting]= useState(false)
-
-
-  console.log(userData)
   
   return (
     <AuthCheck>
