@@ -32,7 +32,7 @@ export default function Dashboard() {
           style={{  textShadow: '1px 2px 6px rgba(255, 255, 255, 0.9)' }}
           className='font-extrabold text-xl pb-4 text-center text-bright text-[1.6rem]'
         >
-          {userData?.name ?  `${userData.name}의` : ""} 드림패스 AI와 함께 자신만의 자기소개서를 완성해 보세요
+          {userData?.name ?  `${userData.name}님의` : ""} 드림패스 AI와 함께 자신만의 자기소개서를 완성해 보세요
         </h1>
         <div className='text-gray-500 text-center mb-[2rem]'>현대자동차 합격 자소서 500개 분석을 기반으로, 본인의 경험과 이력을 가장 잘 살릴 수 있는 방안을 제시해 드립니다.</div>
         <div className='flex w-[95%] mx-auto bg-gray-300 p-[0.2rem] rounded-[0.5rem] mb-8'>
