@@ -8,6 +8,7 @@ import Hyundai_Q2 from '@/components/Hyundai_Q2';
 import Hyundai_Q3 from '@/components/Hyundai_Q3';
 import hdStyles from "@/styles/hyundai.module.scss";
 import HyundaiResult from '@/components/HyundaiResults';
+import { useAuth } from '@/context/AuthContext';
 
 interface HyundaiOutputProps {
   result: {
@@ -21,10 +22,13 @@ interface HyundaiOutputProps {
 
 export default function Dashboard() {
   const { userData } = useUserData()
-  // const { authUser } = useAuth()
+  const {authUser} = useAuth()
   const [activeTab, setActiveTab] = useState('Q1');
   const [answer, setAnswer] = useState<HyundaiOutputProps | null>(null);
   const [waiting, setWaiting]= useState(false)
+
+
+  // console.log(userData)
 
   return (
     <AuthCheck>
@@ -142,9 +146,7 @@ export default function Dashboard() {
             )}
           </div>
         </div>
-        {/* {(authUser?.uid !== "06Gv8BB5rHMwA5kliQSFkkspNmH3" &&
-          authUser?.uid !== "ZIGXAp1AIbhdK1pYXmlyZixwCGo2" &&
-          authUser?.uid !== "rmscjf8643@gmail.com")  && (activeTab === 'Q2' ||activeTab === 'Q3') && ( 
+        {!userData?.hasPaid && (activeTab === 'Q2' ||activeTab === 'Q3') && (      
           <>
             <div className={hdStyles.paywallOverlay}></div>
             <div className={hdStyles.paywallMessage}>
@@ -187,7 +189,7 @@ export default function Dashboard() {
               </div>
             </div>
           </>
-        )} */}
+        )}
       </div>
     </AuthCheck>
   )

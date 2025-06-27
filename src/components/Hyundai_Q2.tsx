@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import hdStyles from "@/styles/hyundai.module.scss";
-import { doc, updateDoc, increment, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
+import { useUserData } from "@/context/UserDataContext";
 import { generateOutline } from "@/app/api/generate";
 
 type WorkExperienceFree = string;
@@ -122,7 +123,7 @@ interface HyundaiOutputProps {
 
 const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: HyundaiOutputProps | null) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
-  // const { userData}  = useUserData()
+  const { userData}  = useUserData()
   const [form, setForm] = useState<CollaborationForm>(defaultForm);
   const [draft, setDraft] = useState("")
 
@@ -166,23 +167,23 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
     setWaiting(true)
     document.getElementById("top")?.scrollIntoView()
 
-    // let hasPaid
+    let hasPaid
     if (!authUser) {
       toast.error("로그인이 필요합니다."); // "Login required."
       return;
     }
 
-    // try {
-    //   const userDoc = await getDoc(doc(db, 'users', authUser.uid));
-    //   hasPaid = userDoc.exists() && userDoc.data().hasPaid === true;
-    // } catch {
-    //   toast.error("사용자 정보를 불러오는 중 오류가 발생했습니다.")
-    // }
+    try {
+      const userDoc = await getDoc(doc(db, 'users', authUser.uid));
+      hasPaid = userDoc.exists() && userDoc.data().hasPaid === true;
+    } catch {
+      toast.error("사용자 정보를 불러오는 중 오류가 발생했습니다.")
+    }
 
-    // if (!hasPaid) {
-    //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-    //   return;
-    // }
+    if (!hasPaid) {
+      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+      return;
+    }
     
     const data = {
       ...form,
@@ -402,8 +403,8 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
         </div>
 
         <div className={hdStyles.btnctn}>
-          <button className={hdStyles.btn} type="button" onClick={handleUpload} disabled={waiting}>
-            나만의 가이드 생성하기
+          <button className={hdStyles.btn} type="button" onClick={handleUpload} disabled={waiting || !userData?.hasPaid}>
+            나만의 자기소개서 생성하기
           </button>
         </div>
       </div>
