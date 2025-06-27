@@ -141,12 +141,8 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
       return;
     }
 
-
-
-
     setWaiting(true)
     document.getElementById("top")?.scrollIntoView()
-
 
     let hasPaid
     let genCount

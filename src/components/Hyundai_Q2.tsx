@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import hdStyles from "@/styles/hyundai.module.scss";
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { useUserData } from "@/context/UserDataContext";
+import { generateOutline } from "@/app/api/generate";
 
 type WorkExperienceFree = string;
 type WorkExperienceToggle = string;
@@ -35,8 +36,8 @@ interface CollaborationForm {
 }
 
 const MAX = {
-  problems: 3,
-  roles: 3,
+  problems: 2,
+  roles: 2,
   weaknesses: 2,
   efforts: 2,
 };
@@ -141,10 +142,32 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
     setForm((f) => ({ ...f, [field]: value }))
   }
 
-  const handleUpload = async() => {
-    document.getElementById("top")?.scrollIntoView()
-    let hasPaid
+  const handleUpload = async (e: React.FormEvent) => {
+    e.preventDefault();
 
+    if (
+      !form.workExperienceFree||
+      (!form.workExperienceToggle) || 
+      (!form.problemsFacedFree) ||
+      (form.problemsFacedToggle.length === 0) || 
+      (!form.myRolesFree) ||
+      (form.myRolesToggle.length === 0) || 
+      (!form. outcomeFree) ||
+      (!form. outcomeToggle) ||
+      (!form.weaknessesFree) ||
+      (form.weaknessesToggle.length === 0) ||
+      (!form.overcomeEffortsFree) ||
+      (form.overcomeEffortsToggle.length === 0) 
+    ) {
+      toast.error("모든 필수 항목을 입력하거나 선택해주세요.");
+      setWaiting(false);
+      return;
+    }
+      
+    setWaiting(true)
+    document.getElementById("top")?.scrollIntoView()
+
+    let hasPaid
     if (!authUser) {
       toast.error("로그인이 필요합니다."); // "Login required."
       return;
@@ -162,17 +185,32 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
       return;
     }
     
-    setWaiting(true)
-    // const data = {
-    //   ...form,
-    //   draft: draft
-    // }
-
-    setTimeout(() => {
-      // setAnswer(`Q2 ${JSON.stringify(data)}`)|
-      setAnswer(null)
+    const data = {
+      ...form,
+      question_id: 2,
+      draft: draft
+    }
+    
+    try {
+      const result = await generateOutline(data)
+      setAnswer(result)
+      await addDoc(
+        collection(db, 'users', authUser.uid, 'generations'),
+        {
+          createdAt: serverTimestamp(),
+          input: data,
+          result: result.result
+        }
+      );
+      const userRef = doc(db, 'users', authUser.uid);
+      await updateDoc(userRef, {
+        generation_count: increment(1)
+      });
+    } catch (e: any) {
+      console.error("생성 횟수 업데이트에 실패했습니다.", e.message);
+    } finally {
       setWaiting(false)
-    }, 3000)
+    }
   }
 
   // useEffect(() => {
@@ -215,7 +253,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
           />
         </div>
 
-        <h2 className={hdStyles.question}>2. 어떤 문제가 생겼나요? (최대 3개)</h2>
+        <h2 className={hdStyles.question}>2. 어떤 문제가 생겼나요? (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {problemOptions.map((item) => (
             <div key={item}>
@@ -243,7 +281,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
           />
         </div>
 
-        <h2 className={hdStyles.question}>3. 협업 과정에서 내가 맡은 역할은? (최대 3개)</h2>
+        <h2 className={hdStyles.question}>3. 협업 과정에서 내가 맡은 역할은? (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {roleOptions.map((item) => (
             <div key={item}>

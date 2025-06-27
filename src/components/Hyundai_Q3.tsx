@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import hdStyles from "@/styles/hyundai.module.scss";
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { useUserData } from "@/context/UserDataContext";
+import { generateOutline } from "@/app/api/generate";
 
 type GoalFree = string;
 type GoalToggle = string;
@@ -32,9 +33,9 @@ interface Question3Form {
 
 const MAX = {
   reasons: 2,
-  difficulties: 3,
-  solutions: 3,
-  lessons: 3,
+  difficulties: 2,
+  solutions: 2,
+  lessons: 2,
 };
 
 const goalOptions: GoalToggle[] = [
@@ -132,10 +133,30 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
     setForm((f) => ({ ...f, [field]: value }))
   }
 
-  const handleUpload = async() => {
-    document.getElementById("top")?.scrollIntoView()
-    let hasPaid
+  const handleUpload = async (e: React.FormEvent) => {
+    e.preventDefault();
 
+    if (
+      !form.goalFree||
+      !form.goalToggle || 
+      (!form.reasonsFree) ||
+      (form.reasonsToggle.length === 0) || 
+      (!form.difficultiesFree) ||
+      (form.difficultiesToggle.length === 0) || 
+      (!form.solutionsFree) ||
+      (form.solutionsToggle.length === 0) || 
+      (!form.lessonsFree) ||
+      (form.lessonsToggle.length === 0) 
+    ) {
+      toast.error("모든 필수 항목을 입력하거나 선택해주세요.");
+      setWaiting(false);
+      return;
+    }
+      
+    setWaiting(true)
+    document.getElementById("top")?.scrollIntoView()
+
+    let hasPaid
     if (!authUser) {
       toast.error("로그인이 필요합니다."); // "Login required."
       return;
@@ -153,18 +174,32 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
       return;
     }
     
-    setWaiting(true)
-    // const data = {
-    //   ...form,
-    //   draft: draft
-    // }
-
+    const data = {
+      ...form,
+      question_id: 3,
+      draft: draft
+    }
     
-    setTimeout(() => {
-      // setAnswer(`Q3 ${JSON.stringify(data)}`)
-      setAnswer(null)
+    try {
+      const result = await generateOutline(data)
+      setAnswer(result)
+      await addDoc(
+        collection(db, 'users', authUser.uid, 'generations'),
+        {
+          createdAt: serverTimestamp(),
+          input: data,
+          result: result.result
+        }
+      );
+      const userRef = doc(db, 'users', authUser.uid);
+      await updateDoc(userRef, {
+        generation_count: increment(1)
+      });
+    } catch (e: any) {
+      console.error("생성 횟수 업데이트에 실패했습니다.", e.message);
+    } finally {
       setWaiting(false)
-    }, 3000)
+    }
   }
 
   // useEffect(() => {
@@ -233,7 +268,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
           />
         </div>
 
-        <h2 className={hdStyles.question}>3. 목표 달성 중 어려웠던 점은? (최대 3개)</h2>
+        <h2 className={hdStyles.question}>3. 목표 달성 중 어려웠던 점은? (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {difficultyOptions.map((diff) => (
             <div key={diff}>
@@ -261,7 +296,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
           />
         </div>
 
-        <h2 className={hdStyles.question}>4. 이 어려움을 어떻게 해결했나요? (최대 3개)</h2>
+        <h2 className={hdStyles.question}>4. 이 어려움을 어떻게 해결했나요? (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {solutionOptions.map((sol) => (
             <div key={sol}>
@@ -289,7 +324,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
           />
         </div>
           
-        <h2 className={hdStyles.question}>5. 이 경험에서 배운 점은? (최대 3개)</h2>
+        <h2 className={hdStyles.question}>5. 이 경험에서 배운 점은? (최대 2개)</h2>
         <div className={hdStyles.checkCard}>
           {lessonOptions.map((lesson) => (
             <div key={lesson}>
