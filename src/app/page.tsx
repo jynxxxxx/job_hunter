@@ -5,6 +5,7 @@ import Features from '../components/Features';
 import Testimonials from '../components/Testimonials';
 import Effects from '@/components/Effects';
 import { useAuth } from '@/context/AuthContext';
+import HyundaiLanding from '@/components/HyundaiLanding';
 
 export default function Home() {
   const { setJustSignedOut } = useAuth();
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <HyundaiLanding />
       <Features />
       <Testimonials />
       <Effects />

@@ -1,25 +1,16 @@
 "use client"
 
-import { useEffect, useRef } from "react";
+import { useRouter } from 'next/navigation';
 import heroStyles from "@/styles/hero.module.scss";
 
 const HeroSection = () => {
-  const scrollRef = useRef<(() => void) | null>(null);
-
-  useEffect(() => {
-    scrollRef.current = () => {
-      const target = document.getElementById('signup-forms');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-  }, []);
+  const router = useRouter();
 
   return (
     <>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
-          채용 스트레스, 
+          취업 준비 스트레스, 
           <br />바로지원으로 한 번에 해결하세요.
         </div>
         <p className={heroStyles.subtext}>
@@ -28,7 +19,7 @@ const HeroSection = () => {
 
         <button
           className={heroStyles.herobtn}
-          onClick={() => scrollRef.current?.()}
+          onClick={() => router.push('/login')}
         >
           시작하기 →
         </button>
