@@ -1,5 +1,4 @@
 import React from 'react';
-import hdStyles from '@/styles/hyundai.module.scss';
 
 interface HyundaiOutputProps {
   result: {

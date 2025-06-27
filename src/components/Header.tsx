@@ -19,9 +19,9 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
-  // const handleLoginClick = () => {
-  //   router.push('/login');
-  // };
+  const handleLoginClick = () => {
+    router.push('/login');
+  };
 
   const handleLogoutClick = async () => {
     setJustSignedOut(true);
@@ -50,13 +50,12 @@ const Header = () => {
           대시보드
         </div>
       ) : (
-        ""
-        // <div
-        //   onClick={handleLoginClick}
-        //   className="text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
-        // >
-        //   로그인
-        // </div>
+        <div
+          onClick={handleLoginClick}
+          className="text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
+        >
+          로그인
+        </div>
       )
     ) : (
       pathname === '/login' ? (
