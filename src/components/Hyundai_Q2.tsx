@@ -403,7 +403,7 @@ const Hyundai_Q2 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
         </div>
 
         <div className={hdStyles.btnctn}>
-          <button className={hdStyles.btn} type="button" onClick={handleUpload} disabled={waiting || !userData?.hasPaid}>
+          <button className={hdStyles.btn} type="button" onClick={handleUpload} disabled={waiting}>
             나만의 가이드 생성하기
           </button>
         </div>
