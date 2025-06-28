@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from "@/lib/firebase";
-import hdStyles from "@/styles/hyundai.module.scss";
 import { useAuth } from "@/context/AuthContext";
-import { toast } from "sonner";
-import { generateOutline } from "@/app/api/generate";
 import { HyundaiEssayOutputProps, HyundaiGuideOutputProps, Question } from "@/types/forms";
 import QuestionForm from "@/templates/QuestionForm";
 import { useUserData } from "@/context/UserDataContext";
@@ -120,7 +115,7 @@ const questions: Question<MobilityForm>[] = [
   },
 ];
 
-const Hyundai_Q1 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: any ) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q1 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps ) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<MobilityForm>(defaultForm);

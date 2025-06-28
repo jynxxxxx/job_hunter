@@ -116,14 +116,14 @@ export default function GenerationPage() {
               <div className='flex w-full mx-auto bg-gray-300 p-[0.2rem] rounded-t-[0.5rem] border border-gray-500'>
                 <div 
                   className={`${hdStyles.tab} ${running || !guide && hdStyles.tabDisabled} ${!running && guide && preview === 'guide' ? hdStyles.active : ''}`}
-                  onClick={() => { !guide ? "" : setPreview("guide")}}
+                  onClick={() => { if (guide) setPreview("guide"); }}
                 >
                   가이드
                 </div>
                 {!guide && <div className="my-auto w-[2px] h-full bg-gray-500 overflow-hidden">.</div>}
                 <div 
                   className={`${hdStyles.tab} ${running || !guide && hdStyles.tabDisabled} ${!running && guide && preview === 'essay' ? hdStyles.active : ''}`}
-                  onClick={() => { !guide ? "" : setPreview("essay")}}
+                  onClick={() => { if (guide) setPreview("essay"); }}
                 >
                   자기소개서
                 </div>

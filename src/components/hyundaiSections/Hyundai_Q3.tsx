@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import hdStyles from "@/styles/hyundai.module.scss";
-import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
-import { toast } from "sonner";
 import { useUserData } from "@/context/UserDataContext";
-import { generateOutline } from "@/app/api/generate";
 import { handleUpload } from "@/hooks/useUploadHandler";
 import { HyundaiEssayOutputProps, HyundaiGuideOutputProps, Question } from "@/types/forms";
 import QuestionForm from "@/templates/QuestionForm";
