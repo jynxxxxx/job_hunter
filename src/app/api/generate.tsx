@@ -1,5 +1,5 @@
 export async function generateOutline(formData: any) {
-  const response = await fetch("https://barojiwon.com/generate", {
+  const response = await fetch("https://api.barojiwon.com/generate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -16,7 +16,7 @@ export async function generateOutline(formData: any) {
 }
 
 export async function generateEssay(payload: any) {
-  const response = await fetch("https://barojiwon.com/generate-essay", {
+  const response = await fetch("https://api.barojiwon.com/generate-essay", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
