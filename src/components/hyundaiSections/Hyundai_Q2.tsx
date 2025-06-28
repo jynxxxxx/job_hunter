@@ -169,6 +169,7 @@ const Hyundai_Q2 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: Hyun
     const requiredFields = Object.keys(defaultForm) as (keyof CollaborationForm)[];
 
     handleUpload({
+      userData,
       authUser,
       form,
       questionId: 2,

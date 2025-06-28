@@ -2,12 +2,14 @@ import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp 
 import { toast } from "sonner";
 import { db } from "@/lib/firebase";
 import { generateEssay, generateOutline } from "@/app/api/generate";
+import { HyundaiEssayOutputProps, HyundaiGuideOutputProps } from "@/types/forms";
 
 interface UploadParams<T> {
   form: T;
   draft: string;
   company: string;
   authUser: any;
+  userData: any;
   setWaiting: (b: boolean) => void;
   setEssay: (essay: any) => void;
   setGuide: (guide: any) => void;
@@ -19,6 +21,7 @@ export async function handleUpload<T>({
   form,
   draft,
   company,
+  userData,
   authUser,
   setWaiting,
   setEssay,
@@ -60,7 +63,7 @@ export async function handleUpload<T>({
     return;
   }
 
-  if (!hasPaid) {
+  if ((userData?.generation_count ?? 0) > 2 && !userData?.hasPaid) {
     toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
     setWaiting(false);
     return;
@@ -68,19 +71,27 @@ export async function handleUpload<T>({
 
   try {
     const data = { ...form, question_id: questionId, draft };
-    const guide = await generateOutline(data);
-    setGuide(guide);
+    let guide: HyundaiGuideOutputProps | undefined;
+    let essay: HyundaiEssayOutputProps | undefined;
 
-    const payload = {user_input: data, guideline: guide}
-    const essay = await generateEssay(payload)
-    setEssay(essay)
+    try {
+      guide = await generateOutline(data);
+      setGuide(guide);
 
-    console.log("essay", essay)
+      const payload = { user_input: data, guideline: guide };
+      essay = await generateEssay(payload);
+      setEssay(essay);
+    } catch (error) {
+      console.error("Error generating guide or essay:", error);
+      toast.error("가이드 또는 자소서 생성 중 오류가 발생했습니다")
+      return; 
+    }
+
     await addDoc(collection(db, "users", authUser.uid, "generations"), {
       createdAt: serverTimestamp(),
       input: data,
-      guide: guide.result,
-      essay: essay.essay,
+      guide: guide?.result,
+      essay: essay?.essay,
       company: company
     });
     const userRef = doc(db, "users", authUser.uid);

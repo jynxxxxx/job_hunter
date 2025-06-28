@@ -45,7 +45,7 @@ export default function HistoryPage() {
 
       const snapshot = await getDocs(q);
       const data = snapshot.docs.map(doc => doc.data() as Generation);
-      console.log("docs:", data)
+
       setGenerations(data);
       setLoading(false)
     };

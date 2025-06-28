@@ -146,6 +146,7 @@ const Hyundai_Q1 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: Hyun
     const requiredFields = Object.keys(defaultForm) as (keyof MobilityForm)[];
 
     handleUpload({
+      userData,
       authUser,
       form: updatedForm,
       questionId: 1,

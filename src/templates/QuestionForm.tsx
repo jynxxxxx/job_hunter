@@ -41,10 +41,6 @@ export default function QuestionForm<T>({
   const currentQuestion = questions[step];
 
   useEffect(() => {
-    console.log("Form data updated:", form);
-  }, [form]);
-
-  useEffect(() => {
     if (step === totalSteps) {
       setSubmitEnabled(false);
       const timer = setTimeout(() => {
