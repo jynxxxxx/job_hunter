@@ -115,7 +115,7 @@ const questions: Question<MobilityForm>[] = [
   },
 ];
 
-const Hyundai_Q1 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps ) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q1 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps ) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<MobilityForm>(defaultForm);

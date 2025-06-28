@@ -102,7 +102,7 @@ const questions: Question<Question3Form>[] = [
     toggleField: "reasonsToggle",
     freeField: "reasonsFree",
     options: optionsMap.reasonOptions,
-    max: 2,
+    max: MAX.reasons,
   },
   {
     type: "checkbox",
@@ -110,7 +110,7 @@ const questions: Question<Question3Form>[] = [
     toggleField: "difficultiesToggle",
     freeField: "difficultiesFree",
     options: optionsMap.difficultyOptions,
-    max: 2,
+    max: MAX.difficulties,
   },
   {
     type: "checkbox",
@@ -118,7 +118,7 @@ const questions: Question<Question3Form>[] = [
     toggleField: "solutionsToggle",
     freeField: "solutionsFree",
     options: optionsMap.solutionOptions,
-    max: 2,
+    max: MAX.solutions,
   },
   {
     type: "checkbox",
@@ -126,12 +126,12 @@ const questions: Question<Question3Form>[] = [
     toggleField: "lessonsToggle",
     freeField: "lessonsFree",
     options: optionsMap.lessonOptions,
-    max: 2,
+    max: MAX.lessons,
   },
 ];
 
 
-const Hyundai_Q3 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q3 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<Question3Form>(defaultForm);
