@@ -1,6 +1,6 @@
 "use client"
 
-import HeroSection from '../components/layoutSections/HeroSection';
+import HeroSection from '../components/landingSections/HeroSection';
 import Features from '../components/landingSections/Features';
 import Testimonials from '../components/landingSections/Testimonials';
 import Effects from '@/components/landingSections/Effects';

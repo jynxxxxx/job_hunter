@@ -1,4 +1,3 @@
-// UserDataProvider.tsx
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
@@ -7,24 +6,32 @@ import { db } from '@/lib/firebase';
 import { toast } from 'sonner';
 import { useAuth } from './AuthContext';
 import type { CustomUserProfile } from '@/types/user'
-import { ConvertFirebaseTimestamp } from '@/components/HelperFunctions';
+import { convertFirebaseTimestamp } from '@/components/HelperFunctions';
 
 type UserDataContextType = {
   userData: CustomUserProfile | null;
   loadingUserData: boolean;
   refetchUserData: () => void;
+  activePage: ActivePage;
+  setActivePage: (page: ActivePage) => void;
 };
+
+type ActivePage = 'generation' | 'history';
 
 const UserDataContext = createContext<UserDataContextType>({
   userData: null,
   loadingUserData: false,
   refetchUserData: () => {},
+  activePage: 'generation',
+  setActivePage: () => {},
 });
 
 export function UserDataProvider({ children }: { children: ReactNode }) {
   const { authUser } = useAuth();
   const [userData, setUserData] = useState<CustomUserProfile | null>(null);
   const [loadingUserData, setLoadingUserData] = useState(false);
+  const [activePage, setActivePage] = useState<'generation' | 'history'>('generation');
+
 
   const fetchUserData = useCallback(async () => {
     if (!authUser?.uid) {
@@ -50,7 +57,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
               전화번호: data.parsedResumeData.연락처?.전화번호?.replace(/[()]/g, ''),
             },
           },
-          resumeUploadDate: ConvertFirebaseTimestamp(data),
+          resumeUploadDate: convertFirebaseTimestamp(data, "resumeUploadDate"),
         };
         setUserData(updatedData);
       } else {
@@ -70,7 +77,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   }, [fetchUserData]);
 
   return (
-    <UserDataContext.Provider value={{ userData, loadingUserData, refetchUserData: fetchUserData }}>
+    <UserDataContext.Provider value={{ userData, loadingUserData, refetchUserData: fetchUserData, activePage, setActivePage }}>
       {children}
     </UserDataContext.Provider>
   );

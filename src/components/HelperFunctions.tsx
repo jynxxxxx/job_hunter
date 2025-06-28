@@ -20,44 +20,34 @@ export const ensureUserProfile = async (user: any, name: string) => {
     }
   };
 
-export function ConvertFirebaseTimestamp(userDocSnapData: any) {
-  const rawData = userDocSnapData; // Get the raw data from Firestore first
+export function convertFirebaseTimestamp(
+  rawData: any,
+  fieldName: string
+): string {
+  let convertedDate: Date | null = null;
+  let formattedDateTimeString = '';
 
-  let convertedResumeUploadDate: Date | null = null; // Will hold the JavaScript Date object
-  let formattedDateTimeString: string = '';           // Will hold the formatted string for display
+  const rawValue = rawData?.[fieldName];
 
-  // --- ⭐ Start of Robust Type Conversion Logic ⭐ ---
-  if (rawData && rawData.resumeUploadDate !== undefined && rawData.resumeUploadDate !== null) {
-    // Case 1: It's a Firebase Timestamp object (expected if stored with serverTimestamp())
-    if (typeof rawData.resumeUploadDate === 'object' && typeof (rawData.resumeUploadDate as any).toDate === 'function') {
-      convertedResumeUploadDate = (rawData.resumeUploadDate as any).toDate();
+  if (rawValue !== undefined && rawValue !== null) {
+    if (typeof rawValue === 'object' && typeof rawValue.toDate === 'function') {
+      convertedDate = rawValue.toDate(); // Firebase Timestamp
+    } else if (rawValue instanceof Date) {
+      convertedDate = rawValue; // Already a JS Date
+    } else if (typeof rawValue === 'string') {
+      convertedDate = new Date(rawValue); // Stored as ISO string
     }
-    // Case 2: It's already a standard JavaScript Date object (less common from raw Firestore, but safe to include)
-    else if (rawData.resumeUploadDate instanceof Date) {
-      convertedResumeUploadDate = rawData.resumeUploadDate;
-    }
-    // Case 3: It's a string (e.g., from older data or if you previously stored it as a string)
-    else if (typeof rawData.resumeUploadDate === 'string') {
-      convertedResumeUploadDate = new Date(rawData.resumeUploadDate);
-    }
-    // If it's any other unexpected type, convertedResumeUploadDate will remain null
   }
-  // --- ⭐ End of Robust Type Conversion Logic ⭐ ---
 
-  // --- ⭐ Start of Formatting Logic ⭐ ---
-  if (convertedResumeUploadDate) { // Only format if we successfully got a Date object
-    const year = convertedResumeUploadDate.getFullYear();
-    const month = convertedResumeUploadDate.getMonth() + 1; // getMonth() is 0-indexed
-    const day = convertedResumeUploadDate.getDate();
-    const hours = convertedResumeUploadDate.getHours();
-    const minutes = convertedResumeUploadDate.getMinutes();
-
-    // Ensure minutes are always two digits (e.g., 5 -> 05)
+  if (convertedDate) {
+    const year = convertedDate.getFullYear();
+    const month = convertedDate.getMonth() + 1;
+    const day = convertedDate.getDate();
+    const hours = convertedDate.getHours();
+    const minutes = convertedDate.getMinutes();
     const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-
-    // Construct the string in the desired "X월 X일 X년 - X:XX시간" format
     formattedDateTimeString = `${month}월 ${day}일 ${year}년 - ${hours}:${formattedMinutes}`;
   }
 
-  return formattedDateTimeString
+  return formattedDateTimeString;
 }

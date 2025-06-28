@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/landingSections/Header";
+import Header from "@/components/layoutSections/Header";
 import { Toaster } from 'sonner';
 import { AuthProvider } from "@/context/AuthContext";
 import { UserDataProvider } from '@/context/UserDataContext';

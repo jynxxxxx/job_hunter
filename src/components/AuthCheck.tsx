@@ -21,7 +21,7 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     }
   }, [authUser, loading, justSignedOut, router, pathname, setJustSignedOut]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className='h-[85vh] flex items-center justify-center text-lg font-semibold'>로딩 중...</p>;
   if (!authUser && pathname !== '/') return null;
 
   return <>{children}</>;

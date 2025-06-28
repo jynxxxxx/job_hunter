@@ -7,6 +7,7 @@ import type { User } from 'firebase/auth';
 type AuthContextType = { 
   authUser: User | null; 
   loading: boolean; 
+  setLoading: (val: boolean) => void;
   justSignedOut: boolean;
   setJustSignedOut: (val: boolean) => void;
 };
@@ -14,6 +15,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({
   authUser: null,
   loading: true,
+  setLoading: () => {},
   justSignedOut: false,
   setJustSignedOut: () => {},
 });
@@ -33,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ authUser, loading, justSignedOut, setJustSignedOut }}>
+    <AuthContext.Provider value={{ authUser, loading, setLoading, justSignedOut, setJustSignedOut }}>
       {children}
     </AuthContext.Provider>
   );
