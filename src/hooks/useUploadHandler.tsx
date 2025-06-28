@@ -63,7 +63,7 @@ export async function handleUpload<T>({
     return;
   }
 
-  if ((userData?.generation_count ?? 0) > 2 && !userData?.hasPaid) {
+  if ((userData?.generation_count ?? 0) > 2 && !hasPaid) {
     toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
     setWaiting(false);
     return;
