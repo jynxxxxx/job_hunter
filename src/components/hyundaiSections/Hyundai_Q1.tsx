@@ -5,7 +5,7 @@ import hdStyles from "@/styles/hyundai.module.scss";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 import { generateOutline } from "@/app/api/generate";
-import { Question } from "@/types/forms";
+import { HyundaiEssayOutputProps, HyundaiGuideOutputProps, Question } from "@/types/forms";
 import QuestionForm from "@/templates/QuestionForm";
 import { useUserData } from "@/context/UserDataContext";
 import { handleUpload } from "@/hooks/useUploadHandler";
@@ -120,7 +120,7 @@ const questions: Question<MobilityForm>[] = [
   },
 ];
 
-const Hyundai_Q1 = ({ setGuide, waiting, setWaiting }: { setGuide: (guide: any ) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q1 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: any ) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<MobilityForm>(defaultForm);
@@ -157,6 +157,7 @@ const Hyundai_Q1 = ({ setGuide, waiting, setWaiting }: { setGuide: (guide: any )
       draft,
       requiredFields,
       setWaiting,
+      setEssay,
       setGuide,
       company: '현대차동차'
     });

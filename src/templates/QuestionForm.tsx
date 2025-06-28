@@ -163,6 +163,7 @@ export default function QuestionForm<T>({
       </>
     );
   };
+
   return (
     <form 
       className={hdStyles.formctn} 
@@ -175,7 +176,8 @@ export default function QuestionForm<T>({
       }}
     >
       <div className="text-lg font-bold text-center">
-        문항 별로 작성 후 하단 &apos;나만의 자기소개서/가이드 작성하기&apos; 클릭 부탁드립니다.
+        문항 별로 작성 후 하단 &apos;나만의 자기소개서/가이드 작성하기&apos;<br />
+        클릭 부탁드립니다.
       </div>
       <div className="flex gap-[1rem] items-center justify-center text-gray-500 pb-[0.5rem] w-[90%] mx-auto">
         <div className="text-xl">※</div>

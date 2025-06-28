@@ -1,7 +1,7 @@
 import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "sonner";
 import { db } from "@/lib/firebase";
-import { generateOutline } from "@/app/api/generate";
+import { generateEssay, generateOutline } from "@/app/api/generate";
 
 interface UploadParams<T> {
   form: T;
@@ -9,6 +9,7 @@ interface UploadParams<T> {
   company: string;
   authUser: any;
   setWaiting: (b: boolean) => void;
+  setEssay: (essay: any) => void;
   setGuide: (guide: any) => void;
   questionId: number;
   requiredFields: (keyof T)[];
@@ -20,6 +21,7 @@ export async function handleUpload<T>({
   company,
   authUser,
   setWaiting,
+  setEssay,
   setGuide,
   questionId,
   requiredFields,
@@ -66,12 +68,19 @@ export async function handleUpload<T>({
 
   try {
     const data = { ...form, question_id: questionId, draft };
-    const result = await generateOutline(data);
-    setGuide(result);
+    const guide = await generateOutline(data);
+    setGuide(guide);
+
+    const payload = {user_input: data, guideline: guide}
+    const essay = await generateEssay(payload)
+    setEssay(essay)
+
+    console.log("essay", essay)
     await addDoc(collection(db, "users", authUser.uid, "generations"), {
       createdAt: serverTimestamp(),
       input: data,
-      guide: result.result,
+      guide: guide.result,
+      essay: essay.essay,
       company: company
     });
     const userRef = doc(db, "users", authUser.uid);

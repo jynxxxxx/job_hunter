@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useUserData } from '@/context/UserDataContext';
 import AuthCheck from '@/components/AuthCheck';
 import Hyundai_Q1 from '@/components/hyundaiSections/Hyundai_Q1';
@@ -8,13 +8,51 @@ import Hyundai_Q2 from '@/components/hyundaiSections/Hyundai_Q2';
 import Hyundai_Q3 from '@/components/hyundaiSections/Hyundai_Q3';
 import hdStyles from "@/styles/hyundai.module.scss";
 import HyundaiGuideResults from '@/components/hyundaiSections/HyundaiGuideResults';
-import { HyundaiGuideOutputProps } from '@/types/forms';
+import { HyundaiEssayOutputProps, HyundaiGuideOutputProps } from '@/types/forms';
 
 export default function Dashboard() {
   const { userData } = useUserData()
   const [activeTab, setActiveTab] = useState('Q1');
   const [guide, setGuide] = useState<HyundaiGuideOutputProps | null>(null);
+  const [essay, setEssay] = useState<HyundaiEssayOutputProps | null>(null);
   const [waiting, setWaiting]= useState(false)
+  const [preview, setPreview] = useState<"guide"|"essay">("guide")
+  const [stageIndex, setStageIndex] = useState(0);
+  const [running, setRunning] = useState(false)
+  const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
+
+  useEffect(() => {
+    if (waiting && !running) {
+    stageSetRef.current = [
+      { text: "고객님의 정보를 안전하게 접수했습니다.", duration: 2000 + Math.random() * 1000 },
+      { text: "입력하신 내용을 분석 중입니다.", duration: 10000 + Math.random() * 5000 },
+      { text: "현대자동차 합격 자소서 데이터를 참고하고 있습니다.", duration: 10000 + Math.random() * 5000 },
+      { text: "고객님 맞춤형 자기소개서 가이드를 작성하고 있습니다.", duration: 13000 + Math.random() * 5000 },
+      { text: "최종 결과물을 준비 중입니다. 곧 확인하실 수 있습니다.", duration: 15000 + Math.random() * 5000 }
+    ];
+
+      setRunning(true);
+      setStageIndex(0);
+    }
+  }, [waiting, running]);
+
+  useEffect(() => {
+    if (!running || !stageSetRef.current) return;
+
+    const stages = stageSetRef.current;
+
+    if (stageIndex >= stages.length - 1) {
+      setPreview("guide")
+      setRunning(false); // cycle finished
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setStageIndex(stageIndex + 1);
+    }, stages[stageIndex].duration);
+
+    return () => clearTimeout(timer);
+  }, [running, stageIndex]);
   
   return (
     <AuthCheck>
@@ -66,34 +104,66 @@ export default function Dashboard() {
         }
         <div className={hdStyles.grid}>
           <div>
-            { activeTab === 'Q1' && <Hyundai_Q1 setGuide={setGuide} waiting={waiting} setWaiting={setWaiting}/> }
-            { activeTab === 'Q2' && <Hyundai_Q2 setGuide={setGuide} waiting={waiting} setWaiting={setWaiting}/> }
-            { activeTab === 'Q3' && <Hyundai_Q3 setGuide={setGuide} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q1' && <Hyundai_Q1 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q2' && <Hyundai_Q2 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q3' && <Hyundai_Q3 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
           </div>
           <div className={hdStyles.rightSide}>
             <div >
               <div id="top" className={`${hdStyles.question} text-center`}>
-                드림패스 AI가 생성한 가이드
+                드림패스 AI가 생성한 가이드/자기소개서
+              </div>            
+              <div className='flex w-full mx-auto bg-gray-300 p-[0.2rem] rounded-t-[0.5rem] border border-gray-500'>
+                <div 
+                  className={`${hdStyles.tab} ${running && !guide && hdStyles.tabDisabled} ${!running && guide && preview === 'guide' ? hdStyles.active : ''}`}
+                  onClick={() => { !guide ? "" : setPreview("guide")}}
+                >
+                  가이드
+                </div>
+                {!guide && <div className="my-auto w-[2px] h-full bg-gray-500 overflow-hidden">.</div>}
+                <div 
+                  className={`${hdStyles.tab} ${running && !guide && hdStyles.tabDisabled} ${!running && guide && preview === 'essay' ? hdStyles.active : ''}`}
+                  onClick={() => { !guide ? "" : setPreview("essay")}}
+                >
+                  자소서
+                </div>
               </div>
-              {waiting ? (
+              {running ? (
                 <div className={hdStyles.guideCtn}>
-                  가이드 생성중<span className={hdStyles.animatedDots}></span>
-                  <br />
-                  잠시만 기다려주세요
+                  {stageSetRef.current?.[stageIndex].text}<span className={hdStyles.animatedDots}></span>
                 </div>
               ) : (
-                guide
-                  ? <div className={hdStyles.guideCtn}><HyundaiGuideResults {...guide} /></div>
+                guide ? 
+                  <>
+                    {preview === "guide" ? (
+                      <div className={hdStyles.guideCtn}><HyundaiGuideResults {...guide} /></div>
+                    ) : (
+                      <div className={hdStyles.guideCtn}>
+                        {essay && (
+                          <>
+                            <div>{essay?.essay.split('\n').map((line, i) => (
+                              <React.Fragment key={i}>
+                                {line}
+                                <br />
+                              </React.Fragment>
+                            ))}</div>
+                            <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
+                            </>
+                        )
+                        }
+                      </div>
+                    )}
+                  
+                  </>
                   : <textarea
                       value=""
                       placeholder="여기에 AI가 작성한 가이드가 표시됩니다."
-                      rows={10}
                       disabled
                       className={hdStyles.guideCtn}
                     />
               )}
             </div>
-            {guide && (
+            {!running && guide && (
               <div className='w-[105%] ml-[-1rem] bg-[#F9F9FB] rounded-xl py-4 pl-4 mb-[2rem]'>
                 <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
                 <div className='flex justify-around gap-6'>

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useUserData } from "@/context/UserDataContext";
 import { generateOutline } from "@/app/api/generate";
 import { handleUpload } from "@/hooks/useUploadHandler";
-import { HyundaiGuideOutputProps, Question } from "@/types/forms";
+import { HyundaiEssayOutputProps, HyundaiGuideOutputProps, Question } from "@/types/forms";
 import QuestionForm from "@/templates/QuestionForm";
 
 interface Question3Form {
@@ -136,7 +136,7 @@ const questions: Question<Question3Form>[] = [
 ];
 
 
-const Hyundai_Q3 = ({ setGuide, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q3 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<Question3Form>(defaultForm);
@@ -154,6 +154,7 @@ const Hyundai_Q3 = ({ setGuide, waiting, setWaiting }: { setGuide: (guide: Hyund
         draft,
         requiredFields,
         setWaiting,
+        setEssay,
         setGuide,
         company: '현대차동차'
       });

@@ -12,7 +12,7 @@ interface HyundaiGuideOutputProps {
 
 const  HyundaiGuideResult = ({ result }: HyundaiGuideOutputProps) => {
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="px-8 w-full mx-auto">
       <section className="mb-12">
         <h2 className="text-xl font-bold text-dark mb-4 border-b pb-2">1. 핵심 강점 키워드</h2>
         <div className="flex flex-wrap gap-2">
@@ -56,7 +56,7 @@ const  HyundaiGuideResult = ({ result }: HyundaiGuideOutputProps) => {
         </ol>
       </section>
 
-      <section className="mb-12">
+      <section className="mb-10">
         <h2 className="text-xl font-bold text-dark mb-4 border-b pb-2">5. 면접관 피드백 관점에서 본 당신</h2>
         <div className="space-y-4 text-gray-700">
           {result.review_from_interviewer.map((r, i) => (

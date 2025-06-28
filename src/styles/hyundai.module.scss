@@ -1,7 +1,7 @@
 @use './variables.scss' as *;
 
 .paywallOverlay {
-position: absolute;
+  position: absolute;
   top: 10%; // 20% down from the top of the entire document
   left: 0;
   width: 100%;
@@ -69,6 +69,13 @@ position: absolute;
   }
 }
 
+.tabDisabled{
+  color: gray;
+  &:hover {
+    transform: none;
+    text-decoration: none;
+  }
+}
 .title{
   font-size: 2rem;
   font-weight: 800;
@@ -83,6 +90,7 @@ position: absolute;
   grid-template-columns: 2fr 1.7fr;
   margin-right: auto;
   margin-left: auto;
+  
 }
 
 .leftSide{
@@ -95,13 +103,12 @@ position: absolute;
   margin:2rem 0 3rem 2rem;
   display: flex;
   flex-direction: column;
-  
   width: 102%;
 }
 
 .guideCtn{
   border: 1px gray solid;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   width: 100%;
   padding: 2rem 1rem;
   background-color: white;

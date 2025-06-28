@@ -10,7 +10,7 @@ import { useUserData } from "@/context/UserDataContext";
 import { generateOutline } from "@/app/api/generate";
 import QuestionForm from "@/templates/QuestionForm";
 import { handleUpload } from "@/hooks/useUploadHandler";
-import { HyundaiGuideOutputProps } from "@/types/forms";
+import { HyundaiEssayOutputProps, HyundaiGuideOutputProps } from "@/types/forms";
 
 interface Question<T> {
   type: "radio" | "checkbox";
@@ -162,7 +162,7 @@ const questions: Question<CollaborationForm>[] = [
 ];
 
 
-const Hyundai_Q2 = ({ setGuide, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q2 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<CollaborationForm>(defaultForm);
@@ -180,6 +180,7 @@ const Hyundai_Q2 = ({ setGuide, waiting, setWaiting }: { setGuide: (guide: Hyund
       draft,
       requiredFields,
       setWaiting,
+      setEssay,
       setGuide,
       company: '현대차동차'
     });

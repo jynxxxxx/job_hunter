@@ -20,3 +20,8 @@ export interface HyundaiGuideOutputProps {
     review_from_interviewer: string[];
   };
 }
+
+export interface HyundaiEssayOutputProps {
+  essay: string,
+  length: string,
+}
