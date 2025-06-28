@@ -209,7 +209,7 @@ const Hyundai_Q3 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: Hy
 
   return (
     <form className={hdStyles.formctn}>
-      <div className='text-lg font-bold text-center'>문항 별로 작성 후 하단 '나만의 자기소개서/가이드 작성하기' 클릭 부탁드립니다.</div>
+      <div className='text-lg font-bold text-center'>문항 별로 작성 후 하단 &apos;나만의 자기소개서/가이드 작성하기&apos; 클릭 부탁드립니다.</div>
       <div className='flex gap-[1rem] items-center justify-center text-gray-500 pb-[0.5rem] w-[90%] mx-auto'>
         <div className='text-xl'>※</div> 
         <div className='text-center'>개인의 경험을 최대한 자세하게 작성해 주세요.</div>
