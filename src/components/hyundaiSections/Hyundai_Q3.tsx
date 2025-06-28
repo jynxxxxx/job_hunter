@@ -131,7 +131,7 @@ const questions: Question<Question3Form>[] = [
 ];
 
 
-const Hyundai_Q3 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q3 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<Question3Form>(defaultForm);
@@ -167,7 +167,7 @@ const Hyundai_Q3 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: Hyun
       setForm={setForm}
       draft={draft}
       setDraft={setDraft}
-      disabled={!userData?.hasPaid}
+      disabled={!userData?.hasPaid || waiting}
       onSubmit={handleSubmit}
     />
   );

@@ -104,9 +104,9 @@ export default function GenerationPage() {
         }
         <div className={hdStyles.grid}>
           <div>
-            { activeTab === 'Q1' && <Hyundai_Q1 setGuide={setGuide} setEssay={setEssay} setWaiting={setWaiting}/> }
-            { activeTab === 'Q2' && <Hyundai_Q2 setGuide={setGuide} setEssay={setEssay} setWaiting={setWaiting}/> }
-            { activeTab === 'Q3' && <Hyundai_Q3 setGuide={setGuide} setEssay={setEssay} setWaiting={setWaiting}/> }
+            { activeTab === 'Q1' && <Hyundai_Q1 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q2' && <Hyundai_Q2 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q3' && <Hyundai_Q3 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
           </div>
           <div className={hdStyles.rightSide}>
             <div >

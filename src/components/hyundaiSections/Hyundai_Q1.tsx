@@ -115,7 +115,7 @@ const questions: Question<MobilityForm>[] = [
   },
 ];
 
-const Hyundai_Q1 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps ) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q1 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps ) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<MobilityForm>(defaultForm);
@@ -170,7 +170,7 @@ const Hyundai_Q1 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: Hyun
       setForm={setForm}
       draft={draft}
       setDraft={setDraft}
-      disabled={ (userData?.generation_count ?? 0) > 2 && !userData?.hasPaid }
+      disabled={ (userData?.generation_count ?? 0) > 2 && !userData?.hasPaid || waiting }
       onSubmit={handleSubmit}
       jobLevel1={jobLevel1}
       setJobLevel1={setJobLevel1}

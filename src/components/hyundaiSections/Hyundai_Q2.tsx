@@ -157,7 +157,7 @@ const questions: Question<CollaborationForm>[] = [
 ];
 
 
-const Hyundai_Q2 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, setWaiting: (waiting: boolean) => void }) => {
+const Hyundai_Q2 = ({ setGuide, setEssay, waiting, setWaiting }: { setGuide: (guide: HyundaiGuideOutputProps | null) => void,  setEssay: (essay: HyundaiEssayOutputProps) => void, waiting: boolean, setWaiting: (waiting: boolean) => void }) => {
   const { authUser } = useAuth()
   const { userData}  = useUserData()
   const [form, setForm] = useState<CollaborationForm>(defaultForm);
@@ -189,7 +189,7 @@ const Hyundai_Q2 = ({ setGuide, setEssay, setWaiting }: { setGuide: (guide: Hyun
       setForm={setForm}
       draft={draft}
       setDraft={setDraft}
-      disabled={!userData?.hasPaid}
+      disabled={!userData?.hasPaid || waiting}
       onSubmit={handleSubmit}
     />
   );
