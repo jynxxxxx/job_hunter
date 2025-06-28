@@ -428,7 +428,8 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
             type="submit" 
             disabled={waiting}
           >
-            나만의 자기소개서/가이드 작성하기
+            나만의 자기소개서/
+            <br/>가이드 작성하기
           </button>
         </div>
       </div>

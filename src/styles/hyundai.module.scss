@@ -178,7 +178,7 @@ position: absolute;
   margin-left: auto;
   padding: 0.5rem 2.5rem;
   border-radius: 9px;
-  margin-right: 2rem;
+  margin-right: 1rem;
 
   &:hover {
     transform: scale(1.03);
@@ -238,5 +238,9 @@ position: absolute;
 
   .radioCard, .checkCard{
     margin-left: 0
+  }
+
+  .btn{
+    margin-right: 0rem;
   }
 }
