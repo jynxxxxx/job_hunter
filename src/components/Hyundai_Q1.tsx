@@ -194,7 +194,7 @@ const Hyundai_Q1 = ({ setAnswer, waiting, setWaiting }: { setAnswer: (answer: an
         {
           createdAt: serverTimestamp(),
           input: sanitizedData,
-          result: result.result
+          guide: result.result
         }
       );
       const userRef = doc(db, 'users', authUser.uid);
