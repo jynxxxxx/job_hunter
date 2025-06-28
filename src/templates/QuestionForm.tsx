@@ -242,13 +242,13 @@ export default function QuestionForm<T>({
         {step === totalSteps && (
           <>
             <h2 className={hdStyles.question}>
-              {totalSteps + 1}. 기존 자소서 초안이 있다면 여기에 입력해주세요. 이를 바탕으로 작성해드립니다.
+              {totalSteps + 1}. 기존 자기소개서 초안이 있다면 여기에 입력해주세요. 이를 바탕으로 작성해드립니다.
             </h2>
             <textarea
               rows={3}
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
-              placeholder="자소서 초안을 입력하세요"
+              placeholder="자기소개서 초안을 입력하세요"
               className={hdStyles.draft}
             />
           </>

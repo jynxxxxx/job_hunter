@@ -124,7 +124,7 @@ const SignupForm = () => {
           <div className={signUpStyles.numberIcon}>
             1
           </div>
-          합격자 자소서 템플릿
+          합격자 자기소개서 템플릿
         </div>
         <div className={signUpStyles.benefit}>
           <div className={signUpStyles.numberIcon}>

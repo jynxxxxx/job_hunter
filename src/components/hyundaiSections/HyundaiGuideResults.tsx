@@ -46,7 +46,7 @@ const  HyundaiGuideResult = ({ result }: HyundaiGuideOutputProps) => {
       </section>
 
       <section className="mb-12">
-        <h2 className="text-xl font-bold text-dark mb-4 border-b pb-2">4. 자소서 흐름 시나리오 요약</h2>
+        <h2 className="text-xl font-bold text-dark mb-4 border-b pb-2">4. 자기소개서 흐름 시나리오 요약</h2>
         <ol className="list-decimal pl-6 space-y-3 text-gray-800">
           {result.outline.map((point, i) => (
             <li key={i} className="bg-white border-l-4 border-dark pl-4 py-2">
