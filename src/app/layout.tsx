@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
+import Header from "@/components/landingSections/Header";
 import { Toaster } from 'sonner';
 import { AuthProvider } from "@/context/AuthContext";
 import { UserDataProvider } from '@/context/UserDataContext';
-import Footer from "@/components/Footer";
+import Footer from "@/components/layoutSections/Footer";
 
 export const metadata: Metadata = {
   title: "바로지원",

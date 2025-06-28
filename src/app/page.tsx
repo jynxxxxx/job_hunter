@@ -1,11 +1,11 @@
 "use client"
 
-import HeroSection from '../components/HeroSection';
-import Features from '../components/Features';
-import Testimonials from '../components/Testimonials';
-import Effects from '@/components/Effects';
+import HeroSection from '../components/layoutSections/HeroSection';
+import Features from '../components/landingSections/Features';
+import Testimonials from '../components/landingSections/Testimonials';
+import Effects from '@/components/landingSections/Effects';
 import { useAuth } from '@/context/AuthContext';
-import HyundaiLanding from '@/components/HyundaiLanding';
+import HyundaiLanding from '@/components/landingSections/HyundaiLanding';
 
 export default function Home() {
   const { setJustSignedOut } = useAuth();

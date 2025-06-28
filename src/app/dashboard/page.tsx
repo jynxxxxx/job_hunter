@@ -3,26 +3,17 @@
 import { useState } from 'react';
 import { useUserData } from '@/context/UserDataContext';
 import AuthCheck from '@/components/AuthCheck';
-import Hyundai_Q1 from '@/components/Hyundai_Q1';
-import Hyundai_Q2 from '@/components/Hyundai_Q2';
-import Hyundai_Q3 from '@/components/Hyundai_Q3';
+import Hyundai_Q1 from '@/components/hyundaiSections/Hyundai_Q1';
+import Hyundai_Q2 from '@/components/hyundaiSections/Hyundai_Q2';
+import Hyundai_Q3 from '@/components/hyundaiSections/Hyundai_Q3';
 import hdStyles from "@/styles/hyundai.module.scss";
-import HyundaiResult from '@/components/HyundaiResults';
-
-interface HyundaiOutputProps {
-  result: {
-    core_keywords: string[];
-    key_experiences: string[];
-    applicant_character: string;
-    outline: string[];
-    review_from_interviewer: string[];
-  };
-}
+import HyundaiGuideResults from '@/components/hyundaiSections/HyundaiGuideResults';
+import { HyundaiGuideOutputProps } from '@/types/forms';
 
 export default function Dashboard() {
   const { userData } = useUserData()
   const [activeTab, setActiveTab] = useState('Q1');
-  const [answer, setAnswer] = useState<HyundaiOutputProps | null>(null);
+  const [guide, setGuide] = useState<HyundaiGuideOutputProps | null>(null);
   const [waiting, setWaiting]= useState(false)
   
   return (
@@ -39,7 +30,7 @@ export default function Dashboard() {
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q1' ? hdStyles.active : ''}`}
             onClick={() => {
-              setAnswer(null)
+              setGuide(null)
               setActiveTab('Q1')
             }}
           >
@@ -48,7 +39,7 @@ export default function Dashboard() {
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q2' ? hdStyles.active : ''}`}
             onClick={() => {
-              setAnswer(null)
+              setGuide(null)
               setActiveTab('Q2')
             }}
           >
@@ -57,7 +48,7 @@ export default function Dashboard() {
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q3' ? hdStyles.active : ''}`}
             onClick={() => {
-              setAnswer(null)
+              setGuide(null)
               setActiveTab('Q3')
             }}
           >
@@ -75,9 +66,9 @@ export default function Dashboard() {
         }
         <div className={hdStyles.grid}>
           <div>
-            { activeTab === 'Q1' && <Hyundai_Q1 setAnswer={setAnswer} waiting={waiting} setWaiting={setWaiting}/> }
-            { activeTab === 'Q2' && <Hyundai_Q2 setAnswer={setAnswer} waiting={waiting} setWaiting={setWaiting}/> }
-            { activeTab === 'Q3' && <Hyundai_Q3 setAnswer={setAnswer} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q1' && <Hyundai_Q1 setGuide={setGuide} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q2' && <Hyundai_Q2 setGuide={setGuide} waiting={waiting} setWaiting={setWaiting}/> }
+            { activeTab === 'Q3' && <Hyundai_Q3 setGuide={setGuide} waiting={waiting} setWaiting={setWaiting}/> }
           </div>
           <div className={hdStyles.rightSide}>
             <div >
@@ -85,29 +76,29 @@ export default function Dashboard() {
                 드림패스 AI가 생성한 가이드
               </div>
               {waiting ? (
-                <div className={hdStyles.answerCtn}>
+                <div className={hdStyles.guideCtn}>
                   가이드 생성중<span className={hdStyles.animatedDots}></span>
                   <br />
                   잠시만 기다려주세요
                 </div>
               ) : (
-                answer
-                  ? <div className={hdStyles.answerCtn}><HyundaiResult {...answer} /></div>
+                guide
+                  ? <div className={hdStyles.guideCtn}><HyundaiGuideResults {...guide} /></div>
                   : <textarea
                       value=""
                       placeholder="여기에 AI가 작성한 가이드가 표시됩니다."
                       rows={10}
                       disabled
-                      className={hdStyles.answerCtn}
+                      className={hdStyles.guideCtn}
                     />
               )}
             </div>
-            {answer && (
+            {guide && (
               <div className='w-[105%] ml-[-1rem] bg-[#F9F9FB] rounded-xl py-4 pl-4 mb-[2rem]'>
                 <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
                 <div className='flex justify-around gap-6'>
                   <div className='flex flex-col justify-center gap-4'>
-                    <p>
+                    <div>
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
                       자체 개발 자기소개서 전용 AI + 전문가가 검토하여 1번 문항 뿐만 아니라,<br />
                       2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
@@ -117,9 +108,9 @@ export default function Dashboard() {
                         <span style={{ textDecoration: 'line-through'}}>3차 얼리버드 30,000원 (10/10명 마감)</span><br />
                         4차 정가 50,000원 (1번 첨삭 포함) 
                       </div>
-                    </p>
+                    </div>
 
-                    <p>
+                    <div>
                      <strong>서비스 신청 방안</strong><br />
                      <div className='flex flex-col'>
                         <div>① 하단 계좌번호 또는 카카오페이로 입금합니다. 입금 후, 010-6642-9318로 입금자명/이메일 주소를 보내주세요</div>
@@ -127,7 +118,7 @@ export default function Dashboard() {
                         <div>③ 설문조사 완료 시, 바로지원 팀에서 바로 자기소개서 작성 작업을 진행합니다.</div>
                         <div>④ 가입하신 이메일로 최대 8시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능).</div>
                       </div>
-                    </p>
+                    </div>
                     <div className='flex items-center justify-center gap-4 mr-4'>
                     <img
                       src="/qr.png"
@@ -155,7 +146,7 @@ export default function Dashboard() {
                 <div className='font-extrabold text-center pb-4 text-xl'>자소서가 도움이 되었나요?</div>
                 <div className='flex justify-around gap-6'>
                   <div className='flex flex-col items-center justify-center gap-2'>
-                    <p>
+                    <div>
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
                       자체 개발 자기소개서 전용 AI + 전문가가 검토하여 1번 문항 뿐만 아니라,<br />
                       2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
@@ -165,8 +156,8 @@ export default function Dashboard() {
                         <span style={{ textDecoration: 'line-through'}}>3차 얼리버드 30,000원 (10/10명 마감)</span><br />
                         4차 정가 50,000원 (1번 첨삭 포함) 
                       </div>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                      <strong>서비스 신청 방안</strong><br />
                      <div className='flex flex-col items-start'>
                         <div>① 하단 계좌번호 또는 카카오페이로 입금합니다. 입금 후, 010-6642-9318로 입금자명/이메일 주소를 보내주세요</div>
@@ -175,7 +166,7 @@ export default function Dashboard() {
                         <div>④ 가입하신 이메일로 최대 8시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능).</div>
                       </div>
                       
-                    </p>
+                    </div>
                     <div className='flex flex-col sm:flex-row items-center justify-center gap-2 mr-4'>
                         <img
                           src="/qr.png"
