@@ -191,11 +191,11 @@ export default function GenerationPage() {
                       2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.
                       <div className='text-left w-[fit-content]'>
                         <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (~6월 29일 오후 6시)</span><br />
-                        <span >2차 얼리버드 20,000원 (~6월 29일 오후 8시)</span><br />
+                        <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (~6월 29일 오후 8시)</span><br />
                         <span >3차 정가 30,000원</span><br />
                       </div>
                     </div>
-{/* style={{ textDecoration: 'line-through'}} */}
+
                     <div>
                      <strong>서비스 신청 방안</strong><br />
                      <div className='flex flex-col'>
@@ -236,7 +236,7 @@ export default function GenerationPage() {
                       2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.
                       <div className='text-left w-[fit-content] mx-auto'>
                         <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (~6월 29일 오후 6시)</span><br />
-                        <span >2차 얼리버드 20,000원 (~6월 29일 오후 8시)</span><br />
+                        <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (~6월 29일 오후 8시)</span><br />
                         <span >3차 정가 30,000원</span><br />
                       </div>
                     </div>
