@@ -188,7 +188,7 @@ export default function GenerationPage() {
                     <div>
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
                       500개의 합격자기소개서와 전문가의 협력으로 만든 자체 개발 자기소개서 전용 AI가 1번 문항 뿐만 아니라, <br />
-                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.
+                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다. 자기소개서 전문가가 해주는 1회 첨삭 포함.
                       <div className='text-left w-[fit-content]'>
                         <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (30/30 마감)</span><br />
                         <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (30/30 마감)</span><br />
@@ -234,7 +234,7 @@ export default function GenerationPage() {
                     <div>
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
                       500개의 합격자기소개서와 전문가의 협력으로 만든 자체 개발 자기소개서 전용 AI가 1번 문항 뿐만 아니라, <br />
-                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다. 자기소개서 전문가가 해주는 1회 첨삭 포함 
+                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다. 자기소개서 전문가가 해주는 1회 첨삭 포함.
                       <div className='text-left w-[fit-content] mx-auto'>
                         <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (30/30 마감)</span><br />
                         <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (30/30 마감)</span><br />
