@@ -51,7 +51,7 @@ export async function handleUpload<T>({
   }
 
   setWaiting(true);
-  document.getElementById("top")?.scrollIntoView();
+  document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
 
   let hasPaid = false;
   try {

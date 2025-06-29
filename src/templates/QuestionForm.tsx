@@ -226,7 +226,8 @@ export default function QuestionForm<T>({
                     rows={3}
                     value={(form[currentQuestion.freeField] as unknown as string) || ""}
                     onChange={(e) => updateField(currentQuestion.freeField, e.target.value)}
-                    placeholder="추가 하고 싶은 자신의 경험에 대해 자유롭게 써주세요."
+                    placeholder="위에 선택하신 내역에 대해 자신의 경험을 서술해 주세요 (필수)"
+                    
                   />
                 </div>
               </>

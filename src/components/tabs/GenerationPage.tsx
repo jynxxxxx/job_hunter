@@ -94,13 +94,28 @@ export default function GenerationPage() {
           </div>
         </div>
         { activeTab === 'Q1' && 
-          <h1 className={hdStyles.title}>내가 ‘모빌리티 기술 인력’이라고 생각하는 이유 + 나만의 강점</h1> 
+          <h1 className={hdStyles.title}>
+            <div>①</div>
+            <div>
+              자신이 '모빌리티 기술인력'이라고 생각하는 이유와 남들과 차별화된 본인만의 강점을 기술해 주십시오. <span className='font-normal text-[1rem] text-gray-500'>(800자 이내)</span>
+            </div>
+          </h1> 
         }
         { activeTab === 'Q2' && 
-          <h1 className={hdStyles.title}>협업 속 문제 해결 경험 + 내 단점과 극복 노력</h1> 
+          <h1 className={hdStyles.title}>
+            <div>②</div>
+            <div>
+              협업을 통해서 문제를 해결해본 경험과, 그 과정에서 느꼈던 본인 성격의 단점, 이를 극복하기 위한 노력을 말씀해주세요.  <span className='font-normal text-[1rem] text-gray-500'>(800자 이내)</span>
+            </div> 
+          </h1> 
         }
         { activeTab === 'Q3' && 
-          <h1 className={hdStyles.title}>목표 설정 → 어려움 → 극복 과정</h1> 
+          <h1 className={hdStyles.title}>
+            <div>③</div>
+            <div>
+              스스로 목표를 설정해서 달성해나가는 과정에서 겪은 어려움과 극복해낸 방법을 말씀해 주십시오. <span className='font-normal text-[1rem] text-gray-500'>(700자 이내)</span>
+            </div>
+          </h1> 
         }
         <div className={hdStyles.grid}>
           <div>
@@ -108,9 +123,9 @@ export default function GenerationPage() {
             { activeTab === 'Q2' && <Hyundai_Q2 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
             { activeTab === 'Q3' && <Hyundai_Q3 setGuide={setGuide} setEssay={setEssay} waiting={waiting} setWaiting={setWaiting}/> }
           </div>
-          <div className={hdStyles.rightSide}>
+          <div className={hdStyles.rightSide} id="top">
             <div >
-              <div id="top" className={`${hdStyles.question} text-center`}>
+              <div className={`${hdStyles.question} text-center`}>
                 드림패스 AI가 생성한 가이드/자기소개서
               </div>            
               <div className='flex w-full mx-auto bg-gray-300 p-[0.2rem] rounded-t-[0.5rem] border border-gray-500'>

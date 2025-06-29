@@ -2,7 +2,7 @@
 
 .paywallOverlay {
   position: absolute;
-  top: 10%; // 20% down from the top of the entire document
+  top: 25%; // 20% down from the top of the entire document
   left: 0;
   width: 100%;
   bottom: 0; // rest of the page
@@ -76,12 +76,16 @@
     text-decoration: none;
   }
 }
+
 .title{
   font-size: 2rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 1rem;
+  font-weight: 700;
   color: $extraDark;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  gap: 0.7rem;
+  width: 70%;
+  margin: 0 auto 1rem;
 }
 
 .grid{
@@ -224,6 +228,15 @@
 @media (max-width: 950px) {
   .paywallMessage{
     width: 90vw;
+  }
+
+  .paywallOverlay{
+    top: 20%;
+  }
+
+  .title{
+    font-size: 1.5rem;
+    width: 90%;
   }
 
   .grid {

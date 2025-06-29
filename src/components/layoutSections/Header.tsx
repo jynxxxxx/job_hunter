@@ -90,13 +90,13 @@ const Header = () => {
           <>
             <div
               onClick={()=> {setActivePage("generation")}}
-              className={`text-[1rem] md:text-[1rem] cursor-pointer ${activePage === 'generation' ? 'font-extrabold' : 'font-semibold hover:underline hover:scale-105 '}`}
+              className={`text-[1rem] md:text-[1rem] cursor-pointer py-2 px-6 ${activePage === 'generation' ? 'font-extrabold bg-gray-200 rounded-4xl' : 'font-semibold hover:underline hover:scale-105 '}`}
             >
               맞춤 자기소개서 시작
             </div>
             <div
               onClick={()=> {setActivePage("history")}}
-              className={`text-[1rem] md:text-[1rem] cursor-pointer ${activePage === 'history' ? 'font-extrabold' : 'font-semibold hover:underline hover:scale-105 '}`}
+              className={`text-[1rem] md:text-[1rem] cursor-pointer py-2 px-6 ${activePage === 'history' ? 'font-extrabold bg-gray-200 rounded-4xl' : 'font-semibold hover:underline hover:scale-105 '}`}
             >
               내 자기소개서 보기
             </div>
