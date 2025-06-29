@@ -113,7 +113,7 @@ export default function GenerationPage() {
           <h1 className={hdStyles.title}>
             <div>③</div>
             <div>
-              스스로 목표를 설정해서 달성해나가는 과정에서 겪은 어려움과 극복해낸 방법을 말씀해 주십시오. <span className='font-normal text-[1rem] text-gray-500'>(700자 이내)</span>
+              스스로 목표를 설정해서 달성해나가는 과정에서 겪은 어려움과 극복해낸 방법을 말씀해 주십시오. <span className='font-normal text-[1rem] text-gray-500'>(800자 이내)</span>
             </div>
           </h1> 
         }
