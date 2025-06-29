@@ -16,7 +16,7 @@ const Footer = () => {
           <span className={footerStyles.tagline}>상호명: 드림패스㈜ | 사업자번호: 711-09-03129</span>
           <span className={footerStyles.tagline}>주소: 서울시 마포구 백범로 31길 21 서울창업허브</span>
           <span className={footerStyles.tagline}>개인정보보호책임자: 문인욱 (teambarojiwon@gmail.com)</span>
-          <span className={footerStyles.tagline}>대표이사: 문인욱 | 대표번호: 010-6642-9318</span>
+          <span className={footerStyles.tagline}>대표이사: 문인욱</span>
         </div>
       </div>
       <div className={footerStyles.bottomSection}>
