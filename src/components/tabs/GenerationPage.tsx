@@ -97,7 +97,7 @@ export default function GenerationPage() {
           <h1 className={hdStyles.title}>
             <div>①</div>
             <div>
-              자신이 '모빌리티 기술인력'이라고 생각하는 이유와 남들과 차별화된 본인만의 강점을 기술해 주십시오. <span className='font-normal text-[1rem] text-gray-500'>(800자 이내)</span>
+              자신이 &apos;모빌리티 기술인력&apos;이라고 생각하는 이유와 남들과 차별화된 본인만의 강점을 기술해 주십시오. <span className='font-normal text-[1rem] text-gray-500'>(800자 이내)</span>
             </div>
           </h1> 
         }
