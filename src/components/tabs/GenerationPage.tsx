@@ -9,6 +9,7 @@ import Hyundai_Q3 from '@/components/hyundaiSections/Hyundai_Q3';
 import hdStyles from "@/styles/hyundai.module.scss";
 import HyundaiGuideResult from '@/components/hyundaiSections/HyundaiGuideResults';
 import { HyundaiEssayOutputProps, HyundaiGuideOutputProps } from '@/types/forms';
+import { DotSpinner } from '../layoutSections/DotSpinner';
 
 export default function GenerationPage() {
   const { userData } = useUserData()
@@ -145,7 +146,8 @@ export default function GenerationPage() {
               </div>
               {running ? (
                 <div className={hdStyles.guideCtn}>
-                  {stageSetRef.current?.[stageIndex].text}<span className={hdStyles.animatedDots}></span>
+                  <div className='w-full pt-[2rem] text-center'>{stageSetRef.current?.[stageIndex].text}</div>
+                  <div className='w-full pt-8'><DotSpinner /></div>
                 </div>
               ) : (
                 guide ? 
@@ -185,23 +187,20 @@ export default function GenerationPage() {
                   <div className='flex flex-col justify-center gap-4'>
                     <div>
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
-                      자체 개발 자기소개서 전용 AI + 전문가가 검토하여 1번 문항 뿐만 아니라,<br />
-                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
+                      500개의 합격자기소개서와 전문가의 협력으로 만든 자체 개발 자기소개서 전용 AI가 1번 문항 뿐만 아니라, <br />
+                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.
                       <div className='text-left w-[fit-content]'>
-                        <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (10/10명 마감)</span><br />
-                        <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (10/10명 마감)</span><br />
-                        <span style={{ textDecoration: 'line-through'}}>3차 얼리버드 30,000원 (10/10명 마감)</span><br />
-                        4차 정가 50,000원 (1번 첨삭 포함) 
+                        <span >1차 얼리버드 10,000원 (~6월 29일 오후 6시)</span><br />
+                        <span >2차 얼리버드 20,000원 (~6월 29일 오후 8시)</span><br />
+                        <span >3차 정가 30,000원</span><br />
                       </div>
                     </div>
-
+{/* style={{ textDecoration: 'line-through'}} */}
                     <div>
                      <strong>서비스 신청 방안</strong><br />
                      <div className='flex flex-col'>
-                        <div>① 하단 계좌번호 또는 카카오페이로 입금합니다. 입금 후, 010-6642-9318로 입금자명/이메일 주소를 보내주세요</div>
-                        <div>② 바로지원 팀에서 입금 결과를 확인 후, 30분 내로 2/3번 문항 작성을 위한 설문조사를 진행 요청 드립니다.</div>
-                        <div>③ 설문조사 완료 시, 바로지원 팀에서 바로 자기소개서 작성 작업을 진행합니다.</div>
-                        <div>④ 가입하신 이메일로 최대 8시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능).</div>
+                        <div>① 하단 계좌번호 또는 카카오페이로 입금합니다. 입금 후, 010-8961-1918로 입금자명/이메일 주소를 보내주세요</div>
+                        <div>② 바로지원 팀에서 입금 결과를 확인 후, 30분 내로 2/3번 문항을 활용할 수 있도록 작성 권한이 활성화됩니다.</div>
                       </div>
                     </div>
                     <div className='flex items-center justify-center gap-4 mr-4'>
@@ -212,8 +211,8 @@ export default function GenerationPage() {
                     />
                     <div>
                       <p className='text-sm text-center text-black'>카카오뱅크</p>
-                      <p className='font-extrabold text-center text-black'>3333016420692</p>
-                      <p className='text-center text-black'>문인욱 </p>
+                      <p className='font-extrabold text-center text-black'>3333058317631</p>
+                      <p className='text-center text-black'>박근철</p>
                     </div>
                   </div>
                   </div>
@@ -233,22 +232,19 @@ export default function GenerationPage() {
                   <div className='flex flex-col items-center justify-center gap-2'>
                     <div>
                       <strong>현대차 · 인사팀 출신 전문가들이 직접!</strong><br />
-                      자체 개발 자기소개서 전용 AI + 전문가가 검토하여 1번 문항 뿐만 아니라,<br />
-                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
+                      500개의 합격자기소개서와 전문가의 협력으로 만든 자체 개발 자기소개서 전용 AI가 1번 문항 뿐만 아니라, <br />
+                      2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.
                       <div className='text-left w-[fit-content] mx-auto'>
-                        <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (10/10명 마감)</span><br />
-                        <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (10/10명 마감)</span><br />
-                        <span style={{ textDecoration: 'line-through'}}>3차 얼리버드 30,000원 (10/10명 마감)</span><br />
-                        4차 정가 50,000원 (1번 첨삭 포함) 
+                        <span >1차 얼리버드 10,000원 (~6월 29일 오후 6시)</span><br />
+                        <span >2차 얼리버드 20,000원 (~6월 29일 오후 8시)</span><br />
+                        <span >3차 정가 30,000원</span><br />
                       </div>
                     </div>
                     <div>
                      <strong>서비스 신청 방안</strong><br />
                      <div className='flex flex-col items-start'>
-                        <div>① 하단 계좌번호 또는 카카오페이로 입금합니다. 입금 후, 010-6642-9318로 입금자명/이메일 주소를 보내주세요</div>
-                        <div>② 바로지원 팀에서 입금 결과를 확인 후, 30분 내로 2/3번 문항 작성을 위한 설문조사를 진행 요청 드립니다.</div>
-                        <div>③ 설문조사 완료 시, 바로지원 팀에서 바로 자기소개서 작성 작업을 진행합니다.</div>
-                        <div>④ 가입하신 이메일로 최대 8시간 내로 완성된 결과물을 제공해 드립니다. (최대 2회 리뷰 가능).</div>
+                        <div>① 하단 계좌번호 또는 카카오페이로 입금합니다. 입금 후, 010-8961-1918로 입금자명/이메일 주소를 보내주세요.</div>
+                        <div>② 바로지원 팀에서 입금 결과를 확인 후, 30분 내로 2/3번 문항을 활용할 수 있도록 작성 권한이 활성화됩니다.</div>
                       </div>
                       
                     </div>
@@ -260,8 +256,8 @@ export default function GenerationPage() {
                         />
                         <div>
                           <div className='text-sm text-center text-black'>카카오뱅크</div>
-                          <div className='font-extrabold text-center text-black'>3333016420692</div>
-                          <div className='text-center text-black'>문인욱 </div>
+                          <div className='font-extrabold text-center text-black'>3333058317631</div>
+                          <div className='text-center text-black'>박근철</div>
                         </div>
                       </div>
                   </div>
