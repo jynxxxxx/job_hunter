@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
 export const ensureUserProfile = async (user: any, name: string) => {
@@ -13,6 +13,7 @@ export const ensureUserProfile = async (user: any, name: string) => {
           name: user.displayName || name,
           hasPaid: false,
           generation_count: 0,
+          createdAt: serverTimestamp(),
         },
         { merge: true } // Use merge: true to avoid overwriting if partial data exists
       );
