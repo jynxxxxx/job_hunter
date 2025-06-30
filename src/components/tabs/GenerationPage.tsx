@@ -193,7 +193,8 @@ export default function GenerationPage() {
                         <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (30/30 마감)</span><br />
                         <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (30/30 마감)</span><br />
                         <span >3차 얼리버드 30,000원 (21/30)</span><br />
-                        <span className='text-gray-500' >※ 정가 40,000원</span>
+                        <span className='text-gray-500' >※ 정가 40,000원</span><br />
+                        <span className='text-gray-500' >※ 서류합격시 &apos;예상면접 질문&apos; 및 &apos;AI 모의면접&apos; 서비스 제공</span>
                       </div>
                     </div>
 
@@ -239,7 +240,8 @@ export default function GenerationPage() {
                         <span style={{ textDecoration: 'line-through'}}>1차 얼리버드 10,000원 (30/30 마감)</span><br />
                         <span style={{ textDecoration: 'line-through'}}>2차 얼리버드 20,000원 (30/30 마감)</span><br />
                         <span>3차 얼리버드 30,000원 (21/30)</span><br />
-                        <span className='text-gray-500' >※ 정가 40,000원</span>
+                        <span className='text-gray-500' >※ 정가 40,000원</span><br />
+                        <span className='text-gray-500' >※ 서류합격시 &apos;예상면접 질문&apos; 및 &apos;AI 모의면접&apos; 서비스 제공</span>
                       </div>
                     </div>
                     <div>
