@@ -3,21 +3,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useUserData } from '@/context/UserDataContext';
 import AuthCheck from '@/components/AuthCheck';
-// import Hyundai_Q1 from '@/components/hyundaiSections/Hyundai_Q1';
-// import Hyundai_Q2 from '@/components/hyundaiSections/Hyundai_Q2';
-// import Hyundai_Q3 from '@/components/hyundaiSections/Hyundai_Q3';
-// import hdStyles from "@/styles/hyundai.module.scss";
-// import HyundaiGuideResult from '@/components/hyundaiSections/HyundaiGuideResults';
+import Hyundai_Q1 from '@/components/hyundaiSections/Hyundai_Q1';
+import Hyundai_Q2 from '@/components/hyundaiSections/Hyundai_Q2';
+import Hyundai_Q3 from '@/components/hyundaiSections/Hyundai_Q3';
+import hdStyles from "@/styles/hyundai.module.scss";
+import HyundaiGuideResult from '@/components/hyundaiSections/HyundaiGuideResults';
 import { HyundaiEssayOutputProps, HyundaiGuideOutputProps } from '@/types/forms';
-// import { DotSpinner } from '../layoutSections/DotSpinner';
+import { DotSpinner } from '../layoutSections/DotSpinner';
 
 export default function GenerationPage() {
-  // const { userData } = useUserData()
-  // const [activeTab, setActiveTab] = useState('Q1');
-  // const [guide, setGuide] = useState<HyundaiGuideOutputProps | null>(null);
-  // const [essay, setEssay] = useState<HyundaiEssayOutputProps | null>(null);
-  const [waiting, _setWaiting]= useState(false)
-  const [_preview, setPreview] = useState<"guide"|"essay">("guide")
+  const { userData } = useUserData()
+  const [activeTab, setActiveTab] = useState('Q1');
+  const [guide, setGuide] = useState<HyundaiGuideOutputProps | null>(null);
+  const [essay, setEssay] = useState<HyundaiEssayOutputProps | null>(null);
+  const [waiting, setWaiting]= useState(false)
+  const [preview, setPreview] = useState<"guide"|"essay">("guide")
   const [stageIndex, setStageIndex] = useState(0);
   const [running, setRunning] = useState(false)
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
@@ -60,17 +60,11 @@ export default function GenerationPage() {
       <div className='p-[0.5rem] pt-[6rem] sm:p-[2rem] sm:pt-[6rem] bg-gradient-to-r from-primary to-[#f5f6f9] relative'>
         <h1 
           style={{  textShadow: '1px 2px 6px rgba(255, 255, 255, 0.9)' }}
-          className='font-extrabold text-xl pb-4 text-center text-bright text-[1.6rem] min-h-[60vh] pt-16'
+          className='font-extrabold text-xl pb-4 text-center text-bright text-[1.6rem]'
         >
-          <strong>서비스 개선 작업 중입니다.</strong><br />
-          더 나은 모습으로 찾아뵙기 위해 잠시 서비스를 중단합니다.<br />
-          <br />
-          &apos;내 자기소개서 보기&apos; 탭에서 이전 기록을 계속 확인하실 수 있습니다. <br />
-          <br />
-          최대한 빠르게 돌아오겠습니다. 감사합니다.
-          {/* {userData?.name ?  `${userData.name}님의` : ""} 드림패스 AI와 함께 자신만의 자기소개서를 완성해 보세요 */}
+          {userData?.name ?  `${userData.name}님의` : ""} 드림패스 AI와 함께 자신만의 자기소개서를 완성해 보세요
         </h1>
-        {/* <div className='text-gray-500 text-center mb-[2rem]'>현대자동차 합격 자기소개서 500개 분석을 기반으로, 본인의 경험과 이력을 가장 잘 살릴 수 있는 방안을 제시해 드립니다.</div>
+        <div className='text-gray-500 text-center mb-[2rem]'>현대자동차 합격 자기소개서 500개 분석을 기반으로, 본인의 경험과 이력을 가장 잘 살릴 수 있는 방안을 제시해 드립니다.</div>
         <div className='flex w-[95%] mx-auto bg-gray-300 p-[0.2rem] rounded-[0.5rem] mb-8'>
           <div 
             className={`${hdStyles.tab} ${activeTab === 'Q1' ? hdStyles.active : ''}`}
@@ -272,7 +266,7 @@ export default function GenerationPage() {
               </div>
             </div>
           </>
-        )} */}
+        )}
       </div>
     </AuthCheck>
   )
