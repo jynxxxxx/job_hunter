@@ -180,7 +180,7 @@ export default function GenerationPage() {
                     />
               )}
             </div>
-            {!running && guide && (
+            {!running && guide && !userData?.hasPaid && (
               <div className='w-[105%] ml-[-1rem] bg-[#F9F9FB] rounded-xl py-4 pl-4 mb-[2rem]'>
                 <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
                 <div className='flex justify-around gap-6'>
