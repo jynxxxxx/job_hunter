@@ -191,7 +191,7 @@ export default function GenerationPage() {
                       자체 개발 자기소개서 전용 AI가<br />
                       1번 문항 뿐만 아니라, 2/3번 문항까지 전문가의 언어로 작성을 도와드립니다.<br />
                       ※ 서류합격시 &apos;예상면접 질문&apos; 및 &apos;AI 모의면접&apos; 서비스 제공.
-                      <div className='text-left w-[fit-content] mx-auto'>
+                      <div className='w-[fit-content]'>
                         <strong><span style={{ textDecoration: 'line-through'}} className='text-gray-500' >정가 30,000원</span> → 15,000원<br /></strong>
                       </div>
                     </div>
