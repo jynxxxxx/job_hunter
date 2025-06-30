@@ -3,21 +3,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useUserData } from '@/context/UserDataContext';
 import AuthCheck from '@/components/AuthCheck';
-import Hyundai_Q1 from '@/components/hyundaiSections/Hyundai_Q1';
-import Hyundai_Q2 from '@/components/hyundaiSections/Hyundai_Q2';
-import Hyundai_Q3 from '@/components/hyundaiSections/Hyundai_Q3';
-import hdStyles from "@/styles/hyundai.module.scss";
-import HyundaiGuideResult from '@/components/hyundaiSections/HyundaiGuideResults';
+// import Hyundai_Q1 from '@/components/hyundaiSections/Hyundai_Q1';
+// import Hyundai_Q2 from '@/components/hyundaiSections/Hyundai_Q2';
+// import Hyundai_Q3 from '@/components/hyundaiSections/Hyundai_Q3';
+// import hdStyles from "@/styles/hyundai.module.scss";
+// import HyundaiGuideResult from '@/components/hyundaiSections/HyundaiGuideResults';
 import { HyundaiEssayOutputProps, HyundaiGuideOutputProps } from '@/types/forms';
-import { DotSpinner } from '../layoutSections/DotSpinner';
+// import { DotSpinner } from '../layoutSections/DotSpinner';
 
 export default function GenerationPage() {
-  const { userData } = useUserData()
-  const [activeTab, setActiveTab] = useState('Q1');
-  const [guide, setGuide] = useState<HyundaiGuideOutputProps | null>(null);
-  const [essay, setEssay] = useState<HyundaiEssayOutputProps | null>(null);
-  const [waiting, setWaiting]= useState(false)
-  const [preview, setPreview] = useState<"guide"|"essay">("guide")
+  // const { userData } = useUserData()
+  // const [activeTab, setActiveTab] = useState('Q1');
+  // const [guide, setGuide] = useState<HyundaiGuideOutputProps | null>(null);
+  // const [essay, setEssay] = useState<HyundaiEssayOutputProps | null>(null);
+  const [waiting, _setWaiting]= useState(false)
+  const [_preview, setPreview] = useState<"guide"|"essay">("guide")
   const [stageIndex, setStageIndex] = useState(0);
   const [running, setRunning] = useState(false)
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
