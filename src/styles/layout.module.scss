@@ -1,0 +1,100 @@
+@use './variables.scss' as *;
+
+// header styles
+.active {
+  position: relative;
+  display: inline-block;
+  font-weight: 800;
+  color: $dark;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 2.5px;
+    background-color: $dark;
+    border-radius: 9999px;
+  }
+}
+
+.underlineAnimate {
+  position: relative;
+  display: inline-block;
+  font-weight: 800;
+  color: gray;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -2px; // adjust spacing from text
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    width: 90%;
+    height: 2.5px; // thickness of underline
+    background-color: gray; // or any color you want
+    border-radius: 9999px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+// footer styles
+.ctn {
+  padding: 1rem 1.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: $extraDark;
+  z-index: 10;
+}
+
+.title{
+  text-align: left;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  font-size: 1.8rem; 
+  font-weight: 700;
+  color: white;
+}
+
+.tagline {
+  font-family: monospace;
+  font-size: 0.8rem; 
+  color: #aec0d6; 
+  display: flex;
+  gap: 0.5rem
+}
+
+.bottomSection {
+  text-align: center;
+  font-size: 0.875rem; 
+  color: #b8c7db; 
+  padding-bottom: 1rem
+}
+
+@media (max-width: 640px) {
+  .ctn{
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .title{
+    text-align: left;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+
+  .tagline {
+    font-family: monospace;
+    font-size: 0.7rem; 
+    color: #aec0d6; 
+    display: flex;
+    gap: 0.1rem
+  }
+}

@@ -7,6 +7,7 @@ import { auth } from '@/lib/firebase';
 import { useAuth } from '@/context/AuthContext';
 import { CircleUserRound } from 'lucide-react';
 import { useUserData } from '@/context/UserDataContext';
+import headerStyles from "@/styles/layout.module.scss";
 
 const Header = () => {
   const { activePage, setActivePage } = useUserData()
@@ -56,16 +57,16 @@ const Header = () => {
   //     : '' 
 
   return (
-    <div className={`absolute w-full top-0 left-0 z-50 h-[5rem] md:h-[4rem] font-bold text-dark flex flex-col items-center justify-between md:flex-row`}>
-      <div className="pt-[0.5rem] text-[1.7rem] pl-4 md:pl-[2rem] cursor-pointer" onClick={() => router.push('/')}>
+    <div className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 z-50 h-[6rem] md:h-[4rem] font-bold text-dark flex flex-col items-center md:flex-row`}>
+      <div className="pt-4 text-[1.7rem] px-6 md:px-[2.5rem] md:pt-0 cursor-pointer" onClick={() => router.push('/')}>
         <img
           src="/logo.png"
           alt="바로지원"
-          className='h-[2.5rem] md:h-[3.5rem]'
+          className='h-[2rem] md:h-[3rem]'
         />
       </div>
 
-      <div className={`w-full pt:12 flex md:w-2/5 md:mr-[4rem] lg:w-3/10 ${pathname === '/' ? 'justify-end' : 'justify-around'}`}>
+      <div className={`w-full pt:12 flex ${pathname === '/' ? 'justify-end' : 'justify-center md:justify-start'}`}>
         {pathname === '/' && (
           isAuthenticated ? (
             <div
@@ -89,16 +90,20 @@ const Header = () => {
         {pathname === '/dashboard' && (
           <>
             <div
-              onClick={()=> {setActivePage("generation")}}
-              className={`text-[1rem] md:text-[1rem] cursor-pointer py-2 px-6 ${activePage === 'generation' ? 'font-extrabold bg-gray-200 rounded-4xl' : 'font-semibold hover:underline hover:scale-105 '}`}
+              onClick={() => setActivePage("generation")}
+              className={`px-6 py-1 cursor-pointer ${
+                activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+              }`}
             >
-              맞춤 자기소개서 시작
+              <span>AI 자기소개서</span>
             </div>
             <div
-              onClick={()=> {setActivePage("history")}}
-              className={`text-[1rem] md:text-[1rem] cursor-pointer py-2 px-6 ${activePage === 'history' ? 'font-extrabold bg-gray-200 rounded-4xl' : 'font-semibold hover:underline hover:scale-105 '}`}
+              onClick={() => setActivePage("history")}
+              className={`px-6 py-1 cursor-pointer ${
+                activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+              }`}
             >
-              내 자기소개서 보기
+              <span>내 자기소개서</span>
             </div>
           </>
         )}
