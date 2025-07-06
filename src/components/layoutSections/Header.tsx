@@ -66,63 +66,64 @@ const Header = () => {
         />
       </div>
 
-      <div className={`w-full pt:12 flex ${pathname === '/' ? 'justify-end' : 'justify-center md:justify-start'}`}>
-        {pathname === '/' && (
-          isAuthenticated ? (
-            <div
-              onClick={() => router.push('/dashboard')}
-              className="text-[1rem] md:text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer"
-            >
-              대시보드
-            </div>
-          ) : (
-            <div
-              onClick={handleLoginClick}
-              className="text-aligntext-[1rem] md:text-[1.3rem] pr-[2rem] font-semibold hover:underline cursor-pointer md:mr-[-2rem]"
-            >
-              로그인
-            </div>
-          )
-        )}
-
-        {pathname === '/login' && ( <div> </div> ) }
-
-        {pathname === '/dashboard' && (
+      <div className={`w-full pt:12 flex 'justify-center md:justify-start'}`}>
+        {pathname === '/login' ? null : (
           <>
-            <div
-              onClick={() => setActivePage("generation")}
-              className={`px-6 py-1 cursor-pointer ${
-                activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-              }`}
-            >
-              <span>AI 자기소개서</span>
-            </div>
-            <div
-              onClick={() => setActivePage("history")}
-              className={`px-6 py-1 cursor-pointer ${
-                activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-              }`}
-            >
-              <span>내 자기소개서</span>
-            </div>
+            {pathname === '/' && !isAuthenticated && (
+              <div
+                onClick={handleLoginClick}
+                className="ml-auto text-aligntext-[1rem] md:text-[1.3rem] pr-[1rem] font-semibold hover:underline cursor-pointer md:mr-[1rem]"
+              >
+                로그인
+              </div>
+            )}
+
+            {isAuthenticated && pathname !== '/login' && (
+              <>
+                <div
+                  onClick={() => {
+                    if (pathname !== '/dashboard') {
+                      router.push('/dashboard');
+                    }
+                    setActivePage("generation");
+                  }}
+                  className={`px-6 py-1 cursor-pointer ${
+                    activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  }`}
+                >
+                  <span>AI 자기소개서</span>
+                </div>
+                <div
+                  onClick={() => {
+                    if (pathname !== '/dashboard') {
+                      router.push('/dashboard');
+                    }
+                    setActivePage("history")
+                  }}
+                  className={`px-6 py-1 cursor-pointer ${
+                    activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  }`}
+                >
+                  <span>내 자기소개서</span>
+                </div>
+
+                <div className="pr-[1rem] absolute top-4 right-2 md:top-[1rem] md:right-[1rem]" ref={dropdownRef}  onClick={() => setIsDropdownOpen(prev => !prev)}>
+                  <CircleUserRound size={28} className="hover:scale-110"/>
+                  {isDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">
+                      <div
+                        onClick={handleLogoutClick}
+                        className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                      >
+                        로그아웃
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
           </>
         )}
-
-        {isAuthenticated && pathname !== '/login' && (
-          <div className="pr-[1rem] absolute top-4 right-2 md:top-[1rem] md:right-[1rem]" ref={dropdownRef}  onClick={() => setIsDropdownOpen(prev => !prev)}>
-              <CircleUserRound size={28} className="hover:scale-110"/>
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">
-                  <div
-                    onClick={handleLogoutClick}
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    로그아웃
-                  </div>
-                </div>
-              )}
-            </div>
-          )}  
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp 
 import { toast } from "sonner";
 import { db } from "@/lib/firebase";
 import { generateEssay, generateOutline } from "@/app/api/generate";
-import { HyundaiEssayOutputProps, HyundaiGuideOutputProps } from "@/types/forms";
+import { HyundaiEssayOutputProps, GuideOutputProps } from "@/types/forms";
 
 interface UploadParams<T> {
   form: T;
@@ -59,54 +59,54 @@ export async function handleUpload<T>({
     }, 50);
   }
 
-  let hasPaid = false;
-  try {
-    const userDoc = await getDoc(doc(db, "users", authUser.uid));
-    hasPaid = userDoc.exists() && userDoc.data().hasPaid === true;
-  } catch {
-    toast.error("사용자 정보를 불러오는 중 오류가 발생했습니다.");
-    setWaiting(false);
-    return;
-  }
+  // let hasPaid = false;
+  // try {
+  //   const userDoc = await getDoc(doc(db, "users", authUser.uid));
+  //   hasPaid = userDoc.exists() && userDoc.data().hasPaid === true;
+  // } catch {
+  //   toast.error("사용자 정보를 불러오는 중 오류가 발생했습니다.");
+  //   setWaiting(false);
+  //   return;
+  // }
 
-  if ((userData?.generation_count ?? 0) > 2 && !hasPaid) {
-    toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-    setWaiting(false);
-    return;
-  }
+  // if ((userData?.generation_count ?? 0) > 2 && !hasPaid) {
+  //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+  //   setWaiting(false);
+  //   return;
+  // }
 
-  try {
-    const data = { ...form, question_id: questionId, draft };
-    let guide: HyundaiGuideOutputProps | undefined;
-    let essay: HyundaiEssayOutputProps | undefined;
+  // try {
+  //   const data = { ...form, question_id: questionId, draft };
+  //   let guide: GuideOutputProps | undefined;
+  //   let essay: HyundaiEssayOutputProps | undefined;
 
-    try {
-      guide = await generateOutline(data);
-      setGuide(guide);
+  //   try {
+  //     guide = await generateOutline(data);
+  //     setGuide(guide);
 
-      const payload = { user_input: data, guideline: guide };
-      essay = await generateEssay(payload);
-      setEssay(essay);
-    } catch (error) {
-      console.error("Error generating guide or essay:", error);
-      toast.error("가이드 또는 자소서 생성 중 오류가 발생했습니다")
-      return; 
-    }
+  //     const payload = { user_input: data, guideline: guide };
+  //     essay = await generateEssay(payload);
+  //     setEssay(essay);
+  //   } catch (error) {
+  //     console.error("Error generating guide or essay:", error);
+  //     toast.error("가이드 또는 자소서 생성 중 오류가 발생했습니다")
+  //     return; 
+  //   }
 
-    await addDoc(collection(db, "users", authUser.uid, "generations"), {
-      createdAt: serverTimestamp(),
-      input: data,
-      guide: guide?.result,
-      essay: essay?.essay,
-      company: company
-    });
-    const userRef = doc(db, "users", authUser.uid);
-    await updateDoc(userRef, {
-      generation_count: increment(1),
-    });
-  } catch (e: any) {
-    console.error("생성 횟수 업데이트에 실패했습니다.", e.message);
-  } finally {
-    setWaiting(false);
-  }
+  //   await addDoc(collection(db, "users", authUser.uid, "generations"), {
+  //     createdAt: serverTimestamp(),
+  //     input: data,
+  //     guide: guide?.result,
+  //     essay: essay?.essay,
+  //     company: company
+  //   });
+  //   const userRef = doc(db, "users", authUser.uid);
+  //   await updateDoc(userRef, {
+  //     generation_count: increment(1),
+  //   });
+  // } catch (e: any) {
+  //   console.error("생성 횟수 업데이트에 실패했습니다.", e.message);
+  // } finally {
+  //   setWaiting(false);
+  // }
 }

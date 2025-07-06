@@ -5,24 +5,21 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase'; // adjust path if needed
 import { useAuth } from '@/context/AuthContext';
 import { convertFirebaseTimestamp } from '../HelperFunctions';
-import HyundaiGuideResult from '../hyundaiSections/HyundaiGuideResults';
-import { HyundaiGuideOutputProps } from '@/types/forms';
-import hdStyles from "@/styles/hyundai.module.scss";
+import GuideResult from '../layoutSections/GuideResults';
+import { GuideOutputProps } from '@/types/forms';
+import genStyles from "@/styles/generation.module.scss";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Generation = {
   createdAt?: { seconds: number; nanoseconds: number };
   input:  any;
-  guide: HyundaiGuideOutputProps['result']
+  guide: GuideOutputProps['result']
   essay:  string;
   company: string;
 };
 
-const HyundaiQuestions: Record<string, string> = {
-  1: "자신이 '모빌리티 기술인력'이라고 생각하는 이유와 남들과 차별화된 본인만의 강점을 기술해 주십시오.",
-  2: "협업을 통해서 문제를 해결해본 경험과, 그 과정에서 느꼈던 본인 성격의 단점, 이를 극복하기 위한 노력을 말씀해주세요.",
-  3: "스스로 목표를 설정해서 달성해나가는 과정에서 겪은 어려움과 극복해낸 방법을 말씀해 주십시오."
-};
+import { getQuestionTemplate } from '@/questionTemplates';
+
 
 export default function HistoryPage() {
   const { authUser, setLoading } = useAuth();
@@ -56,7 +53,7 @@ export default function HistoryPage() {
   if (!authUser) return <div>로그인이 필요합니다.</div>;
 
   return (
-    <div className='pt-[5rem] min-h-[85vh] bg-gradient-to-r from-primary to-[#f5f6f9]'>
+    <div className='pt-[2rem] min-h-[85vh] '>
       <h1 className='text-3xl font-bold mb-4 px-12 pb-6 pt-4'>생성한 자기소개서 기록</h1>
       {generations.length === 0 ? (
         <div>기록이 없습니다.</div>
@@ -79,7 +76,7 @@ export default function HistoryPage() {
             `}
           >
             {!collapsed && (
-              <div className="overflow-y-scroll h-full pr-2 bg-dark/15 border-r py-8 pl-6  min-w-[fit-content]">
+              <div className="overflow-y-scroll h-full pr-2 bg-primary/80 border-r py-8 pl-6  min-w-[fit-content]">
                 {generations.map((gen, index) => {
                   const date = convertFirebaseTimestamp(gen, 'createdAt');
                   const isSelected = selectedGen === gen
@@ -102,31 +99,40 @@ export default function HistoryPage() {
           <div className={`h-[fit-content] flex mx-auto flex-col mb-12 items-center justify-center flex-grow transition-all duration-300 ease-in-out ${collapsed ? 'w-[100vw]'  : 'w-[70vw]'}`}>
             <div className={`mt-6 flex bg-gray-300 p-[0.2rem] rounded-t-[0.5rem] border border-gray-500 ${collapsed ? 'ml-0 w-[90%]'  : 'ml-6 w-[70vw]'}`}>
               <div 
-                className={`${hdStyles.tab} ${preview === 'guide' ? hdStyles.active : ''}`}
+                className={`${genStyles.resultTab} ${preview === 'guide' ? genStyles.active : ''}`}
                 onClick={() => {setPreview("guide")}}
               >
                 가이드
               </div>
               <div 
-                className={`${hdStyles.tab} ${preview === 'essay' ? hdStyles.active : ''}`}
+                className={`${genStyles.resultTab} ${preview === 'essay' ? genStyles.active : ''}`}
                 onClick={() => {setPreview("essay")}}
               >
                 자기소개서
               </div>
             </div>
-            <div className={`min-h-[60vh] ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[70vw]'}`}>
+            <div className={`bg-[#d1d5dc46] border border-gray-700 min-h-[60vh] ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[70vw]'} rounded-b-[0.5rem]`}> 
               {selectedGen ? (
                 <div className='bg-white/70 py-8 px-4 sm:px-16 h-[60vh] rounded-b-[0.5rem] flex flex-col gap-8 overflow-y-scroll '>
                   <div className="text-gray-700 text-[1.3rem]">
                     <strong>지원 회사:</strong> {selectedGen.company}
                   </div>
                   <div className="text-gray-700 text-[1.3rem]">
-                    <strong>{selectedGen.input?.question_id ? `${selectedGen.input?.question_id}번 문항:` : ""}</strong> {HyundaiQuestions[selectedGen.input?.question_id] || "알 수 없는 질문"}
+                    {(() => {
+                      const template = getQuestionTemplate(selectedGen.company, selectedGen.input?.job || '');
+                      const qid = selectedGen.input?.question_id;
+                      const questionText = qid ? (template as any)?.[`question${qid}`] : undefined;
+                      return (
+                        <>
+                          <strong>{qid ? `${qid}번 문항:` : ""}</strong> {questionText || "알 수 없는 질문"}
+                        </>
+                      );
+                    })()}
                   </div>
                   <div className="">
                     {preview === "guide" && (
                       <div className="whitespace-pre-line mt-1">
-                        <HyundaiGuideResult result={selectedGen.guide} />
+                        <GuideResult result={selectedGen.guide} />
                       </div>
                     )}
                     {preview === "essay" && (

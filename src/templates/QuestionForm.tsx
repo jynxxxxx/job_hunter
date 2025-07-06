@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-import hdStyles from "@/styles/hyundai.module.scss";
+import genStyles from "@/styles/generation.module.scss";
 import { JobOptions, Question } from "@/types/forms";
 
 interface QuestionFormProps<T> {
@@ -74,7 +74,7 @@ export default function QuestionForm<T>({
     return (
       <>
         <div className="grid grid-cols-[1fr_1.5fr_1.5fr] pt-[1rem] pb-[2rem] ml-[1.5rem]">
-          <div className={hdStyles.stepGroup}>
+          <div className={genStyles.stepGroup}>
             {Object.keys(options).map((job) => (
               <div key={job}>
                 <label>
@@ -97,7 +97,7 @@ export default function QuestionForm<T>({
           </div>
 
           {jobLevel1 && Array.isArray(level1) && (
-            <div className={hdStyles.stepGroup}>
+            <div className={genStyles.stepGroup}>
               {level1.map((job2: string) => (
                 <label key={job2}>
                   <input
@@ -118,7 +118,7 @@ export default function QuestionForm<T>({
           )}
 
           {jobLevel1 && level1 && !Array.isArray(level1) && (
-            <div className={hdStyles.stepGroup}>
+            <div className={genStyles.stepGroup}>
               {Object.keys(level1).map((job2) => (
                 <label key={job2}>
                   <input
@@ -139,7 +139,7 @@ export default function QuestionForm<T>({
           )}
 
           {jobLevel1 && jobLevel2 && level1 && !Array.isArray(level1) && Array.isArray((level1 as Record<string, string[]>)[jobLevel2]) && (
-            <div className={hdStyles.stepGroup}>
+            <div className={genStyles.stepGroup}>
               {(level1 as Record<string, string[]>)[jobLevel2].map((job3: string) => (
                 <label key={job3}>
                   <input
@@ -162,7 +162,7 @@ export default function QuestionForm<T>({
 
   return (
     <form 
-      className={hdStyles.formctn} 
+      className={genStyles.formctn} 
       onSubmit={e => {
         if (!submitEnabled) {
           e.preventDefault();
@@ -171,32 +171,27 @@ export default function QuestionForm<T>({
         onSubmit(e);
       }}
     >
-      <div className="text-lg font-bold text-center">
-        문항 별로 작성 후 하단 &apos;나만의 자기소개서/가이드 작성하기&apos;<br />
-        클릭 부탁드립니다.
-      </div>
-      <div className="flex gap-[1rem] items-center justify-center text-gray-500 pb-[0.5rem] w-[90%] mx-auto">
-        <div className="text-xl">※</div>
-        <div className="text-center">개인의 경험을 최대한 자세하게 작성해 주세요.</div>
-        <div className="text-xl">※</div>
-      </div>
-
-      <div className="w-[80%] bg-gray-200 h-2 rounded mb-4 mx-auto">
-        <div
-          className=" h-full bg-bright rounded transition-all duration-300"
-          style={{ width: `${((step + 1) / (totalSteps+1)) * 100}%` }}
-        />
+      <div className="mt-4 flex flex-col mb-2">
+        <div className="text-gray-600 font-semibold">
+          진행률: {step + 1} / {totalSteps + 1}
+        </div>
+        <div className="w-full bg-gray-200 h-2 rounded mb-4 mx-auto">
+          <div
+            className=" h-full bg-bright rounded transition-all duration-300"
+            style={{ width: `${((step + 1) / (totalSteps+1)) * 100}%` }}
+          />
+        </div>
       </div>
 
-      <div className={hdStyles.leftSide}>
+      <div className={genStyles.questionCtn}>
         {step < totalSteps && currentQuestion && (
           <div>
-            <h2 className={hdStyles.question}>{step +1}. {currentQuestion.label}</h2>
+            <h2 className={genStyles.question}>{step +1}. {currentQuestion.label}</h2>
             {currentQuestion.type === "jobOptions"
               ? renderJobOptions()
               : (
               <>
-                <div className={currentQuestion.type === "radio" ? hdStyles.radioCard : hdStyles.checkCard}>
+                <div className={currentQuestion.type === "radio" ? genStyles.radioCard : genStyles.checkCard}>
                   {Array.isArray(currentQuestion.options) && currentQuestion.options.map((option) => (
                     <label key={option}>
                       <input
@@ -220,9 +215,9 @@ export default function QuestionForm<T>({
                   ))}
                 </div>
 
-                <div className={hdStyles.free}>
+                <div className={genStyles.free}>
                   <textarea
-                    className={hdStyles.draft}
+                    className={genStyles.draft}
                     rows={3}
                     value={(form[currentQuestion.freeField] as unknown as string) || ""}
                     onChange={(e) => updateField(currentQuestion.freeField, e.target.value)}
@@ -238,7 +233,7 @@ export default function QuestionForm<T>({
 
         {step === totalSteps && (
           <>
-            <h2 className={hdStyles.question}>
+            <h2 className={genStyles.question}>
               {totalSteps + 1}. 기존 자기소개서 초안이 있다면 여기에 입력해주세요. 이를 바탕으로 작성해드립니다.
             </h2>
             <textarea
@@ -246,14 +241,14 @@ export default function QuestionForm<T>({
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               placeholder="자기소개서 초안을 입력하세요"
-              className={hdStyles.draft}
+              className={genStyles.draft}
             />
           </>
         )}
 
         <div className="flex justify-between mt-4">
           {step > 0 && (
-            <button type="button" onClick={() => setStep(step - 1)} className="px-4 py-2 bg-gray-300 rounded">
+            <button type="button" onClick={() => setStep(step - 1)} className="px-4 py-2 bg-gray-300 rounded hover:scale-105">
               이전
             </button>
           )}
@@ -261,12 +256,12 @@ export default function QuestionForm<T>({
             <button
               type="button"
               onClick={() => setStep(step + 1)}
-              className="px-4 py-2 bg-blue-500 text-white rounded ml-auto"
+              className="px-4 py-2 bg-bright text-white rounded ml-auto hover:scale-105"
             >
               다음
             </button>
           ) : (
-            <button className={hdStyles.btn} type="submit" disabled={disabled}>
+            <button className={genStyles.btn} type="submit" disabled={disabled}>
               나만의 자기소개서/
               <br />
               가이드 작성하기

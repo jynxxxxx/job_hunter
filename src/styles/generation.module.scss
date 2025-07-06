@@ -50,30 +50,58 @@
 
 
 .tab{
-  text-align: center;
-  width: 100%;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  &:hover {
-    transform: scale(1.03);
-    text-decoration: underline;
-  }
-}
-
-.active{
-  background-color: white;
-  font-weight: 800;
-  &:hover {
-    transform: scale(1);
-  }
-}
-
-.tabDisabled{
+  padding: 0.5rem 0;
+  font-size: 1rem;
   color: gray;
   &:hover {
-    transform: none;
-    text-decoration: none;
+    transform: scale(1.03);
+  }
+  cursor: pointer;
+
+  &.active {
+    position: relative;
+    display: inline-block;
+    font-weight: 800;
+    color: black;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -1px;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 2.5px;
+      background-color: black;
+      border-radius: 9999px;
+    }
+  }
+
+  &.tabDisabled{
+    color: gray;
+    &:hover {
+      transform: none;
+      text-decoration: none;
+    }
+  }
+}
+
+.resultTab{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 1.15rem;
+  padding: 0.2rem;
+  &:hover {
+    transform: scale(1.03);
+  }
+  cursor: pointer;
+
+  &.active {
+    font-weight: 800;
+    background-color: rgba(white, 0.4);
+    border-radius: 0.5rem;
   }
 }
 
@@ -89,25 +117,23 @@
 }
 
 .grid{
-  width:95%;
-  display:grid;
-  grid-template-columns: 2fr 1.7fr;
+  width: 70%;
   margin-right: auto;
   margin-left: auto;
-  
+  margin-top: 1rem;
 }
 
 .leftSide{
-  background: rgba(255, 255, 255, 0.549);
-  padding: 2rem 1.5rem;
-  border-radius: 2rem;
+  width: 100%;
+  padding: 3rem 5rem;
+  background: rgba($primary, 0.4);
+  border-radius: 3rem;
 }
 
 .rightSide{
-  margin:2rem 0 3rem 2rem;
+  margin: 4rem 3rem 3rem;
   display: flex;
   flex-direction: column;
-  width: 102%;
 }
 
 .guideCtn{
@@ -115,16 +141,20 @@
   border-radius: 0 0 10px 10px;
   width: 100%;
   padding: 2rem 1rem;
-  background-color: white;
   min-height: 50vh;
+  background-color: #d1d5dc46;
 }
 
 .formctn{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 2rem 2rem 3rem 0;
-  border-right: 1px gray solid;
+}
+
+.questionCtn{
+  padding: 2rem 2rem;
+  border-radius: 8px;
+  background-color: rgba($primary, 0.6);
 }
 
 .stepGroup{

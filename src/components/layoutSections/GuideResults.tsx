@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface HyundaiGuideOutputProps {
+interface GuideOutputProps {
   result: {
     core_keywords: string[];
     key_experiences: string[];
@@ -10,7 +10,7 @@ interface HyundaiGuideOutputProps {
   };
 }
 
-const  HyundaiGuideResult = ({ result }: HyundaiGuideOutputProps) => {
+const  GuideResult = ({ result }: GuideOutputProps) => {
   return (
     <div className="px-8 w-full mx-auto">
       <section className="mb-12">
@@ -70,4 +70,4 @@ const  HyundaiGuideResult = ({ result }: HyundaiGuideOutputProps) => {
   );
 };
 
-export default HyundaiGuideResult;
+export default GuideResult;

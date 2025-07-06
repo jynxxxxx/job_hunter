@@ -11,7 +11,7 @@ export interface Question<T> {
   max: number;
 }
 
-export interface HyundaiGuideOutputProps {
+export interface GuideOutputProps {
   result: {
     core_keywords: string[];
     key_experiences: string[];

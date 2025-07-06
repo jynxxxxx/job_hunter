@@ -23,7 +23,9 @@ export default function RootLayout({
           <UserDataProvider>
             <Toaster position="top-center" />
             <Header />
-              {children}
+              <div className="min-h-screen pt-[6rem] md:pt-[4rem]">
+                {children}
+              </div>
             <Footer />
           </UserDataProvider>
         </AuthProvider>
