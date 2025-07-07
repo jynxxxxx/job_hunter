@@ -59,12 +59,12 @@ export default function JobSelectPage() {
         >
           <div className="flex flex-col gap-2 text-center">
             <h1
-              className="text-white mt-8 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
+              className="text-white mt-8 text-3xl md:text-5xl leading-tight tracking-[-0.033em] font-extrabold"
             > 
               AI로 돋보이는 자기소개서를 작성하세요
             </h1>
-            <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-              지원하는 회사와 직무에 맞춰 당신의 강점과 경험을 돋보이게 하는 맞춤형 에세이를 생성하세요.
+            <h2 className="pt-4 text-white text-lg md:text-2xl font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+              지원하는 회사와 직무에 맞춰 당신의 강점과 경험을 돋보이게 하는 맞춤형 자기소개서를 생성하세요.
             </h2>
           </div>
         </div>
