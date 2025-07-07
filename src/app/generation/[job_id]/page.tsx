@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useUserData } from '@/context/UserDataContext';
 import AuthCheck from '@/components/AuthCheck';
-import { getQuestionTemplate } from '@/questionTemplates';
+import { getQuestionTemplate } from '@/templates/jobQuestions';
 import DynamicQuestionSection from '@/components/DynamicQuestionSection';
 import genStyles from "@/styles/generation.module.scss";
 import GuideResult from '@/components/layoutSections/GuideResults';

@@ -1,4 +1,4 @@
-export const questionTemplates = [
+export const jobQuestions = [
   {
     job_id: "1",
     // Group questions by Q1, Q2, Q3 for clarity and separation
@@ -611,5 +611,5 @@ export const questionTemplates = [
 
 // Helper to get template for a company/job
 export function getQuestionTemplate(job_id: string) {
-  return questionTemplates.find(t => t.job_id == job_id);
+  return jobQuestions.find(t => t.job_id == job_id);
 }

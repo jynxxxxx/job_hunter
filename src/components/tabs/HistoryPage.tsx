@@ -9,7 +9,7 @@ import GuideResult from '../layoutSections/GuideResults';
 import { GuideOutputProps } from '@/types/forms';
 import genStyles from "@/styles/generation.module.scss";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { getQuestionTemplate } from '@/questionTemplates';
+import { getQuestionTemplate } from '@/templates/jobQuestions';
 import { useUserData } from '@/context/UserDataContext';
 
 type Generation = {
@@ -19,7 +19,6 @@ type Generation = {
   essay: string;
   job_id?: string;
   question_id?: string;
-  company?: string;
   id?: string;
 };
 

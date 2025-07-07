@@ -3,7 +3,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useUserData } from "@/context/UserDataContext";
 import QuestionForm from "@/templates/QuestionForm";
 import { handleUpload } from "@/hooks/useUploadHandler";
-import { getQuestionTemplate } from "@/questionTemplates";
+import { getQuestionTemplate } from '@/templates/jobQuestions';
 
 interface DynamicQuestionSectionProps {
   job_id: string;

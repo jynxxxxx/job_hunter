@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useUserData } from "@/context/UserDataContext";
 import { useRouter } from "next/navigation";
-import { getQuestionTemplate } from '@/questionTemplates';
+import { getQuestionTemplate } from '@/templates/jobQuestions';
 
 // Helper to generate a random 6-character string
 function randomId() {
