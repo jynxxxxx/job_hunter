@@ -197,17 +197,17 @@ export default function QuestionForm<T>({
                       <input
                         style={{ marginRight: "6px" }}
                         type={currentQuestion.type}
-                        name={String(currentQuestion.toggleField)}
+                        name={String(currentQuestion.multiple_choice)}
                         value={option}
                         checked={
                           currentQuestion.type === "radio"
-                            ? form[currentQuestion.toggleField] === option
-                            : ((form[currentQuestion.toggleField] as unknown as string[]) || []).includes(option)
+                            ? form[currentQuestion.multiple_choice] === option
+                            : ((form[currentQuestion.multiple_choice] as unknown as string[]) || []).includes(option)
                         }
                         onChange={() =>
                           currentQuestion.type === "radio"
-                            ? updateField(currentQuestion.toggleField, option)
-                            : toggleCheckbox(currentQuestion.toggleField, option, currentQuestion.max)
+                            ? updateField(currentQuestion.multiple_choice, option)
+                            : toggleCheckbox(currentQuestion.multiple_choice, option, currentQuestion.max)
                         }
                       />
                       {option}
@@ -219,8 +219,8 @@ export default function QuestionForm<T>({
                   <textarea
                     className={genStyles.draft}
                     rows={3}
-                    value={(form[currentQuestion.freeField] as unknown as string) || ""}
-                    onChange={(e) => updateField(currentQuestion.freeField, e.target.value)}
+                    value={(form[currentQuestion.free_text] as unknown as string) || ""}
+                    onChange={(e) => updateField(currentQuestion.free_text, e.target.value)}
                     placeholder="위에 선택하신 내역에 대해 자신의 경험을 서술해 주세요 (필수)"
                     
                   />

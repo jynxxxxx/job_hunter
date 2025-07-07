@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, getDocs, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { toast } from 'sonner';
 import { useAuth } from './AuthContext';
@@ -14,6 +14,7 @@ type UserDataContextType = {
   refetchUserData: () => void;
   activePage: ActivePage;
   setActivePage: (page: ActivePage) => void;
+  jobList: any[];
 };
 
 type ActivePage = 'generation' | 'history';
@@ -24,6 +25,7 @@ const UserDataContext = createContext<UserDataContextType>({
   refetchUserData: () => {},
   activePage: 'generation',
   setActivePage: () => {},
+  jobList: [],
 });
 
 export function UserDataProvider({ children }: { children: ReactNode }) {
@@ -31,7 +33,25 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState<CustomUserProfile | null>(null);
   const [loadingUserData, setLoadingUserData] = useState(false);
   const [activePage, setActivePage] = useState<'generation' | 'history'>('generation');
+  const [jobList, setJobList] = useState<any[]>([]);
 
+  useEffect(() => {
+    const fetchJobs = async () => {
+      // If jobs_dictionary is a collection:
+      const snapshot = await getDocs(collection(db, "jobs_dictionary"));
+      const jobs = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          ...data,
+          startDate: data.startDate ? convertFirebaseTimestamp(data, "startDate", 'short') : undefined,
+          endDate: data.endDate ? convertFirebaseTimestamp(data, "endDate", 'short') : undefined,
+        };
+      });
+      setJobList(jobs);
+      console.log("Fetched jobs:", jobs);
+    };
+    fetchJobs();
+  }, []);
 
   const fetchUserData = useCallback(async () => {
     if (!authUser?.uid) {
@@ -77,7 +97,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   }, [fetchUserData]);
 
   return (
-    <UserDataContext.Provider value={{ userData, loadingUserData, refetchUserData: fetchUserData, activePage, setActivePage }}>
+    <UserDataContext.Provider value={{ userData, loadingUserData, refetchUserData: fetchUserData, activePage, setActivePage, jobList }}>
       {children}
     </UserDataContext.Provider>
   );

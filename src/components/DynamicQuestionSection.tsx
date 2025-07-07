@@ -6,39 +6,34 @@ import { handleUpload } from "@/hooks/useUploadHandler";
 import { getQuestionTemplate } from "@/questionTemplates";
 
 interface DynamicQuestionSectionProps {
-  company: string;
-  job: string;
+  job_id: string;
   section: string; // e.g. "q1", "q2", "q3", ...
-  questionId: number;
+  question_id: number;
   setGuide: (guide: any) => void;
   setEssay: (essay: any) => void;
   waiting: boolean;
   setWaiting: (waiting: boolean) => void;
+  running?: boolean; // Optional prop to indicate if generation is running
 }
 
 const DynamicQuestionSection = ({
-  company,
-  job,
+  job_id,
   section,
-  questionId,
+  question_id,
   setGuide,
   setEssay,
   waiting,
   setWaiting,
+  running,
 }: DynamicQuestionSectionProps) => {
   const { authUser } = useAuth();
   const { userData } = useUserData();
 
-  const template = getQuestionTemplate(company, job);
-  // Dynamically get all question sections (q1, q2, q3, ...)
-  const sectionKeys = template ? Object.keys(template).filter((k) => /^q\d+$/.test(k)) : [];
+  const template = getQuestionTemplate(job_id);
   const questions = template?.[section as keyof typeof template];
   const defaultForm = template?.[`defaultForm${section.toUpperCase()}` as keyof typeof template] || {};
   // Ensure questions is always an array for rendering
   const safeQuestions = Array.isArray(questions) ? questions : [];
-  const numQuestions =
-    template?.numQuestions?.[section as keyof typeof template.numQuestions] ??
-    safeQuestions.length;
 
   const hasJobOptions = safeQuestions.some(q => q.type === "jobOptions");
   const [jobLevel1, setJobLevel1] = useState("");
@@ -50,18 +45,18 @@ const DynamicQuestionSection = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const requiredFields = Object.keys(defaultForm);
+    const requiredFields = Object.keys(defaultForm) as Array<keyof typeof defaultForm>;
     handleUpload({
       userData,
       authUser,
       form,
-      questionId,
+      question_id,
       draft,
       requiredFields,
       setWaiting,
       setEssay,
       setGuide,
-      company,
+      job_id,
     });
   };
 
@@ -72,7 +67,7 @@ const DynamicQuestionSection = ({
       setForm={setForm}
       draft={draft}
       setDraft={setDraft}
-      disabled={!userData?.hasPaid || waiting}
+      disabled={Boolean((!userData?.hasPaid?.[job_id] && (question_id !== 1)) || waiting || running)}
       onSubmit={handleSubmit}
       {...(hasJobOptions && {
         jobLevel1,

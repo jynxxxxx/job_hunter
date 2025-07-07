@@ -1,7 +1,6 @@
 export const questionTemplates = [
   {
-    company: "현대자동차",
-    job: "생산직",
+    job_id: "1",
     // Group questions by Q1, Q2, Q3 for clarity and separation
     q1: [
       {
@@ -310,14 +309,13 @@ export const questionTemplates = [
     question3:"스스로 목표를 설정해서 달성해나가는 과정에서 겪은 어려움과 극복해낸 방법을 말씀해 주십시오."
   },
   {
-  company: "포스코스틸리온",
-  job: "2025년 하반기 대졸 신입사원 (채용 연계형 인턴) 공개채용",
+  job_id: "2",
   q1: [
     {
       type: "radio",
       label: "내가 회사를 선택할 때 가장 중요하게 여기는 기준은?",
-      toggleField: "companyCriteria_toggle",
-      freeField: "companyCriteria_free",
+      multiple_choice: "1_choice",
+      free_text: "1_free",
       options: [
         "기술력과 R&D 투자",
         "성장 가능성과 사업 안정성",
@@ -331,8 +329,8 @@ export const questionTemplates = [
     {
       type: "radio",
       label: "이 기준을 중요하게 여기는 이유는?",
-      toggleField: "criteriaReason_toggle",
-      freeField: "criteriaReason_free",
+      multiple_choice: "2_choice",
+      free_text: "2_free",
       options: [
         "빠르게 배우고 성장하고 싶어서",
         "내 전공/관심을 살릴 수 있어서",
@@ -346,8 +344,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "포스코스틸리온이 그 기준을 만족한다고 느낀 이유는?",
-      toggleField: "poscoReasons_toggle",
-      freeField: "poscoReasons_free",
+      multiple_choice: "3_choice",
+      free_text: "3_free",
       options: [
         "친환경·스마트팩토리 분야에서 앞서가는 기업이라서",
         "고기능강판 기술력이 업계 최고 수준이라서",
@@ -356,13 +354,13 @@ export const questionTemplates = [
         "자동화·디지털 전환 속도가 빠름",
         "신입교육 및 사내 교육이 잘 갖춰져 있어서"
       ],
-      max: 3
+      max: 2
     },
     {
       type: "radio",
       label: "내가 지원한 직무는?",
-      toggleField: "jobRole_toggle",
-      freeField: "jobRole_free",
+      multiple_choice: "4_choice",
+      free_text: "4_free",
       options: [
         "생산기술 엔지니어",
         "설비기술 엔지니어",
@@ -376,8 +374,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "입사 후 이루고 싶은 나의 목표는?",
-      toggleField: "careerGoals_toggle",
-      freeField: "careerGoals_free",
+      multiple_choice: "5_choice",
+      free_text: "5_free",
       options: [
         "현장 자동화 개선 프로젝트 주도",
         "설비 고장률 20% 줄이기",
@@ -391,8 +389,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "이 목표가 회사에 어떤 기여를 줄 수 있을까요?",
-      toggleField: "goalImpact_toggle",
-      freeField: "goalImpact_free",
+      multiple_choice: "6_choice",
+      free_text: "6_free",
       options: [
         "생산 효율 향상",
         "품질 불량률 감소",
@@ -408,8 +406,8 @@ export const questionTemplates = [
     {
       type: "radio",
       label: "내가 중요하게 여기는 가치관은 무엇인가요?",
-      toggleField: "value_toggle",
-      freeField: "value_free",
+      multiple_choice: "1_choice",
+      free_text: "1_free",
       options: [
         "책임감과 주인의식",
         "배려와 협력",
@@ -423,8 +421,8 @@ export const questionTemplates = [
     {
       type: "radio",
       label: "이 가치관을 중요하게 여기게 된 이유는?",
-      toggleField: "valueReason_toggle",
-      freeField: "valueReason_free",
+      multiple_choice: "2_choice",
+      free_text: "2_free",
       options: [
         "혼자보다 함께가 더 강하다고 느껴서",
         "작은 행동이 큰 결과를 만든다고 생각해서",
@@ -438,8 +436,8 @@ export const questionTemplates = [
     {
       type: "radio",
       label: "어떤 상황에서 이 가치관을 실천했나요?",
-      toggleField: "valueSituation_toggle",
-      freeField: "valueSituation_free",
+      multiple_choice: "3_choice",
+      free_text: "3_free",
       options: [
         "조별과제 중 마감 직전에 충돌 발생",
         "현장실습 중 장비 오류 발생",
@@ -453,8 +451,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "그때 내가 맡은 역할은?",
-      toggleField: "valueRole_toggle",
-      freeField: "valueRole_free",
+      multiple_choice: "4_choice",
+      free_text: "4_free",
       options: [
         "일정 계획 세우고 조율",
         "갈등 중재 및 분위기 조정",
@@ -468,8 +466,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "내가 한 구체적인 행동은?",
-      toggleField: "valueAction_toggle",
-      freeField: "valueAction_free",
+      multiple_choice: "5_choice",
+      free_text: "5_free",
       options: [
         "우선순위 재정리로 일정 재구성",
         "팀원과 1:1 소통하며 이해도 맞춤",
@@ -483,8 +481,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "그 결과는 어땠나요?",
-      toggleField: "valueOutcome_toggle",
-      freeField: "valueOutcome_free",
+      multiple_choice: "6_choice",
+      free_text: "6_free",
       options: [
         "과제 마감일 내 완료",
         "결과물이 더 나아졌다고 평가받음",
@@ -498,8 +496,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "이 가치관이 회사에 어떤 영향을 줄 수 있을까요?",
-      toggleField: "valueImpact_toggle",
-      freeField: "valueImpact_free",
+      multiple_choice: "7_choice",
+      free_text: "7_free",
       options: [
         "업무 신뢰도를 높일 수 있음",
         "협업 효율을 높이고 갈등을 줄일 수 있음",
@@ -514,8 +512,8 @@ export const questionTemplates = [
     {
       type: "radio",
       label: "내가 지원한 직무는?",
-      toggleField: "understandingJob_toggle",
-      freeField: "understandingJob_free",
+      multiple_choice: "1_choice",
+      free_text: "1_free",
       options: [
         "생산기술 엔지니어",
         "설비기술 엔지니어",
@@ -529,8 +527,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "해당 직무의 주요 업무는?",
-      toggleField: "jobTasks_toggle",
-      freeField: "jobTasks_free",
+      multiple_choice: "2_choice",
+      free_text: "2_free",
       options: [
         "생산공정 관리 및 개선",
         "설비 유지보수 및 예지정비",
@@ -544,8 +542,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "전공 또는 배운 내용 중 관련 있는 것은?",
-      toggleField: "relatedStudies_toggle",
-      freeField: "relatedStudies_free",
+      multiple_choice: "3_choice",
+      free_text: "3_free",
       options: [
         "기계/전기/화학/신소재 전공",
         "회로이론, 제어공학, 재료역학",
@@ -558,8 +556,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "직무 관련 프로젝트 또는 경험은?",
-      toggleField: "jobExperience_toggle",
-      freeField: "jobExperience_free",
+      multiple_choice: "4_choice",
+      free_text: "4_free",
       options: [
         "설비 개선 아이디어 제안 프로젝트",
         "품질 이상치 탐지 실습",
@@ -573,8 +571,8 @@ export const questionTemplates = [
     {
       type: "checkbox",
       label: "보유 자격증 또는 기술 역량은?",
-      toggleField: "skills_toggle",
-      freeField: "skills_free",
+      multiple_choice: "5_choice",
+      free_text: "5_free",
       options: [
         "전기/기계/화학 관련 기사 자격증",
         "품질경영기사",
@@ -582,13 +580,13 @@ export const questionTemplates = [
         "Python, SQL, 엑셀 통계분석 가능",
         "안전 관련 자격증 (산업안전기사 등)"
       ],
-      max: 3
+      max: 2
     },
     {
       type: "checkbox",
       label: "내가 이 직무를 잘할 수 있다고 생각하는 이유는?",
-      toggleField: "fitReasons_toggle",
-      freeField: "fitReasons_free",
+      multiple_choice: "6_choice",
+      free_text: "6_free",
       options: [
         "꼼꼼하고 체계적인 성격",
         "문제를 차분히 분석하는 습관",
@@ -612,6 +610,6 @@ export const questionTemplates = [
 ];
 
 // Helper to get template for a company/job
-export function getQuestionTemplate(company: string, job: string) {
-  return questionTemplates.find(t => t.company === company && t.job === job);
+export function getQuestionTemplate(job_id: string) {
+  return questionTemplates.find(t => t.job_id == job_id);
 }

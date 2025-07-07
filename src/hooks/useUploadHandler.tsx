@@ -2,31 +2,31 @@ import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp 
 import { toast } from "sonner";
 import { db } from "@/lib/firebase";
 import { generateEssay, generateOutline } from "@/app/api/generate";
-import { HyundaiEssayOutputProps, GuideOutputProps } from "@/types/forms";
+import { EssayOutputProps, GuideOutputProps } from "@/types/forms";
 
 interface UploadParams<T> {
   form: T;
   draft: string;
-  company: string;
+  job_id: string;
   authUser: any;
   userData: any;
   setWaiting: (b: boolean) => void;
   setEssay: (essay: any) => void;
   setGuide: (guide: any) => void;
-  questionId: number;
+  question_id: number;
   requiredFields: (keyof T)[];
 }
 
 export async function handleUpload<T>({
   form,
   draft,
-  company,
+  job_id,
   userData,
   authUser,
   setWaiting,
   setEssay,
   setGuide,
-  questionId,
+  question_id,
   requiredFields,
 }: UploadParams<T>) {
   // Check all required fields: for toggles (arrays or string) and free text (string)
@@ -59,54 +59,89 @@ export async function handleUpload<T>({
     }, 50);
   }
 
-  // let hasPaid = false;
-  // try {
-  //   const userDoc = await getDoc(doc(db, "users", authUser.uid));
-  //   hasPaid = userDoc.exists() && userDoc.data().hasPaid === true;
-  // } catch {
-  //   toast.error("사용자 정보를 불러오는 중 오류가 발생했습니다.");
-  //   setWaiting(false);
-  //   return;
-  // }
+  try {
+    const userRef = doc(db, "users", authUser.uid);
+    const userSnap = await getDoc(userRef);
 
-  // if ((userData?.generation_count ?? 0) > 2 && !hasPaid) {
-  //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-  //   setWaiting(false);
-  //   return;
-  // }
+    const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
 
-  // try {
-  //   const data = { ...form, question_id: questionId, draft };
-  //   let guide: GuideOutputProps | undefined;
-  //   let essay: HyundaiEssayOutputProps | undefined;
+    const jobId = String(job_id);
+    const jobHasPaid = hasPaidMap[jobId] === true;
+    const jobGenCount = userData.generation_count[jobId] ?? 0;
+    console.log("jobGenCount:", jobGenCount, "jobHasPaid:", jobHasPaid);
+    if (jobGenCount > 2 && !jobHasPaid) {
+      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+      setWaiting(false);
+      return;
+    }
+    console.log("Job ID:", jobId, "Has Paid:", jobHasPaid, "Generation Count:", jobGenCount);
+    // Build answers object from form fields "1_choice", "1_free", ..., "10_choice", "10_free"
+    const answers: Record<string, { multiple_choice: string[]; free_text: string }> = {};
+    for (let i = 1; i <= 10; i++) {
+      const mcKey = `${i}_choice` as keyof T;
+      const freeKey = `${i}_free` as keyof T;
 
-  //   try {
-  //     guide = await generateOutline(data);
-  //     setGuide(guide);
+      let rawMultipleChoice = form[mcKey];
+      let multiple_choice: string[] = [];
 
-  //     const payload = { user_input: data, guideline: guide };
-  //     essay = await generateEssay(payload);
-  //     setEssay(essay);
-  //   } catch (error) {
-  //     console.error("Error generating guide or essay:", error);
-  //     toast.error("가이드 또는 자소서 생성 중 오류가 발생했습니다")
-  //     return; 
-  //   }
+      if (Array.isArray(rawMultipleChoice)) {
+        multiple_choice = rawMultipleChoice;
+      } else if (typeof rawMultipleChoice === "string" && rawMultipleChoice.trim() !== "") {
+        multiple_choice = [rawMultipleChoice];
+      }
 
-  //   await addDoc(collection(db, "users", authUser.uid, "generations"), {
-  //     createdAt: serverTimestamp(),
-  //     input: data,
-  //     guide: guide?.result,
-  //     essay: essay?.essay,
-  //     company: company
-  //   });
-  //   const userRef = doc(db, "users", authUser.uid);
-  //   await updateDoc(userRef, {
-  //     generation_count: increment(1),
-  //   });
-  // } catch (e: any) {
-  //   console.error("생성 횟수 업데이트에 실패했습니다.", e.message);
-  // } finally {
-  //   setWaiting(false);
-  // }
+      const free_text = (form[freeKey] as unknown as string) || "";
+
+      if (multiple_choice.length > 0 || free_text.trim() !== "") {
+        answers[String(i)] = {
+          multiple_choice,
+          free_text,
+        };
+      }
+    }
+
+    const input = {
+      job_id: jobId,
+      question_id: String(question_id),
+      answers,
+      draft,
+    };
+    console.log("Generated answers:", input);
+    let guide: GuideOutputProps | undefined;
+    let essay: EssayOutputProps | undefined;
+
+    try {
+      guide = await generateOutline(input);
+      setGuide(guide);
+
+      const payload = { user_input: input, guideline: guide };
+      essay = await generateEssay(payload);
+      setEssay(essay);
+    } catch (error) {
+      console.error("Error generating guide or essay:", error);
+      toast.error("가이드 또는 자소서 생성 중 오류가 발생했습니다");
+      setWaiting(false);
+      return;
+    }
+
+    // // Save flattened generation document under users/{uid}/generations/{docId}
+    //  await addDoc(collection(db, "users", authUser.uid, "generations"), {
+    //   createdAt: serverTimestamp(),
+    //   input,
+    //   guide: guide?.result,
+    //   essay: essay?.essay,
+    //   job_id: jobId,
+    //   question_id: question_id,
+    // });
+
+    // // Update user's generation count and hasPaid map for this job
+    // await updateDoc(userRef, {
+    //   [`generation_count.${jobId}`]: increment(1),
+    // });
+  } catch (e: any) {
+    console.error("생성 횟수 업데이트에 실패했습니다.", e.message);
+    toast.error("서버 오류가 발생했습니다.");
+  } finally {
+    setWaiting(false);
+  }
 }

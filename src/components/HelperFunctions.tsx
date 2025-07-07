@@ -23,7 +23,8 @@ export const ensureUserProfile = async (user: any, name: string) => {
 
 export function convertFirebaseTimestamp(
   rawData: any,
-  fieldName: string
+  fieldName: string,
+  formatType: 'long' | 'short' = 'long'
 ): string {
   let convertedDate: Date | null = null;
   let formattedDateTimeString = '';
@@ -47,7 +48,17 @@ export function convertFirebaseTimestamp(
     const hours = convertedDate.getHours();
     const minutes = convertedDate.getMinutes();
     const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    formattedDateTimeString = `${month}월 ${day}일 ${year}년 - ${hours}:${formattedMinutes}`;
+    const paddedMonth = month < 10 ? `0${month}` : `${month}`;
+    const paddedDay = day < 10 ? `0${day}` : `${day}`;
+    const paddedHours = hours < 10 ? `0${hours}` : `${hours}`;
+
+    if (formatType === 'long') {
+      // Example: 7월 3일 2025년 - 15:00
+      formattedDateTimeString = `${month}월 ${day}일 ${year}년 - ${paddedHours}:${formattedMinutes}`;
+    } else if (formatType === 'short') {
+      // Example: 2025/07/03 (15:00)
+      formattedDateTimeString = `${year}/${paddedMonth}/${paddedDay} (${paddedHours}:${formattedMinutes})`;
+    }
   }
 
   return formattedDateTimeString;

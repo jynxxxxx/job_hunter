@@ -5,8 +5,8 @@ export type JobOptions = {
 export interface Question<T> {
   type: "radio" | "checkbox" | "jobOptions"
   label: string;
-  toggleField: keyof T;
-  freeField: keyof T;
+  multiple_choice: keyof T;
+  free_text: keyof T;
   options: string[] | JobOptions;
   max: number;
 }
@@ -21,7 +21,7 @@ export interface GuideOutputProps {
   };
 }
 
-export interface HyundaiEssayOutputProps {
+export interface EssayOutputProps {
   essay: string,
   length: string,
 }
