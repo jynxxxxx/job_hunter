@@ -58,7 +58,13 @@ const Header = () => {
 
   return (
     <div className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 z-50 h-[6rem] md:h-[4rem] font-bold text-dark flex flex-col items-center md:flex-row`}>
-      <div className="pt-4 px-6 md:px-[2.5rem] md:pt-0 cursor-pointer" onClick={() => router.push('/')}>
+      <div 
+        className="pt-4 px-6 md:px-[2.5rem] md:pt-0 cursor-pointer" 
+        onClick={() => {
+          router.push('/')
+          setActivePage("home");
+        }}
+      >
         <img
           src="/logo.png"
           alt="바로지원"

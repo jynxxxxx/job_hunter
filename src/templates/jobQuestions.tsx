@@ -358,21 +358,6 @@ export const jobQuestions = [
     },
     {
       type: "checkbox",
-      label: "내가 지원한 직무는?",
-      multiple_choice: "4_choice",
-      free_text: "4_free",
-      options: [
-        "생산기술 엔지니어",
-        "설비기술 엔지니어",
-        "품질관리",
-        "공정개선 및 스마트팩토리 기획",
-        "안전·환경관리",
-        "R&D 연구직"
-      ],
-      max: 2
-    },
-    {
-      type: "checkbox",
       label: "입사 후 이루고 싶은 나의 목표는?",
       multiple_choice: "5_choice",
       free_text: "5_free",
@@ -652,21 +637,6 @@ export const jobQuestions = [
         "포스코그룹 계열의 안정성과 성장성",
         "자동화·디지털 전환 속도가 빠름",
         "신입교육 및 사내 교육이 잘 갖춰져 있어서"
-      ],
-      max: 2
-    },
-    {
-      type: "checkbox",
-      label: "내가 지원한 직무는?",
-      multiple_choice: "4_choice",
-      free_text: "4_free",
-      options: [
-        "생산기술 엔지니어",
-        "설비기술 엔지니어",
-        "품질관리",
-        "공정개선 및 스마트팩토리 기획",
-        "안전·환경관리",
-        "R&D 연구직"
       ],
       max: 2
     },

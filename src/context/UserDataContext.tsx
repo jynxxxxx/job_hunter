@@ -17,7 +17,7 @@ type UserDataContextType = {
   jobList: any[];
 };
 
-type ActivePage = 'generation' | 'history';
+type ActivePage = 'generation' | 'history' | 'home';
 
 const UserDataContext = createContext<UserDataContextType>({
   userData: null,
@@ -32,7 +32,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   const { authUser } = useAuth();
   const [userData, setUserData] = useState<CustomUserProfile | null>(null);
   const [loadingUserData, setLoadingUserData] = useState(false);
-  const [activePage, setActivePage] = useState<'generation' | 'history'>('generation');
+  const [activePage, setActivePage] = useState<ActivePage>('generation');
   const [jobList, setJobList] = useState<any[]>([]);
 
   useEffect(() => {
