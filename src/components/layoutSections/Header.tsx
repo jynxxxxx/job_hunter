@@ -66,7 +66,7 @@ const Header = () => {
         />
       </div>
 
-      <div className={`w-full pt:12 flex 'justify-center md:justify-start'}`}>
+      <div className={`w-full pt:12 flex justify-center md:justify-start'}`}>
         {pathname === '/login' ? null : (
           <>
             {pathname === '/' && !isAuthenticated && (

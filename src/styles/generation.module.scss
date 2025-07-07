@@ -131,7 +131,7 @@
 }
 
 .rightSide{
-  margin: 4rem 3rem 3rem;
+  margin: 4rem 10rem 3rem;
   display: flex;
   flex-direction: column;
 }
@@ -185,8 +185,6 @@
 }
 
 .free{
-  // border-top: 1px rgb(152, 150, 150) solid;
-  // padding-top: 1rem;
   margin-bottom:2rem;
 }
 
@@ -269,12 +267,21 @@
     width: 90%;
   }
 
-  .grid {
-    grid-template-columns: 1fr; 
+  .grid{
+    width: 90%;
   }
 
+  .leftSide{
+    padding: 3rem 1rem;
+  }
+
+
   .rightSide{
-    margin:2rem 0 3rem 0;
+    margin:4rem 0 3rem;
+  }
+
+  .guideCtn{
+    padding: 2rem 0.5rem;
   }
 
   .formctn{
@@ -284,6 +291,10 @@
     padding: 2rem 0 3rem 0;
     border-bottom: 1px gray solid;
     border-right: none;
+  }
+
+  .draft{
+    margin-left: 0rem;
   }
 
   .radioCard, .checkCard{

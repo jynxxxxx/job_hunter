@@ -12,7 +12,7 @@ interface GuideOutputProps {
 
 const  GuideResult = ({ result }: GuideOutputProps) => {
   return (
-    <div className="px-8 w-full mx-auto">
+    <div className="px-2 sm:px-8 w-full mx-auto">
       <section className="mb-12">
         <h2 className="text-xl font-bold text-dark mb-4 border-b pb-2">1. 핵심 강점 키워드</h2>
         <div className="flex flex-wrap gap-2">
