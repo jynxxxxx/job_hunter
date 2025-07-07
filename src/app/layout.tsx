@@ -23,7 +23,7 @@ export default function RootLayout({
           <UserDataProvider>
             <Toaster position="top-center" />
             <Header />
-              <div className="min-h-screen pt-[6rem] md:pt-[4rem]">
+              <div className="min-h-screen pt-[6rem] sm:pt-[4rem]">
                 {children}
               </div>
             <Footer />
