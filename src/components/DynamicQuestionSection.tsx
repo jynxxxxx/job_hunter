@@ -50,7 +50,6 @@ const DynamicQuestionSection = ({
     }
   }
 
-  console.log("defaultForm", defaultForm);
   const safeQuestions = Array.isArray(questions) ? questions : [];
 
   const hasJobOptions = safeQuestions.some(q => q.type === "jobOptions");

@@ -10,8 +10,6 @@ export async function generateOutline(formData: any) {
   if (!response.ok) {
     // Parse the JSON error body
     const errorData = await response.json();
-    console.log("Full error response:", errorData);
-
     throw new Error(`API 호출 실패: ${JSON.stringify(errorData)}`);
   }
 
@@ -31,8 +29,6 @@ export async function generateEssay(payload: any) {
   if (!response.ok) {
     // Parse the JSON error body
     const errorData = await response.json();
-    console.log("Full error response:", errorData);
-
     throw new Error(`API 호출 실패: ${JSON.stringify(errorData)}`);
   }
 

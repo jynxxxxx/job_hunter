@@ -95,7 +95,6 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                     setGuide(null);
                     setActiveTab(section);
                     setEssay(null);
-                    console.log("Active tab changed to:", section);
                   }}
                 >
                   {parseInt(section.replace('q', ''))}번 문항

@@ -70,13 +70,13 @@ export async function handleUpload<T>({
     const jobId = String(job_id);
     const jobHasPaid = hasPaidMap[jobId] === true;
     const jobGenCount = userData.generation_count[jobId] ?? 0;
-    console.log("jobGenCount:", jobGenCount, "jobHasPaid:", jobHasPaid);
+
     if (jobGenCount > 2 && !jobHasPaid) {
       toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
       setWaiting(false);
       return;
     }
-    console.log("Job ID:", jobId, "Has Paid:", jobHasPaid, "Generation Count:", jobGenCount);
+
     // Build answers object from form fields "1_choice", "1_free", ..., "10_choice", "10_free"
     const answers: Record<string, { multiple_choice: string[]; free_text: string }> = {};
     for (let i = 1; i <= 10; i++) {
@@ -108,7 +108,7 @@ export async function handleUpload<T>({
       answers,
       draft,
     };
-    console.log("Generated answers:", input);
+
     let guide: GuideOutputProps | undefined;
     let essayResult: {essay: EssayOutputProps} | undefined;
 
@@ -118,7 +118,6 @@ export async function handleUpload<T>({
       const payload = { user_input: input, guideline: {result: guide?.guideline} };
       essayResult = await generateEssay(payload);
       setEssay(essayResult?.essay);
-      console.log("Generated essay:", essayResult?.essay);
     } catch (error) {
       console.error("Error generating guide or essay:", error);
       toast.error("가이드 또는 자소서 생성 중 오류가 발생했습니다");
