@@ -12,7 +12,7 @@ export interface Question<T> {
 }
 
 export interface GuideOutputProps {
-  result: {
+  guideline: {
     core_keywords: string[];
     key_experiences: string[];
     applicant_character: string;
@@ -25,3 +25,17 @@ export interface EssayOutputProps {
   essay: string,
   length: string,
 }
+
+export type SectionKey = 
+  | "q1"
+  | "q2"
+  | "q3"
+  | "q4"
+  | "q5"
+  | "q6"
+  | "q7"
+  | "q8"
+  | "q9"
+  | "q10";
+
+export type SectionCounts = Partial<Record<SectionKey, number>>;

@@ -312,7 +312,7 @@ export const jobQuestions = [
   job_id: "2",
   q1: [
     {
-      type: "radio",
+      type: "checkbox",
       label: "내가 회사를 선택할 때 가장 중요하게 여기는 기준은?",
       multiple_choice: "1_choice",
       free_text: "1_free",
@@ -324,10 +324,10 @@ export const jobQuestions = [
         "친환경 경영 등 사회적 책임",
         "워라밸과 복지제도"
       ],
-      max: 1
+      max: 2
     },
     {
-      type: "radio",
+      type: "checkbox",
       label: "이 기준을 중요하게 여기는 이유는?",
       multiple_choice: "2_choice",
       free_text: "2_free",
@@ -339,7 +339,7 @@ export const jobQuestions = [
         "기술로 세상에 기여하고 싶어서",
         "즐겁게 오래 일할 수 있는 회사를 원해서"
       ],
-      max: 1
+      max: 2
     },
     {
       type: "checkbox",
@@ -357,7 +357,7 @@ export const jobQuestions = [
       max: 2
     },
     {
-      type: "radio",
+      type: "checkbox",
       label: "내가 지원한 직무는?",
       multiple_choice: "4_choice",
       free_text: "4_free",
@@ -369,7 +369,7 @@ export const jobQuestions = [
         "안전·환경관리",
         "R&D 연구직"
       ],
-      max: 1
+      max: 2
     },
     {
       type: "checkbox",
@@ -404,7 +404,7 @@ export const jobQuestions = [
   ],
   q2: [
     {
-      type: "radio",
+      type: "checkbox",
       label: "내가 중요하게 여기는 가치관은 무엇인가요?",
       multiple_choice: "1_choice",
       free_text: "1_free",
@@ -416,10 +416,10 @@ export const jobQuestions = [
         "도전정신",
         "정직과 신뢰"
       ],
-      max: 1
+      max: 2
     },
     {
-      type: "radio",
+      type: "checkbox",
       label: "이 가치관을 중요하게 여기게 된 이유는?",
       multiple_choice: "2_choice",
       free_text: "2_free",
@@ -431,10 +431,10 @@ export const jobQuestions = [
         "성실한 사람이 결국 성과를 만든다고 믿어서",
         "함께 일하고 싶은 사람이 되고 싶어서"
       ],
-      max: 1
+      max: 2
     },
     {
-      type: "radio",
+      type: "checkbox",
       label: "어떤 상황에서 이 가치관을 실천했나요?",
       multiple_choice: "3_choice",
       free_text: "3_free",
@@ -446,7 +446,7 @@ export const jobQuestions = [
         "동아리 행사 준비 중 의견 불일치",
         "졸업작품 발표 준비 도중 자료 손실"
       ],
-      max: 1
+      max: 2
     },
     {
       type: "checkbox",
@@ -510,7 +510,7 @@ export const jobQuestions = [
   ],
   q3: [
     {
-      type: "radio",
+      type: "checkbox",
       label: "내가 지원한 직무는?",
       multiple_choice: "1_choice",
       free_text: "1_free",
@@ -522,7 +522,306 @@ export const jobQuestions = [
         "공정개선",
         "R&D 연구직"
       ],
-      max: 1
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "해당 직무의 주요 업무는?",
+      multiple_choice: "2_choice",
+      free_text: "2_free",
+      options: [
+        "생산공정 관리 및 개선",
+        "설비 유지보수 및 예지정비",
+        "품질 검사 및 불량 분석",
+        "공정/장비 자동화 기획",
+        "공정 데이터 수집 및 분석",
+        "재료 테스트 및 품질 인증"
+      ],
+      max: 3
+    },
+    {
+      type: "checkbox",
+      label: "전공 또는 배운 내용 중 관련 있는 것은?",
+      multiple_choice: "3_choice",
+      free_text: "3_free",
+      options: [
+        "기계/전기/화학/신소재 전공",
+        "회로이론, 제어공학, 재료역학",
+        "품질관리(QC 7가지 도구 등)",
+        "통계적 공정관리(SPC)",
+        "데이터분석(Python, R, SQL 등)"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "직무 관련 프로젝트 또는 경험은?",
+      multiple_choice: "4_choice",
+      free_text: "4_free",
+      options: [
+        "설비 개선 아이디어 제안 프로젝트",
+        "품질 이상치 탐지 실습",
+        "공정 레이아웃 개선 실습",
+        "자동화 라인 설계 경험",
+        "인턴 중 현장 품질 점검",
+        "팀프로젝트로 제조 공정 시뮬레이션"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "보유 자격증 또는 기술 역량은?",
+      multiple_choice: "5_choice",
+      free_text: "5_free",
+      options: [
+        "전기/기계/화학 관련 기사 자격증",
+        "품질경영기사",
+        "CAD / PLC / LabView 등 소프트웨어",
+        "Python, SQL, 엑셀 통계분석 가능",
+        "안전 관련 자격증 (산업안전기사 등)"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "내가 이 직무를 잘할 수 있다고 생각하는 이유는?",
+      multiple_choice: "6_choice",
+      free_text: "6_free",
+      options: [
+        "꼼꼼하고 체계적인 성격",
+        "문제를 차분히 분석하는 습관",
+        "팀워크에 강하고 피드백에 유연함",
+        "책임감 있게 일 처리함",
+        "기술 배우는 걸 즐김",
+        "현장 경험이 있어 실무에 빠르게 적응 가능"
+      ],
+      max: 2
+    }
+  ],
+  numQuestions: {
+    q1: 6,
+    q2: 7,
+    q3: 6
+  },
+  question1: "포스코스틸리온을 선택한 이유와 입사 후 이루고 싶은 목표에 대해 구체적으로 기술하여 주십시오. (800자)",
+  question2: "본인이 가장 중요하게 생각하는 가치관은 무엇이며, 해당 가치관이 조직 내에서 어떻게 긍정적인 영향을 미칠 수 있는지 본인의 경험을 바탕으로 구체적으로 기술하여 주십시오. (800자)",
+  question3:"지원하신 직무의 역할과 주요 업무에 대해 이해하고 있는 바를 설명해 주시고, 해당 직무를 잘 수행할 수 있다고 생각하는 이유를 본인의 경험과 역량을 바탕으로 구체적으로 기술하여 주십시오. (800자)"
+  },
+  {
+  job_id: "3",
+  q1: [
+    {
+      type: "checkbox",
+      label: "내가 회사를 선택할 때 가장 중요하게 여기는 기준은?",
+      multiple_choice: "1_choice",
+      free_text: "1_free",
+      options: [
+        "기술력과 R&D 투자",
+        "성장 가능성과 사업 안정성",
+        "일 잘하는 기업문화",
+        "직무 적합성과 커리어 성장",
+        "친환경 경영 등 사회적 책임",
+        "워라밸과 복지제도"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "이 기준을 중요하게 여기는 이유는?",
+      multiple_choice: "2_choice",
+      free_text: "2_free",
+      options: [
+        "빠르게 배우고 성장하고 싶어서",
+        "내 전공/관심을 살릴 수 있어서",
+        "안정된 환경에서 커리어를 쌓고 싶어서",
+        "사회에 의미 있는 일을 하고 싶어서",
+        "기술로 세상에 기여하고 싶어서",
+        "즐겁게 오래 일할 수 있는 회사를 원해서"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "포스코스틸리온이 그 기준을 만족한다고 느낀 이유는?",
+      multiple_choice: "3_choice",
+      free_text: "3_free",
+      options: [
+        "친환경·스마트팩토리 분야에서 앞서가는 기업이라서",
+        "고기능강판 기술력이 업계 최고 수준이라서",
+        "철강 + 첨단소재 융합 분야로 확장 중이라서",
+        "포스코그룹 계열의 안정성과 성장성",
+        "자동화·디지털 전환 속도가 빠름",
+        "신입교육 및 사내 교육이 잘 갖춰져 있어서"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "내가 지원한 직무는?",
+      multiple_choice: "4_choice",
+      free_text: "4_free",
+      options: [
+        "생산기술 엔지니어",
+        "설비기술 엔지니어",
+        "품질관리",
+        "공정개선 및 스마트팩토리 기획",
+        "안전·환경관리",
+        "R&D 연구직"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "입사 후 이루고 싶은 나의 목표는?",
+      multiple_choice: "5_choice",
+      free_text: "5_free",
+      options: [
+        "현장 자동화 개선 프로젝트 주도",
+        "설비 고장률 20% 줄이기",
+        "품질 데이터 기반 문제예측 시스템 도입",
+        "신기술 도입 시범라인 참여",
+        "협업 문화를 이끄는 구성원 되기",
+        "3년 내 사내 전문가 인증 취득"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "이 목표가 회사에 어떤 기여를 줄 수 있을까요?",
+      multiple_choice: "6_choice",
+      free_text: "6_free",
+      options: [
+        "생산 효율 향상",
+        "품질 불량률 감소",
+        "비용 절감 및 납기 안정화",
+        "안전한 작업환경 조성",
+        "조직 내 기술전파 및 분위기 활성화",
+        "신제품/공정 전환 속도 향상"
+      ],
+      max: 2
+    }
+  ],
+  q2: [
+    {
+      type: "checkbox",
+      label: "내가 중요하게 여기는 가치관은 무엇인가요?",
+      multiple_choice: "1_choice",
+      free_text: "1_free",
+      options: [
+        "책임감과 주인의식",
+        "배려와 협력",
+        "창의적 문제 해결",
+        "꾸준함과 성실함",
+        "도전정신",
+        "정직과 신뢰"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "이 가치관을 중요하게 여기게 된 이유는?",
+      multiple_choice: "2_choice",
+      free_text: "2_free",
+      options: [
+        "혼자보다 함께가 더 강하다고 느껴서",
+        "작은 행동이 큰 결과를 만든다고 생각해서",
+        "현장에서 주도적인 태도가 중요하다고 느껴서",
+        "문제를 새로운 시각으로 푸는 게 즐거워서",
+        "성실한 사람이 결국 성과를 만든다고 믿어서",
+        "함께 일하고 싶은 사람이 되고 싶어서"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "어떤 상황에서 이 가치관을 실천했나요?",
+      multiple_choice: "3_choice",
+      free_text: "3_free",
+      options: [
+        "조별과제 중 마감 직전에 충돌 발생",
+        "현장실습 중 장비 오류 발생",
+        "공모전 아이디어 단계에서 갈등",
+        "아르바이트 중 동료 무단결근",
+        "동아리 행사 준비 중 의견 불일치",
+        "졸업작품 발표 준비 도중 자료 손실"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "그때 내가 맡은 역할은?",
+      multiple_choice: "4_choice",
+      free_text: "4_free",
+      options: [
+        "일정 계획 세우고 조율",
+        "갈등 중재 및 분위기 조정",
+        "다른 사람 실수 보완",
+        "전체 진행 상황 관리",
+        "마무리 검토 및 발표",
+        "보고서 정리 및 발표 자료 제작"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "내가 한 구체적인 행동은?",
+      multiple_choice: "5_choice",
+      free_text: "5_free",
+      options: [
+        "우선순위 재정리로 일정 재구성",
+        "팀원과 1:1 소통하며 이해도 맞춤",
+        "실수 내용 파악 후 재작업 진행",
+        "대체 자료 찾아서 새롭게 구성",
+        "맡은 일 외에도 부족한 부분 메움",
+        "중간 피드백 시간 마련해서 흐름 조정"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "그 결과는 어땠나요?",
+      multiple_choice: "6_choice",
+      free_text: "6_free",
+      options: [
+        "과제 마감일 내 완료",
+        "결과물이 더 나아졌다고 평가받음",
+        "팀워크가 좋아졌음",
+        "상위 점수 획득",
+        "담당 교수/실습 선생님 칭찬",
+        "행사/과제 모두 성공적으로 마무리"
+      ],
+      max: 2
+    },
+    {
+      type: "checkbox",
+      label: "이 가치관이 회사에 어떤 영향을 줄 수 있을까요?",
+      multiple_choice: "7_choice",
+      free_text: "7_free",
+      options: [
+        "업무 신뢰도를 높일 수 있음",
+        "협업 효율을 높이고 갈등을 줄일 수 있음",
+        "창의적인 방식으로 문제를 빠르게 해결할 수 있음",
+        "반복되는 실수를 줄이고 표준화에 기여할 수 있음",
+        "사내 분위기를 더 밝게 만들 수 있음"
+      ],
+      max: 2
+    }
+  ],
+  q3: [
+    {
+      type: "checkbox",
+      label: "내가 지원한 직무는?",
+      multiple_choice: "1_choice",
+      free_text: "1_free",
+      options: [
+        "생산기술 엔지니어",
+        "설비기술 엔지니어",
+        "품질관리",
+        "스마트팩토리/데이터 분석",
+        "공정개선",
+        "R&D 연구직"
+      ],
+      max: 2
     },
     {
       type: "checkbox",

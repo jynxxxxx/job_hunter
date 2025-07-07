@@ -5,26 +5,26 @@ import { Star } from 'lucide-react';
 import testimonialStyles from "@/styles/testimonials.module.scss";
 
 const testimonials = [
-   {
-    name: "김*수",
-    role: "데이터 분석 지원자",
-    quote: "공채 시즌에 20곳 넘게 지원했는데, 바로지원 덕분에 각각 다른 자기소개서를 쉽게 작성할 수 있었어요.",
-    rating: 5,
-    avatarBg: "#dbeafe",
-    avatarColor: "#2563eb"
-  },
   {
-    name: "박*영",
-    role: "3년차 마케터, 이직 준비 중",
-    quote: "마감일 관리가 정말 힘들었는데, 바로지원이 자동으로 정리해줘서 놓친 지원 기회가 하나도 없었어요. 추천합니다!",
+    name: "김*민",
+    role: " 취업 준비생",
+    quote: "처음엔 크몽 첨삭 썼는데, 여기가 문장 구성력이나 항목 정리가 훨씬 나았어요. 현대로템 포함 10군데 넘게 썼고, 다음에도 여기 이용할 거예요.",
     rating: 5,
     avatarBg: "#d1fae5",
     avatarColor: "#059669"
   },
   {
-    name: "이*우",
-    role: "UX 디자이너 취업 준비생",
-    quote: "포트폴리오 정리하느라 바빠서 자기소개서 쓸 시간이 없었는데, AI가 제 포트폴리오 내용을 반영해서 써줘서 정말 도움됐어요.",
+    name: "최*수",
+    role: "첫 취업 준비생",
+    quote: "챗GPT는 너무 AI 같고 어색했어요. 근데 여기선 추천도 잘 해주고, 말이 자연스럽게 이어졌어요. 첫 취업이라 막막했는데 큰 도움 됐습니다. 현차 생산직 지원 성공적으로 마쳤어요.",
+    rating: 5,
+    avatarBg: "#d1fae5",
+    avatarColor: "#059669"
+  },
+  {
+    name: "김*선",
+    role: "재직자",
+    quote: "재직 중이라 자기소개서를 쓸 시간이 없었어요. 항목도 정확히 잡아주고 2~3번 빠르게 받을 수 있어서 만족했습니다. 솔직히 없었으면 이틀은 걸렸을 거예요",
     rating: 5,
     avatarBg: "#fce7f3",
     avatarColor: "#db2777"
@@ -39,19 +39,19 @@ const testimonials = [
   },
   {
     name: "오*훈",
-    role: "전기전자 전공, 신입 구직자",
-    quote: "AI가 제 전공과 희망 직무를 정확히 반영해서 채용공고를 추천해줘서, 무작정 찾는 데 들이던 시간을 아꼈어요.",
+    role: "신입 구직자",
+    quote: "GPT도 써봤는데 너무 기계적이고 똑같은 말이 반복돼요. 여긴 진짜 제 경험에서 중요한 포인트만 잡아줘서 훨씬 깔끔했어요. 한 번 더 사용할 예정입니다",
     rating: 5,
     avatarBg: "#dbeafe",
     avatarColor: "#2563eb"
   },
   {
-    name: "한*수",
-    role: "비전공 프론트엔드 개발 지원자",
-    quote: "비전공자라 지원서 쓸 때 불안했는데, 바로지원에서 추천한 표현이 실제로 면접에서 칭찬받았어요.",
+    name: "김*수",
+    role: "데이터 분석 지원자",
+    quote: "공채 시즌에 20곳 넘게 지원했는데, 바로지원 덕분에 각각 다른 자기소개서를 쉽게 작성할 수 있었어요.",
     rating: 5,
-    avatarBg: "#d1fae5",
-    avatarColor: "#059669"
+    avatarBg: "#dbeafe",
+    avatarColor: "#2563eb"
   },
   {
     name: "최*준",

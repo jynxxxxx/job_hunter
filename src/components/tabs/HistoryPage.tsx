@@ -15,7 +15,7 @@ import { useUserData } from '@/context/UserDataContext';
 type Generation = {
   createdAt?: { seconds: number; nanoseconds: number };
   input: any;
-  guide: GuideOutputProps['result'];
+  guide: GuideOutputProps['guideline'];
   essay: string;
   job_id?: string;
   question_id?: string;
@@ -76,12 +76,12 @@ export default function HistoryPage() {
           <div
             className={`
               h-[85vh] transition-width duration-300 ease-in-out
-              ${collapsed ? 'w-0' : 'w-[25vw]'}
+              ${collapsed ? 'w-0' : 'max-w-[30vw]'}
               sm:max-w-[300px] min-w-fit flex-shrink-0
             `}
           >
             {!collapsed && (
-              <div className="overflow-y-scroll h-full pr-2 bg-primary/80 border-r py-8 pl-6 min-w-fit">
+              <div className="overflow-y-scroll h-full pr-2 bg-primary/80 border-r py-8 pl-6 sm:max-w-[30vw]">
                 {generations.map((gen, index) => {
                   const date = convertFirebaseTimestamp(gen, 'createdAt');
                   const isSelected = selectedGen === gen;
@@ -108,8 +108,8 @@ export default function HistoryPage() {
           </div>
 
           {/* Content area */}
-          <div className={`flex flex-col items-center justify-center flex-grow mb-12 transition-all duration-300 ease-in-out ${collapsed ? 'w-[100vw]' : 'w-[70vw]'}`}>
-            <div className={`mt-6 flex bg-gray-300 p-[0.2rem] rounded-t-lg border border-gray-500 ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[70vw]'}`}>
+          <div className={`flex flex-col items-center justify-center flex-grow mb-12 transition-all duration-300 ease-in-out ${collapsed ? 'w-[100vw]' : 'w-[60vw]'}`}>
+            <div className={`mt-6 flex bg-gray-300 p-[0.2rem] rounded-t-lg border border-gray-500 ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[60vw]'}`}>
               <div
                 className={`${genStyles.resultTab} ${preview === 'guide' ? genStyles.active : ''}`}
                 onClick={() => setPreview("guide")}
@@ -123,7 +123,7 @@ export default function HistoryPage() {
                 자기소개서
               </div>
             </div>
-            <div className={`bg-[#d1d5dc46] border border-gray-700 min-h-[60vh] ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[70vw]'} rounded-b-lg`}>
+            <div className={`bg-[#d1d5dc46] border border-gray-700 min-h-[60vh] ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[60vw]'} rounded-b-lg`}>
               {selectedGen ? (
                 <div className="bg-white/70 py-8 px-4 sm:px-16 h-[60vh] rounded-b-lg flex flex-col gap-8 overflow-y-scroll">
                   <div className="text-gray-700 text-[1.3rem]">
@@ -151,7 +151,7 @@ export default function HistoryPage() {
                   <div>
                     {preview === "guide" && (
                       <div className="whitespace-pre-line mt-1">
-                        <GuideResult result={selectedGen.guide} />
+                        <GuideResult guideline={selectedGen.guide} />
                       </div>
                     )}
                     {preview === "essay" &&

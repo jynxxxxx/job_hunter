@@ -13,12 +13,17 @@ function randomId() {
 export default function JobSelectPage() {
   const { jobList } = useUserData();
   // Only companies with at least one job that has a question template
+  const now = new Date();
+  
   const uniqueCompanies = Array.from(
     new Set(
       jobList
         .filter(item => {
           const template = getQuestionTemplate(String(item.job_id));
-          return template && !(template as any).comingSoon;
+          if (!template) return false;
+          // Filter out jobs past their endDate
+          if (item.endDate && now > new Date(item.endDate)) return false;
+          return true;
         })
         .map(item => item.company)
     )
@@ -125,21 +130,23 @@ export default function JobSelectPage() {
             return (
               <div
                 key={item.company + item.title + idx}
-                className={`border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isPastDeadline || isComingSoon ? 'opacity-50 grayscale pointer-events-none' : ''}`}
+                className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''} ${isPastDeadline ? 'opacity-50 grayscale pointer-events-none' : ''}`}
                 onClick={() => {
                   if (!isPastDeadline && !isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
                 }}
               >
+                {isComingSoon && (
+                  <div className="absolute top-0 right-0 bg-bright text-white text-s font-bold px-4 py-1 rounded-tr-xl rounded-bl-xl z-10">
+                    곧 출시됩니다
+                  </div>
+                )}
                 <div className="text-lg font-bold text-dark">{item.company}</div>
                 <div className="text-md text-gray-700">{item.title}</div>
                 {item.startDate && (
                   <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
                 )}
-                {isComingSoon && (
-                  <div className="text-xs text-red-500 font-bold mt-2">곧 출시됩니다</div>
-                )}
                 <button
-                  className={`mt-2 px-4 py-1 bg-bright text-white rounded-lg w-fit self-end hover:scale-103 transition-all duration-200 ${isPastDeadline || isComingSoon ? 'opacity-60 grayscale pointer-events-none' : ''}`}
+                  className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isPastDeadline || isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 ${isPastDeadline ? 'opacity-60 grayscale pointer-events-none' : ''}`}
                   onClick={e => {
                     e.stopPropagation();
                     if (!isPastDeadline && !isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)

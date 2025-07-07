@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useUserData } from '@/context/UserDataContext';
 import AuthCheck from '@/components/AuthCheck';
 import { getQuestionTemplate } from '@/templates/jobQuestions';
@@ -11,8 +12,9 @@ import { EssayOutputProps, GuideOutputProps } from '@/types/forms';
 import { DotSpinner } from '@/components/layoutSections/DotSpinner';
 
 export default function GenerationDynamicPage({ params }: { params: Promise<{ job_id: string }> }) {
-  const { jobList, userData } = useUserData();
+  const { jobList, userData, setActivePage } = useUserData();
   const { job_id: encodedJobId } = React.use(params);
+  const router = useRouter();
   const jobURI = decodeURIComponent(encodedJobId);
   const job_id = jobURI.split('xY_')[0];
   const template = getQuestionTemplate(job_id);
@@ -25,9 +27,9 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const [stageIndex, setStageIndex] = useState(0);
   const [running, setRunning] = useState(false);
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
-  const job = jobList.find(job => job.job_id === job_id)?.company || '해당 회사';
+  const job = jobList.find(job => job.job_id == job_id) || '해당 회사';
   const hasPaid = userData?.hasPaid?.[job_id] === true;
-  
+
   useEffect(() => {
     if (waiting && !running) {
       stageSetRef.current = [
@@ -64,6 +66,15 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
     <AuthCheck>
       <div className='relative min-h-screen'>
         <div className={genStyles.grid} >
+          <button
+            onClick={() => {
+              router.push('/dashboard');
+              setActivePage("generation");
+            }}
+            className="text-sm text-gray-700 hover:text-black  px-4 py-2 rounded-md mb-4"
+          >
+            ← 돌아가기
+          </button>
           <div className={genStyles.leftSide} >
             <h1 className='font-extrabold text-xl pb-4 text-dark text-[1.6rem]'>
               {job.company} {job.title} AI 자기소개서 생성
@@ -107,6 +118,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                 setEssay={setEssay}
                 waiting={waiting}
                 setWaiting={setWaiting}
+                setRunning={setRunning}
                 running={running}
               />
             )}

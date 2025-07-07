@@ -1,5 +1,5 @@
 export async function generateOutline(formData: any) {
-  const response = await fetch("https://api.barojiwon.com/generate", {
+  const response = await fetch("https://barojiwon.com/generate-outline", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -8,7 +8,11 @@ export async function generateOutline(formData: any) {
   });
 
   if (!response.ok) {
-    throw new Error("API 호출 실패");
+    // Parse the JSON error body
+    const errorData = await response.json();
+    console.log("Full error response:", errorData);
+
+    throw new Error(`API 호출 실패: ${JSON.stringify(errorData)}`);
   }
 
   const data = await response.json();
@@ -16,7 +20,7 @@ export async function generateOutline(formData: any) {
 }
 
 export async function generateEssay(payload: any) {
-  const response = await fetch("https://api.barojiwon.com/generate-essay", {
+  const response = await fetch("https://barojiwon.com/generate-essay", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -25,7 +29,11 @@ export async function generateEssay(payload: any) {
   });
 
   if (!response.ok) {
-    throw new Error("API 호출 실패");
+    // Parse the JSON error body
+    const errorData = await response.json();
+    console.log("Full error response:", errorData);
+
+    throw new Error(`API 호출 실패: ${JSON.stringify(errorData)}`);
   }
 
   const data = await response.json();
@@ -33,3 +41,4 @@ export async function generateEssay(payload: any) {
 }
 
 // https://barojiwon.com/generate
+// http://3.149.237.144

@@ -186,7 +186,7 @@ export default function QuestionForm<T>({
       <div className={genStyles.questionCtn}>
         {step < totalSteps && currentQuestion && (
           <div>
-            <h2 className={genStyles.question}>{step +1}. {currentQuestion.label}</h2>
+            <h2 className={genStyles.question}>{step +1}. {currentQuestion.label} (최대 {currentQuestion.max}개)</h2>
             {currentQuestion.type === "jobOptions"
               ? renderJobOptions()
               : (

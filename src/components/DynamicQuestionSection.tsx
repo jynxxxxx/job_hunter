@@ -4,6 +4,7 @@ import { useUserData } from "@/context/UserDataContext";
 import QuestionForm from "@/templates/QuestionForm";
 import { handleUpload } from "@/hooks/useUploadHandler";
 import { getQuestionTemplate } from '@/templates/jobQuestions';
+import { SectionCounts, SectionKey } from "@/types/forms";
 
 interface DynamicQuestionSectionProps {
   job_id: string;
@@ -13,6 +14,7 @@ interface DynamicQuestionSectionProps {
   setEssay: (essay: any) => void;
   waiting: boolean;
   setWaiting: (waiting: boolean) => void;
+  setRunning: (running: boolean) => void; // Function to set running state
   running?: boolean; // Optional prop to indicate if generation is running
 }
 
@@ -24,6 +26,7 @@ const DynamicQuestionSection = ({
   setEssay,
   waiting,
   setWaiting,
+  setRunning,
   running,
 }: DynamicQuestionSectionProps) => {
   const { authUser } = useAuth();
@@ -31,8 +34,23 @@ const DynamicQuestionSection = ({
 
   const template = getQuestionTemplate(job_id);
   const questions = template?.[section as keyof typeof template];
-  const defaultForm = template?.[`defaultForm${section.toUpperCase()}` as keyof typeof template] || {};
-  // Ensure questions is always an array for rendering
+
+  const defaultForm: Record<string, string | string[]> = {};
+  
+  const sectionKey = `q${question_id}` as SectionKey;
+  const numQuestions = template?.numQuestions as SectionCounts;
+  const count = numQuestions?.[sectionKey];
+
+  if (typeof count === "number") {
+    for (let i = 1; i <= count; i++) {
+      const choiceKey = `${i}_choice`;
+      const freeKey = `${i}_free`;
+      defaultForm[choiceKey] = "";
+      defaultForm[freeKey] = "";
+    }
+  }
+
+  console.log("defaultForm", defaultForm);
   const safeQuestions = Array.isArray(questions) ? questions : [];
 
   const hasJobOptions = safeQuestions.some(q => q.type === "jobOptions");
@@ -54,6 +72,7 @@ const DynamicQuestionSection = ({
       draft,
       requiredFields,
       setWaiting,
+      setRunning,
       setEssay,
       setGuide,
       job_id,

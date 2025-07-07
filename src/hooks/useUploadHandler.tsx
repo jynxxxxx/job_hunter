@@ -11,6 +11,7 @@ interface UploadParams<T> {
   authUser: any;
   userData: any;
   setWaiting: (b: boolean) => void;
+  setRunning: (b: boolean) => void; // Optional prop to indicate if generation is running
   setEssay: (essay: any) => void;
   setGuide: (guide: any) => void;
   question_id: number;
@@ -24,6 +25,7 @@ export async function handleUpload<T>({
   userData,
   authUser,
   setWaiting,
+  setRunning,
   setEssay,
   setGuide,
   question_id,
@@ -108,36 +110,37 @@ export async function handleUpload<T>({
     };
     console.log("Generated answers:", input);
     let guide: GuideOutputProps | undefined;
-    let essay: EssayOutputProps | undefined;
+    let essayResult: {essay: EssayOutputProps} | undefined;
 
     try {
       guide = await generateOutline(input);
       setGuide(guide);
-
-      const payload = { user_input: input, guideline: guide };
-      essay = await generateEssay(payload);
-      setEssay(essay);
+      const payload = { user_input: input, guideline: {result: guide?.guideline} };
+      essayResult = await generateEssay(payload);
+      setEssay(essayResult?.essay);
+      console.log("Generated essay:", essayResult?.essay);
     } catch (error) {
       console.error("Error generating guide or essay:", error);
       toast.error("가이드 또는 자소서 생성 중 오류가 발생했습니다");
       setWaiting(false);
+      setRunning(false)
       return;
     }
 
-    // // Save flattened generation document under users/{uid}/generations/{docId}
-    //  await addDoc(collection(db, "users", authUser.uid, "generations"), {
-    //   createdAt: serverTimestamp(),
-    //   input,
-    //   guide: guide?.result,
-    //   essay: essay?.essay,
-    //   job_id: jobId,
-    //   question_id: question_id,
-    // });
+    // Save flattened generation document under users/{uid}/generations/{docId}
+     await addDoc(collection(db, "users", authUser.uid, "generations"), {
+      createdAt: serverTimestamp(),
+      input,
+      guide: guide?.guideline,
+      essay: essayResult?.essay.essay,
+      job_id: jobId,
+      question_id: question_id,
+    });
 
-    // // Update user's generation count and hasPaid map for this job
-    // await updateDoc(userRef, {
-    //   [`generation_count.${jobId}`]: increment(1),
-    // });
+    // Update user's generation count and hasPaid map for this job
+    await updateDoc(userRef, {
+      [`generation_count.${jobId}`]: increment(1),
+    });
   } catch (e: any) {
     console.error("생성 횟수 업데이트에 실패했습니다.", e.message);
     toast.error("서버 오류가 발생했습니다.");
