@@ -83,7 +83,7 @@ export async function handleUpload<T>({
       const mcKey = `${i}_choice` as keyof T;
       const freeKey = `${i}_free` as keyof T;
 
-      let rawMultipleChoice = form[mcKey];
+      const rawMultipleChoice = form[mcKey];
       let multiple_choice: string[] = [];
 
       if (Array.isArray(rawMultipleChoice)) {
