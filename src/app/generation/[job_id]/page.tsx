@@ -172,7 +172,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                                         <div className='flex flex-col justify-center gap-4'>
                                           <div>
                                             <strong>전문가 협력 기반, 자기소개서 전용 AI</strong><br />
-                                            현대차 인사팀 출신 전문가와 함께 만든 전용 AI가<br />
+                                            인사팀 출신 전문가와 함께 만든 전용 AI가<br />
                                             1번뿐만 아니라, 2/3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
                                             <div className='mt-2 text-lg font-bold'>공고별 19,900원 정액제</div>
                                           </div>
@@ -233,7 +233,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                   <div className='flex flex-col items-center justify-center gap-2'>
                     <div>
                       <strong>전문가 협력 기반, 자기소개서 전용 AI</strong><br />
-                      현대차 인사팀 출신 전문가와 함께 만든 전용 AI가<br />
+                      인사팀 출신 전문가와 함께 만든 전용 AI가<br />
                       2번과 3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
                       <div className='mt-2 text-lg font-bold'>
                         공고별 19,900원 정액제
