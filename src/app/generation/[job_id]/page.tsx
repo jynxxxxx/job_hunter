@@ -155,57 +155,63 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                       ) : (
                         <div className={genStyles.guideCtn}>
                           {essay && (
-                            <>
-                              {preview === 'essay' && !hasPaid ? (
-                                <div className="relative">
-                                  <div className="line-clamp-5 text-lg overflow-hidden">
-                                    {essay.essay}
-                                    {/* Gradient overlay to fade the last lines */}
-                                    <div className="absolute top-0 left-0 w-full h-[50%] bg-gradient-to-b from-transparent to-white pointer-events-none z-5" />
-                                  </div>
+                            // <>
+                            //   {preview === 'essay' && !hasPaid ? (
+                            //     <div className="relative">
+                            //       <div className="line-clamp-5 text-lg overflow-hidden">
+                            //         {essay.essay}
+                            //         {/* Gradient overlay to fade the last lines */}
+                            //         <div className="absolute top-0 left-0 w-full h-[50%] bg-gradient-to-b from-transparent to-white pointer-events-none z-5" />
+                            //       </div>
 
-                                  {/* Paywall Overlay */}
-                                  <div className="relative mt-[-5rem] w-full flex justify-center z-10 bg-gradient-to-b from-transparent via-white to-white">
-                                    <div className='w-[90%] max-w-[500px] bg-[#F9F9FB] rounded-xl py-4 pl-4 mt-[7rem] mb-4 border border-gray-200 shadow-lg '>
-                                      <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
-                                      <div className='flex justify-around gap-6'>
-                                        <div className='flex flex-col justify-center gap-4'>
-                                          <div>
-                                            <strong>전문가 협력 기반, 자기소개서 전용 AI</strong><br />
-                                            인사팀 출신 전문가와 함께 만든 전용 AI가<br />
-                                            1번뿐만 아니라, 2/3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
-                                            <div className='mt-2 text-lg font-bold'>공고별 19,900원 정액제</div>
-                                          </div>
-                                          <div>
-                                            <strong>이용 방법</strong><br />
-                                            <div className='flex flex-col'>
-                                              <div>① 아래 계좌번호로 19,900원 송금 후,</div>
-                                              <div>② 입금자명과 이메일을 010-8961-1918로 보내주세요.</div>
-                                              <div>③ 확인 후 30분 이내에 해당 회사의 모든 문항을 열람할 수 있습니다.</div>
-                                            </div>
-                                          </div>
-                                          <div className='flex items-center justify-center gap-4 mr-4'>
-                                            <img src="/qr.png" alt="QR Code" className='w-[8rem]' />
-                                            <div>
-                                              <p className='text-sm text-center text-black'>카카오뱅크</p>
-                                              <p className='font-extrabold text-center text-black'>3333058317631</p>
-                                              <p className='text-center text-black'>박근철</p>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              ) : (
-                                // Full essay content if paid
-                                <>
-                                  <div className="text-lg whitespace-pre-line">
-                                    {essay.essay}
-                                  </div>
-                                  <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
-                                </>
-                              )}
+                            //       {/* Paywall Overlay */}
+                            //       <div className="relative mt-[-5rem] w-full flex justify-center z-10 bg-gradient-to-b from-transparent via-white to-white">
+                            //         <div className='w-[90%] max-w-[500px] bg-[#F9F9FB] rounded-xl py-4 pl-4 mt-[7rem] mb-4 border border-gray-200 shadow-lg '>
+                            //           <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
+                            //           <div className='flex justify-around gap-6'>
+                            //             <div className='flex flex-col justify-center gap-4'>
+                            //               <div>
+                            //                 <strong>전문가 협력 기반, 자기소개서 전용 AI</strong><br />
+                            //                 인사팀 출신 전문가와 함께 만든 전용 AI가<br />
+                            //                 1번뿐만 아니라, 2/3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
+                            //                 <div className='mt-2 text-lg font-bold'>공고별 19,900원 정액제</div>
+                            //               </div>
+                            //               <div>
+                            //                 <strong>이용 방법</strong><br />
+                            //                 <div className='flex flex-col'>
+                            //                   <div>① 아래 계좌번호로 19,900원 송금 후,</div>
+                            //                   <div>② 입금자명과 이메일을 010-8961-1918로 보내주세요.</div>
+                            //                   <div>③ 확인 후 30분 이내에 해당 회사의 모든 문항을 열람할 수 있습니다.</div>
+                            //                 </div>
+                            //               </div>
+                            //               <div className='flex items-center justify-center gap-4 mr-4'>
+                            //                 <img src="/qr.png" alt="QR Code" className='w-[8rem]' />
+                            //                 <div>
+                            //                   <p className='text-sm text-center text-black'>카카오뱅크</p>
+                            //                   <p className='font-extrabold text-center text-black'>3333058317631</p>
+                            //                   <p className='text-center text-black'>박근철</p>
+                            //                 </div>
+                            //               </div>
+                            //             </div>
+                            //           </div>
+                            //         </div>
+                            //       </div>
+                            //     </div>
+                            //   ) : (
+                            //     // Full essay content if paid
+                            //     <>
+                            //       <div className="text-lg whitespace-pre-line">
+                            //         {essay.essay}
+                            //       </div>
+                            //       <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
+                            //     </>
+                            //   )}
+                            // </>
+                          <>
+                            <div className="text-lg whitespace-pre-line">
+                                {essay.essay}
+                              </div>
+                              <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
                             </>
                           )}
                         </div>
