@@ -48,7 +48,6 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         };
       });
       setJobList(jobs);
-      console.log("Fetched jobs:", jobs);
     };
     fetchJobs();
   }, []);

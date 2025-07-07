@@ -120,7 +120,6 @@ export default function JobSelectPage() {
             const now = new Date();
             const isPastDeadline = item.endDate && now > new Date(item.endDate);
             const template = getQuestionTemplate(String(item.job_id));
-            console.log("Template for job_id:", item.job_id, template);
             const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
             const rand = randomId();
             return (

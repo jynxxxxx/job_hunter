@@ -58,15 +58,15 @@ const Header = () => {
 
   return (
     <div className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 z-50 h-[6rem] md:h-[4rem] font-bold text-dark flex flex-col items-center md:flex-row`}>
-      <div className="pt-4 text-[1.7rem] px-6 md:px-[2.5rem] md:pt-0 cursor-pointer" onClick={() => router.push('/')}>
+      <div className="pt-4 px-6 md:px-[2.5rem] md:pt-0 cursor-pointer" onClick={() => router.push('/')}>
         <img
           src="/logo.png"
           alt="바로지원"
-          className='h-[2rem] md:h-[3rem]'
+          className='h-[2rem] md:h-[3rem] w-auto'
         />
       </div>
 
-      <div className={`w-full pt:12 flex justify-center md:justify-start'}`}>
+      <div className={`w-full pt:12 flex justify-center sm:justify-start`}>
         {pathname === '/login' ? null : (
           <>
             {pathname === '/' && !isAuthenticated && (
@@ -87,7 +87,7 @@ const Header = () => {
                     }
                     setActivePage("generation");
                   }}
-                  className={`px-6 py-1 cursor-pointer ${
+                  className={`px-6 py-2 cursor-pointer ${
                     activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -100,7 +100,7 @@ const Header = () => {
                     }
                     setActivePage("history")
                   }}
-                  className={`px-6 py-1 cursor-pointer ${
+                  className={`px-6 py-2 cursor-pointer ${
                     activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
