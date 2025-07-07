@@ -54,7 +54,7 @@ export default function JobSelectPage() {
           className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
           style={{
             borderRadius: "4rem",
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCL9-ITtmBGavKou4DgUgJibUFVHfn0McY_Cd_dTV-kfNhYGYE6z2Wijyjx-1WDBAyHJKqEZqpc0gGBGmvguQ0ofskhXdYX6QwfaowcerjVeOwHNhPcCyivt6qs90XBXMb1oAzZfO9ihpYbEXkDVM0kBXXR4lp14-_5ZL77aYJB1xuWJMSgQqImyw52bZoUXndNatLoWhW5L3v0yBD1wZMYihdNoZ9AHQOq6gm-9yM8YROLvnQ7uZyAn_UHDKpexyQ6Vi6EqVsqClMS")`
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("/bg_image.png")`
           }}
         >
           <div className="flex flex-col gap-2 text-center">
