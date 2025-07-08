@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { httpsCallable } from 'firebase/functions';
-import { signInWithCustomToken, OAuthProvider, linkWithCredential } from 'firebase/auth';
+import { signInWithCustomToken } from 'firebase/auth';
 import { functions, auth } from '@/lib/firebase';
 import { ensureUserProfile } from '@/components/HelperFunctions';
 
@@ -31,7 +31,7 @@ export default function KakaoCallback() {
             redirectUri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
           });
           console.log("result", result.data)
-          const { customToken, uid, kakaoProfile } = result.data;
+          const { customToken, kakaoProfile } = result.data;
 
           if (customToken) {
             setMessage('Signing in to Firebase...');
