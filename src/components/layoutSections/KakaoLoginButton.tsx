@@ -1,0 +1,37 @@
+'use client';
+
+import React from 'react';
+import { toast } from 'sonner';
+// This button initiates the Kakao login process by redirecting the user.
+export function KakaoLoginButton() {
+  const KAKAO_JAVASCRIPT_KEY = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
+  const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
+
+  const handleLogin = () => {
+    if (!window.Kakao) {
+      toast.error("Kakao SDK is not loaded.");
+      return;
+    }
+    // Ensure Kakao is initialized
+    if (!window.Kakao.isInitialized()) {
+        window.Kakao.init(KAKAO_JAVASCRIPT_KEY);
+    }
+
+    window.Kakao.Auth.authorize({
+      redirectUri: REDIRECT_URI,
+    });
+  };
+
+  return (
+    <button
+      onClick={handleLogin}
+      className="w-full flex items-center justify-center"
+    >
+      <img
+        src="/kakao_login.png"
+        alt="바로지원"
+        className='h-[2rem] md:h-[3rem] w-auto hover:brightness-90 hover:scale-103 transition duration-300"'
+      />
+    </button>
+  );
+}

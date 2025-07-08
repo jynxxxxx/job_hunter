@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json", // This line is crucial! It inherits settings from tsconfig.json
+  "compilerOptions": {
+    // You can put dev-specific compiler options here if needed,
+    // e.g., "noUnusedLocals": false during development for faster iteration
+  },
+  "exclude": [
+    "node_modules", // Always exclude node_modules
+    ".eslintrc.js"  // Explicitly exclude the ESLint config file from TS processing
+  ]
+}
