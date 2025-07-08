@@ -184,30 +184,30 @@ export default function QuestionForm<T>({
       </div>
 
       <div className={genStyles.questionCtn}>
-        {step < totalSteps && currentQuestion && (
-          <div>
-            <h2 className={genStyles.question}>{step +1}. {currentQuestion.label} (최대 {currentQuestion.max}개)</h2>
-            {currentQuestion.type === "jobOptions"
-              ? renderJobOptions()
-              : (
+        {questions.slice(0, step + 1).map((question, index) => (
+          <div key={index} className={`transition-opacity duration-500 ease-in-out ${genStyles.fadeIn}`}>
+            <h2 className={genStyles.question}>{index + 1}. {question.label} (최대 {question.max}개)</h2>
+            {question.type === "jobOptions" ? (
+              renderJobOptions()
+            ) : (
               <>
-                <div className={currentQuestion.type === "radio" ? genStyles.radioCard : genStyles.checkCard}>
-                  {Array.isArray(currentQuestion.options) && currentQuestion.options.map((option) => (
+                <div className={question.type === "radio" ? genStyles.radioCard : genStyles.checkCard}>
+                  {Array.isArray(question.options) && question.options.map((option) => (
                     <label key={option}>
                       <input
                         style={{ marginRight: "6px" }}
-                        type={currentQuestion.type}
-                        name={String(currentQuestion.multiple_choice)}
+                        type={question.type}
+                        name={String(question.multiple_choice)}
                         value={option}
                         checked={
-                          currentQuestion.type === "radio"
-                            ? form[currentQuestion.multiple_choice] === option
-                            : ((form[currentQuestion.multiple_choice] as unknown as string[]) || []).includes(option)
+                          question.type === "radio"
+                            ? form[question.multiple_choice] === option
+                            : ((form[question.multiple_choice] as unknown as string[]) || []).includes(option)
                         }
                         onChange={() =>
-                          currentQuestion.type === "radio"
-                            ? updateField(currentQuestion.multiple_choice, option)
-                            : toggleCheckbox(currentQuestion.multiple_choice, option, currentQuestion.max)
+                          question.type === "radio"
+                            ? updateField(question.multiple_choice, option)
+                            : toggleCheckbox(question.multiple_choice, option, question.max)
                         }
                       />
                       {option}
@@ -215,24 +215,22 @@ export default function QuestionForm<T>({
                   ))}
                 </div>
 
-                <div className={genStyles.free}>
+                <div className={`transition-opacity duration-500 ease-in-out ${genStyles.fadeIn} ${genStyles.free}`}>
                   <textarea
                     className={genStyles.draft}
                     rows={3}
-                    value={(form[currentQuestion.free_text] as unknown as string) || ""}
-                    onChange={(e) => updateField(currentQuestion.free_text, e.target.value)}
+                    value={(form[question.free_text] as unknown as string) || ""}
+                    onChange={(e) => updateField(question.free_text, e.target.value)}
                     placeholder="위 선택하신 내역에 대한 이유 및 자신의 경험을 서술해 주세요. (필수)"
-                    
                   />
                 </div>
               </>
             )}
           </div>
-
-        )}
+        ))}
 
         {step === totalSteps && (
-          <>
+          <div className="transition-opacity duration-500 ease-in-out animate-fadeIn">
             <h2 className={genStyles.question}>
               {totalSteps + 1}. 기존 자기소개서 초안이 있다면 여기에 입력해주세요. 이를 바탕으로 작성해드립니다.
             </h2>
@@ -243,16 +241,11 @@ export default function QuestionForm<T>({
               placeholder="자기소개서 초안을 입력하세요"
               className={genStyles.draft}
             />
-          </>
+          </div>
         )}
 
         <div className="flex justify-between mt-4">
-          {step > 0 && (
-            <button type="button" onClick={() => setStep(step - 1)} className="px-4 py-2 bg-gray-300 rounded hover:scale-105">
-              이전
-            </button>
-          )}
-          {(step) < totalSteps ? (
+          {step < totalSteps ? (
             <button
               type="button"
               onClick={() => setStep(step + 1)}
