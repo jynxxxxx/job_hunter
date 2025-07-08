@@ -30,7 +30,7 @@ export function KakaoLoginButton() {
       <img
         src="/kakao_login.png"
         alt="바로지원"
-        className='h-[2rem] md:h-[3rem] w-auto hover:brightness-90 hover:scale-103 transition duration-300"'
+        className='h-[3rem] sm:h-[4rem] w-auto hover:brightness-90 hover:scale-103 transition duration-300"'
       />
     </button>
   );
