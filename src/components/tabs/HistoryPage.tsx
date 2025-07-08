@@ -61,9 +61,6 @@ export default function HistoryPage() {
   return (
     <div className="pt-[2rem] min-h-[85vh]">
       <h1 className="text-3xl font-bold mb-4 px-12 pb-6 pt-4">생성한 자기소개서 기록</h1>
-      {generations.length === 0 ? (
-        <div>기록이 없습니다.</div>
-      ) : (
         <div className="flex h-fit relative">
           <button
             onClick={() => setCollapsed(!collapsed)}
@@ -76,33 +73,37 @@ export default function HistoryPage() {
           <div
             className={`
               h-[85vh] transition-width duration-300 ease-in-out
-              ${collapsed ? 'w-0' : 'max-w-[30vw]'}
+              ${collapsed ? 'w-0' : 'w-[100vw]'}
               sm:max-w-[300px] min-w-fit flex-shrink-0
             `}
           >
             {!collapsed && (
-              <div className="overflow-y-scroll h-full pr-2 bg-primary/80 border-r py-8 pl-6 sm:max-w-[30vw]">
-                {generations.map((gen, index) => {
-                  const date = convertFirebaseTimestamp(gen, 'createdAt');
-                  const isSelected = selectedGen === gen;
-                  // Find job info from jobList
-                  const jobInfo = jobList.find(j => String(j.job_id) === String(gen.job_id));
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => setSelectedGen(gen)}
-                      className="py-2 border-b"
-                    >
-                      <div className={`ml-2 px-4 py-2 hover:bg-dark/25 cursor-pointer rounded ${isSelected ? 'bg-[#FEF3C6] font-bold mr-[-0.5rem]' : ''}`}>
-                        <div className="font-semibold text-lg">
-                          {jobInfo ? `${jobInfo.company} - ${jobInfo.title}` : (gen.job_id ? `Job ${gen.job_id}` : '회사 미지정')}
-                          <br /> {gen.question_id ? `${gen.question_id}번 문항` : '질문 없음'}
+              <div className="overflow-y-scroll h-full pr-2 bg-primary/80 border-r py-8 pl-6 sm:min-w-[25vw] sm:max-w-[30vw]">
+                {generations.length === 0 ? (
+                  <div className='text-center pt-4'>기록이 없습니다.</div>
+                ) : (
+                  generations.map((gen, index) => {
+                    const date = convertFirebaseTimestamp(gen, 'createdAt');
+                    const isSelected = selectedGen === gen;
+                    // Find job info from jobList
+                    const jobInfo = jobList.find(j => String(j.job_id) === String(gen.job_id));
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => setSelectedGen(gen)}
+                        className="py-2 border-b"
+                      >
+                        <div className={`ml-2 px-4 py-2 hover:bg-dark/25 cursor-pointer rounded ${isSelected ? 'bg-[#FEF3C6] font-bold mr-[-0.5rem]' : ''}`}>
+                          <div className="font-semibold text-lg">
+                            {jobInfo ? `${jobInfo.company} - ${jobInfo.title}` : (gen.job_id ? `Job ${gen.job_id}` : '회사 미지정')}
+                            <br /> {gen.question_id ? `${gen.question_id}번 문항` : '질문 없음'}
+                          </div>
+                          <div className="text-sm text-gray-500">{date}</div>
                         </div>
-                        <div className="text-sm text-gray-500">{date}</div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                )}
               </div>
             )}
           </div>
@@ -179,7 +180,6 @@ export default function HistoryPage() {
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 }
