@@ -51,6 +51,10 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   background-color: $extraDark;
   z-index: 10;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 15rem;
 }
 
 .title{
@@ -82,6 +86,7 @@
 @media (max-width: 640px) {
   .ctn{
     padding: 1.5rem 1.5rem 0;
+    height: 13rem;
   }
 
   .title{

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useUserData } from "@/context/UserDataContext";
 import { useRouter } from "next/navigation";
 import { getQuestionTemplate } from '@/templates/jobQuestions';
-
+import RequestForm from "@/components/RequestForm";
 // Helper to generate a random 6-character string
 function randomId() {
   return Math.random().toString(36).substring(2, 8);
@@ -159,6 +159,15 @@ export default function JobSelectPage() {
             );
           })}
         </div>
+      </div>
+
+      <div className="pt-8 pb-16">
+        <h1
+          className="mt-12 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
+        > 
+          원하는 공고가 없나요? 필요한 자소서를 요청해 보세요.
+        </h1>
+        <RequestForm />
       </div>
     </div>
   )

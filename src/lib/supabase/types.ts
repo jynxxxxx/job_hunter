@@ -25,6 +25,28 @@ export type Database = {
           resume_path: string;
         };
       };
+      request_list: {
+        Row: {
+          id: string;
+          company: string;
+          title: string;
+          email: string;
+          user_name: string;
+          created_at: string;
+        };
+        Insert: {
+          company: string;
+          title: string;
+          email: string;
+          user_name: string;
+        };
+        Update: {
+          company: string;
+          title: string;
+          email: string;
+          user_name: string;
+        };
+      };
     }
     Views: {
       [_ in never]: never

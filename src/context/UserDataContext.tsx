@@ -50,7 +50,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
       setJobList(jobs);
     };
     fetchJobs();
-  }, []);
+  }, [authUser?.uid]);
 
   const fetchUserData = useCallback(async () => {
     if (!authUser?.uid) {
