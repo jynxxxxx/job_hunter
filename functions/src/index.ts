@@ -56,7 +56,6 @@ export const getKakaoUserInfoAndSignIn = https.onCall(
       });
 
       const kakaoAccessToken = tokenResponse.data.access_token;
-      console.log("Kakao Access Token obtained:", kakaoAccessToken);
 
       // Step 2: Call Kakao User Information API using the obtained access token
       const kakaoResponse = await axios.get("https://kapi.kakao.com/v2/user/me", {
@@ -109,7 +108,6 @@ export const getKakaoUserInfoAndSignIn = https.onCall(
 
       // Create a custom token using the final Firebase UID
       customToken = await admin.auth().createCustomToken(userRecord.uid);
-      console.log(`Generated custom token for UID: ${userRecord.uid}`);
 
       // Step 3: Return relevant data to the client
       return {
