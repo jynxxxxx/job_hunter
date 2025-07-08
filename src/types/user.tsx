@@ -43,4 +43,6 @@ export interface CustomUserProfile {
   resumeUploadDate?:  string; 
   generation_count?: { [jobId: string]: number };
   hasPaid?: { [jobId: string]: boolean };
+  tokens?: number;
+  agreedToPrivacy?: string;
 }

@@ -17,7 +17,7 @@ type UserDataContextType = {
   jobList: any[];
 };
 
-type ActivePage = 'generation' | 'history' | 'home';
+type ActivePage = 'generation' | 'history' | 'home' | 'tokens';
 
 const UserDataContext = createContext<UserDataContextType>({
   userData: null,

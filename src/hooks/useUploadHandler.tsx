@@ -69,9 +69,8 @@ export async function handleUpload<T>({
 
     const jobId = String(job_id);
     const jobHasPaid = hasPaidMap[jobId] === true;
-    const jobGenCount = userData.generation_count[jobId] ?? 0;
 
-    if (jobGenCount > 2 && !jobHasPaid) {
+    if (!jobHasPaid) {
       toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
       setWaiting(false);
       return;

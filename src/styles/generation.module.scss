@@ -28,13 +28,13 @@
   z-index: 1000;
 
   background: rgba(255, 255, 255, 1);
-  padding: 2rem 1rem 1rem;
+  padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 
   text-align: center;
-  width: 65vw;
-  height: 57vh;
+  width: 50vw;
+  height: fit-content;
   overflow-y: auto;
 
   h2 {
@@ -271,6 +271,8 @@
 @media (max-width: 950px) {
   .paywallMessage{
     width: 90vw;
+    // height: 40vh;
+    padding: 1rem;;
   }
 
   .paywallOverlay{

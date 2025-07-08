@@ -11,14 +11,14 @@ import headerStyles from "@/styles/layout.module.scss";
 import PrivacyAgreementModal from './PrivacyConsent';
 
 const Header = () => {
-  const { activePage, setActivePage } = useUserData()
+  const { userData, activePage, setActivePage } = useUserData()
   const router = useRouter();
   const pathname = usePathname();
   const { setJustSignedOut } = useAuth();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-
+  console.log('user getIdTokenResult', userData?.tokens)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
@@ -59,7 +59,7 @@ const Header = () => {
 
   return (
     <div 
-      className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 h-[6rem] sm:h-[4rem] font-bold text-dark flex flex-col items-center sm:flex-row`}
+      className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 h-[6rem] sm:h-[4rem] font-bold text-dark flex flex-col sm:items-center sm:flex-row`}
       style={{ zIndex: 100 }}
     >
       <div 
@@ -76,7 +76,7 @@ const Header = () => {
         />
       </div>
 
-      <div className={`w-full pt:12 flex justify-center sm:justify-start`}>
+      <div className={`w-full pt:12 flex justify-center items-end sm:items-center sm:justify-start`}>
         {pathname === '/login' ? null : (
           <>
             {pathname === '/' && !isAuthenticated && (
@@ -97,7 +97,7 @@ const Header = () => {
                     }
                     setActivePage("generation");
                   }}
-                  className={`px-6 py-2 cursor-pointer ${
+                  className={`px-2 md:px-6 py-2 cursor-pointer ${
                     activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -105,19 +105,34 @@ const Header = () => {
                 </div>
                 <div
                   onClick={() => {
-                    if (pathname !== '/dashboard') {
-                      router.push('/dashboard');
+                    if (pathname !== '/history') {
+                      router.push('/history');
                     }
                     setActivePage("history")
                   }}
-                  className={`px-6 py-2 cursor-pointer ${
+                  className={`px-2 md:px-6 py-2 cursor-pointer ${
                     activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
                   <span>내 자기소개서</span>
                 </div>
-
-                <div className="pr-[1rem] absolute top-4 right-2 md:top-[1rem] md:right-[1rem]" ref={dropdownRef}  onClick={() => setIsDropdownOpen(prev => !prev)}>
+                <div
+                  onClick={() => {
+                    if (pathname !== '/tokens') {
+                      router.push('/tokens');
+                    }
+                    setActivePage("tokens")
+                  }}
+                  className={`px-2 md:px-6 py-2 cursor-pointer ${
+                    activePage === 'tokens' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  }`}
+                >
+                  <span>토큰 충전</span>
+                </div>
+                <div className='pr-[5rem] absolute top-4 right-2 text-bright'> 
+                  토켄수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
+                </div>
+                <div className="pr-[1rem] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" ref={dropdownRef}  onClick={() => setIsDropdownOpen(prev => !prev)}>
                   <CircleUserRound size={28} className="hover:scale-110"/>
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">

@@ -10,8 +10,13 @@ import genStyles from "@/styles/generation.module.scss";
 import GuideResult from '@/components/layoutSections/GuideResults';
 import { EssayOutputProps, GuideOutputProps } from '@/types/forms';
 import { DotSpinner } from '@/components/layoutSections/DotSpinner';
+import { doc, updateDoc, increment } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { useAuth } from '@/context/AuthContext';
+import { toast } from 'sonner';
 
 export default function GenerationDynamicPage({ params }: { params: Promise<{ job_id: string }> }) {
+  const { authUser } = useAuth()
   const { jobList, userData, setActivePage } = useUserData();
   const { job_id: encodedJobId } = React.use(params);
   const router = useRouter();
@@ -28,7 +33,9 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const [running, setRunning] = useState(false);
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const job = jobList.find(job => job.job_id == job_id) || '해당 회사';
-  const hasPaid = userData?.hasPaid?.[job_id] === true;
+  let userHasPaid = userData?.hasPaid?.[job_id] === true;
+  const tokens = userData?.tokens || 0;
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (waiting && !running) {
@@ -57,6 +64,37 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
     }, stages[stageIndex].duration);
     return () => clearTimeout(timer);
   }, [running, stageIndex]);
+
+
+  const handleUseToken = async () => {
+    if (!userData || !authUser ) return;
+    setSubmitted(true);
+    if (userData.tokens && userData.tokens > 0) {
+      try {
+        const userRef = doc(db, 'users', authUser.uid);
+        // Atomically update tokens and add job ID to paidJobs
+        await updateDoc(userRef, {
+          tokens: increment(-1), // Decrement tokens by 1
+          [`hasPaid.${job_id}`]: true, // Mark this job_id as paid with a timestamp
+        });
+
+        userHasPaid = true; // Unlock content
+        toast.success('토큰이 사용되어 해당 공고를 열람할 수 있습니다!');
+
+      } catch (error) {
+        console.error('Error using token:', error);
+        toast.error('토큰 사용 중 오류가 발생했습니다. 다시 시도해주세요.');
+      } finally {
+        setSubmitted(false);
+      }
+    } else {
+      // This case should ideally not be reached if button is disabled/hidden
+      toast.error('토큰이 부족합니다. 토큰 구매 페이지로 이동합니다.');
+      setSubmitted(false);
+      router.push('/tokens'); // Redirect to buy tokens page
+      setActivePage("tokens");
+    }
+  };
 
   if (!template) {
     return <div className="p-8 text-center text-xl">해당 회사/직무에 대한 질문 템플릿이 없습니다.</div>;
@@ -155,60 +193,8 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                       ) : (
                         <div className={genStyles.guideCtn}>
                           {essay && (
-                            // <>
-                            //   {preview === 'essay' && !hasPaid ? (
-                            //     <div className="relative">
-                            //       <div className="line-clamp-5 text-lg overflow-hidden">
-                            //         {essay.essay}
-                            //         {/* Gradient overlay to fade the last lines */}
-                            //         <div className="absolute top-0 left-0 w-full h-[50%] bg-gradient-to-b from-transparent to-white pointer-events-none z-5" />
-                            //       </div>
-
-                            //       {/* Paywall Overlay */}
-                            //       <div className="relative mt-[-5rem] w-full flex justify-center z-10 bg-gradient-to-b from-transparent via-white to-white">
-                            //         <div className='w-[90%] max-w-[500px] bg-[#F9F9FB] rounded-xl py-4 pl-4 mt-[7rem] mb-4 border border-gray-200 shadow-lg '>
-                            //           <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
-                            //           <div className='flex justify-around gap-6'>
-                            //             <div className='flex flex-col justify-center gap-4'>
-                            //               <div>
-                            //                 <strong>전문가 협력 기반, 자기소개서 전용 AI</strong><br />
-                            //                 인사팀 출신 전문가와 함께 만든 전용 AI가<br />
-                            //                 1번뿐만 아니라, 2/3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
-                            //                 <div className='mt-2 text-lg font-bold'>공고별 20,000원 정액제</div>
-                            //               </div>
-                            //               <div>
-                            //                 <strong>이용 방법</strong><br />
-                            //                 <div className='flex flex-col'>
-                            //                   <div>① 아래 계좌번호로 20,000원 송금 후,</div>
-                            //                   <div>② 입금자명과 이메일을 010-8961-1918로 보내주세요.</div>
-                            //                   <div>③ 확인 후 30분 이내에 해당 회사의 모든 문항을 열람할 수 있습니다.</div>
-                            //                 </div>
-                            //               </div>
-                            //               <div className='flex items-center justify-center gap-4 mr-4'>
-                            //                 <img src="/qr.png" alt="QR Code" className='w-[8rem]' />
-                            //                 <div>
-                            //                   <p className='text-sm text-center text-black'>카카오뱅크</p>
-                            //                   <p className='font-extrabold text-center text-black'>3333058317631</p>
-                            //                   <p className='text-center text-black'>박근철</p>
-                            //                 </div>
-                            //               </div>
-                            //             </div>
-                            //           </div>
-                            //         </div>
-                            //       </div>
-                            //     </div>
-                            //   ) : (
-                            //     // Full essay content if paid
-                            //     <>
-                            //       <div className="text-lg whitespace-pre-line">
-                            //         {essay.essay}
-                            //       </div>
-                            //       <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
-                            //     </>
-                            //   )}
-                            // </>
-                          <>
-                            <div className="text-lg whitespace-pre-line">
+                            <>
+                              <div className="text-lg whitespace-pre-line">
                                 {essay.essay}
                               </div>
                               <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
@@ -228,39 +214,49 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
               </div>
           </div>
         </div>
-        {!hasPaid && (activeTab !== 'q1') && (
+        {!userHasPaid && (
           <>
             <div className={genStyles.paywallOverlay}></div>
             <div className={genStyles.paywallMessage}>
               <h2>🔒 프리미엄 콘텐츠입니다</h2>
               <div className='w-full bg-[#F9F9FB] rounded-xl py-4 px-4 '>
-                <div className='font-extrabold text-center pb-4 text-lg sm:text-xl'>2번, 3번 문항은 유료 서비스입니다.</div>
+                <div className='font-extrabold text-center pb-4 text-lg sm:text-xl'>인사 전문가와 AI가 만드는 맞춤형 자기소개서</div>
                 <div className='flex justify-around gap-6'>
                   <div className='flex flex-col items-center justify-center gap-2'>
                     <div>
-                      <strong>전문가 협력 기반, 자기소개서 전용 AI</strong><br />
-                      인사팀 출신 전문가와 함께 만든 전용 AI가<br />
-                      2번과 3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
-                      <div className='mt-2 text-lg font-bold'>
-                        공고별 20,000원 정액제
+                      채용 공고를 분석해 직무별 요구사항을 반영한 알고리즘으로,<br />
+                      지원자의 실제 강점과 경험을 살려내는 자소서를 제공합니다<br />
+                      <div className='mt-3 text-lg font-bold text-gray-800'>
+                        공고별 1 토큰 사용
                       </div>
                     </div>
-                    <div>
-                      <strong>이용 방법</strong><br />
-                      <div className='flex flex-col items-start text-start'>
-                        <div>① 아래 계좌번호로 20,000원 송금 후,</div>
-                        <div>② 입금자명과 이메일을 010-8961-1918로 보내주세요.</div>
-                        <div>③ 확인 후 30분 이내에 해당 회사의 모든 문항을 열람할 수 있습니다.</div>
-                      </div>
+                    <div className="mb-6 text-center">
+                      <p className="text-md sm:text-lg text-gray-800 font-semibold mb-2">
+                        현재 보유 토큰: <span className="text-bright text-xl font-extrabold">{userData?.tokens || 0}개</span>
+                      </p>
                     </div>
-                    <div className='flex flex-col sm:flex-row items-center justify-center gap-2 mr-4'>
-                      <img src="/qr.png" alt="QR Code" className='w-[13rem]' />
-                      <div>
-                        <div className='text-sm text-center text-black'>카카오뱅크</div>
-                        <div className='font-extrabold text-center text-black'>3333058317631</div>
-                        <div className='text-center text-black'>박근철</div>
-                      </div>
-                    </div>
+
+                    {(tokens > 0) ? (
+                      <button
+                        onClick={handleUseToken}
+                        className="w-full bg-bright text-white py-3 rounded-lg font-semibold text-lg
+                                  hover:brightness-90 transition-colors"
+                        disabled={submitted}
+                      >
+                        토큰 사용하기 ({userData?.tokens || 0}개 중 1개)
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          router.push('/tokens')
+                          setActivePage("tokens");
+                        }}
+                        className="w-full bg-dark text-white py-3 rounded-lg font-semibold text-lg
+                                  hover:bg-brightness-110 transition-colors"
+                      >
+                        토큰 구매하러 가기
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
