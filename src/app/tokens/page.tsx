@@ -72,7 +72,16 @@ export default function BuyTokensPage() {
       {/* Manual Payment Modal */}
       {selectedPackage && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl p-8 mt-20 md:mt-16 lg:mt-8 w-[90vw] md:w-[70vw] lg:w-[35vw] overflow-y-auto max-h-[80vh] md:max-h-[75vh]">
+          <div className="relative bg-white rounded-lg shadow-xl p-8 mt-20 md:mt-16 lg:mt-8 w-[90vw] md:w-[70vw] lg:w-[35vw] overflow-y-auto max-h-[80vh] md:max-h-[75vh] lg:max-h-[80vh]">
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none cursor-pointer"
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
             <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
               {selectedPackage.tokens} 토큰 구매 안내
             </h2>

@@ -14,7 +14,7 @@ interface UploadParams<T> {
   setRunning: (b: boolean) => void; // Optional prop to indicate if generation is running
   setEssay: (essay: any) => void;
   setGuide: (guide: any) => void;
-  question_id: number;
+  question_id: number | string;
   requiredFields: (keyof T)[];
 }
 

@@ -9,7 +9,7 @@ import { SectionCounts, SectionKey } from "@/types/forms";
 interface DynamicQuestionSectionProps {
   job_id: string;
   section: string; // e.g. "q1", "q2", "q3", ...
-  question_id: number;
+  question_id: number | string; // e.g. 1, 2, 3, ...
   setGuide: (guide: any) => void;
   setEssay: (essay: any) => void;
   waiting: boolean;

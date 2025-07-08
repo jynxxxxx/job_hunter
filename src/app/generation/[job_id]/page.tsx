@@ -23,7 +23,9 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const jobURI = decodeURIComponent(encodedJobId);
   const job_id = jobURI.split('xY_')[0];
   const template = getQuestionTemplate(job_id);
-  const sectionKeys = template ? Object.keys(template).filter((k) => /^q\d+$/.test(k)) : [];
+  const sectionKeys = template
+    ? Object.keys(template).filter((k) => k.startsWith('q') && !k.includes('question'))
+    : [];
   const [activeTab, setActiveTab] = useState(sectionKeys[0] || '');
   const [guide, setGuide] = useState<GuideOutputProps | null>(null);
   const [essay, setEssay] = useState<EssayOutputProps | null>(null);
@@ -33,7 +35,8 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const [running, setRunning] = useState(false);
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const job = jobList.find(job => job.job_id == job_id) || '해당 회사';
-  let userHasPaid = userData?.hasPaid?.[job_id] === true;
+  let paidCheck = userData?.hasPaid?.[job_id] === true;
+  const [userHasPaid, setUserHasPaid] = useState(paidCheck);
   const tokens = userData?.tokens || 0;
   const [submitted, setSubmitted] = useState(false);
 
@@ -65,7 +68,6 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
     return () => clearTimeout(timer);
   }, [running, stageIndex]);
 
-
   const handleUseToken = async () => {
     if (!userData || !authUser ) return;
     setSubmitted(true);
@@ -78,7 +80,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
           [`hasPaid.${job_id}`]: true, // Mark this job_id as paid with a timestamp
         });
 
-        userHasPaid = true; // Unlock content
+        setUserHasPaid(true) // Unlock content
         toast.success('토큰이 사용되어 해당 공고를 열람할 수 있습니다!');
 
       } catch (error) {
@@ -115,7 +117,9 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
           </button>
           <div className={genStyles.leftSide} >
             <h1 className='font-extrabold text-xl pb-4 text-dark text-[1.6rem]'>
-              {job.company} {job.title} AI 자기소개서 생성
+              {job.company} {job.title}<br />
+              <br />
+              AI 자기소개서 생성
             </h1>
             <div className="text-lg font-bold text-gray-700">
               문항 별로 작성 후 하단 &apos;나만의 자기소개서/가이드 작성하기&apos; 클릭 부탁드립니다.
@@ -135,14 +139,17 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                     setEssay(null);
                   }}
                 >
-                  {parseInt(section.replace('q', ''))}번 문항
+                  {(() => {
+                    const key = section.startsWith('q') ? section.slice(1) : section;
+                    return /^\d+$/.test(key) ? `${key}번 문항` : `${key} 문항`;
+                  })()}
                 </div>
               ))}
             </div>
             {/* Show the question text for the active tab */}
             {activeTab && (
               <div className="mb-4 text-lg font-semibold">
-                {(template as any)[`question${activeTab.replace('q', '')}`]}
+                {(template as any)[`question${activeTab.slice(1)}`]}
               </div>
             )}
             {activeTab && (
@@ -150,7 +157,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                 key={activeTab}
                 job_id={job_id}
                 section={activeTab}
-                question_id={parseInt(activeTab.replace('q', ''))}
+                question_id={activeTab.slice(1)}
                 setGuide={setGuide}
                 setEssay={setEssay}
                 waiting={waiting}

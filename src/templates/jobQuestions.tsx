@@ -880,6 +880,805 @@ export const jobQuestions = [
     "question2": "본인이 가장 중요하게 생각하는 가치관은 무엇이며, 해당 가치관이 조직 내에서 어떻게 긍정적인 영향을 미칠 수 있는지 본인의 경험을 바탕으로 구체적으로 기술하여 주십시오. (800자)",
     "question3": "지원하신 직무의 역할과 주요 업무에 대해 이해하고 있는 바를 설명해 주시고, 해당 직무를 잘 수행할 수 있다고 생각하는 이유를 본인의 경험과 역량을 바탕으로 구체적으로 기술하여 주십시오. (800자)"
   },
+  {
+    "job_id": "11",
+    "q직무 경험 기술": [
+      {
+        "type": "checkbox",
+        "label": "어떤 경험을 선택하셨나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "대학 프로젝트",
+          "인턴십 경험",
+          "연구 논문 작성",
+          "공모전 참여",
+          "학습 활동 (온라인 강의, 워크숍 등)",
+          "자격증 취득 과정",
+          "동아리 활동",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험에서 맡은 역할은 무엇이었나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "팀 리더",
+          "데이터 분석가",
+          "기술 개발자",
+          "품질 검사원",
+          "보고서 작성자",
+          "문제 해결자",
+          "커뮤니케이터",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "사용한 기술이나 도구는 무엇인가요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "Python",
+          "R",
+          "Minitab",
+          "JMP",
+          "C/C++",
+          "MATLAB",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "직면했던 문제점은 무엇이었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "기술적 한계",
+          "데이터 부족",
+          "팀원 간 의견 차이",
+          "시간 부족",
+          "자원 부족",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "문제 해결을 위해 어떤 노력을 기울였나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "새로운 알고리즘 개발",
+          "데이터 수집 및 분석",
+          "팀원과의 협력 강화",
+          "외부 전문가의 조언 수렴",
+          "지속적인 테스트 및 피드백",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "결과로 얻은 성과는 무엇인가요?",
+        "multiple_choice": "6_choice",
+        "free_text": "6_free",
+        "options": [
+          "불량률 감소",
+          "제품 성능 향상",
+          "프로젝트 성공적 완료",
+          "고객 만족도 증가",
+          "논문 출판",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q1": [
+      {
+        "type": "checkbox",
+        "label": "어떤 전문성을 키우기 위해 노력했나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "제품 인증 평가 기준",
+          "양산품질 모니터링",
+          "불량 분석",
+          "공정 변경 관리",
+          "고객 불량 개선 대책",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 학습 과정을 거쳤나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "관련 전공 학습",
+          "품질 관련 자격증 취득",
+          "데이터 분석 툴 학습",
+          "품질 관련 이론 스터디",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "실전에서 어떻게 적용했나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "프로젝트 참여",
+          "실험 수행",
+          "인턴십 경험",
+          "논문 작성",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 성과를 이루었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "불량률 감소",
+          "공정 개선",
+          "제품 신뢰성 향상",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "문제 해결 능력 향상",
+          "데이터 분석 능력 강화",
+          "협업의 중요성",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q2": [
+      {
+        "type": "checkbox",
+        "label": "어떤 상황에서 팀워크를 발휘했나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "신제품 인증 과정",
+          "고객 불만 해결",
+          "프로젝트 협업",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "팀원 간의 갈등이나 문제는 무엇이었나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "의견 불일치",
+          "정보 공유 부족",
+          "역할 분담 문제",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "본인이 취한 주도적인 행동은 무엇이었나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "갈등 조율",
+          "정보 공유 촉진",
+          "협력 유도",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "팀워크의 결과는 무엇이었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "품질 문제 조기 해결",
+          "고객 만족도 향상",
+          "프로젝트 성공적 완료",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "협업의 중요성",
+          "효과적인 소통 방법",
+          "문제 해결 능력",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q3": [
+      {
+        "type": "checkbox",
+        "label": "어떤 도전적인 목표를 세웠나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "불량률 감소",
+          "새로운 품질 검증 방법론 도입",
+          "복합 불량 원인 규명",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "목표 달성 과정에서 어떤 어려움을 겪었나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "기술적 한계",
+          "데이터 부족",
+          "기존 방식의 제약",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어려움을 극복하기 위해 어떤 노력을 했나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "독창적인 해결책 모색",
+          "지속적인 테스트",
+          "협력 강화",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "목표 달성의 결과는 무엇이었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "불량률 개선",
+          "시스템 성공적 도입",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "끈기와 인내의 중요성",
+          "문제 해결 능력 강화",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q#": [
+      {
+        "type": "checkbox",
+        "label": "본인을 나타내는 해시태그는 무엇인가요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "#데이터분석전문가",
+          "#문제해결사",
+          "#협업촉진자",
+          "#품질수호자",
+          "#끈기있는분석가",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "선택한 해시태그와 관련된 구체적인 경험은 무엇인가요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "프로젝트 성공 사례",
+          "문제 해결 경험",
+          "협업 사례",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "본인의 가치관은 어떻게 형성되었나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "교육 경험",
+          "직장 경험",
+          "개인적 경험",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 상황에서 그 강점이 발휘되었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "팀 프로젝트",
+          "개인 연구",
+          "고객 대응",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "책임감의 중요성",
+          "지속적인 학습의 필요성",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "numQuestions": {
+      "직무 경험 기술": 6,
+      "q1": 5,
+      "q2": 5,
+      "q3": 5,
+      "q#": 5
+    },
+    "question직무 경험 기술": "지원 분야 및 직무 역량과 관련된 프로젝트/공모전/논문/연구/학습/활동/경험 등을 작성해주세요. (1,000 자)",
+    "question1": "지원하신 직무 분야의 전문성을 키우기 위해 꾸준히 노력한 경험에 대해 서술해주세요. (600자)",
+    "question2": "팀워크를 발휘해 사람들을 연결하고 공동 목표 달성에 기여한 경험에 대해 서술해 주세요. (600자)",
+    "question3": "도전적인 목표를 세우고 성취하기 위해 끈질기게 노력한 경험에 대해 서술해 주세요. (600자)",
+    "question#": "지원자님은 어떤 사람인가요? (600자, 해시태그 최대 2개)"
+  },
+  {
+    "job_id": "12",
+    "q직무 경험 기술": [
+      {
+        "type": "checkbox",
+        "label": "어떤 프로젝트나 경험을 선택하셨나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "유틸리티 설비 설계 프로젝트",
+          "에너지 효율화 연구",
+          "수자원 관리 개선 프로젝트",
+          "환경 오염 물질 저감 활동",
+          "화학물질 안전 관리 프로젝트",
+          "IoT/AI 기반 설비 관리 시스템 개발",
+          "공정 안전 개선 프로젝트",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 문제가 있었나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "설비 효율이 낮았다",
+          "에너지 소비가 과다했다",
+          "수자원 낭비가 심각했다",
+          "유해물질 배출이 많았다",
+          "안전 규정 미준수 사례가 있었다",
+          "데이터 분석이 부족했다",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "문제 해결을 위해 어떤 분석 방법을 사용했나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "데이터 분석 툴 활용 (Python, R 등)",
+          "시뮬레이션 툴 활용 (CAD, CFD 등)",
+          "현장 실사 및 인터뷰",
+          "IoT 센서 데이터 활용",
+          "머신러닝 모델 개발",
+          "환경 및 안전 규제 검토",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 개선안을 도출하고 적용했나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "설비 구조 개선",
+          "에너지 관리 시스템 도입",
+          "수자원 재활용 시스템 구축",
+          "유해물질 저감 장치 설치",
+          "안전 관리 프로세스 강화",
+          "AI 기반 예측 시스템 도입",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "결과는 어떻게 되었나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "에너지 소비량 XX% 절감",
+          "수자원 재활용률 YY% 향상",
+          "유해물질 배출량 ZZ% 감소",
+          "안전 사고 발생률 감소",
+          "설비 운영 효율 XX% 향상",
+          "비용 절감 XX%",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q1": [
+      {
+        "type": "checkbox",
+        "label": "어떤 전문성을 키우기 위해 노력했나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "에너지 관리 시스템",
+          "수처리 공정 최적화",
+          "화학물질 안전 관리",
+          "스마트 팩토리 유틸리티 연동 기술",
+          "공조/배기 시스템 관리",
+          "전기/배관 시스템 설계",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 학습 과정을 거쳤나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "관련 전공 학습 (기계공학, 화학공학 등)",
+          "관련 자격증 취득 (에너지관리기사 등)",
+          "시뮬레이션 툴 학습 (CAD, CFD 등)",
+          "데이터 분석 툴 학습 (Python, R 등)",
+          "산업 현장 실습",
+          "온라인 강의 수강",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "습득한 지식과 기술을 어떻게 적용했나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "프로젝트에서 에너지 효율 개선",
+          "실험실에서 수처리 공정 최적화",
+          "인턴십에서 화학물질 안전 관리",
+          "유틸리티 시스템 개선 프로젝트 참여",
+          "데이터 분석을 통한 문제 해결",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 성과를 얻었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "유틸리티 효율 XX% 개선",
+          "비용 절감 XX%",
+          "환경 오염물질 저감 XX%",
+          "안전성 향상",
+          "프로젝트 성공적 완료",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "전문성의 중요성",
+          "지속적인 학습의 필요성",
+          "실전 적용의 가치",
+          "협업의 중요성",
+          "문제 해결 능력 향상",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q2": [
+      {
+        "type": "checkbox",
+        "label": "어떤 상황에서 팀워크를 발휘했나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "복잡한 설비 문제 해결",
+          "신규 설비 도입",
+          "환경 안전 목표 달성",
+          "프로젝트 팀 구성",
+          "부서 간 협력 필요",
+          "외부 이해관계자와의 협업",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "팀원 간의 어떤 갈등이나 의견 차이가 있었나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "목표 설정 차이",
+          "역할 분담 문제",
+          "의사소통 부족",
+          "기술적 접근 방법 차이",
+          "시간 관리 문제",
+          "책임 회피",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "본인은 어떤 주도적인 행동을 했나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "갈등 조율 및 중재",
+          "정보 공유 및 소통 강화",
+          "협력 방안 제시",
+          "팀원 동기 부여",
+          "프로젝트 진행 상황 관리",
+          "외부 협력업체와의 조율",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "결과적으로 어떤 성과를 달성했나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "공정 효율 향상",
+          "안전 개선",
+          "환경 목표 달성",
+          "프로젝트 성공적 완료",
+          "팀원 만족도 향상",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "협업의 중요성",
+          "효과적인 소통 방법",
+          "팀워크의 가치",
+          "다양한 의견 수렴의 필요성",
+          "리더십 역량 강화",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q3": [
+      {
+        "type": "checkbox",
+        "label": "어떤 도전적인 목표를 세웠나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "최첨단 Fab 건설 과정에서의 유틸리티 시스템 설계",
+          "기존 설비의 에너지 효율 개선",
+          "유해물질 처리 문제 해결",
+          "새로운 기술 도입",
+          "환경 규제 준수 강화",
+          "안전성 향상 목표",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "목표 달성 과정에서 어떤 어려움이 있었나요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "기술적 한계",
+          "데이터 부족",
+          "기존 방식의 제약",
+          "안전/환경 규제 준수 난관",
+          "예산 제한",
+          "팀원 간 의견 차이",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이를 극복하기 위해 어떤 노력을 기울였나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "독창적인 해결책 모색",
+          "끈질긴 연구와 실험",
+          "다양한 방법 시도",
+          "외부 전문가와의 협력",
+          "지속적인 학습과 개선",
+          "팀원과의 협력 강화",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "결과적으로 어떤 성과를 얻었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "에너지 효율 XX% 개선",
+          "새로운 시스템 성공적 도입",
+          "환경 목표 달성",
+          "안전성 향상",
+          "프로젝트 성공적 완료",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "도전의 가치",
+          "끈기의 중요성",
+          "문제 해결 능력 향상",
+          "목표 설정의 중요성",
+          "지속적인 개선의 필요성",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "q#": [
+      {
+        "type": "checkbox",
+        "label": "어떤 해시태그를 선택하셨나요?",
+        "multiple_choice": "1_choice",
+        "free_text": "1_free",
+        "options": [
+          "#유틸리티마스터",
+          "#안전지킴이",
+          "#환경수호자",
+          "#효율성추구자",
+          "#문제해결분석가",
+          "#시스템설계자",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "선택한 해시태그와 관련된 경험은 무엇인가요?",
+        "multiple_choice": "2_choice",
+        "free_text": "2_free",
+        "options": [
+          "설비 운영 및 관리 경험",
+          "에너지 절감 프로젝트 참여",
+          "환경 보호 활동",
+          "문제 해결 프로젝트",
+          "시스템 설계 및 개선 경험",
+          "안전 관리 활동",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "본인의 가치관은 어떻게 형성되었나요?",
+        "multiple_choice": "3_choice",
+        "free_text": "3_free",
+        "options": [
+          "학습과 경험을 통한 형성",
+          "프로젝트 참여를 통한 성장",
+          "협업을 통한 가치관 강화",
+          "실패와 성공을 통한 교훈",
+          "지속적인 개선을 통한 발전",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "어떤 상황에서 그 강점이 발휘되었나요?",
+        "multiple_choice": "4_choice",
+        "free_text": "4_free",
+        "options": [
+          "프로젝트 리더로서의 역할",
+          "문제 해결 과정에서의 기여",
+          "팀워크를 통한 목표 달성",
+          "안전 및 환경 관리 강화",
+          "시스템 설계 및 개선",
+          "기타"
+        ],
+        "max": 2
+      },
+      {
+        "type": "checkbox",
+        "label": "이 경험을 통해 무엇을 배웠나요?",
+        "multiple_choice": "5_choice",
+        "free_text": "5_free",
+        "options": [
+          "본인의 강점과 개성",
+          "협업과 소통의 중요성",
+          "책임감과 성실성",
+          "지속적인 학습의 필요성",
+          "문제 해결 능력 강화",
+          "기타"
+        ],
+        "max": 2
+      }
+    ],
+    "numQuestions": {
+      "직무 경험 기술": 5,
+      "q1": 5,
+      "q2": 5,
+      "q3": 5,
+      "q#": 5
+    },
+    "question직무 경험 기술": "지원 분야 및 직무 역량과 관련된 프로젝트/공모전/논문/연구/학습/활동/경험 등을 작성해주세요. (1,000 자)",
+    "question1": "지원하신 직무 분야의 전문성을 키우기 위해 꾸준히 노력한 경험에 대해 서술해주세요. (600자)",
+    "question2": "팀워크를 발휘해 사람들을 연결하고 공동 목표 달성에 기여한 경험에 대해 서술해 주세요. (600자)",
+    "question3": "도전적인 목표를 세우고 성취하기 위해 끈질기게 노력한 경험에 대해 서술해 주세요. (600자)",
+    "question#": "지원자님은 어떤 사람인가요? (600자, 해시태그 최대 2개)"
+  }
 ];
 
 // Helper to get template for a company/job

@@ -18,7 +18,7 @@ const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  console.log('user getIdTokenResult', userData?.tokens)
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
