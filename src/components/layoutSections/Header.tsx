@@ -130,7 +130,7 @@ const Header = () => {
                   <span>토큰 충전</span>
                 </div>
                 <div className='pr-[5rem] absolute top-4 right-2 text-bright'> 
-                  토켄수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
+                  토큰수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
                 </div>
                 <div className="pr-[1rem] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" ref={dropdownRef}  onClick={() => setIsDropdownOpen(prev => !prev)}>
                   <CircleUserRound size={28} className="hover:scale-110"/>
