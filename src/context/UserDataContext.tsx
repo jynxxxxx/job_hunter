@@ -10,6 +10,7 @@ import { convertFirebaseTimestamp } from '@/components/HelperFunctions';
 
 type UserDataContextType = {
   userData: CustomUserProfile | null;
+  setUserData: React.Dispatch<React.SetStateAction<CustomUserProfile | null>>;
   loadingUserData: boolean;
   refetchUserData: () => void;
   activePage: ActivePage;
@@ -21,6 +22,7 @@ type ActivePage = 'generation' | 'history' | 'home' | 'tokens';
 
 const UserDataContext = createContext<UserDataContextType>({
   userData: null,
+  setUserData: () => {},
   loadingUserData: false,
   refetchUserData: () => {},
   activePage: 'generation',
@@ -96,7 +98,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   }, [fetchUserData]);
 
   return (
-    <UserDataContext.Provider value={{ userData, loadingUserData, refetchUserData: fetchUserData, activePage, setActivePage, jobList }}>
+    <UserDataContext.Provider value={{ userData, setUserData, loadingUserData, refetchUserData: fetchUserData, activePage, setActivePage, jobList }}>
       {children}
     </UserDataContext.Provider>
   );

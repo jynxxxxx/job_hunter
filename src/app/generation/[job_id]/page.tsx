@@ -13,11 +13,12 @@ import { DotSpinner } from '@/components/layoutSections/DotSpinner';
 import { doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/context/AuthContext';
+import type { CustomUserProfile } from '@/types/user'
 import { toast } from 'sonner';
 
 export default function GenerationDynamicPage({ params }: { params: Promise<{ job_id: string }> }) {
   const { authUser } = useAuth()
-  const { jobList, userData, setActivePage } = useUserData();
+  const { jobList, userData, setUserData, setActivePage } = useUserData();
   const { job_id: encodedJobId } = React.use(params);
   const router = useRouter();
   const jobURI = decodeURIComponent(encodedJobId);
@@ -81,8 +82,16 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
         });
 
         setUserHasPaid(true) // Unlock content
+        
         toast.success('토큰이 사용되어 해당 공고를 열람할 수 있습니다!');
+        setUserData((prev: any) => {
+          if (!prev) return prev; // null check
 
+          return {
+            ...prev,
+            tokens: (prev.tokens || 0) - 1,
+          };
+        });
       } catch (error) {
         console.error('Error using token:', error);
         toast.error('토큰 사용 중 오류가 발생했습니다. 다시 시도해주세요.');
