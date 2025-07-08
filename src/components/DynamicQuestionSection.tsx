@@ -85,7 +85,7 @@ const DynamicQuestionSection = ({
       setForm={setForm}
       draft={draft}
       setDraft={setDraft}
-      disabled={Boolean((!userData?.hasPaid?.[job_id] && (question_id !== 1)) || waiting || running)}
+      disabled={Boolean((userData?.hasPaid?.[job_id] == false) || waiting || running)}
       onSubmit={handleSubmit}
       {...(hasJobOptions && {
         jobLevel1,

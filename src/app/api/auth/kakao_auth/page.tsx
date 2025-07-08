@@ -24,13 +24,12 @@ export default function KakaoCallback() {
           const getKakaoUserInfoAndSignIn = httpsCallable(functions, 'getKakaoUserInfoAndSignIn');
 
           setMessage('Verifying with server...');
-          console.log("Kakao code received:", code);
-          console.log("Redirect URI:", process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI);
+
           const result: any = await getKakaoUserInfoAndSignIn({
             code: code,
             redirectUri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
           });
-          console.log("result", result.data)
+
           const { customToken, kakaoProfile } = result.data;
 
           if (customToken) {
@@ -43,7 +42,7 @@ export default function KakaoCallback() {
               // Now call ensureUserProfile with the currentUser object
               // and the nickname from KakaoProfile.
               await ensureUserProfile(currentUser, kakaoProfile.nickname);
-              console.log("ensureUserProfile completed.");
+
             } else {
               // This case should ideally not happen if signInWithCustomToken succeeds
               console.error("Firebase currentUser is null after signInWithCustomToken.");
