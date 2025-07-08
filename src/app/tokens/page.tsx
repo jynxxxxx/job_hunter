@@ -91,26 +91,25 @@ export default function BuyTokensPage() {
                   <p className="font-extrabold text-xl text-gray-900 mb-1">3333058317631</p>
                   <p className="text-sm text-gray-700">예금주: 박근철</p>
                 </div>
+                 <div className='flex justify-center mt-6'>
+                  <img src="/qr.png" alt="QR Code" className='w-32 h-32 object-contain border border-gray-200 rounded-md p-2' />
+                </div>
               </div>
 
               <div>
                 <p className="font-semibold text-gray-800 mb-2">
                   <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">2단계</span>
-                  송금 후, 아래 정보와 함께 카카오톡으로 알려주세요.
+                  송금 후, 아래 정보와 함께 010-8961-1918로 보내주세요.
                 </p>
                 <div className="bg-gray-100 p-4 rounded-md text-center">
-                  <p className="text-sm text-gray-700">카카오톡 ID: [당신의 카카오톡 ID 또는 전화번호]</p> {/* IMPORTANT: Replace with your actual KakaoTalk ID or Phone number */}
                   <p className="font-bold text-gray-900 mb-1">
-                    [송금자명] / [귀하의 서비스 로그인 이메일] / [구매 토큰 수: {selectedPackage.tokens}개]
+                    [입금자명] / [귀하의 서비스 로그인 이메일] / [구매 토큰 수: {selectedPackage.tokens}개]
                   </p>
                 </div>
               </div>
 
               {/* Optional: Add QR code if you have a QR for Kakao Pay or bank transfer */}
-              <div className='flex justify-center mt-6'>
-                <img src="/qr.png" alt="QR Code" className='w-32 h-32 object-contain border border-gray-200 rounded-md p-2' />
-              </div>
-
+      
               <p className="text-center text-sm text-blue-700 font-semibold mt-6">
                 확인 후 <span className="text-base">30분 이내</span>에 토큰이 계정에 추가됩니다.
               </p>
