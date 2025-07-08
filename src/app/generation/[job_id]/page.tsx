@@ -13,7 +13,6 @@ import { DotSpinner } from '@/components/layoutSections/DotSpinner';
 import { doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/context/AuthContext';
-import type { CustomUserProfile } from '@/types/user'
 import { toast } from 'sonner';
 
 export default function GenerationDynamicPage({ params }: { params: Promise<{ job_id: string }> }) {
