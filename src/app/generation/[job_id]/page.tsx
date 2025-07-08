@@ -35,7 +35,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const [running, setRunning] = useState(false);
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const job = jobList.find(job => job.job_id == job_id) || '해당 회사';
-  let paidCheck = userData?.hasPaid?.[job_id] === true;
+  const paidCheck = userData?.hasPaid?.[job_id] === true;
   const [userHasPaid, setUserHasPaid] = useState(paidCheck);
   const tokens = userData?.tokens || 0;
   const [submitted, setSubmitted] = useState(false);
