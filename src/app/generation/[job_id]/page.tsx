@@ -174,12 +174,12 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                             //                 <strong>전문가 협력 기반, 자기소개서 전용 AI</strong><br />
                             //                 인사팀 출신 전문가와 함께 만든 전용 AI가<br />
                             //                 1번뿐만 아니라, 2/3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
-                            //                 <div className='mt-2 text-lg font-bold'>공고별 19,900원 정액제</div>
+                            //                 <div className='mt-2 text-lg font-bold'>공고별 20,000원 정액제</div>
                             //               </div>
                             //               <div>
                             //                 <strong>이용 방법</strong><br />
                             //                 <div className='flex flex-col'>
-                            //                   <div>① 아래 계좌번호로 19,900원 송금 후,</div>
+                            //                   <div>① 아래 계좌번호로 20,000원 송금 후,</div>
                             //                   <div>② 입금자명과 이메일을 010-8961-1918로 보내주세요.</div>
                             //                   <div>③ 확인 후 30분 이내에 해당 회사의 모든 문항을 열람할 수 있습니다.</div>
                             //                 </div>
@@ -242,13 +242,13 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                       인사팀 출신 전문가와 함께 만든 전용 AI가<br />
                       2번과 3번 문항까지 완성도 높은 작성을 도와드립니다.<br />
                       <div className='mt-2 text-lg font-bold'>
-                        공고별 19,900원 정액제
+                        공고별 20,000원 정액제
                       </div>
                     </div>
                     <div>
                       <strong>이용 방법</strong><br />
                       <div className='flex flex-col items-start text-start'>
-                        <div>① 아래 계좌번호로 19,900원 송금 후,</div>
+                        <div>① 아래 계좌번호로 20,000원 송금 후,</div>
                         <div>② 입금자명과 이메일을 010-8961-1918로 보내주세요.</div>
                         <div>③ 확인 후 30분 이내에 해당 회사의 모든 문항을 열람할 수 있습니다.</div>
                       </div>
