@@ -8,6 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { CircleUserRound } from 'lucide-react';
 import { useUserData } from '@/context/UserDataContext';
 import headerStyles from "@/styles/layout.module.scss";
+import PrivacyAgreementModal from './PrivacyConsent';
 
 const Header = () => {
   const { activePage, setActivePage } = useUserData()
@@ -130,6 +131,10 @@ const Header = () => {
                   )}
                 </div>
               </>
+            )}
+
+            {isAuthenticated && pathname !== '/login' && pathname !== '/' && (
+              <PrivacyAgreementModal />
             )}
           </>
         )}
