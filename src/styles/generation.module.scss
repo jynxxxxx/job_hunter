@@ -231,6 +231,21 @@
   }
 }
 
+.jobBoard{
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, padding 0.5s ease-in-out;
+  padding: 0; // Default padding for closed state
+  max-height: 0; // Start with max-height 0 for closed state
+  opacity: 0; // Start with opacity 0 for closed state
+}
+
+.jobBoard.open {
+  max-height: 300vh; /* A large fixed value, adjust as needed */
+  opacity: 1;
+  padding: 1rem; /* p-4 */
+  margin-bottom: 3rem;
+}
+
 @keyframes dots {
   0% {
     content: ".";

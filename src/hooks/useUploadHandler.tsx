@@ -103,7 +103,7 @@ export async function handleUpload<T>({
 
     const input = {
       job_id: jobId,
-      question_id: String(question_id),
+      question_id: String(question_id).replace(/\s*\([^)]*\)/g, '').trim(),
       answers,
       draft,
     };
@@ -114,6 +114,7 @@ export async function handleUpload<T>({
     try {
       guide = await generateOutline(input);
       setGuide(guide);
+
       const payload = { user_input: input, guideline: {result: guide?.guideline} };
       essayResult = await generateEssay(payload);
       setEssay(essayResult?.essay);

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { getQuestionTemplate } from '@/components/HelperFunctions';
 import RequestForm from "@/components/RequestForm";
 import { finished } from "@/templates/finished_Jobs";
-
+import genStyles from "@/styles/generation.module.scss";
 // Helper to generate a random 6-character string
 function randomId() {
   return Math.random().toString(36).substring(2, 8);
@@ -14,8 +14,9 @@ function randomId() {
 
 export default function Dashboard() {
   const { jobList, jobTemplates } = useUserData();
-  // Only companies with at least one job that has a question template
+  const [openCompany, setOpenCompany] = useState<string|null>(null);
 
+  // Only companies with at least one job that has a question template
   const now = new Date();
   const activeJobs = jobList.filter(item => !item.endDate || new Date(item.endDate) >= now)
   .sort((a, b) => {
@@ -37,6 +38,13 @@ export default function Dashboard() {
     ...finished
   ];
 
+  const groupedByCompany: Record<string, any[]> = activeJobs.reduce((acc, job) => {
+    if (!acc[job.company]) acc[job.company] = [];
+    acc[job.company].push(job);
+    return acc;
+  }, {});
+
+  console.log('groupedByCompany', groupedByCompany)
 
   const uniqueCompanies = Array.from(
     new Set(
@@ -152,45 +160,75 @@ export default function Dashboard() {
         > 
           지원 가능한 기업 및 직무
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">
-          {activeJobs.map((item, idx) => {
-            const template = getQuestionTemplate(String(item.job_id), jobTemplates);
-            const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
-            const rand = randomId();
-            return (
-              <div
-                key={item.company + item.title + idx}
-                className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''}`}
-                onClick={() => {
-                  if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
-                }}
+        <div className="my-8 space-y-4">
+          {Object.entries(groupedByCompany).map(([company, jobs]) => (
+            <div key={company} className="rounded-xl shadow">
+              <button
+                onClick={() => setOpenCompany(openCompany === company ? null : company)}
+                className="border rounded-xl w-full text-left p-4 bg-gray-100 font-semibold text-lg flex justify-between items-center"
               >
-                {isComingSoon && (
-                  <div className="absolute top-0 right-0 bg-bright text-white text-s font-bold px-4 py-1 rounded-tr-xl rounded-bl-xl z-10">
-                    곧 출시됩니다
-                  </div>
+                {company}
+                <span>{openCompany === company ? '▲' : '▼'}</span>
+              </button>
+              <div
+                className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ${genStyles.jobBoard} ${
+                  openCompany === company ? genStyles.open : ''
+                }`}
+              >
+                {openCompany === company && (
+                  jobs.map((item:any, idx:any) => {
+                    const template = getQuestionTemplate(String(item.job_id), jobTemplates);
+                    const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
+                    const rand = randomId();
+                    return (
+                      <div
+                        key={item.company + item.title + idx}
+                        className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''}`}
+                        onClick={() => {
+                          if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
+                        }}
+                      >
+                        {isComingSoon && (
+                          <div className="absolute top-0 right-0 bg-bright text-white text-s font-bold px-4 py-1 rounded-tr-xl rounded-bl-xl z-10">
+                            곧 출시됩니다
+                          </div>
+                        )}
+                        <div className="text-lg font-bold text-dark">{item.company}</div>
+                        <div className="text-md text-gray-700">{item.title}</div>
+                        <div className="text-md font-medium text-gray-700">{item.position}</div>
+                        {item.startDate && (
+                          <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
+                        )}
+                        <button
+                          className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 `}
+                          onClick={e => {
+                            e.stopPropagation();
+                            if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
+                          }}
+                          disabled={isComingSoon}
+                        >
+                          {isComingSoon ? '준비중' : '바로가기'}
+                        </button>
+                      </div>
+                    );
+                  })
                 )}
-                <div className="text-lg font-bold text-dark">{item.company}</div>
-                <div className="text-md text-gray-700">{item.title}</div>
-                <div className="text-md font-medium text-gray-700">{item.position}</div>
-                {item.startDate && (
-                  <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
-                )}
-                <button
-                  className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 `}
-                  onClick={e => {
-                    e.stopPropagation();
-                    if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
-                  }}
-                  disabled={isComingSoon}
-                >
-                  {isComingSoon ? '준비중' : '바로가기'}
-                </button>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
+      </div>
 
+      <div className="pt-8 pb-16">
+        <h1
+          className="mt-12 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
+        > 
+          원하는 공고가 없나요? 필요한 자소서를 요청해 보세요.
+        </h1>
+        <RequestForm />
+      </div>
+
+      <div>
         <h1
           className="mt-12 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
         > 
@@ -218,15 +256,6 @@ export default function Dashboard() {
             );
           })}
         </div>
-      </div>
-
-      <div className="pt-8 pb-16">
-        <h1
-          className="mt-12 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
-        > 
-          원하는 공고가 없나요? 필요한 자소서를 요청해 보세요.
-        </h1>
-        <RequestForm />
       </div>
     </div>
   )
