@@ -34,7 +34,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   const { authUser } = useAuth();
   const [userData, setUserData] = useState<CustomUserProfile | null>(null);
   const [loadingUserData, setLoadingUserData] = useState(false);
-  const [activePage, setActivePage] = useState<ActivePage>('generation');
+  const [activePage, setActivePage] = useState<ActivePage>('home');
   const [jobList, setJobList] = useState<any[]>([]);
 
   useEffect(() => {

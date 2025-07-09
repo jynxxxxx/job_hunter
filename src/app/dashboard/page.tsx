@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { getQuestionTemplate } from '@/templates/jobQuestions';
 import RequestForm from "@/components/RequestForm";
 import { finished } from "@/templates/finished_Jobs";
+import { unique } from "next/dist/build/utils";
 // Helper to generate a random 6-character string
 function randomId() {
   return Math.random().toString(36).substring(2, 8);
@@ -36,16 +37,20 @@ export default function Dashboard() {
     ...finished
   ];
 
+
   const uniqueCompanies = Array.from(
     new Set(
       activeJobs
         .filter(item => {
           const template = getQuestionTemplate(String(item.job_id));
+          console.log("Template for job_id:", item.job_id, "is", template);
           if (!template) return false;
+          return true
         })
         .map(item => item.company)
     )
   );
+
   const router = useRouter();
   const [selectedCompany, setSelectedCompany] = useState("");
   const jobOptions = jobList.filter(item => item.company === selectedCompany);
