@@ -163,6 +163,7 @@ export default function Dashboard() {
                 )}
                 <div className="text-lg font-bold text-dark">{item.company}</div>
                 <div className="text-md text-gray-700">{item.title}</div>
+                <div className="text-md font-medium text-gray-700">{item.position}</div>
                 {item.startDate && (
                   <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
                 )}
