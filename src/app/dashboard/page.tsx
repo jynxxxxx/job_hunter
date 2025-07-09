@@ -64,11 +64,16 @@ export default function Dashboard() {
     setSelectedJob("");
   };
 
-  const handleJobChange = (e: any) => {
-    setSelectedJob(e.target.value);
+  const handleJobChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const [title, position] = e.target.value.split('|||');
+    const job = jobOptions.find(item => item.title === title && item.position === position);
+    if (job) {
+      setSelectedJob(job); // Save full object
+    }
   };
   // Find the selected job object
-  const selectedJobObj = jobOptions.find(item => item.title === selectedJob);
+  const selectedJobObj = selectedJob
+  console.log(selectedJobObj, "selectedJobObj");
 
   return (
     <div className="w-[80vw] mx-auto">
@@ -119,7 +124,13 @@ export default function Dashboard() {
           >
             <option value="" disabled hidden>직무/공고 선택 (회사 먼저 선택 해주세요)</option>
             {jobOptions.map(item => (
-              <option className="text-[1rem]" key={item.title} value={item.title}>{item.title}</option>
+              <option 
+                className="text-[1rem]" 
+                key={`${item.title}-${item.position}`} 
+                value={`${item.title}|||${item.position}`}
+              >
+                {item.title} ({item.position})
+              </option>
             ))}
           </select>
         </div>

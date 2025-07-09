@@ -126,6 +126,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
           <div className={genStyles.leftSide} >
             <h1 className='font-extrabold text-xl pb-4 text-dark text-[1.6rem]'>
               {job.company} {job.title}<br />
+              {job.position}<br />
               <br />
               AI 자기소개서 생성
             </h1>
