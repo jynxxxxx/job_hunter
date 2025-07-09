@@ -44,8 +44,6 @@ export default function Dashboard() {
     return acc;
   }, {});
 
-  console.log('groupedByCompany', groupedByCompany)
-
   const uniqueCompanies = Array.from(
     new Set(
       activeJobs
