@@ -6,6 +6,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { UserDataProvider } from '@/context/UserDataContext';
 import Footer from "@/components/layoutSections/Footer";
 import Script from 'next/script';
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "바로지원",
@@ -45,6 +46,7 @@ export default function RootLayout({
               <Header />
                 <div className="pt-[6rem] sm:pt-[4rem] pb-[13rem] sm:pb-[15rem]">
                   {children}
+                  <Analytics />
                 </div>
               <Footer />
             </div>
