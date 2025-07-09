@@ -42,7 +42,7 @@ export default function Dashboard() {
     new Set(
       activeJobs
         .filter(item => {
-          const template = getQuestionTemplate(String(item.job_id),jobTemplates);
+          const template = getQuestionTemplate(String(item.job_id), jobTemplates);
           if (!template) return false;
           return true
         })

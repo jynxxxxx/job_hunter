@@ -24,7 +24,7 @@ type Generation = {
 
 export default function HistoryPage() {
   const { authUser, setLoading } = useAuth();
-  const { jobList } = useUserData();
+  const { jobList, jobTemplates } = useUserData();
   const [generations, setGenerations] = useState<Generation[]>([]);
   const [selectedGen, setSelectedGen] = useState<Generation | null>(null);
   const [preview, setPreview] = useState<"guide" | "essay">("guide");
@@ -139,7 +139,7 @@ export default function HistoryPage() {
                   </div>
                   <div className="text-gray-700 text-[1.3rem]">
                     {(() => {
-                      const template = getQuestionTemplate(selectedGen.job_id || '');
+                      const template = getQuestionTemplate(selectedGen.job_id || '', jobTemplates);
                       const qid = selectedGen.question_id || selectedGen.input?.question_id;
                       const questionText = qid ? (template as any)?.[`question${qid}`] : undefined;
                       return (
