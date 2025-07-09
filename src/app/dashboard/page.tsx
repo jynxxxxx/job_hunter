@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useUserData } from "@/context/UserDataContext";
 import { useRouter } from "next/navigation";
-import { getQuestionTemplate } from '@/templates/jobQuestions';
+import { getQuestionTemplate } from '@/components/HelperFunctions';
 import RequestForm from "@/components/RequestForm";
 import { finished } from "@/templates/finished_Jobs";
 

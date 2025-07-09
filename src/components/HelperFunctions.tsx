@@ -1,5 +1,6 @@
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+import { useUserData } from '@/context/UserDataContext';
 
 export const ensureUserProfile = async (user: any, name: string) => {
     const userDocRef = doc(db, 'users', user.uid);
@@ -62,4 +63,11 @@ export function convertFirebaseTimestamp(
   }
 
   return formattedDateTimeString;
+}
+
+
+// Helper to get template for a company/job
+export function getQuestionTemplate(job_id: string) {
+  const {jobTemplates} = useUserData()
+  return jobTemplates.find(t => t.job_id == job_id);
 }

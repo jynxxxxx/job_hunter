@@ -16,6 +16,7 @@ type UserDataContextType = {
   activePage: ActivePage;
   setActivePage: (page: ActivePage) => void;
   jobList: any[];
+  jobTemplates: any[];
 };
 
 type ActivePage = 'generation' | 'history' | 'home' | 'tokens';
@@ -28,6 +29,7 @@ const UserDataContext = createContext<UserDataContextType>({
   activePage: 'generation',
   setActivePage: () => {},
   jobList: [],
+  jobTemplates: []
 });
 
 export function UserDataProvider({ children }: { children: ReactNode }) {
@@ -36,6 +38,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   const [loadingUserData, setLoadingUserData] = useState(false);
   const [activePage, setActivePage] = useState<ActivePage>('home');
   const [jobList, setJobList] = useState<any[]>([]);
+  const [jobTemplates, setJobTemplates] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -52,6 +55,16 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
       setJobList(jobs);
     };
     fetchJobs();
+  }, [authUser?.uid]);
+
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      // If jobs_dictionary is a collection:
+      const snapshot = await getDocs(collection(db, "job_templates"));
+      const templates = snapshot.docs.map(doc => doc.data());
+      setJobTemplates(templates);
+    };
+    fetchTemplates();
   }, [authUser?.uid]);
 
   const fetchUserData = useCallback(async () => {
@@ -98,7 +111,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   }, [fetchUserData]);
 
   return (
-    <UserDataContext.Provider value={{ userData, setUserData, loadingUserData, refetchUserData: fetchUserData, activePage, setActivePage, jobList }}>
+    <UserDataContext.Provider value={{ userData, setUserData, loadingUserData, refetchUserData: fetchUserData, activePage, setActivePage, jobList, jobTemplates }}>
       {children}
     </UserDataContext.Provider>
   );

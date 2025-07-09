@@ -9,7 +9,7 @@ import GuideResult from '@/components/layoutSections/GuideResults';
 import { GuideOutputProps } from '@/types/forms';
 import genStyles from "@/styles/generation.module.scss";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { getQuestionTemplate } from '@/templates/jobQuestions';
+import { getQuestionTemplate } from '@/components/HelperFunctions';
 import { useUserData } from '@/context/UserDataContext';
 
 type Generation = {

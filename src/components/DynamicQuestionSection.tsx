@@ -3,7 +3,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useUserData } from "@/context/UserDataContext";
 import QuestionForm from "@/templates/QuestionForm";
 import { handleUpload } from "@/hooks/useUploadHandler";
-import { getQuestionTemplate } from '@/templates/jobQuestions';
+import { getQuestionTemplate } from '@/components/HelperFunctions';
 import { SectionCounts, SectionKey } from "@/types/forms";
 
 interface DynamicQuestionSectionProps {

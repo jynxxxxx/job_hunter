@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserData } from '@/context/UserDataContext';
 import AuthCheck from '@/components/AuthCheck';
-import { getQuestionTemplate } from '@/templates/jobQuestions';
+import { getQuestionTemplate } from '@/components/HelperFunctions';
 import DynamicQuestionSection from '@/components/DynamicQuestionSection';
 import genStyles from "@/styles/generation.module.scss";
 import GuideResult from '@/components/layoutSections/GuideResults';
@@ -24,7 +24,41 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const job_id = jobURI.split('xY_')[0];
   const template = getQuestionTemplate(job_id);
   const sectionKeys = template
-    ? Object.keys(template).filter((k) => k.startsWith('q') && !k.includes('question'))
+    ? Object.keys(template)
+      .filter(k => k.startsWith("q") && !k.includes("question"))
+      .sort((a, b) => {
+        const keyA = a.startsWith('q') ? a.slice(1) : a;
+        const keyB = b.startsWith('q') ? b.slice(1) : b;
+
+        const isNumberA = /^\d+$/.test(keyA);
+        const isNumberB = /^\d+$/.test(keyB);
+        const isAlphaA = /^[a-zA-Z가-힣\s]+$/.test(keyA);
+        const isAlphaB = /^[a-zA-Z가-힣\s]+$/.test(keyB);
+
+        // Case 1: both alpha
+        if (isAlphaA && isAlphaB) {
+          return keyA.localeCompare(keyB, 'ko');
+        }
+
+        // Case 2: both numbers
+        if (isNumberA && isNumberB) {
+          return parseInt(keyA) - parseInt(keyB);
+        }
+
+        // Case 3: mixed alpha and number
+        if (isAlphaA && isNumberB) return -1; // alpha first
+        if (isNumberA && isAlphaB) return 1;  // alpha first
+
+        // Case 4: one or both symbols
+        if (isAlphaA) return -1;  // alpha before symbol
+        if (isAlphaB) return 1;
+
+        if (isNumberA) return -1; // number before symbol
+        if (isNumberB) return 1;
+
+        // Both symbols or unclassified, compare lex
+        return keyA.localeCompare(keyB, 'ko');
+      })
     : [];
   const [activeTab, setActiveTab] = useState(sectionKeys[0] || '');
   const [guide, setGuide] = useState<GuideOutputProps | null>(null);
@@ -35,11 +69,22 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const [running, setRunning] = useState(false);
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const job = jobList.find(job => job.job_id == job_id) || '해당 회사';
-  const paidCheck = userData?.hasPaid?.[job_id] === true;
-  const [userHasPaid, setUserHasPaid] = useState(paidCheck);
+  const [userHasPaid, setUserHasPaid] = useState(false);
   const tokens = userData?.tokens || 0;
   const [submitted, setSubmitted] = useState(false);
   const [openPaywall, setOpenPaywall] = useState(false);
+
+  useEffect(() => {
+    if (!activeTab && sectionKeys.length > 0) {
+      setActiveTab(sectionKeys[0]);
+    }
+  }, [sectionKeys, activeTab]);
+
+  useEffect(() => {
+    const paidCheck = userData?.hasPaid?.[job_id] === true;
+    setUserHasPaid(paidCheck)
+    console.log(paidCheck)
+  }, []);
 
   useEffect(() => {
     if (waiting && !running) {
