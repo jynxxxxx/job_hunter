@@ -54,23 +54,24 @@
   position: absolute;
   width: 100%;
   bottom: 0;
-  height: 15rem;
+  height: 12rem;
 }
 
 .title{
   text-align: left;
-  padding: 1rem 2rem;
+  padding: 0.75rem 2rem 0rem;
 }
 
 .logo {
   font-size: 1.8rem; 
   font-weight: 700;
   color: white;
+  padding-bottom: 0.5rem;
 }
 
 .tagline {
   font-family: monospace;
-  font-size: 0.8rem; 
+  font-size: 0.9rem; 
   color: #aec0d6; 
   display: flex;
   gap: 0.5rem
@@ -78,15 +79,14 @@
 
 .bottomSection {
   text-align: center;
-  font-size: 0.875rem; 
+  font-size: 0.8rem; 
   color: #b8c7db; 
-  padding-bottom: 1rem
 }
 
 @media (max-width: 640px) {
   .ctn{
     padding: 1.5rem 1.5rem 0;
-    height: 13rem;
+    height: 12rem;
   }
 
   .title{
@@ -97,9 +97,13 @@
 
   .tagline {
     font-family: monospace;
-    font-size: 0.7rem; 
+    font-size: 0.8rem; 
     color: #aec0d6; 
     display: flex;
     gap: 0.1rem
+  }
+
+  .bottomSection {
+    font-size: 0.7rem;
   }
 }
