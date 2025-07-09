@@ -39,6 +39,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const [userHasPaid, setUserHasPaid] = useState(paidCheck);
   const tokens = userData?.tokens || 0;
   const [submitted, setSubmitted] = useState(false);
+  const [openPaywall, setOpenPaywall] = useState(false);
 
   useEffect(() => {
     if (waiting && !running) {
@@ -173,6 +174,8 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                 setWaiting={setWaiting}
                 setRunning={setRunning}
                 running={running}
+                setOpenPaywall={setOpenPaywall}
+                userHasPaid = {userHasPaid}
               />
             )}
           </div>
@@ -230,7 +233,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
               </div>
           </div>
         </div>
-        {!userHasPaid && (
+        {!userHasPaid && openPaywall && (
           <>
             <div className={genStyles.paywallOverlay}></div>
             <div className={genStyles.paywallMessage}>

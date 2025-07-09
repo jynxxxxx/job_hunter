@@ -10,6 +10,8 @@ interface QuestionFormProps<T> {
   setForm: React.Dispatch<React.SetStateAction<T>>;
   draft: string;
   setDraft: (val: string) => void;
+  setOpenPaywall: (running: boolean) => void;
+  userHasPaid: boolean;
   disabled: boolean;
   onSubmit: (e: React.FormEvent) => void;
   jobLevel1?: string;
@@ -26,6 +28,8 @@ export default function QuestionForm<T>({
   setForm,
   draft,
   setDraft,
+  setOpenPaywall,
+  userHasPaid,
   disabled,
   onSubmit,
   jobLevel1,
@@ -248,7 +252,14 @@ export default function QuestionForm<T>({
           {step < totalSteps ? (
             <button
               type="button"
-              onClick={() => setStep(step + 1)}
+              onClick={() => {
+                if (!userHasPaid) {
+                  setOpenPaywall(true)
+                }
+                else {
+                  setStep(step + 1)
+                }
+              }}
               className="px-4 py-2 bg-bright text-white rounded ml-auto hover:scale-105"
             >
               다음
