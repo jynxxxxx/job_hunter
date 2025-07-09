@@ -5,6 +5,7 @@ import { useUserData } from "@/context/UserDataContext";
 import { useRouter } from "next/navigation";
 import { getQuestionTemplate } from '@/templates/jobQuestions';
 import RequestForm from "@/components/RequestForm";
+import { finished } from "@/templates/finished_Jobs";
 // Helper to generate a random 6-character string
 function randomId() {
   return Math.random().toString(36).substring(2, 8);
@@ -13,17 +14,34 @@ function randomId() {
 export default function Dashboard() {
   const { jobList } = useUserData();
   // Only companies with at least one job that has a question template
+
   const now = new Date();
-  
+  const activeJobs = jobList.filter(item => !item.endDate || new Date(item.endDate) >= now)
+  .sort((a, b) => {
+    const dateA = a.endDate ? new Date(a.endDate) : new Date('9999-12-31'); // Put jobs without endDate at the end
+    const dateB = b.endDate ? new Date(b.endDate) : new Date('9999-12-31');
+
+    if (dateA.getTime() !== dateB.getTime()) {
+      return dateA.getTime() - dateB.getTime(); // Soonest endDate first
+    }
+
+    const companyCompare = a.company.localeCompare(b.company);
+    if (companyCompare !== 0) return companyCompare;
+
+    return a.title.localeCompare(b.title);
+  });
+
+  const expiredJobs = [
+    ...jobList.filter(item => item.endDate && new Date(item.endDate) < now),
+    ...finished
+  ];
+
   const uniqueCompanies = Array.from(
     new Set(
-      jobList
+      activeJobs
         .filter(item => {
           const template = getQuestionTemplate(String(item.job_id));
           if (!template) return false;
-          // Filter out jobs past their endDate
-          if (item.endDate && now > new Date(item.endDate)) return false;
-          return true;
         })
         .map(item => item.company)
     )
@@ -121,18 +139,16 @@ export default function Dashboard() {
           지원 가능한 기업 및 직무
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">
-          {jobList.map((item, idx) => {
-            const now = new Date();
-            const isPastDeadline = item.endDate && now > new Date(item.endDate);
+          {activeJobs.map((item, idx) => {
             const template = getQuestionTemplate(String(item.job_id));
             const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
             const rand = randomId();
             return (
               <div
                 key={item.company + item.title + idx}
-                className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''} ${isPastDeadline ? 'opacity-50 grayscale pointer-events-none' : ''}`}
+                className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''}`}
                 onClick={() => {
-                  if (!isPastDeadline && !isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
+                  if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
                 }}
               >
                 {isComingSoon && (
@@ -146,14 +162,42 @@ export default function Dashboard() {
                   <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
                 )}
                 <button
-                  className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isPastDeadline || isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 ${isPastDeadline ? 'opacity-60 grayscale pointer-events-none' : ''}`}
+                  className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 `}
                   onClick={e => {
                     e.stopPropagation();
-                    if (!isPastDeadline && !isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
+                    if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
                   }}
-                  disabled={isPastDeadline || isComingSoon}
+                  disabled={isComingSoon}
                 >
-                  {isComingSoon ? '준비중' : isPastDeadline ? '마감됨' : '바로가기'}
+                  {isComingSoon ? '준비중' : '바로가기'}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+
+        <h1
+          className="mt-12 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
+        > 
+          마감된 기업 및 직무
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">
+          {expiredJobs.map((item, idx) => {
+            return (
+              <div
+                key={item.company + item.title + idx}
+                className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg opacity-50 grayscale pointer-events-none`}
+              >
+                <div className="text-lg font-bold text-dark">{item.company}</div>
+                <div className="text-md text-gray-700">{item.title}</div>
+                {item.startDate && (
+                  <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
+                )}
+                <button
+                  className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright opacity-60 grayscale pointer-events-none`}
+                  disabled
+                >
+                  마감됨
                 </button>
               </div>
             );
