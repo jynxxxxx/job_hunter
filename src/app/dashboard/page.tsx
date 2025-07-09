@@ -13,7 +13,7 @@ function randomId() {
 }
 
 export default function Dashboard() {
-  const { jobList } = useUserData();
+  const { jobList, jobTemplates } = useUserData();
   // Only companies with at least one job that has a question template
 
   const now = new Date();
@@ -42,8 +42,7 @@ export default function Dashboard() {
     new Set(
       activeJobs
         .filter(item => {
-          const template = getQuestionTemplate(String(item.job_id));
-          console.log("Template for job_id:", item.job_id, "is", template);
+          const template = getQuestionTemplate(String(item.job_id),jobTemplates);
           if (!template) return false;
           return true
         })
@@ -155,7 +154,7 @@ export default function Dashboard() {
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">
           {activeJobs.map((item, idx) => {
-            const template = getQuestionTemplate(String(item.job_id));
+            const template = getQuestionTemplate(String(item.job_id), jobTemplates);
             const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
             const rand = randomId();
             return (

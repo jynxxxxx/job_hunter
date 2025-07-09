@@ -34,9 +34,9 @@ const DynamicQuestionSection = ({
   userHasPaid
 }: DynamicQuestionSectionProps) => {
   const { authUser } = useAuth();
-  const { userData } = useUserData();
+  const { userData, jobTemplates } = useUserData();
 
-  const template = getQuestionTemplate(job_id);
+  const template = getQuestionTemplate(job_id, jobTemplates);
   const questions = template?.[section as keyof typeof template];
 
   const defaultForm: Record<string, string | string[]> = {};

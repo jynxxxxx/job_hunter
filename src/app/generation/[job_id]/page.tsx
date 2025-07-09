@@ -17,12 +17,12 @@ import { toast } from 'sonner';
 
 export default function GenerationDynamicPage({ params }: { params: Promise<{ job_id: string }> }) {
   const { authUser } = useAuth()
-  const { jobList, userData, setUserData, setActivePage } = useUserData();
+  const { jobList, jobTemplates, userData, setUserData, setActivePage } = useUserData();
   const { job_id: encodedJobId } = React.use(params);
   const router = useRouter();
   const jobURI = decodeURIComponent(encodedJobId);
   const job_id = jobURI.split('xY_')[0];
-  const template = getQuestionTemplate(job_id);
+  const template = getQuestionTemplate(job_id, jobTemplates);
   const sectionKeys = template
     ? Object.keys(template)
       .filter(k => k.startsWith("q") && !k.includes("question"))
@@ -83,7 +83,6 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   useEffect(() => {
     const paidCheck = userData?.hasPaid?.[job_id] === true;
     setUserHasPaid(paidCheck)
-    console.log(paidCheck)
   }, []);
 
   useEffect(() => {
