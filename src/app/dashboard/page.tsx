@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { getQuestionTemplate } from '@/templates/jobQuestions';
 import RequestForm from "@/components/RequestForm";
 import { finished } from "@/templates/finished_Jobs";
-import { unique } from "next/dist/build/utils";
+
 // Helper to generate a random 6-character string
 function randomId() {
   return Math.random().toString(36).substring(2, 8);
@@ -72,8 +72,7 @@ export default function Dashboard() {
     }
   };
   // Find the selected job object
-  const selectedJobObj = selectedJob
-  console.log(selectedJobObj, "selectedJobObj");
+  const selectedJobObj: any = selectedJob
 
   return (
     <div className="w-[80vw] mx-auto">
