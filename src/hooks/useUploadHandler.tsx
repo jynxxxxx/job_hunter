@@ -63,9 +63,9 @@ export async function handleUpload<T>({
 
   try {
     const userRef = doc(db, "users", authUser.uid);
-    const userSnap = await getDoc(userRef);
+    // const userSnap = await getDoc(userRef);
 
-    const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
+    // const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
 
     const jobId = String(job_id);
     // const jobHasPaid = hasPaidMap[jobId] === true;
