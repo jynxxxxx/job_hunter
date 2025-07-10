@@ -153,7 +153,7 @@ export default function Dashboard() {
       > 
         회사 및 직무 선택해주세요
       </h1>
-      <div className="flex flex-col lg:flex-row gap-4 lg:px-4 w-[100%] lg:w-[80%] lg:items-center mt-4">
+      <div className="flex flex-col lg:flex-row gap-4 w-[100%] lg:w-[80%] lg:items-center mt-4">
         <div className="w-full lg:w-1/2">
           <select
             value={selectedCompany || ""}
@@ -201,11 +201,6 @@ export default function Dashboard() {
 
 
       <div>
-        <h1
-          className="mt-12 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
-        > 
-          지원 가능한 기업 및 직무
-        </h1>
         <div className="my-8 space-y-4">
           {companyChunks.map((chunk, chunkIndex) => (
             <div key={chunkIndex} className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 items-stretch`}>
