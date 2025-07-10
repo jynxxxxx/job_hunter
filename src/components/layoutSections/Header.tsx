@@ -116,7 +116,7 @@ const Header = () => {
                 >
                   <span>내 자기소개서</span>
                 </div>
-                <div
+                {/* <div
                   onClick={() => {
                     if (pathname !== '/tokens') {
                       router.push('/tokens');
@@ -128,10 +128,10 @@ const Header = () => {
                   }`}
                 >
                   <span>토큰 충전</span>
-                </div>
-                <div className='text-[1rem] lg:text-[1.2rem] pr-[5rem] absolute top-4 right-2 text-bright'> 
+                </div> */}
+                {/* <div className='text-[1rem] lg:text-[1.2rem] pr-[5rem] absolute top-4 right-2 text-bright'> 
                   토큰수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
-                </div>
+                </div> */}
                 <div 
                   className="z-[1000] pr-[1rem] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" 
                   ref={dropdownRef}  
