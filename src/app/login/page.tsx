@@ -22,7 +22,6 @@ export default function AuthForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checked, setChecked] = useState(false);
   const [mode, setMode] = useState<'signup' | 'login'>('login');
 
 
@@ -48,10 +47,6 @@ export default function AuthForm() {
 
   const emailSignup = async () => {
     try {
-      if (!checked) {
-        toast.error('개인정보 수집 및 이용에 동의해 주세요.');
-        return
-      }
       if (!name) {
         toast.error('성함을 입력해 주세요.');
         return

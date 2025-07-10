@@ -11,7 +11,7 @@ import headerStyles from "@/styles/layout.module.scss";
 import PrivacyAgreementModal from './PrivacyConsent';
 
 const Header = () => {
-  const { userData, activePage, setActivePage } = useUserData()
+  const { activePage, setActivePage } = useUserData()
   const router = useRouter();
   const pathname = usePathname();
   const { setJustSignedOut } = useAuth();
