@@ -63,7 +63,7 @@ export default function KakaoCallback() {
   }, [searchParams, router, error]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-[70vh] bg-gray-100">
       <div className="p-8 pb-16 bg-white rounded-lg shadow-md text-center">
         <h1 className="text-2xl font-bold mb-4">로그인 중입니다</h1>
         <DotSpinner />

@@ -25,12 +25,12 @@ export function KakaoLoginButton() {
   return (
     <button
       onClick={handleLogin}
-      className="w-full flex items-center justify-center"
+      className="h-10 bg-[#FEE523] overflow-hidden mx-auto flex gap-2 justify-center items-center w-4/5 mb-4 text-dark border border-dark rounded-3xl hover:scale-103 transform transition-transform duration-200"
     >
       <img
         src="/kakao_login.png"
         alt="바로지원"
-        className='h-[3rem] sm:h-[4rem] w-auto hover:brightness-90 hover:scale-103 transition duration-300"'
+        className='object-cover object-center sm:h-[3.5rem] w-auto'
       />
     </button>
   );
