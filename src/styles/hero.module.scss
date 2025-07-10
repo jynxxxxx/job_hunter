@@ -58,8 +58,8 @@
   z-index: 200; 
   height: fit-content;
   border-radius: 3rem;
-  background-color: white;
-  opacity: 100%
+  display: flex;
+  justify-content: center;
 }
 
 .herobtn{
@@ -99,9 +99,9 @@
     font-size: 2.5rem;
     padding: 0 1rem 0;
     
-    &::after {
-      background-image: url('/herosm.png');
-    }
+    // &::after {
+    //   background-image: url('/herosm.png');
+    // }
   }
 
   .title {
@@ -114,7 +114,7 @@
 
   .btnctn{
     bottom: 3rem;
-    min-width: fit-content;
+    width: 100%
   }
 
   .herobtn {
@@ -131,7 +131,12 @@
   .subtext {
     font-size: 1.5rem;
   }
-  
+
+  .btnctn{
+    bottom: 3rem;
+    width: 100%
+  }
+
   .herobtn {
     padding: 0.6rem 4rem;
     font-size: 0.9rem;
