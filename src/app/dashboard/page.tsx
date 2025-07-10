@@ -145,7 +145,7 @@ export default function Dashboard() {
           AI로 돋보이는 자기소개서를 작성하세요
         </h1>
         <h2 className="pt-4 text-bright text-lg md:text-2xl font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-          지원하는 회사와 직무에 맞춰 당신의 강점과 경험을 돋보이게 하는 맞춤형 자기소개서를 생성하세요.
+          삼성-SK 하이닉스 인사팀 출신 전문가와 AI연구원이 만든 서비스로 기업 맞춤형 자기소개서가 완성됩니다
         </h2>
       </div>
       <h1
