@@ -118,7 +118,7 @@ export default function Dashboard() {
 
   return (
     <div className="w-[80vw] mx-auto">
-      <div className="">
+      {/* <div className="">
         <div
           className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
           style={{
@@ -137,6 +137,16 @@ export default function Dashboard() {
             </h2>
           </div>
         </div>
+      </div> */}
+      <div className="flex flex-col gap-2 pt-8 pb-4 text-center">
+        <h1
+          className="text-bright mt-8 text-3xl md:text-5xl leading-tight tracking-[-0.033em] font-extrabold"
+        > 
+          AI로 돋보이는 자기소개서를 작성하세요
+        </h1>
+        <h2 className="pt-4 text-bright text-lg md:text-2xl font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+          지원하는 회사와 직무에 맞춰 당신의 강점과 경험을 돋보이게 하는 맞춤형 자기소개서를 생성하세요.
+        </h2>
       </div>
       <h1
         className="mt-8 text-4xl leading-tight tracking-[-0.033em] font-extrabold"
@@ -182,7 +192,8 @@ export default function Dashboard() {
               router.push(`/generation/${selectedJobObj.job_id}xY_${rand}`);
             }
           }}
-          className="min-w-[fit-content] px-5 py-2 bg-primary text-bold rounded-2xl hover:bg-primary/80 hover:scale-103 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="min-w-[fit-content] text-md px-5 py-2 bg-primary rounded-2xl hover:bg-primary/80 hover:scale-103 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-extrabold"
+          style={{fontSize: "1.3rem"}}
         >
           자기소개서 생성하기
         </button>

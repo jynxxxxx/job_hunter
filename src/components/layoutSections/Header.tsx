@@ -97,7 +97,7 @@ const Header = () => {
                     }
                     setActivePage("generation");
                   }}
-                  className={`px-2 md:px-6 py-2 cursor-pointer ${
+                  className={`text-[1rem] lg:text-[1.2rem] px-2 md:px-6 py-2 cursor-pointer ${
                     activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -110,7 +110,7 @@ const Header = () => {
                     }
                     setActivePage("history")
                   }}
-                  className={`px-2 md:px-6 py-2 cursor-pointer ${
+                  className={`text-[1rem] lg:text-[1.2rem] px-2 md:px-6 py-2 cursor-pointer ${
                     activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -123,13 +123,13 @@ const Header = () => {
                     }
                     setActivePage("tokens")
                   }}
-                  className={`px-2 md:px-6 py-2 cursor-pointer ${
+                  className={`text-[1rem] lg:text-[1.2rem] px-2 md:px-6 py-2 cursor-pointer ${
                     activePage === 'tokens' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
                   <span>토큰 충전</span>
                 </div>
-                <div className='pr-[5rem] absolute top-4 right-2 text-bright'> 
+                <div className='text-[1rem] lg:text-[1.2rem] pr-[5rem] absolute top-4 right-2 text-bright'> 
                   토큰수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
                 </div>
                 <div 
