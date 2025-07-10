@@ -25,15 +25,16 @@ const HeroSection = () => {
         <p className={heroStyles.subtext}>
           1000건의 합격자소서로 학습된 AI 기술로 만드는 나를 담은 자기소개서
         </p>
-      </section>
-      <div className={heroStyles.btnctn}>
         <button
           className={heroStyles.herobtn}
           onClick={handleStart}
         >
           AI 자기소개서 생성하기→
         </button>
-        </div>
+      </section>
+      {/* <div className={heroStyles.btnctn}> */}
+
+        {/* </div> */}
     </>
   );
 };

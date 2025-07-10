@@ -82,7 +82,7 @@ const Header = () => {
             {pathname === '/' && !isAuthenticated && (
               <div
                 onClick={handleLoginClick}
-                className="ml-auto text-aligntext-[1rem] md:text-[1.3rem] pr-[1rem] font-semibold hover:underline cursor-pointer md:mr-[1rem]"
+                className="ml-auto text-aligntext-[1rem] md:text-[1.5rem] pr-[1rem] font-semibold hover:underline cursor-pointer md:mr-[1rem]"
               >
                 로그인
               </div>

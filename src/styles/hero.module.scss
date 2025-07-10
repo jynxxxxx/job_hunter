@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  padding: 4rem 6rem;
+  padding: 15rem 6rem 4rem;
   color: $dark;
 
   background: linear-gradient(
@@ -75,6 +75,7 @@
   font-weight: bold;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
   opacity: 100%;
+  margin: 7rem auto 0;
 
   &:hover {
     transform: scale(1.03);
