@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "sonner";
 import { db } from "@/lib/firebase";
 import { generateEssay, generateOutline } from "@/app/api/generate";
