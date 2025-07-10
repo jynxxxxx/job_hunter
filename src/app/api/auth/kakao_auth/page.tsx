@@ -11,7 +11,6 @@ import { DotSpinner } from '@/components/layoutSections/DotSpinner';
 export default function KakaoCallback() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [message, setMessage] = useState('Authenticating with Kakao...');
   const [error, setError] = useState('');
 
   useEffect(() => {
