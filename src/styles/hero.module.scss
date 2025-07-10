@@ -9,7 +9,7 @@
   align-items: center;
   overflow: hidden;
   text-align: center;
-  padding: 4rem 4rem 0;
+  padding: 4rem;
   color: $dark;
 
   background: linear-gradient(
@@ -22,18 +22,18 @@
   overflow: hidden;
   opacity: 0.95;
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url('/herolg.png');
-    background-size: auto;
-    background-position: top center;
-    background-repeat: no-repeat;
-    opacity: 0.5;
-    z-index: 0;
-    overflow: hidden;
-  }
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   inset: 0;
+  //   background-image: url('/herolg.png');
+  //   background-size: auto;
+  //   background-position: top center;
+  //   background-repeat: no-repeat;
+  //   opacity: 0.5;
+  //   z-index: 0;
+  //   overflow: hidden;
+  // }
 }
 
 .title {
@@ -50,20 +50,31 @@
   padding-top: 2rem;
 }
 
+.btnctn {
+  position: fixed;
+  bottom: 7.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200; 
+  height: fit-content;
+  border-radius: 3rem;
+  background-color: white;
+  opacity: 100%
+}
 
 .herobtn{
-  z-index: 5;
+  z-index: 200;
   width: fit-content;
-  margin: 3rem 0 0;
-  padding: 0.8rem 4rem;
-  font-size: 1.2rem;
-  background-color: $dark;
+  padding: 0.8rem 6rem;
+  font-size: 2rem;
+  background-color: $bright;
   color: white;
   border-radius: 3rem;
   border: none;
   cursor: pointer;
   font-weight: bold;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  opacity: 100%;
 
   &:hover {
     transform: scale(1.03);
@@ -101,9 +112,14 @@
     font-size: 1.5rem;
   }
 
+  .btnctn{
+    bottom: 3rem;
+    min-width: fit-content;
+  }
+
   .herobtn {
     padding: 0.5rem 3rem;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
   }
 }
 

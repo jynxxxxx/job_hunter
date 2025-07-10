@@ -1,13 +1,40 @@
+"use client"
+
+import styles from "@/styles/layout.module.scss";
+import { useState, useEffect } from "react";
 
 const ApplicationPosting = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  // useEffect(() => {
+  //   // Check local storage on component mount
+  //   const dismissed = localStorage.getItem('announcementDismissed');
+  //   if (dismissed !== 'true') {
+  //     setIsVisible(true); // Show banner if not dismissed
+  //   }
+  // }, []); // Empty dependency array means this runs once on mount
+
+  const handleDismiss = () => {
+    setIsVisible(false); // Hide the banner
+    // localStorage.setItem('announcementDismissed', 'true'); // Store dismissal state
+  };
+
+  if (!isVisible) {
+    return null; // Don't render anything if not visible
+  }
+
   return (
-    <>
-      <p className="flex flex-col gap-4 text-md z-10 dont-bold text-white text-center bg-bright py-4 px-8 sm:rounded-4xl w-[fit-content] sm:text-xl sm:mx-auto md:text-3xl">
-        <div>현재 <strong>포스코스틸리온 대졸 신입</strong>(7/3 - 7/12) 전용 AI 자기소개서 서비스 시작</div> 
-        <div>현재 <strong>SK하이닉스 신입 수시채용</strong>(7/7 - 7/16) 전용 AI 자기소개서 서비스 시작</div>
-        <div>현재 <strong>LG에너지솔루션 신입사원 수시채용</strong>(7/4 - 7/14) 전용 AI 자기소개서 서비스 시작</div>   
+    <div className={styles.announcementBanner}>
+      <p>
+        현재 <strong className={styles.strongText}>포스코스틸리온, SK하이닉스, LG에너지솔루션</strong> 신입사원 수시채용 전용 AI 자기소개서 서비스 시작
       </p>
-    </>
+      <a href="/dashboard" className={styles.ctaButton}>
+        자세히 알아보기
+      </a>
+      <button className={styles.dismissButton} onClick={handleDismiss}>
+        &times;
+      </button>
+    </div>
   );
 };
 

@@ -60,7 +60,7 @@ const Header = () => {
   return (
     <div 
       className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 h-[6rem] sm:h-[4rem] font-bold text-dark flex flex-col sm:items-center sm:flex-row`}
-      style={{ zIndex: 100 }}
+      style={{ zIndex: 1000 }}
     >
       <div 
         className="pt-4 px-6 md:px-[2.5rem] sm:pt-0 cursor-pointer" 
@@ -132,10 +132,17 @@ const Header = () => {
                 <div className='pr-[5rem] absolute top-4 right-2 text-bright'> 
                   토큰수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
                 </div>
-                <div className="pr-[1rem] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" ref={dropdownRef}  onClick={() => setIsDropdownOpen(prev => !prev)}>
+                <div 
+                  className="z-[1000] pr-[1rem] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" 
+                  ref={dropdownRef}  
+                  onClick={() => setIsDropdownOpen(prev => !prev)}
+                >
                   <CircleUserRound size={28} className="hover:scale-110"/>
                   {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">
+                    <div 
+                      className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg"
+                      style={{zIndex: '1000'}}
+                    >
                       <div
                         onClick={handleLogoutClick}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"

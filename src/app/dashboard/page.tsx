@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useUserData } from "@/context/UserDataContext";
 import { useRouter } from "next/navigation";
 import { getQuestionTemplate } from '@/components/HelperFunctions';
@@ -12,9 +12,37 @@ function randomId() {
   return Math.random().toString(36).substring(2, 8);
 }
 
+const imageMap: { [key: string]: string } = {
+  "포스코스틸리온": "/company_logos/posco.svg",
+  "LG에너지솔루션": "/company_logos/lg_logo.png",
+  "SK하이닉스": "/company_logos/sk_hynix.png",
+}
+
 export default function Dashboard() {
   const { jobList, jobTemplates } = useUserData();
   const [openCompany, setOpenCompany] = useState<string|null>(null);
+  const [columns, setColumns] = useState(3); // default to desktop
+  const router = useRouter();
+  const [selectedCompany, setSelectedCompany] = useState("");
+  const [initialized, setInitialized] = useState(false);
+  const jobOptions = jobList.filter(item => item.company === selectedCompany);
+
+  const [selectedJob, setSelectedJob] = useState("");
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth < 640) {
+        setColumns(1); // sm
+      } else if (window.innerWidth < 770) {
+        setColumns(2); // md
+      } else {
+        setColumns(3); // lg and up
+      }
+    };
+
+    updateColumns();
+    window.addEventListener('resize', updateColumns);
+    return () => window.removeEventListener('resize', updateColumns);
+  }, []);
 
   // Only companies with at least one job that has a question template
   const now = new Date();
@@ -44,6 +72,21 @@ export default function Dashboard() {
     return acc;
   }, {});
 
+  useEffect(() => {
+    if (!initialized && Object.keys(groupedByCompany).length > 0) {
+      setOpenCompany(Object.keys(groupedByCompany)[0]);
+      setInitialized(true); // Prevent future auto-setting
+    }
+  }, [groupedByCompany, initialized]);
+
+  function chunkArray<T>(arr: T[], size: number): T[][] {
+    return arr.reduce((acc, _, i) => {
+      return i % size === 0 ? [...acc, arr.slice(i, i + size)] : acc;
+    }, [] as T[][]);
+  }
+
+  const companyChunks = chunkArray(Object.entries(groupedByCompany), columns);
+
   const uniqueCompanies = Array.from(
     new Set(
       activeJobs
@@ -55,12 +98,6 @@ export default function Dashboard() {
         .map(item => item.company)
     )
   );
-
-  const router = useRouter();
-  const [selectedCompany, setSelectedCompany] = useState("");
-  const jobOptions = jobList.filter(item => item.company === selectedCompany);
-
-  const [selectedJob, setSelectedJob] = useState("");
 
   // Update job options when company changes
   const handleCompanyChange = (e: any) => {
@@ -159,57 +196,69 @@ export default function Dashboard() {
           지원 가능한 기업 및 직무
         </h1>
         <div className="my-8 space-y-4">
-          {Object.entries(groupedByCompany).map(([company, jobs]) => (
-            <div key={company} className="rounded-xl shadow">
-              <button
-                onClick={() => setOpenCompany(openCompany === company ? null : company)}
-                className="border rounded-xl w-full text-left p-4 bg-gray-100 font-semibold text-lg flex justify-between items-center"
-              >
-                {company}
-                <span>{openCompany === company ? '▲' : '▼'}</span>
-              </button>
-              <div
-                className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ${genStyles.jobBoard} ${
-                  openCompany === company ? genStyles.open : ''
-                }`}
-              >
-                {openCompany === company && (
-                  jobs.map((item:any, idx:any) => {
-                    const template = getQuestionTemplate(String(item.job_id), jobTemplates);
-                    const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
-                    const rand = randomId();
-                    return (
-                      <div
-                        key={item.company + item.title + idx}
-                        className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''}`}
-                        onClick={() => {
-                          if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
-                        }}
-                      >
-                        {isComingSoon && (
-                          <div className="absolute top-0 right-0 bg-bright text-white text-s font-bold px-4 py-1 rounded-tr-xl rounded-bl-xl z-10">
-                            곧 출시됩니다
-                          </div>
-                        )}
-                        <div className="text-lg font-bold text-dark">{item.company}</div>
-                        <div className="text-md text-gray-700">{item.title}</div>
-                        <div className="text-md font-medium text-gray-700">{item.position}</div>
-                        {item.startDate && (
-                          <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
-                        )}
-                        <button
-                          className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 `}
-                          onClick={e => {
-                            e.stopPropagation();
+          {companyChunks.map((chunk, chunkIndex) => (
+            <div key={chunkIndex} className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 items-stretch`}>
+              {chunk.map(([company]) => {
+                const companyImageSrc = imageMap[company as keyof typeof imageMap];
+
+                return (
+                  <div key={company} className="rounded-xl shadow h-full items-stretch">
+                    <button
+                      onClick={() => setOpenCompany(openCompany === company ? null : company)}
+                      className={`rounded-xl shadow logo relative border rounded-xl w-full h-full hover:scale-103 text-left p-4 font-semibold text-lg flex flex-col gap-4 justify-center items-center ${openCompany === company ? 'bg-gray-200 scale-103' : "bg-gray-100 "}`}
+                    >
+                      {companyImageSrc && (
+                        <img
+                          src={companyImageSrc}
+                          alt={`${company} logo`}
+                          className="h-[10rem] lg:h-[13rem] w-4/5 object-contain pt-4 pb-12" 
+                        />
+                      )}
+                      <span className="absolute bottom-4">{openCompany === company ? '▲' : '▼'}</span>
+                    </button>
+                  </div>
+                )
+              })}
+              <div className={`col-span-full w-full bg-white border-t border-gray-300 p-6 shadow-inner ${genStyles.jobBoard} ${openCompany ? genStyles.open : ""}`}>
+                {chunk.some(([c]) => c === openCompany) && openCompany && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {groupedByCompany[openCompany].map((item: any, idx: any) => {
+                      const template = getQuestionTemplate(String(item.job_id), jobTemplates);
+                      const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
+                      const rand = randomId();
+                      return (
+                        <div
+                          key={item.company + item.title + idx}
+                          className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''}`}
+                          onClick={() => {
                             if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
                           }}
-                          disabled={isComingSoon}
                         >
-                          {isComingSoon ? '준비중' : '바로가기'}
-                        </button>
-                      </div>
-                    );
-                  })
+                          {isComingSoon && (
+                            <div className="absolute top-0 right-0 bg-bright text-white text-s font-bold px-4 py-1 rounded-tr-xl rounded-bl-xl z-10">
+                              곧 출시됩니다
+                            </div>
+                          )}
+                          <div className="text-lg font-bold text-dark">{item.company}</div>
+                          <div className="text-md text-gray-700">{item.title}</div>
+                          <div className="text-md font-medium text-gray-700">{item.position}</div>
+                          {item.startDate && (
+                            <div className="text-xs text-gray-500">{item.startDate} - {item.endDate}</div>
+                          )}
+                          <button
+                            className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 `}
+                            onClick={e => {
+                              e.stopPropagation();
+                              if (!isComingSoon) router.push(`/generation/${item.job_id}xY_${rand}`)
+                            }}
+                            disabled={isComingSoon}
+                          >
+                            {isComingSoon ? '준비중' : '바로가기'}
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
             </div>

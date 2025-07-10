@@ -12,9 +12,9 @@ const Effects = () => {
     },
     {
       img: '/icons/heart.svg',
-      title: '답장률 3배 증가',
+      title: '자소서 완성도 극대화',
       description:
-        '기업 가치에 딱 맞는 자기소개서로 더 많은 관심을 받으세요.',
+        '기업과 직무에 딱 맞춘 자기소개서로 강점을 전달하세요.',
     },
     {
       img: '/icons/cycle.svg',

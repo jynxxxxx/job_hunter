@@ -39,8 +39,8 @@ export default function RequestForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-4 w-80% my-4">
-      <div className='w-1/4'>
+    <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 w-full lg:w-[65%] my-4">
+      <div className='w-full md:w-1/2'>
         <label htmlFor="companyName" className="block font-semibold mb-1">
           회사명
         </label>
@@ -55,7 +55,7 @@ export default function RequestForm() {
           disabled={loading}
         />
       </div>
-      <div className='w-1/4'>
+      <div className='w-full md:w-1/2'>
         <label htmlFor="jobTitle" className="block font-semibold mb-1">
           공고명
         </label>
@@ -73,7 +73,7 @@ export default function RequestForm() {
       <button
         type="submit"
         disabled={loading}
-        className="mt-auto w-fit h-fit bg-bright text-white font-semibold py-2 px-4 rounded hover:bg-dark disabled:opacity-50"
+        className=" ml-auto mt-auto min-w-fit h-fit bg-bright text-white font-semibold py-2 px-4 rounded hover:bg-dark disabled:opacity-50"
       >
         {loading ? '요청 중...' : '요청 하기'}
       </button>

@@ -242,8 +242,9 @@
 .jobBoard.open {
   max-height: 300vh; /* A large fixed value, adjust as needed */
   opacity: 1;
-  padding: 1rem; /* p-4 */
+  padding: 2rem; /* p-4 */
   margin-bottom: 3rem;
+  background-color: $primary
 }
 
 @keyframes dots {

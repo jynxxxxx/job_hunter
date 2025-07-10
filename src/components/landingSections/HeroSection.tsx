@@ -20,20 +20,23 @@ const HeroSection = () => {
     <>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
-          취업 준비 스트레스, 
-          <br />바로지원으로 한 번에 해결하세요.
+          취업 준비는 전략이다.
         </div>
         <p className={heroStyles.subtext}>
-          취업 준비생부터 경력 구직자까지, 모두를 위한 맞춤형 AI 도우미.
+          인사 전문가와 AI 연구원이 설계한 맞춤형 자소서로 경쟁력을 높이세요.
         </p>
-
+        <p className={heroStyles.subtext}>
+          지원 공고별 맞춤 자소서 생성과 작성 가이드, 면접관 관점의 코멘트까지!
+        </p>
+      </section>
+      <div className={heroStyles.btnctn}>
         <button
           className={heroStyles.herobtn}
           onClick={handleStart}
         >
-          시작하기 →
+          AI 자기소개서 생성하기→
         </button>
-      </section>
+        </div>
     </>
   );
 };
