@@ -28,9 +28,9 @@ export default function QuestionForm<T>({
   setForm,
   draft,
   setDraft,
-  setOpenPaywall,
-  userHasPaid,
-  disabled,
+  // setOpenPaywall,
+  // userHasPaid,
+  // disabled,
   onSubmit,
   jobLevel1,
   setJobLevel1,
@@ -253,19 +253,20 @@ export default function QuestionForm<T>({
             <button
               type="button"
               onClick={() => {
-                if (!userHasPaid) {
-                  setOpenPaywall(true)
-                }
-                else {
+                // if (!userHasPaid) {
+                //   setOpenPaywall(true)
+                // }
+                // else {
                   setStep(step + 1)
-                }
+                // }
               }}
               className="px-4 py-2 bg-bright text-white rounded ml-auto hover:scale-105"
             >
               다음
             </button>
           ) : (
-            <button className={genStyles.btn} type="submit" disabled={disabled}>
+            // <button className={genStyles.btn} type="submit" disabled={disabled}>
+            <button className={genStyles.btn} type="submit" >
               나만의 자기소개서/
               <br />
               가이드 작성하기

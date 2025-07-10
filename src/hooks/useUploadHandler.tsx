@@ -68,13 +68,13 @@ export async function handleUpload<T>({
     const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
 
     const jobId = String(job_id);
-    const jobHasPaid = hasPaidMap[jobId] === true;
+    // const jobHasPaid = hasPaidMap[jobId] === true;
 
-    if (!jobHasPaid) {
-      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-      setWaiting(false);
-      return;
-    }
+    // if (!jobHasPaid) {
+    //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+    //   setWaiting(false);
+    //   return;
+    // }
 
     // Build answers object from form fields "1_choice", "1_free", ..., "10_choice", "10_free"
     const answers: Record<string, { multiple_choice: string[]; free_text: string }> = {};
