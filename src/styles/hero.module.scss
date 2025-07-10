@@ -6,10 +6,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   overflow: hidden;
-  text-align: center;
-  padding: 4rem;
+  padding: 4rem 6rem;
   color: $dark;
 
   background: linear-gradient(
@@ -17,7 +15,7 @@
     #b3d8f3 0%,
     $primary 40%,
     $primary 70%,
-    #ffffff 100%
+    $light 100%
   );
   overflow: hidden;
   opacity: 0.95;
@@ -41,6 +39,7 @@
   font-size: 4rem;
   font-weight: bolder;
   padding-top: 2rem;
+  text-align: start;
 }
 
 .subtext {
@@ -48,6 +47,7 @@
   font-size: 2rem;
   font-weight: normal;
   padding-top: 2rem;
+  text-align: start;
 }
 
 .btnctn {

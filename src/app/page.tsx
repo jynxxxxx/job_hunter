@@ -15,9 +15,9 @@ export default function Home() {
     <>
       <HeroSection />
       <ApplicationPosting />
-      <Features />
-      <Testimonials />
       <Effects />
+      <Testimonials />
+      <Features />
     </>
   )
 }

@@ -9,8 +9,8 @@ const features = [
     color: "blue"
   },
   {
-    icon: Target,
-    title: "지원서 추적기",
+    icon: PenTool,
+    title: "AI 기반 자기소개서 작성",
     description: "모든 지원 현황과 마감일을 한눈에 관리하세요. 이제 놓치는 기회란 없습니다.",
     color: "green"
   },
@@ -27,14 +27,14 @@ const features = [
     color: "orange"
   },
   {
-    icon: PenTool,
-    title: "AI 기반 자기소개서 생성",
+    icon: Target,
+    title: "나만을  Career Path추천",
     description: "기업의 가치와 나의 경험을 결합한 맞춤형 자기소개서 문장을 AI가 작성해줍니다.",
     color: "pink"
   },
   {
     icon: Zap,
-    title: "자동 지원서 작성 기능",
+    title: "AI기반 모의 면접 서비스",
     description: "반복적인 개인정보 입력은 그만! 원클릭으로 지원서를 자동 완성하세요.",
     color: "indigo"
   }

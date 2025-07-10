@@ -20,13 +20,10 @@ const HeroSection = () => {
     <>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
-          취업 준비는 전략이다.
+          바로지원과 함께 <br />나만의 자기소개서를 완성해요
         </div>
         <p className={heroStyles.subtext}>
-          인사 전문가와 AI 연구원이 설계한 맞춤형 자소서로 경쟁력을 높이세요.
-        </p>
-        <p className={heroStyles.subtext}>
-          지원 공고별 맞춤 자소서 생성과 작성 가이드, 면접관 관점의 코멘트까지!
+          1000건의 합격자소서로 학습된 AI 기술로 만드는 나를 담은 자기소개서
         </p>
       </section>
       <div className={heroStyles.btnctn}>
