@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "@/styles/layout.module.scss";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const ApplicationPosting = () => {
   const [isVisible, setIsVisible] = useState(true);
