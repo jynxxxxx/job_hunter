@@ -30,7 +30,7 @@ export function KakaoLoginButton() {
       <img
         src="/kakao_login.png"
         alt="바로지원"
-        className='object-cover object-center sm:h-[3.5rem] w-auto'
+        className='object-cover object-center h-[3rem] sm:h-[3.5rem] w-auto'
       />
     </button>
   );
