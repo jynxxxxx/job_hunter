@@ -11,7 +11,6 @@ import {
 import { KakaoLoginButton } from '@/components/layoutSections/KakaoLoginButton';
 import { ensureUserProfile } from '@/components/HelperFunctions';
 import { toast } from 'sonner'; 
-import { DotSpinner } from '@/components/layoutSections/DotSpinner';
 
 export default function AuthForm() {
   const router = useRouter();
