@@ -17,7 +17,7 @@ import Paywall from '@/components/Paywall';
 
 export default function GenerationDynamicPage({ params }: { params: Promise<{ job_id: string }> }) {
   const { authUser } = useAuth()
-  const { jobList, jobTemplates, userData, refetchUserData, setActivePage } = useUserData();
+  const { jobList, jobTemplates, userData, setActivePage } = useUserData();
   const { job_id: encodedJobId } = React.use(params);
   const router = useRouter();
   const jobURI = decodeURIComponent(encodedJobId);
