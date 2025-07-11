@@ -24,11 +24,11 @@ const HeroSection = () => {
           <div className="h-px sm:hidden"><br/></div>
           완성하세요
         </div>
-        <p className={heroStyles.subtext}>
+        <div className={heroStyles.subtext}>
           1000건의 합격자소서로 학습된 
           <div className="h-px sm:hidden"><br/></div>
           AI 기술로 만드는 나를 담은 자기소개서
-        </p>
+        </div>
         <button
           className={heroStyles.herobtn}
           onClick={handleStart}

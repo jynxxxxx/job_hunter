@@ -271,7 +271,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
         )}
         {!userHasPaid && guide && !running && ( 
           <div className='bg-primary py-8'>
-            <div className='w-1/2 mx-auto text-center'>
+            <div className='w-[90vw] sm:w-1/2 mx-auto text-center'>
               <Paywall />
             </div>
           </div>

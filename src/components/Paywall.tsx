@@ -5,7 +5,7 @@ export default function Paywall() {
         <div className='font-extrabold text-center pb-4 text-xl'>직접 작성하기 어려우신가요?</div>
         <div className='flex justify-around gap-6'>
           <div className='flex flex-col justify-center gap-2'>
-            <p>
+            <div>
               <strong>삼성- SK하이닉스 출신 <div className="h-px sm:hidden"><br/></div>인사팀 전문가들이 직접!</strong><br /><br />
               <div className="text-left sm:text-center"> 3,000건의 합격 자기소개서와 오직 채용 담당자만이 쌓아온 노하우를 결합한 AI 서비스입니다.<br />
               바로지원으로 서류 합격률을 높이는 자기소개서를 작성하세요.
@@ -20,9 +20,9 @@ export default function Paywall() {
                 <div className="w-fit my-auto">※</div>
                 <div className='text-left text-gray-600'>실제 면접에서 핵심 질문은 5개로, 지원 기업의 최근 트렌드 정보를 반영한 질문 + 답변 세트를 제공해드립니다.</div>
               </div>
-            </p>
+            </div>
 
-            <p>
+            <div>
             <strong>서비스 신청 방안</strong><br />
             <div className='flex flex-col w-[fit-content] text-left mx-auto items-start'>
                 <div>① 하단 계좌번호 또는 카카오페이로 입금합니다</div>
@@ -30,7 +30,7 @@ export default function Paywall() {
                 <div className="mx-auto text-center">[입금자명 / 이메일 주소 / 회사명 / 지원 직무명]</div>
                 <div>③ 바로지원 팀에서 입금 결과를 확인 후, 30분 내로 모든 문항을 풀어줍니다.</div>
               </div>
-            </p>
+            </div>
             <div className='mx-auto w-full sm:w-3/5 flex items-center justify-around'>
               <img
                 src="/qr.png"

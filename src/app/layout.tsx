@@ -7,6 +7,7 @@ import { UserDataProvider } from '@/context/UserDataContext';
 import Footer from "@/components/layoutSections/Footer";
 import Script from 'next/script';
 import { Analytics } from "@vercel/analytics/next"
+import { ScrollToTopOnRouteChange } from "@/components/layoutSections/ScollToTop";
 
 export const metadata: Metadata = {
   title: "바로지원",
@@ -45,6 +46,7 @@ export default function RootLayout({
             <div className="min-h-screen relative">
               <Header />
                 <div className="pt-[6rem] sm:pt-[4rem] pb-[13rem] sm:pb-[12rem]">
+                  <ScrollToTopOnRouteChange />
                   {children}
                   <Analytics />
                 </div>

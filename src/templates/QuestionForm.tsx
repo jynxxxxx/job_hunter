@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import genStyles from "@/styles/generation.module.scss";
 import { JobOptions, Question } from "@/types/forms";
 
@@ -39,6 +39,7 @@ export default function QuestionForm<T>({
   const [step, setStep] = useState(0);
   const totalSteps = questions.length;
   const currentQuestion = questions[step];
+  const nextQuestionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (step === totalSteps) {
@@ -53,6 +54,27 @@ export default function QuestionForm<T>({
     }
   }, [step, totalSteps])
 
+  useEffect(() => {
+    if (!nextQuestionRef.current || step === 0) return;
+
+    const element = nextQuestionRef.current;
+
+    // Delay is necessary to allow layout/render to finish
+    const timeout = setTimeout(() => {
+      const rect = element.getBoundingClientRect();
+      const scrollY = window.scrollY;
+      const elementCenter = rect.top + scrollY + rect.height / 2;
+      const screenCenter = window.innerHeight / 2;
+      const scrollTo = elementCenter - screenCenter;
+
+      window.scrollTo({
+        top: scrollTo,
+        behavior: 'smooth',
+      });
+    }, 100); // Delay matters!
+
+    return () => clearTimeout(timeout);
+  }, [step]);
   const updateField = (field: keyof T, value: any) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
@@ -184,53 +206,56 @@ export default function QuestionForm<T>({
       </div>
 
       <div className={genStyles.questionCtn}>
-        {questions.slice(0, step + 1).map((question, index) => (
-          <div key={index} className={`transition-opacity duration-500 ease-in-out ${genStyles.fadeIn}`}>
-            <h2 className={genStyles.question}>{index + 1}. {question.label} (최대 {question.max}개)</h2>
-            {question.type === "jobOptions" ? (
-              renderJobOptions()
-            ) : (
-              <>
-                <div className={question.type === "radio" ? genStyles.radioCard : genStyles.checkCard}>
-                  {Array.isArray(question.options) && question.options.map((option) => (
-                    <label key={option}>
-                      <input
-                        style={{ marginRight: "6px" }}
-                        type={question.type}
-                        name={String(question.multiple_choice)}
-                        value={option}
-                        checked={
-                          question.type === "radio"
-                            ? form[question.multiple_choice] === option
-                            : ((form[question.multiple_choice] as unknown as string[]) || []).includes(option)
-                        }
-                        onChange={() =>
-                          question.type === "radio"
-                            ? updateField(question.multiple_choice, option)
-                            : toggleCheckbox(question.multiple_choice, option, question.max)
-                        }
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
+        {questions.slice(0, step + 1).map((question, index) => {
+          const isLast = index === step;
+          return (
+            <div key={index}  ref={isLast ? nextQuestionRef : null} className={`transition-opacity duration-500 ease-in-out ${genStyles.fadeIn}`}>
+              <h2 className={genStyles.question}>{index + 1}. {question.label} (최대 {question.max}개)</h2>
+              {question.type === "jobOptions" ? (
+                renderJobOptions()
+              ) : (
+                <>
+                  <div className={question.type === "radio" ? genStyles.radioCard : genStyles.checkCard}>
+                    {Array.isArray(question.options) && question.options.map((option) => (
+                      <label key={option}>
+                        <input
+                          style={{ marginRight: "6px" }}
+                          type={question.type}
+                          name={String(question.multiple_choice)}
+                          value={option}
+                          checked={
+                            question.type === "radio"
+                              ? form[question.multiple_choice] === option
+                              : ((form[question.multiple_choice] as unknown as string[]) || []).includes(option)
+                          }
+                          onChange={() =>
+                            question.type === "radio"
+                              ? updateField(question.multiple_choice, option)
+                              : toggleCheckbox(question.multiple_choice, option, question.max)
+                          }
+                        />
+                        {option}
+                      </label>
+                    ))}
+                  </div>
 
-                <div className={`transition-opacity duration-500 ease-in-out ${genStyles.fadeIn} ${genStyles.free}`}>
-                  <textarea
-                    className={genStyles.draft}
-                    rows={3}
-                    value={(form[question.free_text] as unknown as string) || ""}
-                    onChange={(e) => updateField(question.free_text, e.target.value)}
-                    placeholder="위 선택하신 내역에 대한 이유 및 자신의 경험을 서술해 주세요. (필수)"
-                  />
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+                  <div className={`transition-opacity duration-500 ease-in-out ${genStyles.fadeIn} ${genStyles.free}`}>
+                    <textarea
+                      className={genStyles.draft}
+                      rows={3}
+                      value={(form[question.free_text] as unknown as string) || ""}
+                      onChange={(e) => updateField(question.free_text, e.target.value)}
+                      placeholder="위 선택하신 내역에 대한 이유 및 자신의 경험을 서술해 주세요. (필수)"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+          )
+        })}
 
         {step === totalSteps && (
-          <div className="transition-opacity duration-500 ease-in-out animate-fadeIn">
+          <div ref={step === totalSteps ? nextQuestionRef : null} className="transition-opacity duration-500 ease-in-out animate-fadeIn">
             <h2 className={genStyles.question}>
               {totalSteps + 1}. 기존 자기소개서 초안이 있다면 여기에 입력해주세요. 이를 바탕으로 작성해드립니다.
             </h2>
@@ -249,7 +274,12 @@ export default function QuestionForm<T>({
             <button
               type="button"
               onClick={() => {
-                setStep(step + 1)
+                setStep((prev) => prev + 1);
+
+                // Scroll after slight delay to allow render
+                setTimeout(() => {
+                  nextQuestionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100); // 100ms delay gives the DOM time to update
               }}
               className="px-4 py-2 bg-bright text-white rounded ml-auto hover:scale-105"
             >
