@@ -38,8 +38,11 @@ const ApplicationPosting = () => {
             </p>
           </div>
           <div className="pt-4 text-[1rem] lg:text-[1.3rem]">
-            <strong>AI 자기소개서  서비스 선착순 30명 무료!</strong><br/>
-            <span className="text-[1rem] lg:text-[1.3rem]">7월11일 금요일 23:59까지</span> 
+            <strong>AI 자기소개서  서비스 선착순 30명 무료!</strong>
+            <span className="h-px sm:hidden">
+              <br/>
+            </span>
+            <span className="text-[1rem] lg:text-[1.3rem]"> 7월11일 금요일 23:59까지</span> 
           </div>
             <div className="text-gray-400 text-[0.8rem] lg:text-[1rem]">
               *이벤트 종료 후 정가 30,000원에 판매됩니다.

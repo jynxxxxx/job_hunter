@@ -20,10 +20,13 @@ const HeroSection = () => {
     <>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
-          바로지원과 함께 <br />나만의 자기소개서를 <br />완성하세요
+          바로지원과 함께 <br />나만의 자기소개서를 
+          <div className="h-px sm:hidden"><br/></div>
+          완성하세요
         </div>
         <p className={heroStyles.subtext}>
-          1000건의 합격자소서로 학습된 <br />
+          1000건의 합격자소서로 학습된 
+          <div className="h-px sm:hidden"><br/></div>
           AI 기술로 만드는 나를 담은 자기소개서
         </p>
         <button
