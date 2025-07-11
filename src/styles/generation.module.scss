@@ -22,7 +22,7 @@
 
 .paywallMessage {
   position: fixed;
-  top: 35%;
+  top: 30%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -33,9 +33,9 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 
   text-align: center;
-  width: 50vw;
-  height: fit-content;
-  overflow-y: auto;
+  width: 55vw;
+  height: 50%;
+  overflow-y: scroll;
 
   h2 {
     margin-bottom: 1rem;

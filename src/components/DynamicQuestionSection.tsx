@@ -15,8 +15,7 @@ interface DynamicQuestionSectionProps {
   waiting: boolean;
   setWaiting: (waiting: boolean) => void;
   setRunning: (running: boolean) => void; // Function to set running state
-  setOpenPaywall: (running: boolean) => void;
-  userHasPaid: boolean;
+  freePassUsed: boolean;
   running?: boolean; // Optional prop to indicate if generation is running
 }
 
@@ -29,9 +28,8 @@ const DynamicQuestionSection = ({
   waiting,
   setWaiting,
   setRunning,
-  setOpenPaywall,
+  freePassUsed,
   running,
-  userHasPaid
 }: DynamicQuestionSectionProps) => {
   const { authUser } = useAuth();
   const { userData, jobTemplates } = useUserData();
@@ -74,6 +72,7 @@ const DynamicQuestionSection = ({
       question_id,
       draft,
       requiredFields,
+      freePassUsed,
       setWaiting,
       setRunning,
       setEssay,
@@ -89,9 +88,7 @@ const DynamicQuestionSection = ({
       setForm={setForm}
       draft={draft}
       setDraft={setDraft}
-      setOpenPaywall={setOpenPaywall}
-      userHasPaid={userHasPaid}
-      disabled={Boolean((userData?.hasPaid?.[job_id] == false) || waiting || running)}
+      disabled={Boolean(waiting || running || (freePassUsed && userData?.hasPaid?.[job_id] == false))}
       onSubmit={handleSubmit}
       {...(hasJobOptions && {
         jobLevel1,

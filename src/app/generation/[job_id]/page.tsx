@@ -10,14 +10,14 @@ import genStyles from "@/styles/generation.module.scss";
 import GuideResult from '@/components/layoutSections/GuideResults';
 import { EssayOutputProps, GuideOutputProps } from '@/types/forms';
 import { DotSpinner } from '@/components/layoutSections/DotSpinner';
-import { doc, updateDoc, increment } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/context/AuthContext';
-import { toast } from 'sonner';
+import Paywall from '@/components/Paywall';
 
 export default function GenerationDynamicPage({ params }: { params: Promise<{ job_id: string }> }) {
   const { authUser } = useAuth()
-  const { jobList, jobTemplates, userData, setUserData, setActivePage } = useUserData();
+  const { jobList, jobTemplates, userData, refetchUserData, setActivePage } = useUserData();
   const { job_id: encodedJobId } = React.use(params);
   const router = useRouter();
   const jobURI = decodeURIComponent(encodedJobId);
@@ -69,10 +69,8 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const [running, setRunning] = useState(false);
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const job = jobList.find(job => job.job_id == job_id) || '해당 회사';
+  const [freePassUsed, setFreePassUsed] = useState(false);
   const [userHasPaid, setUserHasPaid] = useState(false);
-  const tokens = userData?.tokens || 0;
-  const [submitted, setSubmitted] = useState(false);
-  const [openPaywall, setOpenPaywall] = useState(false);
 
   useEffect(() => {
     if (!activeTab && sectionKeys.length > 0) {
@@ -83,7 +81,31 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   useEffect(() => {
     const paidCheck = userData?.hasPaid?.[job_id] === true;
     setUserHasPaid(paidCheck)
-  }, []);
+  }, [activeTab]);
+
+  useEffect(() => {
+    const fetchGenerationCount = async () => {
+      if (authUser){
+        try {
+          const userRef = doc(db, "users", authUser.uid);
+          const userSnap = await getDoc(userRef);
+
+          const generations = userSnap.exists() ? userSnap.data().generation_count || {} : {};
+          const generationCount = generations[job_id] ?? 0;
+
+          const freePassUsed = generationCount > 0;
+          setFreePassUsed(freePassUsed);
+        } catch (error) {
+          console.error('Failed to fetch generation count:', error);
+        }
+      }
+    };
+
+    if (userData?.hasPaid?.[job_id] === true){
+      return
+    }
+    fetchGenerationCount();
+  }, [authUser, job_id, activeTab]);
 
   useEffect(() => {
     if (waiting && !running) {
@@ -112,44 +134,6 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
     }, stages[stageIndex].duration);
     return () => clearTimeout(timer);
   }, [running, stageIndex]);
-
-  const handleUseToken = async () => {
-    if (!userData || !authUser ) return;
-    setSubmitted(true);
-    if (userData.tokens && userData.tokens > 0) {
-      try {
-        const userRef = doc(db, 'users', authUser.uid);
-        // Atomically update tokens and add job ID to paidJobs
-        await updateDoc(userRef, {
-          tokens: increment(-1), // Decrement tokens by 1
-          [`hasPaid.${job_id}`]: true, // Mark this job_id as paid with a timestamp
-        });
-
-        setUserHasPaid(true) // Unlock content
-        
-        toast.success('토큰이 사용되어 해당 공고를 열람할 수 있습니다!');
-        setUserData((prev: any) => {
-          if (!prev) return prev; // null check
-
-          return {
-            ...prev,
-            tokens: (prev.tokens || 0) - 1,
-          };
-        });
-      } catch (error) {
-        console.error('Error using token:', error);
-        toast.error('토큰 사용 중 오류가 발생했습니다. 다시 시도해주세요.');
-      } finally {
-        setSubmitted(false);
-      }
-    } else {
-      // This case should ideally not be reached if button is disabled/hidden
-      toast.error('토큰이 부족합니다. 토큰 구매 페이지로 이동합니다.');
-      setSubmitted(false);
-      router.push('/tokens'); // Redirect to buy tokens page
-      setActivePage("tokens");
-    }
-  };
 
   if (!template) {
     return <div className="p-8 text-center text-xl">해당 회사/직무에 대한 질문 템플릿이 없습니다.</div>;
@@ -218,8 +202,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                 setWaiting={setWaiting}
                 setRunning={setRunning}
                 running={running}
-                setOpenPaywall={setOpenPaywall}
-                userHasPaid = {userHasPaid}
+                freePassUsed={freePassUsed}
               />
             )}
           </div>
@@ -277,54 +260,21 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
               </div>
           </div>
         </div>
-        {!userHasPaid && openPaywall && (
+        {!userHasPaid && freePassUsed && (
           <>
             <div className={genStyles.paywallOverlay}></div>
             <div className={genStyles.paywallMessage}>
-              <h2>🔒 프리미엄 콘텐츠입니다</h2>
-              <div className='w-full bg-[#F9F9FB] rounded-xl py-4 px-4 '>
-                <div className='font-extrabold text-center pb-4 text-lg sm:text-xl'>인사 전문가와 AI가 만드는 맞춤형 자기소개서</div>
-                <div className='flex justify-around gap-6'>
-                  <div className='flex flex-col items-center justify-center gap-2'>
-                    <div>
-                      채용 공고를 분석해 직무별 요구사항을 반영한 알고리즘으로,<br />
-                      지원자의 실제 강점과 경험을 살려내는 자소서를 제공합니다<br />
-                      <div className='mt-3 text-lg font-bold text-gray-800'>
-                        공고별 1 토큰 사용
-                      </div>
-                    </div>
-                    <div className="mb-6 text-center">
-                      <p className="text-md sm:text-lg text-gray-800 font-semibold mb-2">
-                        현재 보유 토큰: <span className="text-bright text-xl font-extrabold">{userData?.tokens || 0}개</span>
-                      </p>
-                    </div>
-
-                    {(tokens > 0) ? (
-                      <button
-                        onClick={handleUseToken}
-                        className="w-full bg-bright text-white py-3 rounded-lg font-semibold text-lg
-                                  hover:brightness-90 transition-colors"
-                        disabled={submitted}
-                      >
-                        토큰 사용하기 ({userData?.tokens || 0}개 중 1개)
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          router.push('/tokens')
-                          setActivePage("tokens");
-                        }}
-                        className="w-full bg-dark text-white py-3 rounded-lg font-semibold text-lg
-                                  hover:bg-brightness-110 transition-colors"
-                      >
-                        토큰 구매하러 가기
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <h2 className="text-[1.5rem] font-extrabold pb-4">🔒 프리미엄 콘텐츠입니다</h2>
+              <Paywall />
             </div>
           </>
+        )}
+        {!userHasPaid && guide && !running && ( 
+          <div className='bg-primary py-8'>
+            <div className='w-1/2 mx-auto text-center'>
+              <Paywall />
+            </div>
+          </div>
         )}
       </div>
     </AuthCheck>

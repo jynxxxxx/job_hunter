@@ -10,8 +10,6 @@ interface QuestionFormProps<T> {
   setForm: React.Dispatch<React.SetStateAction<T>>;
   draft: string;
   setDraft: (val: string) => void;
-  setOpenPaywall: (running: boolean) => void;
-  userHasPaid: boolean;
   disabled: boolean;
   onSubmit: (e: React.FormEvent) => void;
   jobLevel1?: string;
@@ -28,9 +26,7 @@ export default function QuestionForm<T>({
   setForm,
   draft,
   setDraft,
-  // setOpenPaywall,
-  // userHasPaid,
-  // disabled,
+  disabled,
   onSubmit,
   jobLevel1,
   setJobLevel1,
@@ -253,20 +249,14 @@ export default function QuestionForm<T>({
             <button
               type="button"
               onClick={() => {
-                // if (!userHasPaid) {
-                //   setOpenPaywall(true)
-                // }
-                // else {
-                  setStep(step + 1)
-                // }
+                setStep(step + 1)
               }}
               className="px-4 py-2 bg-bright text-white rounded ml-auto hover:scale-105"
             >
               다음
             </button>
           ) : (
-            // <button className={genStyles.btn} type="submit" disabled={disabled}>
-            <button className={genStyles.btn} type="submit" >
+            <button className={genStyles.btn} type="submit" disabled={disabled}>
               나만의 자기소개서/
               <br />
               가이드 작성하기

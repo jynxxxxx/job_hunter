@@ -1,4 +1,4 @@
-import { doc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "sonner";
 import { db } from "@/lib/firebase";
 import { generateEssay, generateOutline } from "@/app/api/generate";
@@ -10,6 +10,7 @@ interface UploadParams<T> {
   job_id: string;
   authUser: any;
   userData: any;
+  freePassUsed: boolean;
   setWaiting: (b: boolean) => void;
   setRunning: (b: boolean) => void; // Optional prop to indicate if generation is running
   setEssay: (essay: any) => void;
@@ -24,6 +25,7 @@ export async function handleUpload<T>({
   job_id,
   userData,
   authUser,
+  freePassUsed,
   setWaiting,
   setRunning,
   setEssay,
@@ -63,18 +65,18 @@ export async function handleUpload<T>({
 
   try {
     const userRef = doc(db, "users", authUser.uid);
-    // const userSnap = await getDoc(userRef);
+    const userSnap = await getDoc(userRef);
 
-    // const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
+    const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
 
     const jobId = String(job_id);
-    // const jobHasPaid = hasPaidMap[jobId] === true;
+    const jobHasPaid = hasPaidMap[jobId] === true;
 
-    // if (!jobHasPaid) {
-    //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-    //   setWaiting(false);
-    //   return;
-    // }
+    if (!jobHasPaid && freePassUsed) {
+      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+      setWaiting(false);
+      return;
+    }
 
     // Build answers object from form fields "1_choice", "1_free", ..., "10_choice", "10_free"
     const answers: Record<string, { multiple_choice: string[]; free_text: string }> = {};
