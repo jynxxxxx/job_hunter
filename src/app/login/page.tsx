@@ -1,18 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { auth } from '@/lib/firebase';
 import {
   GoogleAuthProvider,
-  signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithRedirect,
+  getRedirectResult,
 } from 'firebase/auth';
 import { KakaoLoginButton } from '@/components/layoutSections/KakaoLoginButton';
 import { ensureUserProfile } from '@/components/HelperFunctions';
 import { toast } from 'sonner'; 
+import { DotSpinner } from '@/components/layoutSections/DotSpinner';
 
 export default function AuthForm() {
   const router = useRouter();
@@ -23,7 +25,7 @@ export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState<'signup' | 'login'>('login');
-
+  const [waiting, setWaiting] = useState(false);
 
   const afterLoginRedirect = async () => {
     await router.push(redirect);
@@ -31,19 +33,57 @@ export default function AuthForm() {
 
   const googleLogin = async () => {
     try {
+      sessionStorage.setItem('googleLoginAttempted', 'true');
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-
-      if (result.user) {
-        await ensureUserProfile(result.user, name);
-        await afterLoginRedirect();
-      } else {
-        toast.error('Google 로그인에 실패했습니다. 사용자 정보를 가져올 수 없습니다.');
-      }
+      console.log('auth', auth)
+      console.log('provider', provider)
+      await signInWithRedirect(auth, provider);
     } catch (err: any) {
-      toast.error(err.message || 'Google 로그인 중 오류가 발생했습니다.');
+      console.error("Error initiating Google redirect login:", err);
+      sessionStorage.removeItem('googleLoginAttempted');
+      toast.error(err.message || 'Google 로그인 리디렉션 시작 중 오류가 발생했습니다.');
     }
   };
+ 
+  useEffect(() => {
+    const handleRedirectResultOnLoad = async () => {
+      const loginAttempted = sessionStorage.getItem('googleLoginAttempted');
+      if (!loginAttempted) return; // ⛔ don't run unless user clicked login
+
+      // Clear the flag so this only runs once
+      sessionStorage.removeItem('googleLoginAttempted');
+
+      setWaiting(true)
+      try {
+        const result = await getRedirectResult(auth); // <--- KEY: Get the result after redirect
+        console.log('auth',auth )  
+        console.log('result',result )      
+        if (result) {
+          await ensureUserProfile(result.user, name);
+          await afterLoginRedirect();
+        } else {
+          toast.error('Google 로그인에 실패했습니다. 사용자 정보를 가져올 수 없습니다.');
+          console.log("useEffect: getRedirectResult returned null. No pending redirect operation.")
+        }
+      } catch (error: any) {
+        console.error("Error during Google redirect sign-in:", error);
+        if (error.code === 'auth/cancelled-pop-up' || error.code === 'auth/popup-closed-by-user') {
+          toast.error('Google 로그인 리디렉션이 사용자 또는 브라우저에 의해 취소되었습니다.');
+        } else if (error.code === 'auth/auth-domain-config-error') {
+          toast.error('Firebase 인증 도메인 설정 오류: Firebase 콘솔에서 웹 도메인을 확인하세요.');
+        } else if (error.code === 'auth/credential-already-in-use') {
+          toast.error('이미 다른 방식으로 가입된 이메일입니다. 다른 로그인 방법을 사용하거나 기존 계정으로 로그인해주세요.');
+        }
+        else {
+          toast.error(error.message || 'Google 로그인 중 알 수 없는 오류가 발생했습니다.');
+        }
+      } finally {
+        setWaiting(false)
+      }
+    };
+
+    handleRedirectResultOnLoad(); 
+  }, [auth, ensureUserProfile, afterLoginRedirect]);
 
   const emailSignup = async () => {
     try {
@@ -61,7 +101,7 @@ export default function AuthForm() {
       }
 
       const result = await createUserWithEmailAndPassword(auth, email, password);
-
+      console.log('result',result)
       if (result.user) {
         await ensureUserProfile(result.user, name);
         await afterLoginRedirect();
@@ -90,6 +130,12 @@ export default function AuthForm() {
 
   return (
     <div className='h-[85vh] flex items-center justify-center bg-primary'>
+      {waiting ? (
+        <div className="p-8 pb-16 bg-white rounded-lg shadow-md text-center">
+          <h1 className="text-2xl font-bold mb-4">로그인 중입니다</h1>
+          <DotSpinner />
+        </div>
+      ) : (
       <div className="bg-white w-md mx-auto my-28 p-4 border rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">
           {mode === 'signup' ? '회원가입' : '로그인'}
@@ -168,6 +214,7 @@ export default function AuthForm() {
           </button>
         </p>
       </div>
+      )}
     </div>
   );
 }
