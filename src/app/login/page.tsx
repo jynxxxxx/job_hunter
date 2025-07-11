@@ -22,7 +22,6 @@ export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState<'signup' | 'login'>('login');
-  const [waiting, setWaiting] = useState(false);
 
   const afterLoginRedirect = async () => {
     await router.push(redirect);
@@ -123,12 +122,6 @@ export default function AuthForm() {
 
   return (
     <div className='h-[85vh] flex items-center justify-center bg-primary'>
-      {waiting ? (
-        <div className="p-8 pb-16 bg-white rounded-lg shadow-md text-center">
-          <h1 className="text-2xl font-bold mb-4">로그인 중입니다</h1>
-          <DotSpinner />
-        </div>
-      ) : (
       <div className="bg-white w-md mx-auto my-28 p-4 border rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">
           {mode === 'signup' ? '회원가입' : '로그인'}
@@ -207,7 +200,6 @@ export default function AuthForm() {
           </button>
         </p>
       </div>
-      )}
     </div>
   );
 }
