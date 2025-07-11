@@ -35,8 +35,7 @@ export default function AuthForm() {
     try {
       sessionStorage.setItem('googleLoginAttempted', 'true');
       const provider = new GoogleAuthProvider();
-      console.log('auth', auth)
-      console.log('provider', provider)
+
       await signInWithRedirect(auth, provider);
     } catch (err: any) {
       console.error("Error initiating Google redirect login:", err);
@@ -55,15 +54,12 @@ export default function AuthForm() {
 
       setWaiting(true)
       try {
-        const result = await getRedirectResult(auth); // <--- KEY: Get the result after redirect
-        console.log('auth',auth )  
-        console.log('result',result )      
+        const result = await getRedirectResult(auth); // <--- KEY: Get the result after redirect   
         if (result) {
           await ensureUserProfile(result.user, name);
           await afterLoginRedirect();
         } else {
           toast.error('Google 로그인에 실패했습니다. 사용자 정보를 가져올 수 없습니다.');
-          console.log("useEffect: getRedirectResult returned null. No pending redirect operation.")
         }
       } catch (error: any) {
         console.error("Error during Google redirect sign-in:", error);
@@ -101,7 +97,7 @@ export default function AuthForm() {
       }
 
       const result = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('result',result)
+
       if (result.user) {
         await ensureUserProfile(result.user, name);
         await afterLoginRedirect();
