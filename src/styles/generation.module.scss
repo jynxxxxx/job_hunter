@@ -240,11 +240,12 @@
 }
 
 .jobBoard.open {
-  max-height: 300vh; /* A large fixed value, adjust as needed */
+  max-height: 90vh; /* A large fixed value, adjust as needed */
   opacity: 1;
   padding: 2rem; /* p-4 */
   margin-bottom: 3rem;
-  background-color: $primary
+  background-color: $primary;
+  overflow-y: scroll;
 }
 
 @keyframes dots {

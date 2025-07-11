@@ -22,7 +22,7 @@ const imageMap: { [key: string]: string } = {
 export default function Dashboard() {
   const { jobList, jobTemplates } = useUserData();
   const [openCompany, setOpenCompany] = useState<string|null>(null);
-  const [columns, setColumns] = useState(3); // default to desktop
+  const [columns, setColumns] = useState(1); // default to desktop
   const router = useRouter();
   const [selectedCompany, setSelectedCompany] = useState("");
   const [initialized, setInitialized] = useState(false);
@@ -48,19 +48,32 @@ export default function Dashboard() {
   // Only companies with at least one job that has a question template
   const now = new Date();
   const activeJobs = jobList.filter(item => !item.endDate || new Date(item.endDate) >= now)
-  .sort((a, b) => {
-    const dateA = a.endDate ? new Date(a.endDate) : new Date('9999-12-31'); // Put jobs without endDate at the end
-    const dateB = b.endDate ? new Date(b.endDate) : new Date('9999-12-31');
+    .sort((a, b) => {
+      const aIsSK = a.company.toLowerCase().includes('sk');
+      const bIsSK = b.company.toLowerCase().includes('sk');
 
-    if (dateA.getTime() !== dateB.getTime()) {
-      return dateA.getTime() - dateB.getTime(); // Soonest endDate first
-    }
+      // Primary Sort: 'SK' companies first
+      // If 'a' is an SK company and 'b' is not, 'a' comes before 'b' (return -1)
+      if (aIsSK && !bIsSK) {
+        return -1;
+      }
+      // If 'a' is not an SK company and 'b' is, 'a' comes after 'b' (return 1)
+      if (!aIsSK && bIsSK) {
+        return 1;
+      }
 
-    const companyCompare = a.company.localeCompare(b.company);
-    if (companyCompare !== 0) return companyCompare;
+      const dateA = a.endDate ? new Date(a.endDate) : new Date('9999-12-31'); // Put jobs without endDate at the end
+      const dateB = b.endDate ? new Date(b.endDate) : new Date('9999-12-31');
 
-    return a.title.localeCompare(b.title);
-  });
+      if (dateA.getTime() !== dateB.getTime()) {
+        return dateA.getTime() - dateB.getTime(); // Soonest endDate first
+      }
+
+      const companyCompare = b.company.localeCompare(a.company);
+      if (companyCompare !== 0) return companyCompare;
+
+      return a.title.localeCompare(b.title);
+    });
 
   const expiredJobs = [
     ...jobList.filter(item => item.endDate && new Date(item.endDate) < now),
@@ -74,11 +87,11 @@ export default function Dashboard() {
   }, {});
 
   useEffect(() => {
-    if (!initialized && Object.keys(groupedByCompany).length > 0) {
+    if (!initialized && Object.keys(groupedByCompany).length > 0 && columns > 1) {
       setOpenCompany(Object.keys(groupedByCompany)[0]);
       setInitialized(true); // Prevent future auto-setting
     }
-  }, [groupedByCompany, initialized]);
+  }, [groupedByCompany, initialized, columns]);
 
   function chunkArray<T>(arr: T[], size: number): T[][] {
     return arr.reduce((acc, _, i) => {
@@ -205,7 +218,7 @@ export default function Dashboard() {
         <div>
           <div className="my-8 space-y-4">
             {companyChunks.map((chunk, chunkIndex) => (
-              <div key={chunkIndex} className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 items-stretch`}>
+              <div key={chunkIndex} className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4 items-stretch`}>
                 {chunk.map(([company]) => {
                   const companyImageSrc = imageMap[company as keyof typeof imageMap];
 
@@ -227,9 +240,9 @@ export default function Dashboard() {
                     </div>
                   )
                 })}
-                <div className={`col-span-full w-full bg-white border-t border-gray-300 p-6 shadow-inner ${genStyles.jobBoard} ${openCompany ? genStyles.open : ""}`}>
+                <div className={`col-span-full w-full bg-white border-t border-gray-300 p-6 shadow-inner ${genStyles.jobBoard} ${openCompany && chunk.some(([c]) => c === openCompany) ? genStyles.open : ""}`}>
                   {chunk.some(([c]) => c === openCompany) && openCompany && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                       {groupedByCompany[openCompany].map((item: any, idx: any) => {
                         const template = getQuestionTemplate(String(item.job_id), jobTemplates);
                         const isComingSoon = template ? false : true; // Assuming template is defined if coming soon
@@ -289,7 +302,7 @@ export default function Dashboard() {
           > 
             마감된 기업 및 직무
           </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8 max-h-[30vh] md:max-h-[50vh] overflow-y-scroll">
             {expiredJobs.map((item, idx) => {
               return (
                 <div
