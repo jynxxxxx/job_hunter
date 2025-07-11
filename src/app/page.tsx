@@ -13,8 +13,8 @@ export default function Home() {
 
   return (
     <>
-      <HeroSection />
       <ApplicationPosting />
+      <HeroSection />
       <Effects />
       <Testimonials />
       <Features />
