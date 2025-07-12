@@ -1,7 +1,7 @@
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
-export const ensureUserProfile = async (user: any, name: string) => {
+export const ensureUserProfile = async (user: any, name: string, eventSourceUrl?: string) => {
     const userDocRef = doc(db, 'users', user.uid);
     const docSnap = await getDoc(userDocRef);
 
@@ -12,11 +12,23 @@ export const ensureUserProfile = async (user: any, name: string) => {
           email: user.email,
           name: user.displayName || name,
           hasPaid: {},
-          tokens: 1,
           createdAt: serverTimestamp(),
         },
         { merge: true } // Use merge: true to avoid overwriting if partial data exists
       );
+
+      // meta conversion api call
+      if (eventSourceUrl) {
+      await fetch('/api/meta', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventName: 'SignUp',
+          eventSourceUrl,
+          email: user.email,
+        }),
+      });
+    }
     } else {
     }
   };

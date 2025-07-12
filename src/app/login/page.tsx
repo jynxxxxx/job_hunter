@@ -94,7 +94,7 @@ export default function AuthForm() {
       const result = await createUserWithEmailAndPassword(auth, email, password);
 
       if (result.user) {
-        await ensureUserProfile(result.user, name);
+        await ensureUserProfile(result.user, name, window.location.href);
         await afterLoginRedirect();
       } else {
         toast.error('회원가입에 실패했습니다. 사용자 정보를 생성할 수 없습니다.');
@@ -109,7 +109,7 @@ export default function AuthForm() {
       const result = await signInWithEmailAndPassword(auth, email, password);
 
       if (result.user) {
-        await ensureUserProfile(result.user, name);
+        await ensureUserProfile(result.user, name, window.location.href);
         await afterLoginRedirect();
       } else {
         toast.error('로그인에 실패했습니다. 사용자 정보를 가져올 수 없습니다.');
@@ -138,7 +138,13 @@ export default function AuthForm() {
         <div className='pb-[2rem] border-b border-gray-500'>
           <KakaoLoginButton />
         </div>
-        <div className="pt-[3rem] mb-4 flex flex-col items-center">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            mode === 'signup' ? emailSignup() : emaillogin();
+          }}
+          className="pt-[3rem] mb-4 flex flex-col items-center"
+        >
           {mode === 'signup' ? (
             <input
               type="text"
@@ -167,25 +173,16 @@ export default function AuthForm() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
 
-        <div className="flex justify-center">
-          {mode === 'signup' ? (
+          <div className="flex justify-center mt-4 w-full">
             <button
-              onClick={emailSignup}
+              type="submit"
               className="mx-auto w-4/5 bg-dark hover:opacity-90 text-white py-2 rounded-3xl hover:scale-103 transform transition-transform duration-200"
             >
-              이메일로 회원가입
+              {mode === 'signup' ? '이메일로 회원가입' : '이메일로 로그인'}
             </button>
-          ) : (
-            <button
-              onClick={emaillogin}
-              className="mx-auto w-4/5 bg-dark hover:opacity-90 text-white py-2 rounded-3xl hover:scale-103 transform transition-transform duration-200"
-            >
-              이메일로 로그인
-            </button>
-          )}
-        </div>
+          </div>
+        </form>
 
         <p className="mt-4 text-center">
           {mode === 'signup' ? '이미 계정이 있나요? ' : '계정이 없나요? '}

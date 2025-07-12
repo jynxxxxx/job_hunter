@@ -55,6 +55,7 @@ export async function handleUpload<T>({
   }
 
   setWaiting(true);
+
   const el = document.getElementById("top");
   if (el) {
     setTimeout(() => {
@@ -62,6 +63,7 @@ export async function handleUpload<T>({
       window.scrollTo({ top: y, behavior: "smooth" });
     }, 50);
   }
+
 
   try {
     const userRef = doc(db, "users", authUser.uid);
@@ -76,6 +78,22 @@ export async function handleUpload<T>({
       toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
       setWaiting(false);
       return;
+    }
+
+    if (!jobHasPaid) {
+      // meta conversion api call
+      await fetch('/api/meta', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventName: 'Lead',
+          eventSourceUrl: window.location.href,
+          email: authUser?.email, // optional
+          customData: {
+            content_name: '프리 자기소개서 생성 클릭', // or any relevant label
+          },
+        }),
+      });
     }
 
     // Build answers object from form fields "1_choice", "1_free", ..., "10_choice", "10_free"

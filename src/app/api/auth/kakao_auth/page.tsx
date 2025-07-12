@@ -37,7 +37,7 @@ export default function KakaoCallback() {
             if (currentUser) {
               // Now call ensureUserProfile with the currentUser object
               // and the nickname from KakaoProfile.
-              await ensureUserProfile(currentUser, kakaoProfile.nickname);
+              await ensureUserProfile(currentUser, kakaoProfile.nickname, window.location.href);
 
             } else {
               // This case should ideally not happen if signInWithCustomToken succeeds
