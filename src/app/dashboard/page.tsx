@@ -17,6 +17,7 @@ const imageMap: { [key: string]: string } = {
   "포스코스틸리온": "/company_logos/posco.svg",
   "LG에너지솔루션": "/company_logos/lg_logo.png",
   "SK하이닉스": "/company_logos/sk_hynix.png",
+  "롯데건설":"/company_logos/lotte_gunsul.jpg",
 }
 
 function parseCustomEndDate(dateString: string) {
