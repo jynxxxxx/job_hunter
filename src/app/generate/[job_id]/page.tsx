@@ -60,6 +60,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
         return keyA.localeCompare(keyB, 'ko');
       })
     : [];
+
   const [activeTab, setActiveTab] = useState(sectionKeys[0] || '');
   const [guide, setGuide] = useState<GuideOutputProps | null>(null);
   const [essay, setEssay] = useState<EssayOutputProps | null>(null);
@@ -141,19 +142,19 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
 
   return (
     <AuthCheck>
-      <div className='relative min-h-screen'>
+      <div className='mt-8 relative min-h-screen'>
         <div className={genStyles.grid} >
           <button
             onClick={() => {
-              router.push('/dashboard');
+              router.push('/generate');
               setActivePage("generation");
             }}
-            className="text-sm text-gray-700 hover:text-black  px-4 py-2 rounded-md mb-4"
+            className="text-sm text-gray-700 hover:text-black px-4 py-2 rounded-md mb-4"
           >
             ← 돌아가기
           </button>
           <div className={genStyles.leftSide} >
-            <h1 className='font-extrabold text-xl pb-4 text-dark text-[1.6rem]'>
+            <h1 className='font-extrabold pb-4 text-dark text-xl'>
               {job.company} {job.title}<br />
               {job.position}<br />
               <br />
@@ -166,7 +167,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
               <div className="text-xl">※</div>
               <div className="text-center">개인의 경험을 최대한 자세하게 작성해 주세요.</div>
             </div>
-            <div className='flex gap-12 my-6 border-b border-gray-300'>
+            <div className='grid grid-flow-col grid-cols-[repeat(auto-fit,minmax(0,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(0,_max-content))] auto-cols-max items-end gap-2 sm:gap:6 md:gap-12 my-6 border-b border-gray-300'>
               {sectionKeys.map((section) => (
                 <div
                   key={section}

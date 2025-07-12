@@ -269,7 +269,7 @@ export default function QuestionForm<T>({
           </div>
         )}
 
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between mt-0 sm:mt-4">
           {step < totalSteps ? (
             <button
               type="button"

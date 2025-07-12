@@ -22,8 +22,7 @@ const imageMap: { [key: string]: string } = {
   "롯데건설":"/company_logos/lotte_gunsul.png",
 }
 
-
-export default function Dashboard() {
+export default function JobBoard() {
   const { jobList, jobTemplates } = useUserData();
   const jobContainerRef = useRef<HTMLDivElement | null>(null);
   const [openCompany, setOpenCompany] = useState<string|null>(null);

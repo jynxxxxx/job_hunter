@@ -80,3 +80,27 @@ export function convertFirebaseTimestamp(
 export function getQuestionTemplate(job_id: string, jobTemplates: any[]) {
   return jobTemplates.find(t => t.job_id === job_id);
 }
+
+export function parseCustomEndDate(dateString: string) {
+  if (!dateString) {
+    return new Date(NaN);
+  }
+  
+  // Example: "2025/07/12 (23:59)"
+  const parts = dateString.match(/(\d{4})\/(\d{2})\/(\d{2}) \((\d{2}):(\d{2})\)/);
+
+  if (!parts) {
+    console.warn(`Invalid date format for: ${dateString}. Expected YYYY/MM/DD (HH:mm)`);
+    return new Date(NaN); // Return an invalid date
+  }
+
+  const year = parseInt(parts[1], 10);
+  const month = parseInt(parts[2], 10) - 1; // Month is 0-indexed in JavaScript Date
+  const day = parseInt(parts[3], 10);
+  const hours = parseInt(parts[4], 10);
+  const minutes = parseInt(parts[5], 10);
+
+  // Construct a Date object in the LOCAL timezone
+  // This is important because 'now' is also in the local timezone.
+  return new Date(year, month, day, hours, minutes, 0, 0); // Year, Month, Day, Hour, Minute, Second, Millisecond
+}
