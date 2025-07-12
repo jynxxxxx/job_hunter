@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     };
 
     const res = await fetch(
-      `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events?access_token=${FB_ACCESS_TOKEN}&test_event_code=TEST17615`,
+      `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events?access_token=${FB_ACCESS_TOKEN}`,
       {
         method: 'POST',
         headers: {
