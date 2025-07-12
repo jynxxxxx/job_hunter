@@ -78,7 +78,7 @@ export default function RootLayout({
             <Toaster position="top-center" />
             <div className="min-h-screen relative">
               <Header />
-                <div className="pt-[6rem] sm:pt-[4rem] pb-[13rem] sm:pb-[12rem]">
+                <div className="pt-[6rem] sm:pt-[4rem] pb-[12rem] sm:pb-[12rem]">
                   <ScrollToTopOnRouteChange />
                   {children}
                   <Analytics />

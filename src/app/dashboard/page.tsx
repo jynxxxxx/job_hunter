@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useUserData } from "@/context/UserDataContext";
 import { useRouter } from "next/navigation";
 import { getQuestionTemplate } from '@/components/HelperFunctions';
@@ -17,7 +17,7 @@ const imageMap: { [key: string]: string } = {
   "포스코스틸리온": "/company_logos/posco.svg",
   "LG에너지솔루션": "/company_logos/lg_logo.png",
   "SK하이닉스": "/company_logos/sk_hynix.png",
-  "롯데건설":"/company_logos/lotte_gunsul.jpg",
+  "롯데건설":"/company_logos/lotte_gunsul.png",
 }
 
 function parseCustomEndDate(dateString: string) {
@@ -46,6 +46,7 @@ function parseCustomEndDate(dateString: string) {
 
 export default function Dashboard() {
   const { jobList, jobTemplates } = useUserData();
+  const jobContainerRef = useRef<HTMLDivElement | null>(null);
   const [openCompany, setOpenCompany] = useState<string|null>(null);
   const [columns, setColumns] = useState(1); // default to desktop
   const router = useRouter();
@@ -164,6 +165,28 @@ export default function Dashboard() {
   // Find the selected job object
   const selectedJobObj: any = selectedJob
 
+  useEffect(() => {
+      if (!jobContainerRef.current) return;
+  
+      const element = jobContainerRef.current;
+  
+      // Delay is necessary to allow layout/render to finish
+      const timeout = setTimeout(() => {
+        const rect = element.getBoundingClientRect();
+        const scrollY = window.scrollY;
+        const elementCenter = rect.top + scrollY + rect.height / 2;
+        const offsetFromTop = window.innerHeight / 3;
+        const scrollTo = elementCenter - offsetFromTop;
+
+  
+        window.scrollTo({
+          top: scrollTo,
+        });
+      }, 200); // Delay matters!
+  
+      return () => clearTimeout(timeout);
+    }, [openCompany]);
+
   return (
     <AuthCheck>
       <div className="w-[80vw] mx-auto">
@@ -257,7 +280,11 @@ export default function Dashboard() {
                   const companyImageSrc = imageMap[company as keyof typeof imageMap];
 
                   return (
-                    <div key={company} className="rounded-xl shadow h-full items-stretch">
+                    <div 
+                      key={company} 
+                      className="rounded-xl shadow h-full items-stretch"
+                      ref={(company === openCompany) ? jobContainerRef : null}
+                    >
                       <button
                         onClick={() => setOpenCompany(openCompany === company ? null : company)}
                         className={`rounded-xl shadow logo relative border rounded-xl w-full h-full hover:scale-103 text-left p-4 font-semibold text-lg flex flex-col gap-4 justify-center items-center ${openCompany === company ? 'bg-gray-200 scale-103' : "bg-gray-100 "}`}
@@ -274,7 +301,7 @@ export default function Dashboard() {
                     </div>
                   )
                 })}
-                <div className={`col-span-full w-full bg-white border-t border-gray-300 p-6 shadow-inner ${genStyles.jobBoard} ${openCompany && chunk.some(([c]) => c === openCompany) ? genStyles.open : ""}`}>
+                <div className={`col-span-full w-full bg-white border-t border-gray-300 p-6 shadow-inner ${genStyles.jobBoard} ${openCompany && chunk.some(([c]) => c === openCompany) ? genStyles.open  : ""}`}>
                   {chunk.some(([c]) => c === openCompany) && openCompany && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                       {groupedByCompany[openCompany].map((item: any, idx: any) => {
