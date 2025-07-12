@@ -19,6 +19,30 @@ const imageMap: { [key: string]: string } = {
   "SK하이닉스": "/company_logos/sk_hynix.png",
 }
 
+function parseCustomEndDate(dateString: string) {
+  if (!dateString) {
+    return new Date(NaN);
+  }
+  
+  // Example: "2025/07/12 (23:59)"
+  const parts = dateString.match(/(\d{4})\/(\d{2})\/(\d{2}) \((\d{2}):(\d{2})\)/);
+
+  if (!parts) {
+    console.warn(`Invalid date format for: ${dateString}. Expected YYYY/MM/DD (HH:mm)`);
+    return new Date(NaN); // Return an invalid date
+  }
+
+  const year = parseInt(parts[1], 10);
+  const month = parseInt(parts[2], 10) - 1; // Month is 0-indexed in JavaScript Date
+  const day = parseInt(parts[3], 10);
+  const hours = parseInt(parts[4], 10);
+  const minutes = parseInt(parts[5], 10);
+
+  // Construct a Date object in the LOCAL timezone
+  // This is important because 'now' is also in the local timezone.
+  return new Date(year, month, day, hours, minutes, 0, 0); // Year, Month, Day, Hour, Minute, Second, Millisecond
+}
+
 export default function Dashboard() {
   const { jobList, jobTemplates } = useUserData();
   const [openCompany, setOpenCompany] = useState<string|null>(null);
@@ -47,7 +71,7 @@ export default function Dashboard() {
 
   // Only companies with at least one job that has a question template
   const now = new Date();
-  const activeJobs = jobList.filter(item => !item.endDate || new Date(item.endDate) >= now)
+  const activeJobs = jobList.filter(item => !item.endDate || parseCustomEndDate(item.endDate) >= now)
     .sort((a, b) => {
       const aIsSK = a.company.toLowerCase().includes('sk');
       const bIsSK = b.company.toLowerCase().includes('sk');
@@ -76,7 +100,16 @@ export default function Dashboard() {
     });
 
   const expiredJobs = [
-    ...jobList.filter(item => item.endDate && new Date(item.endDate) < now),
+    ...jobList.filter(item => {
+
+      const itemEndDateObj = parseCustomEndDate(item.endDate);
+
+      if (isNaN(itemEndDateObj?.getTime())) {
+        return false; 
+      }
+
+      return itemEndDateObj < now;
+    }),
     ...finished
   ];
 
