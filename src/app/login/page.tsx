@@ -42,7 +42,7 @@ export default function AuthForm() {
   // useEffect(() => {
   //   const handleRedirectResultOnLoad = async () => {
   //     const loginAttempted = sessionStorage.getItem('googleLoginAttempted');
-  //     if (!loginAttempted) return; // ⛔ don't run unless user clicked login
+  //     if (!loginAttempted) return; // don't run unless user clicked login
 
   //     // Clear the flag so this only runs once
   //     sessionStorage.removeItem('googleLoginAttempted');
@@ -141,7 +141,11 @@ export default function AuthForm() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            mode === 'signup' ? emailSignup() : emaillogin();
+             if (mode === 'signup') {
+              emailSignup();
+            } else {
+              emaillogin();
+            }
           }}
           className="pt-[3rem] mb-4 flex flex-col items-center"
         >
