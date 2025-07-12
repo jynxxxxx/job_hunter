@@ -11,19 +11,32 @@ const hashEmail = (email: string) => {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+
+    const clientIp =
+      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+      req.headers.get('x-real-ip') ||
+      ''; // fallback to empty if unavailable
+
+    const userAgent = req.headers.get('user-agent') || '';
+
+    const eventId = body.eventId || crypto.randomUUID();
+
     const payload = {
       event_name: body.eventName,
       event_time: Math.floor(Date.now() / 1000),
       event_source_url: body.eventSourceUrl,
+      event_id: eventId,
       user_data: {
-        em: [hashEmail(body.email)], // hash with SHA256
+        em: body.email ? [hashEmail(body.email)] : [],
+        client_ip_address: clientIp,
+        client_user_agent: userAgent,
       },
-      custom_data: body.customData,
+      custom_data: body.customData || {},
       action_source: 'website',
     };
 
     const res = await fetch(
-      `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events?access_token=${FB_ACCESS_TOKEN}`,
+      `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events?access_token=${FB_ACCESS_TOKEN}&test_event_code=TEST17615`,
       {
         method: 'POST',
         headers: {
