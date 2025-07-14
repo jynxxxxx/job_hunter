@@ -243,7 +243,7 @@ export default function JobBoard() {
             onClick={() => {
               if (selectedJob) {
                 const rand = randomId();
-                router.push(`/generate/${selectedJob.job_id}xY_${rand}`);
+                router.push(`/generate/trending/${selectedJob.job_id}xY_${rand}`);
               }
             }}
             className="min-w-[fit-content] text-md px-5 py-2 bg-primary rounded-2xl hover:bg-primary/80 hover:scale-103 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-extrabold"
@@ -297,7 +297,7 @@ export default function JobBoard() {
                             key={item.company + item.title + idx}
                             className={`relative border rounded-xl shadow-md p-6 flex flex-col gap-2 transition cursor-pointer bg-white hover:shadow-lg ${isComingSoon ? 'opacity-70' : ''}`}
                             onClick={() => {
-                              if (!isComingSoon) router.push(`/generate/${item.job_id}xY_${rand}`)
+                              if (!isComingSoon) router.push(`/generate/trending/${item.job_id}xY_${rand}`)
                             }}
                           >
                             {isComingSoon && (
@@ -315,7 +315,7 @@ export default function JobBoard() {
                               className={`mt-2 px-4 py-1 text-white rounded-lg w-fit self-end bg-bright ${isComingSoon ? "" : 'hover:scale-103'} transition-all duration-200 `}
                               onClick={e => {
                                 e.stopPropagation();
-                                if (!isComingSoon) router.push(`/generate/${item.job_id}xY_${rand}`)
+                                if (!isComingSoon) router.push(`/generate/trending/${item.job_id}xY_${rand}`)
                               }}
                               disabled={isComingSoon}
                             >

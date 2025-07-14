@@ -225,11 +225,11 @@ export default function RevisionPage() {
             1단계: 회사/직무 선택 및 초안 입력
           </summary>
           <form onSubmit={handleSubmitDraft} className={styles.sectionctn}>
-            <div className="w-full">
+            <div className={`w-full ${selectedCompany == "자유입력" ? 'flex gap-4' : ""}`}>
               <select
                 value={selectedCompany || ""}
                 onChange={handleCompanyChange}
-                className={styles.formField}
+                className={`${selectedCompany == "자유입력" ? styles.free : ""} ${styles.formField}`}
                 required
               >
                 <option value="" disabled hidden>회사 선택</option>
@@ -251,7 +251,7 @@ export default function RevisionPage() {
                 />
               )}
             </div>
-            <div className="w-full">
+            <div className={`w-full ${selectedJob == "자유입력" ? 'flex gap-4' : ""}`}>
               <select
                 value={
                   selectedJob === '자유입력'
@@ -262,7 +262,7 @@ export default function RevisionPage() {
                 }
                 onChange={handleJobChange}
                 disabled={!selectedCompany}
-                className={styles.formField}
+                className={`${selectedJob == "자유입력" ? styles.free : ""} ${styles.formField}`}
                 required
               >
                 <option value="" disabled hidden>직무/공고 선택 (회사 먼저 선택 해주세요)</option>
@@ -288,13 +288,11 @@ export default function RevisionPage() {
                 />
               )}
             </div>  
-            <div>
+            <div className={`w-full ${selectedCompany == "자유입력" ? 'flex gap-4' : ""}`}>
               <select
                 value={selectedQuestion}
-                onChange={(e) => {setSelectedQuestion(e.target.value)
-                  console.log('question:', e.target.value)}
-                }
-                className={styles.formField}
+                onChange={(e) => setSelectedQuestion(e.target.value)}
+                className={`${selectedQuestion == "자유입력" ? styles.free : ""} ${styles.formField}`}
                 disabled={!selectedJob}
                 required
               >

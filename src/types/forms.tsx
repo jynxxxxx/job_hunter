@@ -53,3 +53,22 @@ export interface Revision {
   revised_essay: string,
   revision_explanation: string[]
 }
+
+export interface SubQuestionItem {
+  sub_question: string;
+  suggested_inputs: string[];
+}
+
+export interface SubQuestionGroup {
+  question: string;
+  sub_question_list: {
+    [key: string]: SubQuestionItem;
+  };
+}
+
+export interface SubQuestions {
+  subquestion: {
+    [key: string]: SubQuestionGroup;
+  };
+  prompts: {};
+}

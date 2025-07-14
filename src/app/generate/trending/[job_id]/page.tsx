@@ -157,16 +157,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
             <h1 className='font-extrabold pb-4 text-dark text-xl'>
               {job.company} {job.title}<br />
               {job.position}<br />
-              <br />
-              AI 자기소개서 생성
             </h1>
-            <div className="text-lg font-bold text-gray-700">
-              문항 별로 작성 후 하단 &apos;나만의 자기소개서/가이드 작성하기&apos; 클릭 부탁드립니다.
-            </div>
-            <div className="flex gap-[0.5rem] items-center justify-start text-gray-500 pb-[0.5rem] ">
-              <div className="text-xl">※</div>
-              <div className="text-center">개인의 경험을 최대한 자세하게 작성해 주세요.</div>
-            </div>
             <div className='grid grid-flow-col grid-cols-[repeat(auto-fit,minmax(0,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(0,_max-content))] auto-cols-max items-end gap-2 sm:gap:6 md:gap-12 my-6 border-b border-gray-300'>
               {sectionKeys.map((section) => (
                 <div

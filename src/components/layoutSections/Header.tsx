@@ -16,8 +16,10 @@ const Header = () => {
   const pathname = usePathname();
   const { setJustSignedOut } = useAuth();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [isProfileTabOpen, setIsProfileTabOpen] = useState(false);
+  const [isGenerateTabOpen, setIsGenerateTabOpen] = useState(false);
+  const profileRef = useRef(null);
+  const generateRef = useRef(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -29,10 +31,16 @@ const Header = () => {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        dropdownRef.current &&
-        !(dropdownRef.current as HTMLElement).contains(event.target as Node)
+        profileRef.current &&
+        !(profileRef.current as HTMLElement).contains(event.target as Node)
       ) {
-        setIsDropdownOpen(false);
+        setIsProfileTabOpen(false);
+      }
+      if (
+        generateRef.current &&
+        !(generateRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        setIsGenerateTabOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -94,18 +102,43 @@ const Header = () => {
               >
                 <span>자기소개서 AI 첨삭</span>
               </div> */}
-              <div
-                onClick={() => {
-                  if (pathname !== '/generate') {
-                    router.push('/generate');
-                  }
-                  setActivePage("generation");
-                }}
-                className={`w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
+            <div 
+              className={`relative w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
                   activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                 }`}
-              >
-                <span>AI 자기소개서 생성</span>
+              ref={generateRef}  
+              onClick={() => setIsGenerateTabOpen(prev => !prev)}
+            >
+              <span>AI 자기소개서 생성</span>
+              {isGenerateTabOpen && (
+                <div
+                  className="absolute top-full left-2 w-[150%] flex flex-col bg-white border border-gray-200 rounded shadow-lg"
+                >
+                  <div
+                    onClick={() => {
+                      if (pathname !== '/generate') {
+                        router.push('/generate/trending');
+                      }
+                      setActivePage("generation");
+                    }}
+                    className='py-4 px-8 hover:bg-primary'
+                  >
+                    핫한 채용공고 자기소개서
+                    <p></p>
+                  </div>
+                  <div
+                    onClick={() => {
+                      if (pathname !== '/generate') {
+                        router.push('/generate/free');
+                      }
+                      setActivePage("generation");
+                    }}
+                    className='py-4 px-8 hover:bg-primary/40'
+                  >
+                    자유항목 공고 자기소개서
+                  </div>
+                </div>
+              )}                
               </div>
               <div
                 onClick={() => {
@@ -148,11 +181,11 @@ const Header = () => {
           ):(
             <div 
               className="z-[1000] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" 
-              ref={dropdownRef}  
-              onClick={() => setIsDropdownOpen(prev => !prev)}
+              ref={profileRef}  
+              onClick={() => setIsProfileTabOpen(prev => !prev)}
             >
               <CircleUserRound size={28} className="hover:scale-110"/>
-              {isDropdownOpen && (
+              {isProfileTabOpen && (
                 <div 
                   className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg"
                   style={{zIndex: '1000'}}
