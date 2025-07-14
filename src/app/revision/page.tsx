@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useUserData } from "@/context/UserDataContext";
 import AuthCheck from "@/components/AuthCheck";
 import { parseCustomEndDate } from "@/components/HelperFunctions";
-import { useAuth } from "@/context/AuthContext";
 import { Feedback, Revision } from "@/types/forms";
 import { generateFeedback } from "../api/generate";
 import { toast } from "sonner";
@@ -16,35 +15,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export const feedbackTestData1: Feedback = {
-  feedback: [
-    "지원 동기가 회사 인재상과 충분히 연결되지 않아 보입니다.",
-    "프로젝트 경험은 좋으나, 본인의 정확한 역할과 기여도가 모호합니다.",
-    "수치화된 성과 제시가 없어 설득력이 부족합니다."
-  ],
-  additional_info_request: {
-    needs_additional_info: true, // Additional info IS needed for this case
-    reason: "직무 관련 프로젝트에서 지원자의 구체적인 역할과 기여도를 명확히 파악하기 위함입니다. 또한, 성과를 수치화할 수 있는 정보가 필요합니다.",
-    questions: [
-      "참여했던 '데이터 분석 프로젝트'에서 당신의 주요 역할은 무엇이었나요?",
-      "그 프로젝트에서 당신의 기여로 인해 어떤 구체적인 수치적 성과(예: 효율성 개선 몇 %, 비용 절감 얼마)가 있었나요?",
-      "당시 팀원들과의 협업 과정에서 가장 기억에 남는 어려움과 해결 과정은 무엇이었나요?"
-    ]
-  }
-};
-
-const revisionTestData1: Revision = {
-  revised_essay: `[리라이팅된 자기소개서 내용 1]\n\n저는 끊임없는 호기심과 분석적 사고를 바탕으로 데이터가 가진 잠재력을 탐구해왔습니다. 특히, 대학 시절 'AI 기반 추천 시스템 개발' 프로젝트를 통해, 팀원들과 협력하여 사용자 만족도를 15% 향상시키는 데 기여했습니다. 이 경험을 통해 데이터로부터 유의미한 인사이트를 도출하고 실제 서비스 개선에 기여하는 역량을 길렀습니다. 귀사의 '데이터 사이언티스트' 직무에서 이러한 저의 역량을 발휘하여 혁신적인 성과를 창출하고 싶습니다.`,
-  revision_explanation: [
-    "도입부를 회사 비전과 연결하여 지원 동기를 강화했습니다.",
-    "경험 서술 시 STAR 기법을 적용하여 문제점, 행동, 성과를 명확히 제시했습니다.",
-    "구체적인 수치(사용자 만족도 15% 향상)를 삽입하여 성과의 설득력을 높였습니다.",
-    "불필요한 수식어를 제거하고 간결하고 명확한 문장으로 수정하여 가독성을 높였습니다."
-  ]
-};
-
 export default function RevisionPage() {
-  const { authUser } = useAuth()
   const { jobList, jobTemplates } = useUserData();
   const [draft, setDraft] = useState('');
   const [feedback, setFeedback] = useState<Feedback | null>(null);
@@ -174,26 +145,24 @@ export default function RevisionPage() {
   
   const handleSubmitDraft = async (e: any) => {
     e.preventDefault();
-    // const input = {
-    //   company_name: selectedCompany == "자유입력" ? customCompany : selectedJob.company,
-    //   job_title: selectedJob == "자유입력" ? customJob : selectedJob.position,
-    //   question_number: selectedQuestion == "자유입력" ? customQuestion : selectedQuestion.replace(/^question/, ''),
-    //   // url: jobUrl,
-    //   essay_draft: draft,
-    // };
-    // setWaiting1(true)
-    // try {
-    // const feedback = await generateFeedback(input)
-    // setFeedback(feedback);
-    // console.log("feedback", feedback)
-    // setOpenStep(prev => [...new Set([...prev, 2])]);
-    // } catch (err) { 
-    //   toast.error('피드백 요청 중 오류가 발생했습니다. 다시 시도해주세요.');
-    // } finally {
-    // setWaiting1(false)
-    // }
-    setFeedback(feedbackTestData1)
+    const input = {
+      company_name: selectedCompany == "자유입력" ? customCompany : selectedJob.company,
+      job_title: selectedJob == "자유입력" ? customJob : selectedJob.position,
+      question_number: selectedQuestion == "자유입력" ? customQuestion : selectedQuestion.replace(/^question/, ''),
+      // url: jobUrl,
+      essay_draft: draft,
+    };
+    setWaiting1(true)
+    try {
+    const feedback = await generateFeedback(input)
+    setFeedback(feedback);
+    console.log("feedback", feedback)
     setOpenStep(prev => [...new Set([...prev, 2])]);
+    } catch (err) { 
+      toast.error('피드백 요청 중 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+    setWaiting1(false)
+    }
   };
 
   const handleSubmitFollowup = async (e: any) => {
@@ -207,19 +176,16 @@ export default function RevisionPage() {
       essay_draft: draft,
       additional_user_input: followupAnswers
     };
-    // setWaiting2(true)
-    // try {
-    //   const revision = await generateFeedback(input)
-    //   setFinalEssay(revision);
-    //   setOpenStep(prev => [...new Set([...prev, 3])]);
-    // } catch (err) { 
-    //   toast.error('피드백 요청 중 오류가 발생했습니다. 다시 시도해주세요.');
-    // } finally {
-    //   setWaiting2(false)   
-    // }
-
-    setFinalEssay(revisionTestData1)
-    setOpenStep(prev => [...new Set([...prev, 3])]);
+    setWaiting2(true)
+    try {
+      const revision = await generateFeedback(input)
+      setFinalEssay(revision);
+      setOpenStep(prev => [...new Set([...prev, 3])]);
+    } catch (err) { 
+      toast.error('피드백 요청 중 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      setWaiting2(false)   
+    }
   };
 
   const toggleStep = (step: number) => {
@@ -241,7 +207,7 @@ export default function RevisionPage() {
           <h1
             className="text-bright mt-8 text-2xl md:text-4xl leading-tight tracking-[-0.033em] font-extrabold"
           > 
-            당신의 자소서, 정말 '합격 수준' 인지&nbsp;<div className="h-px sm:hidden"><br/></div>확인해 보세요.
+            당신의 자소서, 정말 &apos;합격 수준&apos; 인지&nbsp;<div className="h-px sm:hidden"><br/></div>확인해 보세요.
           </h1>
           <h2 className="py-4 text-bright text-lg md:text-2xl font-normal leading-normal ">
             삼성-SK 하이닉스 인사팀 출신 전문가의 날카로운 분석과 AI의 정교한 수정으로, 당신의 자소서를 합격 공식에 맞춰 완벽하게 개선하세요.
@@ -275,7 +241,6 @@ export default function RevisionPage() {
                   type="text"
                   value={customCompany}
                   onChange={e => {
-                    console.log(e.target.value)
                     setCustomCompany(e.target.value)}
                   }
                   placeholder="회사를 입력하세요"
