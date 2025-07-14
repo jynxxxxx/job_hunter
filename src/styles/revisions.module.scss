@@ -1,0 +1,91 @@
+@use './variables.scss' as *;
+@use "sass:color";
+
+
+.section{
+  margin-bottom: 1rem;
+  border: 1px solid gray;
+  border-radius: 8px;
+  overflow-x: hidden;
+}
+
+.formField{
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 4px 6px;
+  font-size: 1rem;
+  width: 100% 
+}
+
+.formOption{
+  font-size: 1rem;
+}
+
+.sectionctn{
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn{
+  margin-left: auto; 
+  min-width: fit-content; 
+  font-size: 1rem;
+  font-weight: 800; 
+  color: white; 
+  padding: 0.5rem 1.25rem;
+  background-color: color.adjust($primary, $lightness: -40%);
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); 
+
+    &:hover {
+      background-color: color.adjust($primary, $lightness: -60%);
+      transform: scale(1.03);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-color: gray
+    }
+}
+
+.custom_swiper {
+  position: relative;
+  overflow: visible !important;
+
+  :global(.swiper-button-prev),
+  :global(.swiper-button-next) {
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.swiper-button-prev)::after,
+  :global(.swiper-button-next)::after {
+    font-size: 1rem !important;
+    color: #333 !important;
+  }
+
+  :global(.swiper-button-prev) {
+    left: -2rem;
+  }
+
+  :global(.swiper-button-next) {
+    right: -2rem;
+  }
+
+  :global(.swiper-pagination) {
+    bottom: -1.5rem  !important;
+  }
+}

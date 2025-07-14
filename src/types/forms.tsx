@@ -39,3 +39,17 @@ export type SectionKey =
   | "q10";
 
 export type SectionCounts = Partial<Record<SectionKey, number>>;
+
+export interface Feedback {
+  feedback: string[]
+  additional_info_request: {
+    needs_additional_info: boolean,
+    reason: string,
+    questions: string[]
+  }
+}
+
+export interface Revision {
+  revised_essay: string,
+  revision_explanation: string[]
+}
