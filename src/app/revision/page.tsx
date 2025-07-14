@@ -159,6 +159,7 @@ export default function RevisionPage() {
     console.log("feedback", feedback)
     setOpenStep(prev => [...new Set([...prev, 2])]);
     } catch (err) { 
+      console.error("Error getting feedback:", err);
       toast.error('피드백 요청 중 오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
     setWaiting1(false)
@@ -182,7 +183,8 @@ export default function RevisionPage() {
       setFinalEssay(revision);
       setOpenStep(prev => [...new Set([...prev, 3])]);
     } catch (err) { 
-      toast.error('피드백 요청 중 오류가 발생했습니다. 다시 시도해주세요.');
+      console.error("Error submitting follow up:", err);
+      toast.error('최종 자소서 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
       setWaiting2(false)   
     }
