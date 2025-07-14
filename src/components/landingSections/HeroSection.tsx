@@ -20,7 +20,7 @@ const HeroSection = () => {
     <>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
-          바로지원과 함께 <br />나만의 자기소개서를 
+          바로지원과 함께 <br />나만의 자기소개서를&nbsp;
           <div className="h-px sm:hidden"><br/></div>
           완성하세요
         </div>

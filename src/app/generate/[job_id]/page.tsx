@@ -60,6 +60,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
         return keyA.localeCompare(keyB, 'ko');
       })
     : [];
+
   const [activeTab, setActiveTab] = useState(sectionKeys[0] || '');
   const [guide, setGuide] = useState<GuideOutputProps | null>(null);
   const [essay, setEssay] = useState<EssayOutputProps | null>(null);
@@ -141,19 +142,19 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
 
   return (
     <AuthCheck>
-      <div className='relative min-h-screen'>
+      <div className='mt-8 relative min-h-screen'>
         <div className={genStyles.grid} >
           <button
             onClick={() => {
-              router.push('/dashboard');
+              router.push('/generate');
               setActivePage("generation");
             }}
-            className="text-sm text-gray-700 hover:text-black  px-4 py-2 rounded-md mb-4"
+            className="text-sm text-gray-700 hover:text-black px-4 py-2 rounded-md mb-4"
           >
             ← 돌아가기
           </button>
           <div className={genStyles.leftSide} >
-            <h1 className='font-extrabold text-xl pb-4 text-dark text-[1.6rem]'>
+            <h1 className='font-extrabold pb-4 text-dark text-xl'>
               {job.company} {job.title}<br />
               {job.position}<br />
               <br />

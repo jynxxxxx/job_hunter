@@ -59,7 +59,7 @@ const Header = () => {
 
   return (
     <div 
-      className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 h-[6rem] sm:h-[4rem] font-bold text-dark flex flex-col sm:items-center sm:flex-row`}
+      className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 sm:h-[4rem] font-bold text-dark flex flex-col sm:items-center sm:flex-row ${isAuthenticated ? "h-[6rem]" : "h-[4rem]"}`}
       style={{ zIndex: 1000 }}
     >
       <div 
@@ -76,91 +76,104 @@ const Header = () => {
         />
       </div>
 
-      <div className={`w-full pt:12 flex justify-around items-end sm:items-center sm:justify-start`}>
-        {pathname === '/login' ? null : (
-          <>
-            {pathname === '/' && !isAuthenticated && (
-              <div
-                onClick={handleLoginClick}
-                className="ml-auto text-aligntext-[1rem] md:text-[1.5rem] pr-[1rem] font-semibold hover:underline cursor-pointer md:mr-[1rem]"
+      
+      {pathname === '/login' ? null : (
+        <div className={`w-full mt-2 md:mt-0 pt:12 flex justify-around items-end sm:items-center sm:justify-start`}>
+          {isAuthenticated && pathname !== '/login' && (
+            <>
+              {/* <div
+                onClick={() => {
+                  if (pathname !== '/revision') {
+                    router.push('/revision');
+                  }
+                  setActivePage("revision");
+                }}
+                className={`w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
+                  activePage === 'revision' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                }`}
               >
-                로그인
+                <span>자기소개서 AI 첨삭</span>
+              </div> */}
+              <div
+                onClick={() => {
+                  if (pathname !== '/generate') {
+                    router.push('/generate');
+                  }
+                  setActivePage("generation");
+                }}
+                className={`w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
+                  activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                }`}
+              >
+                <span>AI 자기소개서 생성</span>
               </div>
-            )}
-
-            {isAuthenticated && pathname !== '/login' && (
-              <>
-                <div
-                  onClick={() => {
-                    if (pathname !== '/dashboard') {
-                      router.push('/dashboard');
-                    }
-                    setActivePage("generation");
-                  }}
-                  className={`text-[1rem] lg:text-[1.2rem] px-2 md:px-6 py-2 cursor-pointer ${
-                    activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-                  }`}
-                >
-                  <span>AI 자기소개서</span>
-                </div>
-                <div
-                  onClick={() => {
-                    if (pathname !== '/history') {
-                      router.push('/history');
-                    }
-                    setActivePage("history")
-                  }}
-                  className={`text-[1rem] lg:text-[1.2rem] px-2 md:px-6 py-2 cursor-pointer ${
-                    activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-                  }`}
-                >
-                  <span>내 자기소개서</span>
-                </div>
-                {/* <div
-                  onClick={() => {
-                    if (pathname !== '/tokens') {
-                      router.push('/tokens');
-                    }
-                    setActivePage("tokens")
-                  }}
-                  className={`text-[1rem] lg:text-[1.2rem] px-2 md:px-6 py-2 cursor-pointer ${
-                    activePage === 'tokens' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-                  }`}
-                >
-                  <span>토큰 충전</span>
-                </div> */}
-                {/* <div className='text-[1rem] lg:text-[1.2rem] pr-[5rem] absolute top-4 right-2 text-bright'> 
-                  토큰수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
-                </div> */}
+              <div
+                onClick={() => {
+                  if (pathname !== '/history') {
+                    router.push('/history');
+                  }
+                  setActivePage("history")
+                }}
+                className={`w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
+                  activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                }`}
+              >
+                <span>내 자기소개서</span>
+              </div>
+              {/* <div
+                onClick={() => {
+                  if (pathname !== '/tokens') {
+                    router.push('/tokens');
+                  }
+                  setActivePage("tokens")
+                }}
+                className={`text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
+                  activePage === 'tokens' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                }`}
+              >
+                <span>토큰 충전</span>
+              </div> */}
+              {/* <div className='text-[1rem] lg:text-[1.2rem] pr-[5rem] absolute top-4 right-2 text-bright'> 
+                토큰수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
+              </div> */}
+            </>
+          )}
+          {!isAuthenticated ? (
+            <div
+              onClick={handleLoginClick}
+              className="z-[1000] absolute top-4 right-6 md:top-[1rem] md:right-[1rem] text-[1rem] md:text-[1.5rem] pr-[1rem] font-semibold hover:scale-110 cursor-pointer"
+            >
+              로그인
+            </div>
+          ):(
+            <div 
+              className="z-[1000] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" 
+              ref={dropdownRef}  
+              onClick={() => setIsDropdownOpen(prev => !prev)}
+            >
+              <CircleUserRound size={28} className="hover:scale-110"/>
+              {isDropdownOpen && (
                 <div 
-                  className="z-[1000] pr-[1rem] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" 
-                  ref={dropdownRef}  
-                  onClick={() => setIsDropdownOpen(prev => !prev)}
+                  className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg"
+                  style={{zIndex: '1000'}}
                 >
-                  <CircleUserRound size={28} className="hover:scale-110"/>
-                  {isDropdownOpen && (
-                    <div 
-                      className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg"
-                      style={{zIndex: '1000'}}
-                    >
-                      <div
-                        onClick={handleLogoutClick}
-                        className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                      >
-                        로그아웃
-                      </div>
-                    </div>
-                  )}
+                  <div
+                    onClick={handleLogoutClick}
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                  >
+                    로그아웃
+                  </div>
                 </div>
-              </>
-            )}
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
-            {isAuthenticated && pathname !== '/login' && pathname !== '/' && (
-              <PrivacyAgreementModal />
-            )}
-          </>
-        )}
-      </div>
+      {isAuthenticated && pathname !== '/login' && pathname !== '/' && (
+            <PrivacyAgreementModal />
+          )}
+      
     </div>
   );
 };

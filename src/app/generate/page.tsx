@@ -22,8 +22,7 @@ const imageMap: { [key: string]: string } = {
   "롯데건설":"/company_logos/lotte_gunsul.png",
 }
 
-
-export default function Dashboard() {
+export default function JobBoard() {
   const { jobList, jobTemplates } = useUserData();
   const jobContainerRef = useRef<HTMLDivElement | null>(null);
   const [openCompany, setOpenCompany] = useState<string|null>(null);
@@ -165,28 +164,6 @@ export default function Dashboard() {
 
     return () => clearTimeout(timeout);
   }, [openCompany]);
-
-  useEffect(() => {
-      if (!jobContainerRef.current) return;
-  
-      const element = jobContainerRef.current;
-  
-      // Delay is necessary to allow layout/render to finish
-      const timeout = setTimeout(() => {
-        const rect = element.getBoundingClientRect();
-        const scrollY = window.scrollY;
-        const elementCenter = rect.top + scrollY + rect.height / 2;
-        const offsetFromTop = window.innerHeight / 3;
-        const scrollTo = elementCenter - offsetFromTop;
-
-  
-        window.scrollTo({
-          top: scrollTo,
-        });
-      }, 200); // Delay matters!
-  
-      return () => clearTimeout(timeout);
-    }, [openCompany]);
 
   return (
     <AuthCheck>

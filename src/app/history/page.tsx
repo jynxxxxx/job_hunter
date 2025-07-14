@@ -61,8 +61,8 @@ export default function HistoryPage() {
 
   return (
     <AuthCheck>
-      <div className="pt-[2rem] min-h-[85vh]">
-        <h1 className="text-3xl font-bold mb-4 px-12 pb-6 pt-4">생성한 자기소개서 기록</h1>
+      <div className="pt-[4rem] min-h-[85vh]">
+        <h1 className="text-2xl font-bold mb-4 px-12 pb-6 pt-4">생성한 자기소개서 기록</h1>
           <div className="flex h-fit relative">
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -111,8 +111,8 @@ export default function HistoryPage() {
             </div>
 
             {/* Content area */}
-            <div className={`flex flex-col items-center justify-center flex-grow mb-12 transition-all duration-300 ease-in-out ${collapsed ? 'w-[100vw]' : 'w-[60vw]'}`}>
-              <div className={`mt-6 flex bg-gray-300 p-[0.2rem] rounded-t-lg border border-gray-500 ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[60vw]'}`}>
+            <div className={`flex flex-col items-center justify-start flex-grow mb-12 transition-all duration-300 ease-in-out ${collapsed ? 'w-[100vw]' : 'w-[60vw]'}`}>
+              <div className={`flex bg-gray-300 p-[0.2rem] rounded-t-lg border border-gray-500 ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[60vw]'}`}>
                 <div
                   className={`${genStyles.resultTab} ${preview === 'guide' ? genStyles.active : ''}`}
                   onClick={() => setPreview("guide")}
@@ -129,7 +129,7 @@ export default function HistoryPage() {
               <div className={`bg-[#d1d5dc46] border border-gray-700 min-h-[60vh] ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[60vw]'} rounded-b-lg`}>
                 {selectedGen ? (
                   <div className="bg-white/70 py-8 px-4 sm:px-16 h-[60vh] rounded-b-lg flex flex-col gap-8 overflow-y-scroll">
-                    <div className="text-gray-700 text-[1.3rem]">
+                    <div className="text-gray-700 text-lg">
                       {(() => {
                         const jobInfo = jobList.find(j => String(j.job_id) === String(selectedGen.job_id));
                         return (
@@ -139,7 +139,7 @@ export default function HistoryPage() {
                         );
                       })()}
                     </div>
-                    <div className="text-gray-700 text-[1.3rem]">
+                    <div className="text-gray-700 text-lg">
                       {(() => {
                         const template = getQuestionTemplate(selectedGen.job_id || '', jobTemplates);
                         const qid = selectedGen.question_id || selectedGen.input?.question_id;
