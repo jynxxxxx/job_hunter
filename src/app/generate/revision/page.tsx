@@ -13,6 +13,8 @@ import styles from "@/styles/revisions.module.scss"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { useAuth } from "@/context/AuthContext";
+import Paywall from "@/components/Paywall";
+import genStyles from "@/styles/generation.module.scss"
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -27,13 +29,10 @@ export default function RevisionPage() {
   const [showFollowup, setShowFollowup] = useState(false);
   const [followupAnswers, setFollowupAnswers] = useState<string[]>([]);
   const [finalEssay, setFinalEssay] = useState<Revision | null>(null);
-  const [selectedCompany, setSelectedCompany] = useState("");
-  const [selectedJob, setSelectedJob] = useState<any>(null);
+  const [companyInput, setCompanyInput] = useState("");
+  const [jobInput, setJobInput] = useState("");
   const [openStep, setOpenStep] = useState<number[]>([1]);
-  const [selectedQuestion, setSelectedQuestion] = useState('')
-  const [customCompany, setCustomCompany] = useState('');
-  const [customJob, setCustomJob] = useState('');
-  const [customQuestion, setCustomQuestion] = useState('');
+  const [questionInput, setQuestionInput] = useState("");
   const [jobUrl, setJobUrl] = useState('');
   const [waiting1, setWaiting1] = useState(false);
   const [waiting2, setWaiting2] = useState(false);
@@ -42,60 +41,21 @@ export default function RevisionPage() {
   const [running, setRunning] = useState(false);
   const step2Ref = useRef<HTMLDetailsElement | null>(null);
   const step3Ref = useRef<HTMLDetailsElement | null>(null);
+  const [paywall, setPaywall] = useState(false);
 
-  const jobOptions = selectedCompany === '자유입력'
-    ? []
-    : jobList.filter(item => item.company === selectedCompany);
-
-  const now = new Date();
-  const activeJobs = jobList.filter(item => !item.endDate || parseCustomEndDate(item.endDate) >= now)
-    .sort((a, b) => {
-      const aIsSK = a.company.toLowerCase().includes('sk');
-      const bIsSK = b.company.toLowerCase().includes('sk');
-
-      // Primary Sort: 'SK' companies first
-      // If 'a' is an SK company and 'b' is not, 'a' comes before 'b' (return -1)
-      if (aIsSK && !bIsSK) {
-        return -1;
-      }
-      // If 'a' is not an SK company and 'b' is, 'a' comes after 'b' (return 1)
-      if (!aIsSK && bIsSK) {
-        return 1;
-      }
-
-      const dateA = a.endDate ? new Date(a.endDate) : new Date('9999-12-31'); // Put jobs without endDate at the end
-      const dateB = b.endDate ? new Date(b.endDate) : new Date('9999-12-31');
-
-      if (dateA.getTime() !== dateB.getTime()) {
-        return dateA.getTime() - dateB.getTime(); // Soonest endDate first
-      }
-
-      const companyCompare = b.company.localeCompare(a.company);
-      if (companyCompare !== 0) return companyCompare;
-
-      return a.title.localeCompare(b.title);
-    });
-
-  const uniqueCompanies = Array.from(
-    new Set(
-      activeJobs
-        .map(item => item.company)
-    )
-  );
-
-    useEffect(() => {
-      if (waiting2 && !running) {
-        stageSetRef.current = [
-          { text: '고객님의 정보를 안전하게 접수했습니다.', duration: 2000 + Math.random() * 1000 },
-          { text: '입력하신 내용을 분석 중입니다.', duration: 8000 + Math.random() * 5000 },
-          { text: `${selectedCompany == "자유입력" ? customCompany : selectedCompany} 합격 자기소개서 데이터를 참고하고 있습니다.`, duration: 8000 + Math.random() * 5000 },
-          { text: '고객님 맞춤형 자기소개서 가이드를 작성하고 있습니다.', duration: 10000 + Math.random() * 5000 },
-          { text: '최종 결과물을 준비 중입니다. 곧 확인하실 수 있습니다.', duration: 12000 + Math.random() * 5000 }
-        ];
-        setRunning(true);
-        setStageIndex(0);
-      }
-    }, [waiting2, running, selectedCompany]);
+  useEffect(() => {
+    if (waiting2 && !running) {
+      stageSetRef.current = [
+        { text: '고객님의 정보를 안전하게 접수했습니다.', duration: 2000 + Math.random() * 1000 },
+        { text: '입력하신 내용을 분석 중입니다.', duration: 8000 + Math.random() * 5000 },
+        { text: `${companyInput} 합격 자기소개서 데이터를 참고하고 있습니다.`, duration: 8000 + Math.random() * 5000 },
+        { text: '고객님 맞춤형 자기소개서 첨삭 진행중 입니다.', duration: 10000 + Math.random() * 5000 },
+        { text: '최종 결과물을 준비 중입니다. 곧 확인하실 수 있습니다.', duration: 12000 + Math.random() * 5000 }
+      ];
+      setRunning(true);
+      setStageIndex(0);
+    }
+  }, [waiting2, running, companyInput]);
   
     useEffect(() => {
       if (!running || !stageSetRef.current) return;
@@ -110,100 +70,14 @@ export default function RevisionPage() {
       return () => clearTimeout(timer);
     }, [running, stageIndex]);
 
-  // Update job options when company changes
-  const handleCompanyChange = (e: any) => {
-    const company = e.target.value;
-    setSelectedCompany(company);
-    if(company =='자유입력'){
-      setSelectedJob('자유입력');
-      setSelectedQuestion('자유입력');
-    } else {
-      setSelectedJob(null);
-      setSelectedQuestion('');
-    }
-  };
-
-  const handleJobChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const [title, position] = e.target.value.split('|||');
-
-    if (e.target.value == '자유입력') {
-      setSelectedJob('자유입력');
-      setSelectedQuestion('자유입력');
-    } else {
-      const job = jobOptions.find(item => item.title === title && item.position === position);
-      if (job) {
-        setSelectedJob(job);
-      }
-    }
-    setSelectedQuestion('');
-  };
-
-  const selectedJobTemplate = jobTemplates.find(t => t.job_id == selectedJob?.job_id);
-
-  const questionOptions = selectedJobTemplate && selectedJob !== '자유입력'
-    ? Object.entries(selectedJobTemplate)
-      .filter(([key]) => key.startsWith('question'))
-      .map(([key, text]) => ({ key, text: String(text) }))
-      .sort((a, b) => {
-        const cleanA = a.key.replace(/^question/, '');
-        const cleanB = b.key.replace(/^question/, '');
-
-        const isNumberA = /^\d+$/.test(cleanA);
-        const isNumberB = /^\d+$/.test(cleanB);
-        const isAlphaA = /^[a-zA-Z가-힣\s]+$/.test(cleanA);
-        const isAlphaB = /^[a-zA-Z가-힣\s]+$/.test(cleanB);
-
-        // Case 1: both alpha
-        if (isAlphaA && isAlphaB) {
-          return cleanA.localeCompare(cleanB, 'ko');
-        }
-
-        // Case 2: both numbers
-        if (isNumberA && isNumberB) {
-          return parseInt(cleanA) - parseInt(cleanB);
-        }
-
-        // Case 3: mixed alpha and number
-        if (isAlphaA && isNumberB) return -1; // alpha first
-        if (isNumberA && isAlphaB) return 1;  // alpha first
-
-        // Case 4: one or both symbols
-        if (isAlphaA) return -1;  // alpha before symbol
-        if (isAlphaB) return 1;
-
-        if (isNumberA) return -1; // number before symbol
-        if (isNumberB) return 1;
-
-        // Both symbols or unclassified, compare lex
-        return cleanA.localeCompare(cleanB, 'ko');
-      })
-    : [];
-  
   const handleSubmitDraft = async (e: any) => {
     e.preventDefault();
 
-    if (!authUser) {
-      toast.error("로그인이 필요합니다.");
-      setWaiting2(false);
-      return;
-    }
-
-    const userRef = doc(db, "users", authUser?.uid);
-    const userSnap = await getDoc(userRef);
-
-    const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    const freePassUsed =  userSnap.exists() && userSnap.data().revision_count > 0
-    
-    if (!hasSubscribed && freePassUsed) {
-      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-      return;
-    }
-
     const input = {
-      company_name: selectedCompany == "자유입력" ? customCompany : selectedJob.company,
-      job_title: selectedJob == "자유입력" ? customJob : selectedJob.position,
-      question_number: customQuestion ? "" : selectedQuestion.replace(/^question/, ''),
-      question_text: customQuestion ? customQuestion : "",
+      company_name: companyInput,
+      job_title: jobInput,
+      question_text: questionInput,
+      question_number: "",
       url: jobUrl,
       essay_draft: draft,
     };
@@ -224,6 +98,28 @@ export default function RevisionPage() {
     setWaiting1(false)
     }
   };
+
+  const handleSeeQuestions = async (e: any) => {
+    e.preventDefault();
+    if (!authUser) {
+      toast.error("로그인이 필요합니다.");
+      setWaiting2(false);
+      return;
+    }
+
+    const userRef = doc(db, "users", authUser?.uid);
+    const userSnap = await getDoc(userRef);
+
+    const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
+    const freePassUsed = userSnap.exists() && userSnap.data().revision_count > 0;
+
+    if (!hasSubscribed && freePassUsed) {
+      setPaywall(true);
+      return;
+    }
+
+    setShowFollowup(true);
+  }
 
   const handleSubmitFollowup = async (e: any) => {
     e.preventDefault();
@@ -262,10 +158,10 @@ export default function RevisionPage() {
     } 
     
     const input = {
-      company_name: selectedCompany == "자유입력" ? customCompany : selectedJob.company,
-      job_title: selectedJob == "자유입력" ? customJob : selectedJob.position,
-      question_number: customQuestion ? "" : selectedQuestion.replace(/^question/, ''),
-      question_text: customQuestion ? customQuestion : "",
+      company_name: companyInput,
+      job_title: jobInput,
+      question_text: questionInput,
+      question_number: "",
       url: jobUrl,
       essay_draft: draft,
       additional_user_input: Object.values(followupAnswers)
@@ -308,13 +204,10 @@ export default function RevisionPage() {
     setShowFollowup(false);
     setFollowupAnswers([]);
     setFinalEssay(null);
-    setSelectedCompany('');
-    setSelectedJob(null);
+    setCompanyInput("");
+    setJobInput("");
     setOpenStep([1]);
-    setSelectedQuestion('');
-    setCustomCompany('');
-    setCustomJob('');
-    setCustomQuestion('');
+    setQuestionInput("");
     setJobUrl('');
 
     window.scrollTo({top:0, behavior: 'smooth',});
@@ -342,7 +235,7 @@ export default function RevisionPage() {
             당신의 자소서, 정말 &apos;합격 수준&apos; 인지&nbsp;<div className="h-px sm:hidden"><br/></div>확인해 보세요.
           </h1>
           <h2 className="py-4 text-bright text-lg md:text-2xl font-normal leading-normal ">
-            삼성-SK 하이닉스 인사팀 출신 전문가의 날카로운 분석과 AI의 정교한 수정으로, 당신의 자소서를 합격 공식에 맞춰 완벽하게 개선하세요.
+            삼성-SK 하이닉스 인사팀 출신 전문가의 노하우와 3,000건의 합격자소서를 기반으로, 합격률을 높이는 자소서로 완성하세요.
           </h2>
         </div>
 
@@ -357,98 +250,38 @@ export default function RevisionPage() {
           <form onSubmit={handleSubmitDraft} className={styles.sectionctn}>
             <div className="w-full flex items-center gap-2">
               <label className="w-[5ch] min-w-[5ch]">회사:</label>
-              <select
-                value={selectedCompany || ""}
-                onChange={handleCompanyChange}
-                className={`${selectedCompany == "자유입력" ? styles.free : ""} ${styles.formField}`}
+              <input
+                type="text"
+                value={companyInput}
+                onChange={e => setCompanyInput(e.target.value)}
+                placeholder="회사를 입력하세요"
+                className={styles.formField}
                 required
-              >
-                <option value="" disabled hidden>회사 선택</option>
-                {uniqueCompanies.map(company => (
-                  <option className={styles.formOption} key={company} value={company}>{company}</option>
-                ))}
-                <option className={styles.formOption} key="자유입력" value="자유입력">자유입력</option>
-              </select>
-              {selectedCompany === '자유입력' && (
-                <input
-                  type="text"
-                  value={customCompany}
-                  onChange={e => {
-                    setCustomCompany(e.target.value)}
-                  }
-                  placeholder="회사를 입력하세요"
-                  className={styles.formField}
-                  required
-                />
-              )}
+              />
             </div>
             <div className="w-full flex items-center gap-2">
               <label className="w-[5ch] min-w-[5ch] min-">직무:</label>
-              <select
-                value={
-                  selectedJob === '자유입력'
-                    ? '자유입력'
-                    : selectedJob
-                      ? `${selectedJob.title}|||${selectedJob.position}`
-                      : ""
-                }
-                onChange={handleJobChange}
-                disabled={!selectedCompany}
-                className={`${selectedJob == "자유입력" ? styles.free : ""} ${styles.formField}`}
+              <input
+                type="text"
+                value={jobInput}
+                onChange={e => setJobInput(e.target.value)}
+                placeholder="직무를 입력하세요"
+                className={styles.formField}
                 required
-              >
-                <option value="" disabled hidden>직무/공고 선택 (회사 먼저 선택 해주세요)</option>
-                {jobOptions.map(item => (
-                  <option 
-                    className={styles.formOption} 
-                    key={`${item.title}-${item.position}`} 
-                    value={`${item.title}|||${item.position}`}
-                  >
-                    {item.title} ({item.position})
-                  </option>
-                ))}
-                <option className={styles.formOption} key="자유입력" value="자유입력">자유입력</option>
-              </select>
-              {selectedJob === '자유입력' && (
-                <input
-                  type="text"
-                  value={customJob}
-                  onChange={e => setCustomJob(e.target.value)}
-                  placeholder="직무를 입력하세요"
-                  className={styles.formField}
-                  required
-                />
-              )}
+              />
             </div>  
             <div className="w-full flex items-center gap-2">
               <label className="w-[5ch] min-w-[5ch]">문항:</label>
-              <select
-                value={selectedQuestion}
-                onChange={(e) => setSelectedQuestion(e.target.value)}
-                className={`${selectedQuestion == "자유입력" ? styles.free : ""} ${styles.formField}`}
-                disabled={!selectedJob}
+              <input
+                type="text"
+                value={questionInput}
+                onChange={e => setQuestionInput(e.target.value)}
+                placeholder="문항을 입력하세요"
+                className={styles.formField}
                 required
-              >
-                <option value="" disabled hidden>문항 선택 (직무 선택 해주세요)</option>
-                {questionOptions.map(opt => (
-                  <option key={opt.key} value={opt.key}>
-                    {/^\d+$/.test(opt.key.replace(/^question/, '')) ? `${opt.key.replace(/^question/, '')}번 문항:` : `${opt.key.replace(/^question/, '')} 문항:`} {opt.text}
-                  </option>
-                ))}
-                <option className={styles.formOption} key="자유입력" value="자유입력">자유입력</option>
-              </select>
-              {selectedQuestion === '자유입력' && (
-                <input
-                  type="text"
-                  value={customQuestion}
-                  onChange={e => setCustomQuestion(e.target.value)}
-                  placeholder="문항을 입력하세요"
-                  className={styles.formField}
-                  required
-                />
-              )}
+              />
             </div>
-            <div className="w-full flex items-center gap-2">
+            <div className="w-full flex flex-row sm:flex-col items-center gap-2">
               <label className="w-[5ch] min-w-[5ch]">URL:</label>
               <input
                   type="text"
@@ -458,7 +291,7 @@ export default function RevisionPage() {
                   className={styles.formField}
                 />
             </div>
-            <div className="w-full flex flex-col">
+            <div className="w-full flex gap-2">
               <label className="w-[5ch] min-w-[5ch]">초안:</label>
               <textarea
                 rows={6}
@@ -515,7 +348,7 @@ export default function RevisionPage() {
 
                 {feedback?.additional_info_request?.needs_additional_info && (
                   <button
-                    onClick={() => setShowFollowup(true)}
+                    onClick={handleSeeQuestions}
                     className={styles.btn}
                   >
                     추가 질문 보기
@@ -552,7 +385,7 @@ export default function RevisionPage() {
                         className={styles.btn}
                         disabled={waiting2}
                       >
-                        최종 자기소개서 생성하기
+                        자기소개서 첨삭 하기
                       </button>
                     </div>
                   </div>
@@ -604,6 +437,24 @@ export default function RevisionPage() {
             </button>
           </div>
         }
+        {paywall && (
+          <>
+            <div className={genStyles.paywallOverlay}></div>
+            <div className={`relative ${genStyles.paywallMessage}`}>
+              <h2 className="text-[1.5rem] font-extrabold pb-4">🔒 프리미엄 콘텐츠입니다</h2>
+              <Paywall />
+              <button
+                onClick={()=> setPaywall(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none cursor-pointer"
+                aria-label="Close"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </AuthCheck>
   );
