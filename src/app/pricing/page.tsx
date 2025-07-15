@@ -4,9 +4,9 @@ import AuthCheck from '@/components/AuthCheck';
 import React, { useState } from 'react';
 
 export default function PricingPage() {
-  const [selectedPackage, setSelectedPackage] = useState<{ tier:String; spotsLeft: number; price: number } | null>(null);
+  const [selectedPackage, setSelectedPackage] = useState<{ tier:string; spotsLeft: number; price: number } | null>(null);
 
-  const handlePurchaseClick = (pkg: { tier:String; spotsLeft: number; price: number }) => {
+  const handlePurchaseClick = (pkg: { tier:string; spotsLeft: number; price: number }) => {
     setSelectedPackage(pkg);
   };
 

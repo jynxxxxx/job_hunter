@@ -70,5 +70,5 @@ export interface SubQuestions {
   subquestion: {
     [key: string]: SubQuestionGroup;
   };
-  prompts: {};
+  prompts: Record<string, Record<string, string>>;
 }

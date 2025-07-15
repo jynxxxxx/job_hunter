@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useUserData } from "@/context/UserDataContext";
 import AuthCheck from "@/components/AuthCheck";
-import { parseCustomEndDate, scrollToElementWithOffset } from "@/components/HelperFunctions";
+import { scrollToElementWithOffset } from "@/components/HelperFunctions";
 import { Feedback, Revision } from "@/types/forms";
 import { generateFeedback, generateRevision } from "@/app/api/generate";
 import { toast } from "sonner";
@@ -23,7 +23,6 @@ import { DotSpinner } from "@/components/layoutSections/DotSpinner";
 
 export default function RevisionPage() {
   const {authUser} = useAuth()
-  const { jobList, jobTemplates } = useUserData();
   const [draft, setDraft] = useState('');
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [showFollowup, setShowFollowup] = useState(false);
