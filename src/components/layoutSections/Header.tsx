@@ -109,9 +109,9 @@ const Header = () => {
                       }
                       setActivePage("generation");
                     }}
-                    className='py-4 px-8 hover:bg-primary/40'
+                    className='p-4 hover:bg-primary/40'
                   >
-                    핫한 채용공고 자기소개서 생성
+                    🔥 핫한 채용공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 생성
                   </div>
                   <div
                     onClick={() => {
@@ -120,9 +120,9 @@ const Header = () => {
                       }
                       setActivePage("generation");
                     }}
-                    className='py-4 px-8 hover:bg-primary/40'
+                    className='p-4 hover:bg-primary/40'
                   >
-                    자유항목 공고 자기소개서 생성
+                    ✍️ 자유항목 공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 생성
                   </div>
                   <div
                     onClick={() => {
@@ -131,9 +131,9 @@ const Header = () => {
                       }
                       setActivePage("generation");
                     }}
-                    className='py-4 px-8 hover:bg-primary/40'
+                    className='p-4 hover:bg-primary/40'
                   >
-                    자유항목 공고 자기소개서 첨삭
+                    🛠 자유항목 공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 첨삭
                   </div>
                 </div>
               )}                
