@@ -19,6 +19,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   const { authUser } = useAuth()
   const { jobList, jobTemplates, userData, setActivePage } = useUserData();
   const { job_id: encodedJobId } = React.use(params);
+  const [openStep, setOpenStep] = useState<number[]>([1]);
   const router = useRouter();
   const jobURI = decodeURIComponent(encodedJobId);
   const job_id = jobURI.split('xY_')[0];
@@ -110,6 +111,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
 
   useEffect(() => {
     if (waiting && !running) {
+      setOpenStep(prev => [...new Set([...prev, 2])]);
       stageSetRef.current = [
         { text: '고객님의 정보를 안전하게 접수했습니다.', duration: 2000 + Math.random() * 1000 },
         { text: '입력하신 내용을 분석 중입니다.', duration: 10000 + Math.random() * 5000 },
@@ -136,6 +138,18 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
     return () => clearTimeout(timer);
   }, [running, stageIndex]);
 
+
+  const toggleStep = (step: number) => {
+    setOpenStep(prev =>
+      prev.includes(step) ? prev.filter(s => s !== step) : [...prev, step]
+    );
+  };
+
+  const stepDisabled = (step: number) => {
+    if (step === 2) return !(running || guide);
+    return false;
+  };
+  
   if (!template) {
     return <div className="p-8 text-center text-xl">해당 회사/직무에 대한 질문 템플릿이 없습니다.</div>;
   }
@@ -146,7 +160,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
         <div className={genStyles.grid} >
           <button
             onClick={() => {
-              router.push('/generate');
+              router.push('/generate/trending');
               setActivePage("generation");
             }}
             className="text-sm text-gray-700 hover:text-black px-4 py-2 rounded-md mb-4"
@@ -182,27 +196,42 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                 {(template as any)[`question${activeTab.slice(1)}`]}
               </div>
             )}
-            {activeTab && (
-              <DynamicQuestionSection
-                key={activeTab}
-                job_id={job_id}
-                section={activeTab}
-                question_id={activeTab.slice(1)}
-                setGuide={setGuide}
-                setEssay={setEssay}
-                waiting={waiting}
-                setWaiting={setWaiting}
-                setRunning={setRunning}
-                running={running}
-                freePassUsed={freePassUsed}
-              />
+            {/* Step 1 */}
+            {activeTab && (        
+              <details open={openStep.includes(1)} className={genStyles.section}>
+                <summary
+                  className="cursor-pointer font-semibold px-4 py-2 bg-primary"
+                  onClick={() => toggleStep(1)}
+                >
+                  1단계: 질문 답하기
+                </summary>
+                <div className={genStyles.sectionctn}>
+                  <DynamicQuestionSection
+                    key={activeTab}
+                    job_id={job_id}
+                    section={activeTab}
+                    question_id={activeTab.slice(1)}
+                    setGuide={setGuide}
+                    setEssay={setEssay}
+                    waiting={waiting}
+                    setWaiting={setWaiting}
+                    setRunning={setRunning}
+                    running={running}
+                    freePassUsed={freePassUsed}
+                  />
+                </div>
+              </details>
             )}
           </div>
           <div className={genStyles.rightSide} id="top">
-              <div >
-                <div className={`${genStyles.question} text-center`}>
-                  바로지원 AI가 생성한 가이드/자기소개서
-                </div>            
+            <details open={openStep.includes(2)} className={`${genStyles.section} ${stepDisabled(2) ? 'opacity-50 pointer-events-none' : ''}`}>
+            <summary
+              className="cursor-pointer font-semibold px-4 py-2 bg-primary"
+              onClick={() => !stepDisabled(2) && toggleStep(2)}
+            >
+              2단계: 바로지원 AI가 생성한 가이드/자기소개서
+            </summary>
+              <div className={genStyles.sectionctn}>         
                 <div className='flex w-full mx-auto bg-gray-300 p-[0.2rem] rounded-t-[0.5rem] border border-gray-500'>
                   <div 
                     className={`${genStyles.resultTab} ${running || !guide && genStyles.tabDisabled} ${!running && guide && preview === 'guide' ? genStyles.active : ''}`}
@@ -250,6 +279,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
                       />
                 )}
               </div>
+            </details>
           </div>
         </div>
         {!userHasPaid && freePassUsed && (
@@ -268,6 +298,17 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
             </div>
           </div>
         )}
+        { guide && !running && 
+          <div className="flex justify-end pr-4 w-full md:w-[65%] mx-auto">
+            <button 
+              onClick={()=>window.scrollTo({top:0, behavior: 'smooth',})} 
+              className="my-6 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+            >
+              다시 위로 가기
+            </button>
+          </div>
+        }
+
       </div>
     </AuthCheck>
   );

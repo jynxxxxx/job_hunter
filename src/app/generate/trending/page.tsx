@@ -82,15 +82,24 @@ export default function JobBoard() {
 
   const expiredJobs = [
     ...jobList.filter(item => {
-
       const itemEndDateObj = parseCustomEndDate(item.endDate);
-
       if (isNaN(itemEndDateObj?.getTime())) {
         return false; 
       }
-
       return itemEndDateObj < now;
-    }),
+    }).reduce((map, item) => {
+      const key = `${item.company}-${item.title}`;
+      if (!map.has(key)) {
+        map.set(key, {
+          company: item.company,
+          title: item.title,
+          startDate: item.startDate,
+          endDate: item.endDate,
+        });
+      }
+      return map;
+    }, new Map<string, { company: string; title: string; startDate?: string; endDate?: string }>())
+    .values(),
     ...finished
   ];
 
@@ -168,26 +177,6 @@ export default function JobBoard() {
   return (
     <AuthCheck>
       <div className="w-[80vw] mx-auto">
-        {/* <div className="">
-          <div
-            className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
-            style={{
-              borderRadius: "4rem",
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("/bg_image.png")`
-            }}
-          >
-            <div className="flex flex-col gap-2 text-center">
-              <h1
-                className="text-white mt-8 text-3xl md:text-5xl leading-tight tracking-[-0.033em] font-extrabold"
-              > 
-                AI로 돋보이는 자기소개서를 작성하세요
-              </h1>
-              <h2 className="pt-4 text-white text-lg md:text-2xl font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                지원하는 회사와 직무에 맞춰 당신의 강점과 경험을 돋보이게 하는 맞춤형 자기소개서를 생성하세요.
-              </h2>
-            </div>
-          </div>
-        </div> */}
         <div className="flex flex-col gap-2 pt-8 pb-4 text-center">
           <h1
             className="text-bright mt-8 text-2xl md:text-4xl leading-tight tracking-[-0.033em] font-extrabold"

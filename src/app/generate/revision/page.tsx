@@ -489,8 +489,6 @@ export default function RevisionPage() {
           >
             2단계: AI 피드백 확인 및 선택적 보완
           </summary>
-
-            
           <div className={styles.sectionctn}>
             {waiting1 ? (
               <div className="flex flex-col justify-center items-center">

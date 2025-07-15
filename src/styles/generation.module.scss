@@ -117,7 +117,7 @@
 }
 
 .grid{
-  width: 70%;
+  width: 65%;
   margin-right: auto;
   margin-left: auto;
   margin-top: 1rem;
@@ -125,13 +125,23 @@
 
 .leftSide{
   width: 100%;
-  padding: 3rem 5rem;
-  background: rgba($primary, 0.4);
   border-radius: 8px;
 }
 
+.section{
+  margin-bottom: 1rem;
+  border: 1px solid gray;
+  border-radius: 8px;
+  overflow-x: hidden;
+}
+
+.sectionctn{
+  width: 100%;
+  padding: 1rem 2rem;
+  gap: 0.5rem;
+}
+
 .rightSide{
-  margin: 4rem 10rem 3rem;
   display: flex;
   flex-direction: column;
 }
@@ -152,9 +162,7 @@
 }
 
 .questionCtn{
-  padding: 2rem 2rem;
   border-radius: 8px;
-  background-color: rgba($primary, 0.6);
 }
 
 .stepGroup{
@@ -197,7 +205,7 @@
   padding: 1rem;
   border: 1px gray solid;
   border-radius: 8px;
-  width: 100%;
+  width: calc(100% -  1.5rem);
   background-color: white;
 }
 
@@ -301,8 +309,8 @@
     width: 90%;
   }
 
-  .leftSide{
-    padding: 1.5rem 1rem 1rem;
+  .sectionctn{
+    padding: 1rem
   }
 
   .rightSide{
@@ -310,7 +318,7 @@
   }
 
   .guideCtn{
-    padding: 2rem 0.5rem;
+    padding: 1rem 0.5rem;
   }
 
   .formctn{
@@ -324,6 +332,7 @@
   .draft{
     margin-left: 0rem;
     padding: 0.5rem 0.75rem;
+    width: 100%;
   }
 
   .radioCard, .checkCard{
