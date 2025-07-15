@@ -89,30 +89,18 @@ const Header = () => {
         <div className={`w-full mt-2 md:mt-0 pt:12 flex justify-around items-end sm:items-center sm:justify-start`}>
           {isAuthenticated && pathname !== '/login' && (
             <>
-              {/* <div
-                onClick={() => {
-                  if (pathname !== '/revision') {
-                    router.push('/revision');
-                  }
-                  setActivePage("revision");
-                }}
-                className={`w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
-                  activePage === 'revision' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-                }`}
-              >
-                <span>자기소개서 AI 첨삭</span>
-              </div> */}
-            <div 
-              className={`relative w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
+              <div 
+                className={`relative w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
                   activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                 }`}
-              ref={generateRef}  
-              onClick={() => setIsGenerateTabOpen(prev => !prev)}
+                ref={generateRef}  
+                onMouseEnter={() => setIsGenerateTabOpen(true)}
+                onMouseLeave={() => setIsGenerateTabOpen(false)}
             >
-              <span>AI 자기소개서 생성</span>
+              <span>AI 자기소개서</span>
               {isGenerateTabOpen && (
                 <div
-                  className="absolute top-full left-2 w-[150%] flex flex-col bg-white border border-gray-200 rounded shadow-lg"
+                  className="absolute top-full left-2 text-sm font-bold w-[180%] flex flex-col bg-white border border-gray-200 rounded shadow-lg"
                 >
                   <div
                     onClick={() => {
@@ -121,10 +109,9 @@ const Header = () => {
                       }
                       setActivePage("generation");
                     }}
-                    className='py-4 px-8 hover:bg-primary'
+                    className='py-4 px-8 hover:bg-primary/40'
                   >
-                    핫한 채용공고 자기소개서
-                    <p></p>
+                    핫한 채용공고 자기소개서 생성
                   </div>
                   <div
                     onClick={() => {
@@ -135,7 +122,18 @@ const Header = () => {
                     }}
                     className='py-4 px-8 hover:bg-primary/40'
                   >
-                    자유항목 공고 자기소개서
+                    자유항목 공고 자기소개서 생성
+                  </div>
+                  <div
+                    onClick={() => {
+                      if (pathname !== '/generate') {
+                        router.push('/generate/revision');
+                      }
+                      setActivePage("generation");
+                    }}
+                    className='py-4 px-8 hover:bg-primary/40'
+                  >
+                    자유항목 공고 자기소개서 첨삭
                   </div>
                 </div>
               )}                
@@ -151,24 +149,21 @@ const Header = () => {
                   activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                 }`}
               >
-                <span>내 자기소개서</span>
+                <span>자기소개서 기록</span>
               </div>
-              {/* <div
+              <div
                 onClick={() => {
-                  if (pathname !== '/tokens') {
-                    router.push('/tokens');
+                  if (pathname !== '/pricing') {
+                    router.push('/pricing');
                   }
-                  setActivePage("tokens")
+                  setActivePage("pricing")
                 }}
                 className={`text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
-                  activePage === 'tokens' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  activePage === 'pricing' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                 }`}
               >
-                <span>토큰 충전</span>
-              </div> */}
-              {/* <div className='text-[1rem] lg:text-[1.2rem] pr-[5rem] absolute top-4 right-2 text-bright'> 
-                토큰수: {userData?.tokens && (userData?.tokens> 0) ? userData?.tokens : 0 }
-              </div> */}
+                <span>구독안네</span>
+              </div> 
             </>
           )}
           {!isAuthenticated ? (

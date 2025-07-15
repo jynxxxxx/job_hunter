@@ -104,3 +104,17 @@ export function parseCustomEndDate(dateString: string) {
   // This is important because 'now' is also in the local timezone.
   return new Date(year, month, day, hours, minutes, 0, 0); // Year, Month, Day, Hour, Minute, Second, Millisecond
 }
+
+export const scrollToElementWithOffset = (ref: React.RefObject<HTMLElement | HTMLDetailsElement | null>, offsetRatio = 0.3) => {
+  if (!ref.current) return;
+
+  const rect = ref.current.getBoundingClientRect();
+  const scrollY = window.scrollY;
+  const elementTop = rect.top + scrollY;
+  const offset = window.innerHeight * offsetRatio;
+
+  window.scrollTo({
+    top: elementTop - offset,
+    behavior: 'smooth',
+  });
+};
