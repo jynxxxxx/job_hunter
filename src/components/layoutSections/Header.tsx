@@ -162,7 +162,7 @@ const Header = () => {
                   activePage === 'pricing' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                 }`}
               >
-                <span>구독안네</span>
+                <span>구독안내</span>
               </div> 
             </>
           )}

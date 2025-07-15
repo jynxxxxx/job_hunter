@@ -126,7 +126,7 @@ export default function PricingPage() {
                 </div>
         
                 <p className="text-center text-sm text-blue-700 font-semibold mt-6">
-                  확인 후 <span className="text-base">30분 이내</span>에 토큰이 계정에 추가됩니다.
+                  결제 완료 확인 후 <span className="text-base">30분 내</span> 구독이 활성화됩니다.
                 </p>
               </div>
 

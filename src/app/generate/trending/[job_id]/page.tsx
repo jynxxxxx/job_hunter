@@ -81,7 +81,7 @@ export default function GenerationDynamicPage({ params }: { params: Promise<{ jo
   }, [sectionKeys, activeTab]);
 
   useEffect(() => {
-    const paidCheck = userData?.hasPaid?.[job_id] === true;
+    const paidCheck = userData?.hasPaid?.[job_id] === true || userData?.subscription.active === true;
     setUserHasPaid(paidCheck)
   }, [activeTab]);
 

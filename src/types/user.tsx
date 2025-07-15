@@ -45,4 +45,9 @@ export interface CustomUserProfile {
   hasPaid?: { [jobId: string]: boolean };
   tokens?: number;
   agreedToPrivacy?: string;
+  subscription: {
+    active: boolean,
+    startDate:string,
+    endDate:string,
+  }
 }

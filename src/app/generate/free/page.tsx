@@ -11,6 +11,8 @@ import styles from "@/styles/revisions.module.scss"
 import { DotSpinner } from "@/components/layoutSections/DotSpinner";
 import { scrollToElementWithOffset } from "@/components/HelperFunctions";
 import { useAuth } from "@/context/AuthContext";
+import Paywall from "@/components/Paywall";
+import genStyles from "@/styles/generation.module.scss"
 
 export default function FreeGenerationPage() {
   const {authUser} = useAuth()
@@ -29,7 +31,8 @@ export default function FreeGenerationPage() {
   const [running, setRunning] = useState(false);
   const step2Ref = useRef<HTMLDetailsElement | null>(null);
   const step3Ref = useRef<HTMLDetailsElement | null>(null);
-  
+  const [paywall, setPaywall] = useState(false);
+
   useEffect(() => {
     if (waiting2 && !running) {
       stageSetRef.current = [
@@ -73,7 +76,7 @@ export default function FreeGenerationPage() {
     const freePassUsed =  userSnap.exists() && userSnap.data().generation_count['open'] > 0
 
     if (!hasSubscribed && freePassUsed) {
-      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+      setPaywall(true)
       return;
     }
 
@@ -219,7 +222,7 @@ export default function FreeGenerationPage() {
             AI와 전문가의 힘으로 합격 자소서를 완성하세요.
           </h1>
           <h2 className="py-4 text-bright text-lg md:text-2xl font-normal leading-normal ">
-            삼성-SK 하이닉스 인사팀 출신 전문가의 날카로운 분석과 AI의 정교한 수정으로, 당신의 자소서를 합격 공식에 맞춰 완벽하게 개선하세요.
+            삼성-SK 하이닉스 인사팀 출신 전문가의 노하우와 3,000건의 합격자소서를 기반으로, 합격률을 높이는 자소서로 완성하세요.
           </h2>
         </div>
 
@@ -281,7 +284,7 @@ export default function FreeGenerationPage() {
                 className={styles.btn}
                 disabled={waiting1}
               >
-                자기소개서 첨삭하기
+                자기소개서 생성 시작하기
               </button>
             </div>
           </form>
@@ -293,7 +296,7 @@ export default function FreeGenerationPage() {
             className="cursor-pointer font-semibold px-4 py-2 bg-primary"
             onClick={() => !stepDisabled(2) && toggleStep(2)}
           >
-            2단계: 조금더 나 답게
+            2단계: 경험과 상세 내용을 작성하기
           </summary>
 
           <div className={styles.sectionctn}>
@@ -384,6 +387,15 @@ export default function FreeGenerationPage() {
             </button>
           </div>
         }
+        {paywall && (
+          <>
+            <div className={genStyles.paywallOverlay}></div>
+            <div className={genStyles.paywallMessage}>
+              <h2 className="text-[1.5rem] font-extrabold pb-4">🔒 프리미엄 콘텐츠입니다</h2>
+              <Paywall />
+            </div>
+          </>
+        )}
       </div>
     </AuthCheck>
   );
