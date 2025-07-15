@@ -45,10 +45,9 @@ export default function HistoryPage() {
       );
 
       const snapshot = await getDocs(q);
-      const data = snapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id,
-      })) as Generation[];
+      const data = snapshot.docs
+        .map(doc => ({ id: doc.id, ...doc.data() } as Generation))
+        .filter(doc => doc.job_id !== 'open') ;
 
       setGenerations(data);
       setLoading(false);
