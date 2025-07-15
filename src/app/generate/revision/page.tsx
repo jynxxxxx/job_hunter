@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from "react";
-import { useUserData } from "@/context/UserDataContext";
 import AuthCheck from "@/components/AuthCheck";
 import { scrollToElementWithOffset } from "@/components/HelperFunctions";
 import { Feedback, Revision } from "@/types/forms";
