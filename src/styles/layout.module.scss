@@ -25,6 +25,7 @@
   display: inline-block;
   font-weight: 800;
   color: gray;
+  transition: color 0.3s ease;
 
   &::after {
     content: '';
@@ -35,13 +36,17 @@
     transform-origin: center;
     width: 90%;
     height: 2.5px; // thickness of underline
-    background-color: gray; // or any color you want
+    background-color: $dark; // or any color you want
     border-radius: 9999px;
     transition: transform 0.3s ease;
   }
 
-  &:hover::after {
-    transform: translateX(-50%) scaleX(1);
+  &:hover {
+    color: $dark; // Change font color on hover
+
+    &::after {
+      transform: translateX(-50%) scaleX(1); // Animate underline on hover
+    }
   }
 }
 
