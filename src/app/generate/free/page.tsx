@@ -215,13 +215,13 @@ export default function FreeGenerationPage() {
   return (
     <AuthCheck>
       <div className="w-[90vw] md:w-[70vw] mx-auto">
-        <div className="flex flex-col gap-2 pt-4 pb-4 text-center">
+        <div className="flex flex-col gap-2 pt-8 sm:pt-4 pb-4 text-center">
           <h1
-            className="text-bright mt-8 text-2xl md:text-4xl leading-tight tracking-[-0.033em] font-extrabold"
+            className="text-gray-900 mt-8 text-2xl md:text-4xl leading-tight tracking-[-0.033em] font-extrabold"
           > 
-            AI와 전문가의 힘으로 합격 자소서를 완성하세요.
+            AI와 전문가의 힘으로 합격 자소서를&nbsp;<div className="h-px sm:hidden"><br/></div>완성하세요.
           </h1>
-          <h2 className="py-4 text-bright text-lg md:text-2xl font-normal leading-normal ">
+          <h2 className="py-4 text-gray-900 text-lg md:text-2xl font-normal leading-normal ">
             삼성-SK 하이닉스 인사팀 출신 전문가의 노하우와 3,000건의 합격자소서를 기반으로, 합격률을 높이는 자소서로 완성하세요.
           </h2>
         </div>
