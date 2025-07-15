@@ -214,7 +214,7 @@ export default function FreeGenerationPage() {
 
   return (
     <AuthCheck>
-      <div className="w-[90vw] md:w-[70vw] mx-auto">
+      <div className="w-[90vw] md:w-[60vw] mx-auto pb-12">
         <div className="flex flex-col gap-2 pt-8 sm:pt-4 pb-4 text-center">
           <h1
             className="text-gray-900 mt-8 text-2xl md:text-4xl leading-tight tracking-[-0.033em] font-extrabold"
