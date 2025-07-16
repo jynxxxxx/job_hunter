@@ -10,7 +10,15 @@ const HeroSection = () => {
 
   const handleStart = () => {
     if (authUser) {
-      router.push('/dashboard');
+      router.push('/generate');
+    } else {
+      router.push('/login');
+    }
+  };
+
+    const handleFeedback = () => {
+    if (authUser) {
+      router.push('/revision');
     } else {
       router.push('/login');
     }
@@ -30,7 +38,7 @@ const HeroSection = () => {
         <div className='flex gap-4 mt-10'>
           <button
             className={heroStyles.herobtn}
-            onClick={handleStart}
+            onClick={handleFeedback}
           >
             무료 피드백 받기 →
           </button>
