@@ -111,7 +111,7 @@ const Header = () => {
                     }}
                     className='p-4 hover:bg-primary/40'
                   >
-                    🔥 핫한 채용공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 생성
+                    🔥 인기 채용공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 생성
                   </div>
                   <div
                     onClick={() => {
@@ -151,19 +151,6 @@ const Header = () => {
               >
                 <span>자기소개서 기록</span>
               </div>
-              <div
-                onClick={() => {
-                  if (pathname !== '/pricing') {
-                    router.push('/pricing');
-                  }
-                  setActivePage("pricing")
-                }}
-                className={`text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
-                  activePage === 'pricing' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-                }`}
-              >
-                <span>구독안내</span>
-              </div> 
             </>
           )}
           {!isAuthenticated ? (
@@ -185,6 +172,17 @@ const Header = () => {
                   className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg"
                   style={{zIndex: '1000'}}
                 >
+                  <div
+                    onClick={() => {
+                      if (pathname !== '/pricing') {
+                        router.push('/pricing');
+                      }
+                      setActivePage("pricing")
+                    }}
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                  >
+                    <span>구독안내</span>
+                  </div> 
                   <div
                     onClick={handleLogoutClick}
                     className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
