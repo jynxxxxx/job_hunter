@@ -322,6 +322,4 @@ const QuestionForm = forwardRef(QuestionFormComponent) as <T>(
   props: QuestionFormProps<T> & { ref?: React.Ref<QuestionFormRef> }
 ) => React.ReactElement;
 
-QuestionForm.displayName = 'QuestionForm';
-
 export default QuestionForm;

@@ -110,4 +110,6 @@ const DynamicQuestionSection = forwardRef<QuestionFormRef, DynamicQuestionSectio
   );
 })
 
+DynamicQuestionSection.displayName = "DynamicQuestionSection";
+
 export default DynamicQuestionSection;
