@@ -206,7 +206,7 @@ export default function JobBoard() {
                   >
                     <button
                       onClick={(e) => handlePickCompany(e, company)}
-                      className={`rounded-xl shadow logo relative border rounded-xl w-full h-full hover:scale-103 text-left p-4 font-semibold text-lg flex flex-col gap-2 justify-center items-center hover:bg-gray-200 bg-gray-100`}
+                      className={`rounded-xl shadow logo relative border rounded-xl w-full h-full hover:scale-103 text-left p-4 font-semibold text-lg flex flex-col gap-2 justify-center items-center bg-white`}
                     >
                       {companyImageSrc && (
                         <img
