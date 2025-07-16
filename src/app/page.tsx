@@ -35,7 +35,7 @@ export default function Home() {
                 인기 대기업 채용 공고 리스트에서 클릭만 하면 빠르고 정교한 나만의 자소서 완성
               </p>
               <button
-                onClick={() => router.push("/generate/trending")}
+                onClick={() => router.push("/generate")}
                 className="text-blue-600 font-semibold hover:underline"
               >
                 공고 보러가기 →
@@ -49,7 +49,7 @@ export default function Home() {
                 지원하는 기업, 직무, 자소서 문항을 입력하면, 개인별 최적화된 자소서 완성
               </p>
               <button
-                onClick={() => router.push("/generate/free")}
+                onClick={() => router.push("/generate/open")}
                 className="text-blue-600 font-semibold hover:underline"
               >
                 자유 생성하기 →
@@ -63,7 +63,7 @@ export default function Home() {
                 내가 쓴 자소서는 지원하는 공고에 최적화 되어 있는지 피드백과 함께 첨삭
               </p>
               <button
-                onClick={() => router.push("/generate/revision")}
+                onClick={() => router.push("/revision")}
                 className="text-blue-600 font-semibold hover:underline"
               >
                 첨삭하러가기 →

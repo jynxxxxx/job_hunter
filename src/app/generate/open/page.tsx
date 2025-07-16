@@ -34,6 +34,10 @@ export default function GenerationOpenPage() {
   const [tab, setTab] = useState("essay");
 
   useEffect(() => {
+    if (!authUser) {
+      return;
+    }
+
     const dataString = sessionStorage.getItem('openGenData');
     const timestampString = sessionStorage.getItem('openGenDataTimestamp');
 
@@ -62,7 +66,7 @@ export default function GenerationOpenPage() {
         setCurrentStep(1)
       }
     }
-  }, []);
+  }, [authUser]);
 
   useEffect(() => {
     if (waiting2 && !running) {
