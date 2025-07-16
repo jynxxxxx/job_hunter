@@ -120,8 +120,8 @@ export default function AuthForm() {
   };
 
   return (
-    <div className='h-[85vh] flex items-center justify-center bg-primary'>
-      <div className="bg-white w-md mx-auto my-28 p-4 border rounded-md shadow-md">
+    <div className='h-[85vh] flex sm:items-center justify-center bg-primary'>
+      <div className="h-fit bg-white w-xs my-24 sm:w-md mx-auto p-4 border rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">
           {mode === 'signup' ? '회원가입' : '로그인'}
         </h2>
@@ -155,7 +155,7 @@ export default function AuthForm() {
               placeholder="성함"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-4/5 px-4 py-2 mb-2 border rounded-full"
+              className="w-full sm:w-4/5 px-4 py-2 mb-2 border rounded-full"
               required
             />
           ):(
@@ -164,7 +164,7 @@ export default function AuthForm() {
           <input
             type="email"
             placeholder="이메일"
-            className="w-4/5 py-2 px-4 border rounded-3xl mb-2"
+            className="w-full sm:w-4/5 py-2 px-4 border rounded-3xl mb-2"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -172,7 +172,7 @@ export default function AuthForm() {
           <input
             type="password"
             placeholder="비밀번호"
-            className="w-4/5 py-2 px-4 border rounded-3xl"
+            className="w-full sm:w-4/5 py-2 px-4 border rounded-3xl"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -181,7 +181,7 @@ export default function AuthForm() {
           <div className="flex justify-center mt-4 w-full">
             <button
               type="submit"
-              className="mx-auto w-4/5 bg-dark hover:opacity-90 text-white py-2 rounded-3xl hover:scale-103 transform transition-transform duration-200"
+              className="mx-auto w-full sm:w-4/5 bg-dark hover:opacity-90 text-white py-2 rounded-3xl hover:scale-103 transform transition-transform duration-200"
             >
               {mode === 'signup' ? '이메일로 회원가입' : '이메일로 로그인'}
             </button>

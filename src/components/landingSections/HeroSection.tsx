@@ -20,25 +20,29 @@ const HeroSection = () => {
     <>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
-          바로지원과 함께 <br />나만의 자기소개서를&nbsp;
-          <div className="h-px sm:hidden"><br/></div>
-          완성하세요
+          자소서, 쓰는 게 아니라<br/>'합격' 시키는 겁니다.
         </div>
         <div className={heroStyles.subtext}>
-          3,000건의 합격자소서로 학습된 
-          <div className="h-px sm:hidden"><br/></div>
-          AI 기술로 만드는 나를 담은 자기소개서
+          3,000건 이상의 합격 자소서를 <div className="h-px sm:hidden"><br/></div>학습한 고도화된 AI가
+          <br/>
+          회사별·직무별 포인트를 정확히 짚어<div className="h-px sm:hidden"><br/></div>진짜 ‘붙을 자소서’를 만들어 드립니다.
         </div>
-        <button
-          className={heroStyles.herobtn}
-          onClick={handleStart}
-        >
-          AI 자기소개서 생성하기→
-        </button>
+        <div className='flex gap-4 mt-10'>
+          <button
+            className={heroStyles.herobtn}
+            onClick={handleStart}
+          >
+            무료 피드백 받기 →
+          </button>
+          <button
+            className={heroStyles.herobtn}
+            onClick={handleStart}
+          >
+            가입하고 생성하기 →
+          </button>
+        </div>
+        
       </section>
-      {/* <div className={heroStyles.btnctn}> */}
-
-        {/* </div> */}
     </>
   );
 };

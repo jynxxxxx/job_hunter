@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useUserData } from "@/context/UserDataContext";
-import QuestionForm from "@/templates/QuestionForm";
+import QuestionForm, { QuestionFormRef } from "@/templates/QuestionForm";
 import { handleUpload } from "@/hooks/useUploadHandler";
 import { getQuestionTemplate } from '@/components/HelperFunctions';
 import { SectionCounts, SectionKey } from "@/types/forms";
@@ -17,20 +17,26 @@ interface DynamicQuestionSectionProps {
   setRunning: (running: boolean) => void; // Function to set running state
   freePassUsed: boolean;
   running?: boolean; // Optional prop to indicate if generation is running
+  setLastStep: (lastStep: boolean) => void;
 }
 
-const DynamicQuestionSection = ({
-  job_id,
-  section,
-  question_id,
-  setGuide,
-  setEssay,
-  waiting,
-  setWaiting,
-  setRunning,
-  freePassUsed,
-  running,
-}: DynamicQuestionSectionProps) => {
+const DynamicQuestionSection = forwardRef<QuestionFormRef, DynamicQuestionSectionProps>(
+  (
+    {
+      job_id,
+      section,
+      question_id,
+      setGuide,
+      setEssay,
+      waiting,
+      setWaiting,
+      setRunning,
+      freePassUsed,
+      running,
+      setLastStep
+    },
+    ref
+  ) => {
   const { authUser } = useAuth();
   const { userData, jobTemplates } = useUserData();
 
@@ -83,6 +89,7 @@ const DynamicQuestionSection = ({
 
   return (
     <QuestionForm
+      ref={ref}
       questions={safeQuestions as import("@/types/forms").Question<any>[]}
       form={form}
       setForm={setForm}
@@ -90,6 +97,7 @@ const DynamicQuestionSection = ({
       setDraft={setDraft}
       disabled={Boolean(waiting || running || (freePassUsed && userData?.hasPaid?.[job_id] == false))}
       onSubmit={handleSubmit}
+      setLastStep={setLastStep}
       {...(hasJobOptions && {
         jobLevel1,
         setJobLevel1,
@@ -100,6 +108,6 @@ const DynamicQuestionSection = ({
       })}
     />
   );
-};
+})
 
 export default DynamicQuestionSection;

@@ -1,0 +1,15 @@
+export const imageMap: { [key: string]: string } = {
+  "포스코스틸리온": "/company_logos/posco.svg",
+  "LG에너지솔루션": "/company_logos/lg_logo.png",
+  "SK하이닉스": "/company_logos/sk_hynix.png",
+  "롯데건설":"/company_logos/lotte_gunsul.png",
+  "방위산업공제조합": "/company_logos/kdgc.svg",
+  "교원그룹": "/company_logos/kyowon.png",
+  "경농": "/company_logos/kyungnong.png",
+  "지역난방안전": "/company_logos/district_heating.jpg",
+  "한국유나이티드제약": "/company_logos/kup.png",
+  "LT메탈": "/company_logos/lt_metal.svg",
+  "한국화학산업협회": "/company_logos/kcia.jpg",
+  "현대종합금속": "/company_logos/hdw.jpg",
+  "현대중공업터보기계": "/company_logos/hyundai_heavy.JPG",
+}

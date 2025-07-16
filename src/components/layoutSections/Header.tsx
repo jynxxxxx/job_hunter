@@ -17,9 +17,8 @@ const Header = () => {
   const { setJustSignedOut } = useAuth();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isProfileTabOpen, setIsProfileTabOpen] = useState(false);
-  const [isGenerateTabOpen, setIsGenerateTabOpen] = useState(false);
   const profileRef = useRef(null);
-  const generateRef = useRef(null);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -35,12 +34,6 @@ const Header = () => {
         !(profileRef.current as HTMLElement).contains(event.target as Node)
       ) {
         setIsProfileTabOpen(false);
-      }
-      if (
-        generateRef.current &&
-        !(generateRef.current as HTMLElement).contains(event.target as Node)
-      ) {
-        setIsGenerateTabOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -67,11 +60,11 @@ const Header = () => {
 
   return (
     <div 
-      className={`fixed bg-white w-full border-b border-gray-300 top-0 left-0 sm:h-[4rem] font-bold text-dark flex flex-col sm:items-center sm:flex-row ${isAuthenticated ? "h-[6rem]" : "h-[4rem]"}`}
+      className={`fixed bg-white w-full top-0 left-0 h-[5rem] sm:h-[4rem] font-bold text-dark flex flex-col sm:items-center sm:flex-row`}
       style={{ zIndex: 1000 }}
     >
       <div 
-        className="pt-4 px-6 md:px-[2.5rem] sm:pt-0 cursor-pointer" 
+        className="pt-2 px-6 md:px-[2.5rem] sm:pt-0 cursor-pointer" 
         onClick={() => {
           router.push('/')
           setActivePage("home");
@@ -80,89 +73,68 @@ const Header = () => {
         <img
           src="/logo.png"
           alt="바로지원"
-          className='h-[2rem] md:h-[3rem] w-auto'
+          className='h-[2rem] w-auto'
         />
       </div>
 
       
       {pathname === '/login' ? null : (
-        <div className={`w-full mt-2 md:mt-0 pt:12 flex justify-around items-end sm:items-center sm:justify-start`}>
-          {isAuthenticated && pathname !== '/login' && (
+        <div className={`w-full pl-4 sm:pl-0 md:pt:12 flex items-end justify-start`}>
+          <>
+          {isAuthenticated && (
             <>
               <div 
-                className={`relative w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
-                  activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-                }`}
-                ref={generateRef}  
-                onMouseEnter={() => setIsGenerateTabOpen(true)}
-                onMouseLeave={() => setIsGenerateTabOpen(false)}
-            >
-              <span>AI 자기소개서</span>
-              {isGenerateTabOpen && (
-                <div
-                  className="absolute top-full left-2 text-sm font-bold w-[180%] flex flex-col bg-white border border-gray-200 rounded shadow-lg"
-                >
-                  <div
-                    onClick={() => {
-                      if (pathname !== '/generate') {
-                        router.push('/generate/trending');
-                      }
-                      setActivePage("generation");
-                    }}
-                    className='p-4 hover:bg-primary/40'
-                  >
-                    🔥 인기 채용공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 생성
-                  </div>
-                  <div
-                    onClick={() => {
-                      if (pathname !== '/generate') {
-                        router.push('/generate/free');
-                      }
-                      setActivePage("generation");
-                    }}
-                    className='p-4 hover:bg-primary/40'
-                  >
-                    ✍️ 자유항목 공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 생성
-                  </div>
-                  <div
-                    onClick={() => {
-                      if (pathname !== '/generate') {
-                        router.push('/generate/revision');
-                      }
-                      setActivePage("generation");
-                    }}
-                    className='p-4 hover:bg-primary/40'
-                  >
-                    🛠 자유항목 공고&nbsp;<div className="h-px sm:hidden"><br/></div>자기소개서 첨삭
-                  </div>
-                </div>
-              )}                
-              </div>
-              <div
                 onClick={() => {
-                  if (pathname !== '/history') {
-                    router.push('/history');
+                  if (pathname !== '/revision') {
+                    router.push('/revision');
                   }
-                  setActivePage("history")
+                  setActivePage("revision")
                 }}
-                className={`w-fit text-[0.9rem] md:text-[1rem] px-2 md:px-6 py-2 cursor-pointer ${
-                  activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                  activePage === 'revision' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                 }`}
               >
-                <span>자기소개서 기록</span>
+                <span>자기소개서 첨삭</span>
               </div>
-            </>
-          )}
+                <div 
+                  onClick={() => {
+                    if (pathname !== '/generate') {
+                      router.push('/generate');
+                    }
+                    setActivePage("generation")
+                  }}
+                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                    activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  }`}
+                >
+                  <span>자기소개서 생성</span>
+                </div>
+                <div
+                  onClick={() => {
+                    if (pathname !== '/history') {
+                      router.push('/history');
+                    }
+                    setActivePage("history")
+                  }}
+                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                    activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  }`}
+                >
+                  <span>자기소개서 기록</span>
+                </div>
+              </>
+            )}
+          </>
           {!isAuthenticated ? (
             <div
               onClick={handleLoginClick}
-              className="z-[1000] absolute top-4 right-6 md:top-[1rem] md:right-[1rem] text-[1rem] md:text-[1.5rem] pr-[1rem] font-semibold hover:scale-110 cursor-pointer"
+              className="z-[1000] absolute top-6 sm:top-1/2 transform -translate-y-1/2 right-4 md:right-[1rem] text-sm font-semibold hover:scale-110 cursor-pointer"
             >
               로그인
             </div>
           ):(
             <div 
-              className="z-[1000] absolute top-4 right-6 md:top-[1rem] md:right-[1rem]" 
+              className="z-[1000] absolute top-6 sm:top-1/2 transform -translate-y-1/2 right-4 md:right-[1rem] text-sm font-semibold hover:scale-110 cursor-pointer" 
               ref={profileRef}  
               onClick={() => setIsProfileTabOpen(prev => !prev)}
             >

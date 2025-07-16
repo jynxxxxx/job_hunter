@@ -23,7 +23,6 @@
 
 .sectionctn{
   width: 100%;
-  padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -32,8 +31,8 @@
 .btn{
   margin-left: auto; 
   min-width: fit-content; 
-  font-size: 1rem;
-  font-weight: 800; 
+  font-size: 0.8rem;
+  font-weight: 700; 
   color: white; 
   padding: 0.5rem 1.25rem;
   background-color: color.adjust($primary, $lightness: -40%);

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import genStyles from "@/styles/generation.module.scss";
 import { JobOptions, Question } from "@/types/forms";
 
@@ -18,28 +18,74 @@ interface QuestionFormProps<T> {
   setJobLevel2?: (val: string) => void;
   jobLevel3?: string;
   setJobLevel3?: (val: string) => void;
+  setLastStep: (lastStep: boolean) => void;
 }
 
-export default function QuestionForm<T>({
-  questions,
-  form,
-  setForm,
-  draft,
-  setDraft,
-  disabled,
-  onSubmit,
-  jobLevel1,
-  setJobLevel1,
-  jobLevel2,
-  setJobLevel2,
-  jobLevel3,
-  setJobLevel3,
-}: QuestionFormProps<T>) {
+export interface QuestionFormRef {
+  nextStep: () => void;
+  submitForm: () => void;
+  resetForm: () => void;
+}
+
+function QuestionFormComponent<T>(
+  {
+    questions,
+    form,
+    setForm,
+    draft,
+    setDraft,
+    disabled,
+    onSubmit,
+    jobLevel1,
+    setJobLevel1,
+    jobLevel2,
+    setJobLevel2,
+    jobLevel3,
+    setJobLevel3,
+    setLastStep
+  }: QuestionFormProps<T>,
+  ref: React.Ref<QuestionFormRef>
+) {
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const [step, setStep] = useState(0);
   const totalSteps = questions.length;
   const currentQuestion = questions[step];
   const nextQuestionRef = useRef<HTMLDivElement | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    nextStep() {
+      if (step < totalSteps) {
+        setStep((prev) => prev + 1);
+        setTimeout(() => {
+          nextQuestionRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
+
+      if (step == (totalSteps - 1)) {setLastStep(true)}
+
+    },
+    submitForm() {
+      if (step === totalSteps && submitEnabled) {
+        // Create a synthetic event with preventDefault no-op
+        const syntheticEvent = {
+          preventDefault: () => {},
+        } as React.FormEvent;
+
+        onSubmit(syntheticEvent);
+      } else {
+        // Optionally handle disabled submit case
+        console.log('Submit is disabled or not on last step');
+      }
+    },
+    resetForm() {
+      setStep(0);
+      setDraft("");
+      setForm({} as T);
+    }
+  }));
 
   useEffect(() => {
     if (step === totalSteps) {
@@ -268,32 +314,13 @@ export default function QuestionForm<T>({
             />
           </div>
         )}
-
-        <div className="flex justify-between mt-0 sm:mt-4">
-          {step < totalSteps ? (
-            <button
-              type="button"
-              onClick={() => {
-                setStep((prev) => prev + 1);
-
-                // Scroll after slight delay to allow render
-                setTimeout(() => {
-                  nextQuestionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100); // 100ms delay gives the DOM time to update
-              }}
-              className="px-4 py-2 bg-bright text-white rounded ml-auto hover:scale-105"
-            >
-              다음
-            </button>
-          ) : (
-            <button className={genStyles.btn} type="submit" disabled={disabled}>
-              나만의 자기소개서/
-              <br />
-              가이드 작성하기
-            </button>
-          )}
-        </div>
       </div>
     </form>
   );
 }
+
+const QuestionForm = forwardRef(QuestionFormComponent) as <T>(
+  props: QuestionFormProps<T> & { ref?: React.Ref<QuestionFormRef> }
+) => React.ReactElement;
+
+export default QuestionForm;
