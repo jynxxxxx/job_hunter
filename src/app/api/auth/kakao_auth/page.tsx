@@ -45,7 +45,7 @@ export default function KakaoCallback() {
               setError("로그인 실패: 사용자 정보 없음");
               return; // Stop execution
             }
-            router.push('/dashboard');
+            router.push('/generate');
           } else {
             throw new Error("No Firebase token received.");
           }

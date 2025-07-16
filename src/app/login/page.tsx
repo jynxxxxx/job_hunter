@@ -15,7 +15,7 @@ import { toast } from 'sonner';
 export default function AuthForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/dashboard';
+  const redirect = searchParams.get('redirect') || '/generate';
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
