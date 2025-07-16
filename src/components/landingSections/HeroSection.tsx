@@ -20,7 +20,7 @@ const HeroSection = () => {
     <>
       <section className={heroStyles.ctn}>
         <div className={heroStyles.title}>
-          자소서, 쓰는 게 아니라<br/>'합격' 시키는 겁니다.
+          자소서, 쓰는 게 아니라<br/>&apos;합격&apos; 시키는 겁니다.
         </div>
         <div className={heroStyles.subtext}>
           3,000건 이상의 합격 자소서를 <div className="h-px sm:hidden"><br/></div>학습한 고도화된 AI가

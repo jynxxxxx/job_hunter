@@ -34,7 +34,6 @@ function QuestionFormComponent<T>(
     setForm,
     draft,
     setDraft,
-    disabled,
     onSubmit,
     jobLevel1,
     setJobLevel1,
@@ -322,5 +321,7 @@ function QuestionFormComponent<T>(
 const QuestionForm = forwardRef(QuestionFormComponent) as <T>(
   props: QuestionFormProps<T> & { ref?: React.Ref<QuestionFormRef> }
 ) => React.ReactElement;
+
+QuestionForm.displayName = 'QuestionForm';
 
 export default QuestionForm;
