@@ -1,15 +1,17 @@
 import footerStyles from "@/styles/layout.module.scss";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <footer className={footerStyles.ctn}>
       <div className={footerStyles.topSection}>
         <div className={footerStyles.title}>
-          <div className={footerStyles.logo}>
-            <img
+          <div className={`${footerStyles.logo} h-[2.5rem] w-[9rem] relative`}>
+            <Image
               src="/logo_white.png"
               alt="바로지원"
-              className='h-[2.5rem]'
+              fill
+              className="object-contain"
             />
           </div>
           <span className={footerStyles.tagline}>지원서부터 면접까지, 바로지원이 도와드립니다.</span>

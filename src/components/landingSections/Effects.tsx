@@ -1,6 +1,7 @@
 
 
 import effectStyles from "@/styles/effects.module.scss";
+import Image from "next/image";
 
 const Effects = () => {
   //   const features = [
@@ -55,7 +56,9 @@ const Effects = () => {
       <div className={effectStyles.items}>
         {features.map((card, i) => (
           <div key={i} className={effectStyles.card}>
-            <img src={card.img} alt="" className={effectStyles.icon} />
+            <div className={effectStyles.icon}>
+              <Image src={card.img} alt="" fill className="object-cover" />
+            </div>
             <div className={effectStyles.title}>{card.title}</div>
             <div className={effectStyles.description}>{card.description}</div>
           </div>

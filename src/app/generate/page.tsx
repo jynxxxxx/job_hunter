@@ -10,6 +10,7 @@ import AuthCheck from "@/components/AuthCheck";
 import { parseCustomEndDate } from "@/components/HelperFunctions";
 import revStyles from "@/styles/revisions.module.scss"
 import { imageMap } from "@/templates/imageMap";
+import Image from "next/image";
 
 export default function JobBoard() {
   const { jobList, jobTemplates } = useUserData();
@@ -197,11 +198,11 @@ export default function JobBoard() {
         <div>
           <div className="mb-8 space-y-4 grid">
             <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-0 sm:mb-4 items-stretch`}>
-              {uniqueCompanies.map((company) => {
+              {uniqueCompanies.map((company, idx) => {
                 const companyImageSrc = imageMap[company.company as keyof typeof imageMap];
                 return (
                   <div 
-                    key={company} 
+                    key={idx} 
                     className="rounded-xl shadow h-full items-stretch"
                   >
                     <button
@@ -209,11 +210,14 @@ export default function JobBoard() {
                       className={`rounded-xl shadow logo relative border rounded-xl w-full h-full hover:scale-103 text-left p-4 font-semibold text-lg flex flex-col gap-2 justify-center items-center bg-white`}
                     >
                       {companyImageSrc && (
-                        <img
-                          src={companyImageSrc}
-                          alt={`${company} logo`}
-                          className="h-[5rem] object-contain py-2" 
-                        />
+                        <div className="relative min-h-[3rem] md:min-h-[4rem] w-[90%] py-2">
+                          <Image
+                            src={companyImageSrc}
+                            alt={`${company} logo`}
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
                       )}
                       <div className="text-sm">{company.title}</div>
                       <div className="text-center text-xs font-normal text-gray-500">{company.startDate} - {company.endDate}</div>

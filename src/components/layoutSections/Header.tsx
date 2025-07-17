@@ -9,6 +9,7 @@ import { CircleUserRound } from 'lucide-react';
 import { useUserData } from '@/context/UserDataContext';
 import headerStyles from "@/styles/layout.module.scss";
 import PrivacyAgreementModal from './PrivacyConsent';
+import Image from 'next/image';
 
 const Header = () => {
   const { activePage, setActivePage } = useUserData()
@@ -70,11 +71,14 @@ const Header = () => {
           setActivePage("home");
         }}
       >
-        <img
-          src="/logo.png"
-          alt="바로지원"
-          className='h-[2rem] w-auto'
-        />
+        <div className="h-[2.5rem] w-[8rem] relative">
+          <Image
+            src="/logo.png"
+            alt="바로지원"
+            fill
+            className="object-contain"
+          />
+        </div>
       </div>
 
       

@@ -1,6 +1,7 @@
 'use client'
 
 import AuthCheck from '@/components/AuthCheck';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 export default function PricingPage() {
@@ -77,7 +78,7 @@ export default function PricingPage() {
         {/* Manual Payment Modal */}
         {selectedPackage && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="relative bg-white rounded-lg shadow-xl p-8 mt-20 md:mt-16 lg:mt-8 w-[90vw] md:w-[70vw] lg:w-[50vw] overflow-y-auto max-h-[80vh] md:max-h-[75vh] lg:max-h-[80vh]">
+            <div className="relative bg-white rounded-lg shadow-xl p-4 sm:p-8 mt-20 md:mt-16 lg:mt-8 w-[90vw] md:w-[70vw] lg:w-[50vw] overflow-y-auto max-h-[80vh] md:max-h-[75vh] lg:max-h-[80vh]">
               <button
                 onClick={handleCloseModal}
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none cursor-pointer"
@@ -99,7 +100,7 @@ export default function PricingPage() {
                 <div>
                   <p className="font-semibold text-gray-800 mb-2">
                     <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">1단계</span>
-                    아래 계좌로 정확한 금액을 송금해주세요.
+                    아래 계좌로 위 금액을 송금해주세요.
                   </p>
                   <div className="flex justify-around items-center bg-gray-100 p-4 rounded-md text-center">
                     <div>
@@ -108,7 +109,14 @@ export default function PricingPage() {
                       <p className="text-sm text-gray-700">예금주: 박근철</p>
                     </div>
                     <div className='flex justify-center'>
-                      <img src="/qr.png" alt="QR Code" className='w-32 h-32 object-contain border border-gray-200 rounded-md p-2' />
+                      <div className="w-32 h-32 relative border border-gray-200 rounded-md p-2">
+                        <Image
+                          src="/qr.png"
+                          alt="QR Code"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

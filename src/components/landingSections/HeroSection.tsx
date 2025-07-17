@@ -40,13 +40,13 @@ const HeroSection = () => {
             className={heroStyles.herobtn}
             onClick={handleFeedback}
           >
-            무료 피드백 받기 →
+            자소서 작성 →
           </button>
           <button
             className={heroStyles.herobtn}
             onClick={handleStart}
           >
-            가입하고 생성하기 →
+            자소서 첨삭 →
           </button>
         </div>
         

@@ -20,6 +20,7 @@ import { Copy, RefreshCw } from 'lucide-react';
 import { QuestionFormRef } from '@/templates/QuestionForm';
 import { imageMap } from '@/templates/imageMap';
 import Loading from '@/app/loading';
+import Image from 'next/image';
 
 function GenerationDynamicPage({ company, title }: { company: string; title: string }) {
   const { authUser } = useAuth()
@@ -197,11 +198,14 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
       <div className="min-h-[80vh] bg-primary/30">
         <div className="w-[90vw] md:w-[60vw] mx-auto pb-12">
           <div className='flex flex-col items-center justify-center pt-8'>
-            <img
-              src={companyImageSrc}
-              alt={`${company} logo`}
-              className="h-[5rem] object-contain py-2" 
-            />
+            <div className="relative h-[5rem] w-[90%] py-2">
+              <Image
+                src={companyImageSrc}
+                alt={`${company} logo`}
+                fill
+                className="object-contain"
+              />
+            </div>
             <div className='text-gray-700'>{title}</div>
           </div>
           <div className="h-fit">
