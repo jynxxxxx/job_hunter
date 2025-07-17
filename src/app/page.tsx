@@ -1,12 +1,12 @@
 "use client"
 
 import HeroSection from '../components/landingSections/HeroSection';
-import Features from '../components/landingSections/Features';
 import Testimonials from '../components/landingSections/Testimonials';
-import Effects from '@/components/landingSections/Effects';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-// import ApplicationPosting from '@/components/landingSections/ApplicationPosting';
+import Instructions from '@/components/landingSections/Instructions';
+import JobCarousel from '@/components/landingSections/JobCarousel';
+import Features from '@/components/landingSections/Features';
 
 export default function Home() {
   const router = useRouter();
@@ -15,12 +15,12 @@ export default function Home() {
 
   return (
     <>
-      {/* <ApplicationPosting /> */}
       <HeroSection />
-      <Effects />
-      <Testimonials />
+      <Instructions />
       <Features />
-            <div className="min-h-screen bg-white px-6 py-16 text-gray-900">
+      <JobCarousel />
+      <Testimonials />
+      <div className="h-fit bg-bright/5 px-6 py-16 text-gray-900">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-2xl sm:text-3xl font-bold mb-4">자기소개서, 합격 가능성을 높이는 3가지 방법!</h1>
           <p className="text-gray-600 mb-8 text-lg">

@@ -73,7 +73,7 @@ const Testimonials = () => {
           <br />만족하며 이용하고 있어요.
         </h2>
         <p>
-          대학생과 취준생이 선택한 이유, 직접 들어보세요.
+          대학생과 취준생이 선택한 이유,&nbsp;<div className="h-px sm:hidden"><br/></div>직접 들어보세요.
         </p>
       </header>
 

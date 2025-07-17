@@ -2,7 +2,6 @@
 
 .ctn {
   padding: 6rem 0rem;
-  background-color: $primary;
 }
 
 .header {
@@ -12,12 +11,12 @@
 
   h2 {
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
   }
 
   p {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -32,12 +31,13 @@
   width: fit-content;
   gap: 2rem;
   animation: scroll-left 80s linear infinite;
+  padding-bottom: 2rem;
 }
 
 .card {
-  width: 30vw;
+  width: 25vw;
   background-color: white;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   font-weight: 500;
   padding: 1.5rem;
   border-radius: 2rem;
@@ -45,13 +45,14 @@
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .icon{
   margin-right: 0.2rem;
   margin-bottom: 1rem;
   color: #FACC1F;
-  fill:currentColor
+  fill:currentColor;
 }
 
 .tag{
@@ -76,8 +77,9 @@
 
 .name{
   margin-right: auto;
-  margin-top: 0.5rem;
-  font-size: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 0.8rem;
   color:#4b5563
 }
 
@@ -105,7 +107,7 @@
   }
 
   .card {
-    width: 70vw;
+    width: 65vw;
   }
 
   .disclaimer {
@@ -117,5 +119,9 @@
 @media (min-width: 640px) and (max-width: 1024px) {
   .header {
     padding-left: 3rem;
+  }
+
+  .card {
+    width: 30vw;
   }
 }

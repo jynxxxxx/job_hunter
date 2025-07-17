@@ -76,7 +76,7 @@ function QuestionFormComponent<T>(
         onSubmit(syntheticEvent);
       } else {
         // Optionally handle disabled submit case
-        console.log('Submit is disabled or not on last step');
+        console.log('Submit is disabled');
       }
     },
     resetForm() {
