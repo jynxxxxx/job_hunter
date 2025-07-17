@@ -19,13 +19,11 @@ import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
 import { Copy, RefreshCw } from 'lucide-react';
 import { QuestionFormRef } from '@/templates/QuestionForm';
 import { imageMap } from '@/templates/imageMap';
+import Loading from '@/app/loading';
 
-export default function GenerationDynamicPage() {
+function GenerationDynamicPage({ company, title }: { company: string; title: string }) {
   const { authUser } = useAuth()
   const { jobList, jobTemplates, userData } = useUserData();
-  const params = useParams();
-  const company_data = decodeURIComponent(params.company_data as string);
-  const [company, title] = company_data?.split('_xyz') || [];
   const questionFormRef = useRef<QuestionFormRef>(null);
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedJob, setSelectedJob] = useState<any>("");
@@ -411,3 +409,25 @@ export default function GenerationDynamicPage() {
     </AuthCheck>
   );
 };
+
+export default function GenerationPageWrapper() {
+  const params = useParams();
+  const [companyData, setCompanyData] = useState<[string, string] | null>(null);
+
+  useEffect(() => {
+    if (params?.company_data) {
+      try {
+        const decoded = decodeURIComponent(params.company_data as string);
+        const [company, title] = decoded.split('_xyz');
+        setCompanyData([company, title]);
+      } catch (e) {
+        console.error('Decoding error', e);
+      }
+    }
+  }, [params]);
+
+  if (!companyData) return <Loading />;
+
+  const [company, title] = companyData;
+  return <GenerationDynamicPage company={company} title={title} />;
+}
