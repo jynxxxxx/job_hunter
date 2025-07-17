@@ -46,7 +46,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
   const companyImageSrc = imageMap[company as keyof typeof imageMap];
   
   useEffect(() => {
-    const paidCheck = userData?.hasPaid?.[template.job_id] === true || userData?.subscription.active === true;
+    const paidCheck = userData?.hasPaid?.[template.job_id] === true || userData?.subscription?.active === true;
     setUserHasPaid(paidCheck)
   }, [template]);
   
@@ -109,7 +109,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
       setSelectedJob(job); // Save full object
       const selectedTemplate = getQuestionTemplate(String(job.job_id), jobTemplates);
       setTemplate(selectedTemplate)
-      console.log("selectedJob", job)
+
       const questionKeys = Object.keys(selectedTemplate)
         .filter(k => k.startsWith("question"))
         .sort((a, b) => {
@@ -145,7 +145,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
           // Both symbols or others, lex compare
           return keyA.localeCompare(keyB, 'ko');
         });
-      console.log("template", selectedTemplate)
+
       const questions = questionKeys.map(key => ({
         key: key.replace("question",""),
         question: selectedTemplate[key],

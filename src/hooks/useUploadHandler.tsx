@@ -72,7 +72,7 @@ export async function handleUpload<T>({
     const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
 
     const jobId = String(job_id);
-    const jobHasPaid = hasPaidMap[jobId] === true || userData?.subscription.active === true;
+    const jobHasPaid = hasPaidMap[jobId] === true || userData?.subscription?.active === true;
 
     if (!jobHasPaid && freePassUsed) {
       toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
