@@ -20,6 +20,17 @@ const Header = () => {
   const [isProfileTabOpen, setIsProfileTabOpen] = useState(false);
   const profileRef = useRef(null);
 
+  useEffect(() => {
+    if (pathname === '/revision') {
+      setActivePage('revision');
+    } else if (pathname.startsWith('/generate')) {
+      setActivePage('generation');
+    } else if (pathname === '/history') {
+      setActivePage('history');
+    } else {
+      setActivePage('home');
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

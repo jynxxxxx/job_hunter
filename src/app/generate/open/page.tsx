@@ -57,7 +57,7 @@ export default function GenerationOpenPage() {
         setJobInput(data.job);
         setQuestionInput(data.question);
         setJobUrl(data.url || '');
-        console.log(data.company, data.job, data.question)
+
         // Delay to ensure states update before submit
         setTimeout(() => {
           submitBasicInfo();
@@ -65,6 +65,8 @@ export default function GenerationOpenPage() {
       } else {
         setCurrentStep(1)
       }
+    } else {
+      setCurrentStep(1)
     }
   }, [authUser]);
 
