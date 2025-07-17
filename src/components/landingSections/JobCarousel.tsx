@@ -7,14 +7,13 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { convertFirebaseTimestamp, parseCustomEndDate, getQuestionTemplate } from "../HelperFunctions";
 import { imageMap } from "@/templates/imageMap";
-import styles from "@/styles/revisions.module.scss"
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const JobCarousel = () => {
