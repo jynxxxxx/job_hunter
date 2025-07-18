@@ -30,7 +30,7 @@ const HeroSection = () => {
       <section className={`${heroStyles.ctn} grid grid-rows-[1.7fr_1fr] sm:grid-cols-[1.5fr_1fr]`}>
         <div className='flex flex-col justify-center'>
           <div className={heroStyles.title}>
-            자소서, 쓰는 게 아니라,<br/>&apos;합격&apos; 시키는 겁니다.
+            자소서 쓰는 게 아니라,<br/>&apos;합격&apos; 시키는 겁니다.
           </div>
           <div className={heroStyles.subtext}>
             AI Copilot 기술과 3000건의 합격 자기소개서로,

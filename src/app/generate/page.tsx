@@ -134,7 +134,7 @@ export default function JobBoard() {
         <h1
           className="text-center mb-2 mt-4 sm:mt-8 text-2xl leading-tight tracking-[-0.033em] font-extrabold"
         > 
-          회사·직무·문항 모두 자유 입력 자기소개서
+          지원하는 회사, 직무, 자소서 문항만 입력하면 바로지원 AI가 도와드립니다.
         </h1>
         <div className={`${revStyles.section} sm:w-3/5 mx-auto`}>
           <form onSubmit={handleSubmitBasicInfo} className="px-2 sm:px-8 pt-6 pb-4 flex flex-col gap-2">
