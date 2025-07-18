@@ -12,6 +12,7 @@ export const ensureUserProfile = async (user: any, name: string, eventSourceUrl?
           email: user.email,
           name: user.displayName || name,
           hasPaid: {},
+          subscription: {active: false},
           createdAt: serverTimestamp(),
         },
         { merge: true } // Use merge: true to avoid overwriting if partial data exists
