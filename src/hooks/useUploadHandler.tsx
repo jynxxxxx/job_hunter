@@ -136,6 +136,7 @@ export async function handleUpload<T>({
       setGuide(guide);
 
       const payload = { user_input: input, guideline: {result: guide?.guideline} };
+
       essayResult = await generateEssay(payload);
       setEssay(essayResult?.essay);
     } catch (error) {

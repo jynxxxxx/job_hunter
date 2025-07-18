@@ -262,7 +262,7 @@ export default function GenerationOpenPage() {
               {currentStep==2 && "세부 질문 답변"}
               {currentStep==3 && "자기소개서 완성"}
             </h2>
-            <div className="min-h-4/5 sm:px-8 pt-8">
+            <div className="min-h-4/5 sm:px-8 sm:pt-8">
               {currentStep === 1 &&
                 <form id="basicInfoForm" onSubmit={handleSubmitBasicInfo} className={styles.sectionctn}>
                   <div className="w-full flex items-center gap-2">
@@ -311,12 +311,29 @@ export default function GenerationOpenPage() {
                 </form>
               }     
               {currentStep === 2 &&
-                <div className={styles.sectionctn}>
+                <div className={`relative ${styles.sectionctn}`}>
                   {waiting1 ? (
-                    <div className="flex flex-col justify-center items-center">
-                      <div className='w-full pt-[2rem] text-center'>추가 질문 생성하는중입니다 <br /> 잠시만 기다려주세요</div>
-                      <div className='w-full pt-8 pb-16'><DotSpinner /></div>
-                    </div>
+                    <>
+                      <div className="whitespace-pre-wrap space-y-4 p-8 text-gray-700 text-base leading-relaxed blur-sm select-none pointer-events-none">            
+                        <h2 className="text-lg font-bold">
+                          추가 질문으로 더 정교하게 보완하기
+                          <div className="h-px sm:hidden"><br /></div>
+                          (선택 사항)
+                        </h2>
+                        <div className="space-y-4">
+                          {[...Array(3)].map((_, idx) => (
+                            <div key={idx}>
+                              <div className="h-4 w-2/3 bg-gray-300 rounded mb-2 animate-pulse" />
+                              <div className="h-20 border border-gray-200 rounded animate-pulse" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="absolute z-10 flex flex-col justify-center items-center w-full">
+                        <div className='w-full pt-[2rem] text-center drop-shadow-[0_0_4px_white]'>추가 질문 생성하는중입니다 <br /> 잠시만 기다려주세요 (최대 1분)</div>
+                        <div className='w-full pt-4 pb-16'><DotSpinner /></div>
+                      </div>
+                    </>
                   ) : (
                     subQuestions ? (
                       subQuestions?.subquestion?.["1"] &&
@@ -363,16 +380,32 @@ export default function GenerationOpenPage() {
               }
 
               {currentStep === 3 &&
-                <div className={styles.sectionctn}>
+                <div className={`relative ${styles.sectionctn}`}>
                   {waiting2 && running ? (
-                    <div className="flex flex-col justify-center items-center">
-                      <div className='w-full pt-[2rem] text-center'>{stageSetRef.current?.[stageIndex].text}</div>
-                      <div className='w-full pt-8 pb-16'><DotSpinner /></div>
-                    </div>
+                    <>
+                      <div className="whitespace-pre-wrap space-y-4 p-8 text-gray-700 text-base leading-relaxed blur-sm select-none pointer-events-none">            
+                        <h2 className="text-lg font-bold">
+                          추가 질문으로 더 정교하게 보완하기
+                          <div className="h-px sm:hidden"><br /></div>
+                          (선택 사항)
+                        </h2>
+                        <div className="space-y-4">
+                          {[...Array(7)].map((_, idx) => (
+                            <div key={idx}>
+                              <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="absolute z-10 flex flex-col justify-center items-center w-full">
+                        <div className='w-full pt-[2rem] text-center drop-shadow-[0_0_4px_white]'>{stageSetRef.current?.[stageIndex].text}</div>
+                        <div className='w-full pt-8 pb-16'><DotSpinner /></div>
+                      </div>
+                    </>
                   ) : (
                     finalEssay && (
                       <>
-                        <div className="grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
+                        <div className="mt-6 grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
                           <div 
                             className={`text-center py-2 rounded-lg cursor-pointer ${tab==="essay" ? "bg-white" : ""}`}
                             onClick={()=> setTab("essay")}

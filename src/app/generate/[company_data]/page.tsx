@@ -280,16 +280,32 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
               )}
 
               {currentStep === 3 && (
-                <div className={revStyles.sectionctn}>
+                <div className={`relative ${revStyles.sectionctn}`}>
                   {running ? (
-                    <div className="flex flex-col justify-center items-center">
-                      <div className='w-full pt-[2rem] text-center'>{stageSetRef.current?.[stageIndex].text}</div>
+                    <>
+                    <div className="whitespace-pre-wrap space-y-4 p-8 text-gray-700 text-base leading-relaxed blur-sm select-none pointer-events-none">            
+                        <h2 className="text-lg font-bold">
+                          추가 질문으로 더 정교하게 보완하기
+                          <div className="h-px sm:hidden"><br /></div>
+                          (선택 사항)
+                        </h2>
+                        <div className="space-y-4">
+                          {[...Array(7)].map((_, idx) => (
+                            <div key={idx}>
+                              <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="absolute z-10 flex flex-col justify-center items-center w-full">
+                        <div className='w-full pt-[2rem] text-center drop-shadow-[0_0_4px_white]'>{stageSetRef.current?.[stageIndex].text}</div>
                       <div className='w-full pt-8 pb-16'><DotSpinner /></div>
                     </div>
+                    </>
                   ) : (
                     guide ? 
                     <>
-                      <div className="grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
+                      <div className="mt-6 grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
                         <div 
                           className={`text-center py-2 rounded-lg cursor-pointer ${preview==="guide" ? "bg-white" : ""}`}
                           onClick={()=> setPreview("guide")}
