@@ -101,6 +101,8 @@ export default function JobBoard() {
 
   const handleSubmitBasicInfo = (e: any) => {
     e.preventDefault();
+    sessionStorage.removeItem('openGenData');
+    sessionStorage.removeItem('openGenDataTimestamp');
 
     const formData = {
       company: companyInput,
