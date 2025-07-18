@@ -293,7 +293,7 @@ export default function RevisionPage() {
                     <>
                       <div className="whitespace-pre-wrap space-y-4 p-8 text-gray-700 text-base leading-relaxed blur-sm select-none pointer-events-none">            
                         <h2 className="text-lg font-bold">
-                          초안 분석 중이에요! 곧 피드백과 추가 질문을 드릴게요
+                          초안 분석 중이에요! 곧 피드백과 보완을 위한 추가 질문을 드릴게요.
                           <div className="h-px sm:hidden"><br /></div>
                           (선택 사항)
                         </h2>
@@ -322,7 +322,7 @@ export default function RevisionPage() {
                         </div>
                       </div>
                       <div className="absolute z-10 flex flex-col justify-center items-center w-full">
-                        <div className='w-full pt-[2rem] text-center drop-shadow-[0_0_4px_white]'>초안 분석 중이에요! 곧 피드백과 추가 질문을 드릴게요. <br /> 잠시만 기다려주세요 (최대 1분)</div>
+                        <div className='w-full pt-[2rem] text-center drop-shadow-[0_0_4px_white]'>초안 분석 중이에요! 곧 피드백과 보완을 위한 추가 질문을 드릴게요. <br /> 잠시만 기다려주세요 (최대 1분)</div>
                         <div className='w-full pt-8 pb-16'><DotSpinner /></div>
                       </div>
                     </>
@@ -473,7 +473,7 @@ export default function RevisionPage() {
                     className={styles.btn}
                     disabled={waiting2}
                   >
-                    추가 질문 답하기
+                    추가 질문 확인하기
                   </button>
                 </>
               )}

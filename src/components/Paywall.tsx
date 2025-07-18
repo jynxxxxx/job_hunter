@@ -11,7 +11,7 @@ export default function Paywall() {
               바로지원으로 서류 합격률을 높이는 자기소개서를 작성하세요.
               </div>
               <p className="text-left sm:text-center text-lg sm:text-xl max-w-xl">
-                무제한 자기소개서 생성 및 수정 기능은 <strong>월 구독</strong>을 통해 제공됩니다. 현제 얼리버드 선착순 한인 진행 중입니다
+                무제한 자기소개서 생성 및 수정 기능은 <strong>월 구독</strong>을 통해 제공됩니다. <br/>현재 얼리버드 선착순 할인 진행 중입니다
               </p>
 
               <a

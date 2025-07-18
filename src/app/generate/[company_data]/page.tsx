@@ -303,44 +303,44 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
                     </div>
                     </>
                   ) : (
-                    guide ? 
-                    <>
-                      <div className="mt-6 grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
-                        <div 
-                          className={`text-center py-2 rounded-lg cursor-pointer ${preview==="guide" ? "bg-white" : ""}`}
-                          onClick={()=> setPreview("guide")}
-                        >
-                          가이드
+                    guide?.guideline?.core_keywords ? 
+                      <>
+                        <div className="mt-6 grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
+                          <div 
+                            className={`text-center py-2 rounded-lg cursor-pointer ${preview==="guide" ? "bg-white" : ""}`}
+                            onClick={()=> setPreview("guide")}
+                          >
+                            가이드
+                          </div>
+                          <div 
+                            className={`text-center py-2 rounded-lg cursor-pointer ${preview==="essay" ? "bg-white" : ""}`}
+                            onClick={()=> setPreview("essay")}
+                          >
+                            자기소개서
+                          </div>
                         </div>
-                        <div 
-                          className={`text-center py-2 rounded-lg cursor-pointer ${preview==="essay" ? "bg-white" : ""}`}
-                          onClick={()=> setPreview("essay")}
-                        >
-                          자기소개서
-                        </div>
-                      </div>
-                      {preview === "guide" ? (
-                        <div className={genStyles.guideCtn}><GuideResult {...guide} /></div>
-                      ) : (
-                        <div className={genStyles.guideCtn}>
-                          {essay && (
-                            <>
-                              <div className="text-lg whitespace-pre-line">
-                                {essay.essay}
-                              </div>
-                              <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
-                            </>
-                          )}
-                        </div>
-                      )}
-                    </>
-                  : <textarea
-                        value=""
-                        placeholder="오류가 생겼습니다.  다시 한번 해보세요."
-                        disabled
-                        className={genStyles.guideCtn}
-                      />
-                  )}
+                        {preview === "guide" ? (
+                          <div className={genStyles.guideCtn}><GuideResult {...guide} /></div>
+                        ) : (
+                          <div className={genStyles.guideCtn}>
+                            {essay && (
+                              <>
+                                <div className="text-lg whitespace-pre-line">
+                                  {essay.essay}
+                                </div>
+                                <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{essay?.length}자</div>
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </>
+                    : <textarea
+                          value=""
+                          placeholder="오류가 발생했습니다. 다시 시도해주세요."
+                          disabled
+                          className={genStyles.guideCtn}
+                        />
+                    )}
                 </div>
               )}
             </div>

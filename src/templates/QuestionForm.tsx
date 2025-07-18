@@ -91,7 +91,7 @@ function QuestionFormComponent<T>(
       setSubmitEnabled(false);
       const timer = setTimeout(() => {
         setSubmitEnabled(true);
-      }, 1000); // 1 seconds delay
+      }, 100); // 1 milliseconds delay
 
       return () => clearTimeout(timer);
     } else {
