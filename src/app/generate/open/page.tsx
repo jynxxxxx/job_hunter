@@ -108,7 +108,7 @@ export default function GenerationOpenPage() {
     const userSnap = await getDoc(userRef);
 
     const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    const freePassUsed =  userSnap.exists() && userSnap.data().generation_count['open'] > 0
+    const freePassUsed =  userSnap.exists() && ((userSnap.data().generation_count?.['open'] ?? 0) > 0);
 
     if (!hasSubscribed && freePassUsed) {
       setPaywall(true)
@@ -154,7 +154,7 @@ export default function GenerationOpenPage() {
     const userSnap = await getDoc(userRef);
 
     const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    const freePassUsed =  userSnap.exists() && userSnap.data().generation_count['open'] > 0
+    const freePassUsed =  userSnap.exists() && ((userSnap.data().generation_count?.['open'] ?? 0) > 0);
     
     if (!hasSubscribed && freePassUsed) {
       toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
@@ -403,7 +403,7 @@ export default function GenerationOpenPage() {
                       </div>
                     </>
                   ) : (
-                    finalEssay && (
+                    finalEssay ? (
                       <>
                         <div className="mt-6 grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
                           <div 
@@ -439,6 +439,13 @@ export default function GenerationOpenPage() {
                           </div>
                         )}
                       </>
+                    ) : (
+                      <textarea
+                        value=""
+                        placeholder="오류가 발생했습니다. 다시 시도해주세요."
+                        disabled
+                        className={genStyles.guideCtn}
+                      />
                     )
                   )}
                 </div>

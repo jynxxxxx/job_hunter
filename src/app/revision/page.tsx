@@ -177,7 +177,8 @@ export default function RevisionPage() {
       ...input,
       feedback: feedback?.feedback,
       additional_questions: feedback?.additional_info_request.questions,
-
+      revision: revision.revised_essay,
+      revision_explanation: revision.revision_explanation
     });
 
       await updateDoc(userRef, {
