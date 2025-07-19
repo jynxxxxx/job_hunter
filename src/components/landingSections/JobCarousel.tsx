@@ -151,7 +151,7 @@ const JobCarousel = () => {
                       </div>
                     )}
                   </div>
-                  <div className="w-fit py-1 px-2 mt-2 text-xs font-semibold bg-gray-200 rounded-4xl">{company.d_days == 1 ? "오늘 마감" : `D-${company.d_days}`}</div>
+                  <div className="w-fit py-1 px-2 mt-2 text-xs font-semibold bg-gray-200 rounded-4xl">{company.d_days < 1 ? "오늘 마감" : `D-${company.d_days}`}</div>
                   <div className="mt-2 text-md font-semibold">{company.company}</div>
                   <div className="mt-2 text-sm text-gray-500">{company.title}</div>
                   <div className="text-xs text-gray-500">
