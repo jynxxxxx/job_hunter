@@ -136,7 +136,7 @@ export default function JobBoard() {
         > 
           지원하는 회사, 직무, 자소서 문항만 입력하면 바로지원 AI가 도와드립니다.
         </h1>
-        <div className={`${revStyles.section} sm:w-3/5 mx-auto`}>
+        <div className={`${revStyles.section} sm:w-3/5 2xl:w-1/2 mx-auto`}>
           <form onSubmit={handleSubmitBasicInfo} className="px-2 sm:px-8 pt-6 pb-4 flex flex-col gap-2">
             <div className="w-full flex items-center gap-2">
               <label className="w-[5ch]">회사:</label>

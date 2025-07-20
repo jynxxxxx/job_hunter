@@ -210,7 +210,7 @@ export default function RevisionPage() {
   return (
     <AuthCheck>
       <div className="min-h-[80vh] bg-primary/30">
-        <div className="w-[90vw] md:w-[60vw] mx-auto pb-12">
+        <div className={`w-[90vw] md:w-[60vw] mx-auto pb-12 ${currentStep==1 ? "2xl:w-2/5" : "2xl:w-1/2"}`}>
           <div className='flex flex-col items-center justify-center pt-8'>
             <div className='text-gray-700 font-bold text-2xl pt-12'>자기소개서 첨삭</div>
           </div>

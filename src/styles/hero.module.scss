@@ -1,12 +1,10 @@
 @use './variables.scss' as *;
 
 .ctn {
-  height: 75vh;
+  max-height: fit-content;
   min-height: fit-content;
-  width: 100%;
   overflow: hidden;
-  padding: 6rem 4rem;
-
+  padding: 6rem 2rem 6rem 3rem;
   background-color: $extraDark;
   overflow: hidden;
   opacity: 0.95;
@@ -14,7 +12,7 @@
 
 .title {
   z-index: 5;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bolder;
   text-align: start;
   color: white;
@@ -31,8 +29,7 @@
 
 .herobtn{
   z-index: 200;
-  width: fit-content;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 2rem;
   font-size: 1rem;
   border-radius: 8px;
   border: none;
@@ -54,7 +51,7 @@
   }
 
   .title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .subtext {
@@ -74,11 +71,25 @@
   }
 
   .subtext {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
   }
 
   .herobtn {
     padding: 0.6rem 2rem;
     font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .ctn{
+    min-height: 70vh;
+  }
+  
+  .title {
+    font-size: 2.7rem;
+  }
+
+  .subtext {
+    font-size: 1.6rem;
   }
 }

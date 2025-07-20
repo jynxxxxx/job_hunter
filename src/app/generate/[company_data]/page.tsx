@@ -196,7 +196,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
   return (
     <AuthCheck>
       <div className="min-h-[80vh] bg-primary/30">
-        <div className="w-[90vw] md:w-[60vw] mx-auto pb-12">
+        <div className={`w-[90vw] md:w-[60vw] mx-auto pb-12 2xl:w-1/2`}>
           <div className='flex flex-col items-center justify-center pt-8'>
             <div className="relative h-[5rem] w-[90%] py-2">
               <Image

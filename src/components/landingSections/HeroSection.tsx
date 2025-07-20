@@ -26,29 +26,29 @@ const HeroSection = () => {
   };
 
   return (
-    <>
-      <section className={`${heroStyles.ctn} grid grid-rows-[1.7fr_1fr] sm:grid-cols-[1.5fr_1fr]`}>
+    <div className='bg-extraDark flex w-full justify-center'>
+      <section className={`${heroStyles.ctn} grid grid-rows-[1.7fr_1fr] sm:grid-rows-[1fr] sm:grid-cols-[1.5fr_1fr] w-fit`}>
         <div className='flex flex-col justify-center'>
           <div className={heroStyles.title}>
-            자소서 쓰는 게 아니라,<br/>&apos;합격&apos; 시키는 겁니다.
+            나를 담은 이야기로,<br/>회사 맞춤형 자소서를 완성하세요.
           </div>
           <div className={heroStyles.subtext}>
-            AI Copilot 기술과 3000건의 합격 자기소개서로,
-            &nbsp;<div className="h-px sm:hidden"></div>
-            3분이면 합격률이 높은 자소서가 완성됩니다
+            치열해진 서류경쟁, AI Copilot 기술과&nbsp;<br className="sm:hidden" />3000건의 합격 데이터로
+            &nbsp;<br className="hidden sm:block xl:hidden" />
+            채용담당자&nbsp;<br className="hidden xl:block" />눈에 띄는&nbsp;<br className="sm:hidden" />자기소개서를 완성하세요
           </div>
-          <div className='flex flex-col sm:flex-row gap-2 sm:gap-4 mt-10 px-12 sm:px-0 mb-8 sm:mb-0'>
+          <div className='grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 sm:w-fit gap-2 sm:gap-4 mt-10 px-12 sm:px-0 mb-8 sm:mb-0'>
             <button
-              className={`${heroStyles.herobtn} bg-bright/80 text-white`}
+              className={`${heroStyles.herobtn} bg-bright/80 text-white w-full`}
               onClick={handleStart}
             >
-              자기소개서 작성하기 →
+              작성하기
             </button>
             <button
-              className={`${heroStyles.herobtn} bg-gray-200`}
+              className={`${heroStyles.herobtn} bg-gray-200 w-full`}
               onClick={handleFeedback}
             >
-              자기소개서 피드백받기 →
+              피드백받기
             </button>
           </div>
         </div>
@@ -61,7 +61,7 @@ const HeroSection = () => {
           />
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
