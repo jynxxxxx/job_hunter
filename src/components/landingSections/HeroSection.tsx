@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import heroStyles from "@/styles/hero.module.scss";
 import { useAuth } from '@/context/AuthContext';
 import Image from 'next/image';
+import ApplicationPosting from './ApplicationPosting';
 
 const HeroSection = () => {
   const router = useRouter();
@@ -26,6 +27,8 @@ const HeroSection = () => {
   };
 
   return (
+    <>
+    <ApplicationPosting />
     <div className='bg-extraDark flex w-full justify-center'>
       <section className={`${heroStyles.ctn} grid grid-rows-2 sm:grid-rows-[1fr] sm:grid-cols-[1.2fr_1fr] w-fit`}>
         <div className='flex flex-col justify-center'>
@@ -62,6 +65,7 @@ const HeroSection = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
