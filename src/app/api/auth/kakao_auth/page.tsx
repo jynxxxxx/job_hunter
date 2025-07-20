@@ -45,7 +45,9 @@ export default function KakaoCallback() {
               setError("로그인 실패: 사용자 정보 없음");
               return; // Stop execution
             }
-            router.push('/generate');
+            const storedRedirect = localStorage.getItem('postLoginRedirect') || '/generate';
+            router.push(storedRedirect);
+            localStorage.removeItem('postLoginRedirect');
           } else {
             throw new Error("No Firebase token received.");
           }
