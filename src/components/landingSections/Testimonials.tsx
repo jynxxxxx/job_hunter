@@ -70,11 +70,11 @@ const Testimonials = () => {
       <header className={testimonialStyles.header}>
         <h2>
           많은 고객들이
-          <br />만족하며 이용하고 있어요.
+          &nbsp;<br className="md:hidden" />만족하며 이용하고 있어요.
         </h2>
-        <p>
+        <div>
           대학생과 취준생이 선택한 이유,&nbsp;<div className="h-px sm:hidden"><br/></div>직접 들어보세요.
-        </p>
+        </div>
       </header>
 
       <div className={testimonialStyles.carouselWrapper}>

@@ -23,29 +23,31 @@ const Instructions = () => {
   ]
 
   return (
-    <div className="min-h-fit flex flex-col justify-center gap-8 py-16 md:py-32">
-      <h1 className="font-extrabold text-3xl mlg:text-5xl text-gray-700 px-4 xl:px-32">
-        AI Copilot과&nbsp;<div className="h-px sm:hidden"><br/></div>함께 작성하세요
-      </h1>
-      <div className="px-8 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-4 xl:gap-8">
-        {cards.map((card, idx) => (
-          <div key={idx} className="flex flex-col gap-2 bg-light h-full w-full border border-dark/40 rounded-2xl">
-            <div className="relative w-full h-[13rem] xl:h-[15rem] bg-[#D6F4FF] rounded-t-2xl">
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                className="object-contain rounded-t-2xl"
-              />
+    <div className="flex justify-center">
+      <div className="min-h-fit flex flex-col justify-center gap-8 py-16 md:py-32 max-w-[1200px]">
+        <h1 className="font-extrabold text-3xl mlg:text-5xl text-gray-700 px-4 xl:px-32">
+          AI Copilot과&nbsp;<div className="h-px sm:hidden"><br/></div>함께 작성하세요
+        </h1>
+        <div className="px-8 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-4 xl:gap-8">
+          {cards.map((card, idx) => (
+            <div key={idx} className="flex flex-col gap-2 bg-light h-full w-full border border-dark/40 rounded-2xl">
+              <div className="relative w-full h-[13rem] xl:h-[15rem] bg-[#D6F4FF] rounded-t-2xl">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-contain rounded-t-2xl"
+                />
+              </div>
+              <h2 className="font-extrabold text-xl px-6 py-2">
+                {card.title}
+              </h2>
+              <h4 className="text-md text-gray-500 px-6 pb-4">
+                {card.description}
+              </h4>
             </div>
-            <h2 className="font-extrabold text-xl px-6 py-2">
-              {card.title}
-            </h2>
-            <h4 className="text-md text-gray-500 px-6 pb-4">
-              {card.description}
-            </h4>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

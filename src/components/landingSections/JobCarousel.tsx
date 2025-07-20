@@ -106,7 +106,7 @@ const JobCarousel = () => {
 
   return (
     <div className="min-h-fit flex flex-col justify-center py-16 lg:my-16">
-      <h1 className="font-extrabold text-3xl mlg:text-5xl text-gray-700 px-12 xl:px-32">
+      <h1 className="font-extrabold text-3xl mlg:text-5xl text-gray-700 px-12 xl:px-32 2xl:px-40">
         인기 기업 공고
       </h1>
       <div className="relative py-10">

@@ -20,29 +20,31 @@ const Features = () => {
   ]
 
   return (
-    <div className="bg-bright/5 min-h-fit grid grid-cols-1 md:grid-cols-2 px-8 py-16 justify-center items-center">
-      <div className="hidden sm:inline relative w-[45vw] h-[45vw] p-4">
-        <Image
-          src="/revision.png"
-          alt="website screenshot"
-          fill
-          className="object-contain"
-        />
-      </div>
-      <div className="lg:px-8 flex flex-col gap-4 sm:gap-4 xl:gap-8">
-        <h1 className="text-center font-extrabold text-3xl mlg:text-5xl text-gray-900">
-          기업 맞춤형 피드백과 첨삭
-        </h1>
-        {cards.map((card, idx) => (
-          <div key={idx} className="gap-2 h-full w-full">
-            <h2 className="text-gray-900 font-extrabold text-xl px-6 py-2">
-              {card.title}
-            </h2>
-            <h4 className="text-md text-gray-500 px-6 pb-4">
-              {card.description}
-            </h4>
-          </div>
-        ))}
+    <div className="flex justify-center bg-bright/5">
+      <div className="min-h-fit grid grid-cols-1 md:grid-cols-2 px-8 py-16 justify-center items-center max-w-[1500px]">
+        <div className="hidden md:inline relative w-[45vw] h-[45vw] 2xl:h-[40vw] 2xl:w-[40vw] p-4">
+          <Image
+            src="/revision.png"
+            alt="website screenshot"
+            fill
+            className="object-contain"
+          />
+        </div>
+        <div className="lg:px-8 flex flex-col gap-4 sm:gap-4 xl:gap-8">
+          <h1 className="text-center font-extrabold text-3xl mlg:text-5xl text-gray-900">
+            기업 맞춤형 피드백과 첨삭
+          </h1>
+          {cards.map((card, idx) => (
+            <div key={idx} className="gap-2 h-full w-full">
+              <h2 className="text-gray-900 font-extrabold text-xl px-6 py-2">
+                {card.title}
+              </h2>
+              <h4 className="text-md text-gray-500 px-6 pb-4">
+                {card.description}
+              </h4>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
