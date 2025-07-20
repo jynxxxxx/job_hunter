@@ -23,9 +23,9 @@ const ApplicationPosting = () => {
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
         <div className="w-full sm:w-4/5">
-          <div className="flex justify-center items-center gap-4 text-10 sm:text-[1.3rem]">
+          <div className="flex justify-center items-center gap-4 text-10 sm:text-[1.2rem]">
             <p>
-              <strong className={styles.strongText}>&lt;10분 무료 자소서 컨설팅&gt;</strong>&nbsp;<br className="sm:hidden" /><span className="text-8 sm:text-[1.2rem]">15년 겅력 인사담당자와 1:1로 만나보세요!</span>
+              24일까지 <strong className={styles.strongText}>&lt;10분 무료 자소서 컨설팅&gt;</strong>&nbsp;<br className="sm:hidden" /><span className="text-8 sm:text-[1.2rem]">15년 겅력 인사담당자와 1:1로 만나보세요!</span>
               <br/>
               <a href="https://calendly.com/teambarojiwon/30min" className="text-[0.8rem] hover:text-[0.85rem]">https://calendly.com/teambarojiwon/30min</a>
             </p>
