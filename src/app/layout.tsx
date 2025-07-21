@@ -10,7 +10,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ScrollToTopOnRouteChange } from "@/components/layoutSections/ScollToTop";
 
 export const metadata: Metadata = {
-  title: "바로지원",
+  title: "AI 취업 코파일럿 바로지원 | 자기소개서, 이력서, 면접 합격",
   description: "지원서부터 면접까지, 바로지원이 도와드립니다.",
 };
 

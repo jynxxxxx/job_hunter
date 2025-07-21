@@ -48,6 +48,16 @@ a {
   text-decoration: none;
 }
 
+.noticker::-webkit-inner-spin-button,
+.noticker::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.noticker {
+  -moz-appearance: textfield; /* Firefox */
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

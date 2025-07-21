@@ -18,6 +18,7 @@ export default function JobBoard() {
   const [jobInput, setJobInput] = useState("");
   const [questionInput, setQuestionInput] = useState("");
   const [companyInput, setCompanyInput] = useState("");
+  const [characterCount,setCharacterCount] = useState("");
   const [jobUrl, setJobUrl] = useState('');
   // Only companies with at least one job that has a question template
   const now = new Date();
@@ -108,6 +109,7 @@ export default function JobBoard() {
       company: companyInput,
       job: jobInput,
       question: questionInput,
+      characterCount: characterCount,
       url: jobUrl,
     };
 
@@ -169,6 +171,17 @@ export default function JobBoard() {
                 placeholder="문항을 입력하세요"
                 className={revStyles.formField}
                 required
+              />
+            </div>
+            <div className="w-full flex items-center gap-2">
+              <label className="w-[5ch]">자수:</label>
+              <input
+                type="number"
+                pattern="[0-9]*"
+                value={characterCount}
+                onChange={e => setCharacterCount(e.target.value)}
+                placeholder="원하는 자소서 글자 수 입력하세요 (예: 700)"
+                className={`${revStyles.formField} noticker`}
               />
             </div>
             <div className="w-full flex items-center gap-2">

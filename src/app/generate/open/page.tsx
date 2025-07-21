@@ -15,6 +15,14 @@ import genStyles from "@/styles/generation.module.scss"
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
 import { Copy, RefreshCw } from "lucide-react";
 
+type BasicInfoInput = {
+  company_name: string;
+  job_title: string;
+  question_text: string;
+  url: string;
+  target_length: string;
+};
+
 export default function GenerationOpenPage() {
   const {authUser} = useAuth()
   const [currentStep, setCurrentStep] = useState(2)
@@ -24,6 +32,7 @@ export default function GenerationOpenPage() {
   const [companyInput, setCompanyInput] = useState("");
   const [jobInput, setJobInput] = useState("");
   const [questionInput, setQuestionInput] = useState("");
+  const [characterCount,setCharacterCount] = useState("");
   const [jobUrl, setJobUrl] = useState('');
   const [waiting1, setWaiting1] = useState(false);
   const [waiting2, setWaiting2] = useState(false);
@@ -53,15 +62,19 @@ export default function GenerationOpenPage() {
       }
 
       if (data.company && data.job && data.question) {
+        setJobUrl(data.url || '');
         setCompanyInput(data.company);
         setJobInput(data.job);
         setQuestionInput(data.question);
-        setJobUrl(data.url || '');
+        setCharacterCount(data.characterCount)
 
-        // Delay to ensure states update before submit
-        setTimeout(() => {
-          submitBasicInfo();
-        }, 100);
+        submitBasicInfo({
+          company_name: data.company,
+          job_title: data.job,
+          question_text: data.question,
+          url: data.url,
+          target_length: data.characterCount,
+        })
       } else {
         setCurrentStep(1)
       }
@@ -97,7 +110,7 @@ export default function GenerationOpenPage() {
     return () => clearTimeout(timer);
   }, [running, stageIndex]);
 
-  const submitBasicInfo = async () => {
+  const submitBasicInfo = async (data?: Partial<BasicInfoInput>) => {
     if (!authUser) {
       toast.error("로그인이 필요합니다.");
       setWaiting2(false);
@@ -116,10 +129,11 @@ export default function GenerationOpenPage() {
     }
 
     const input = {
-      company_name: companyInput,
-      job_title: jobInput,
-      question_text: questionInput,
-      url: jobUrl,
+      company_name: data?.company_name ?? companyInput,
+      job_title: data?.job_title ?? jobInput,
+      question_text: data?.question_text ?? questionInput,
+      url: data?.url ?? jobUrl,
+      target_length: data?.target_length ?? characterCount,
     };
 
     setWaiting1(true)
@@ -179,7 +193,8 @@ export default function GenerationOpenPage() {
 
     const input = {
       ...subQuestions,
-      user_input: followupAnswers
+      user_input: followupAnswers,
+      target_length: characterCount,
     };
 
     setCurrentStep(currentStep + 1)
@@ -210,6 +225,7 @@ export default function GenerationOpenPage() {
       question_text: questionInput,
       company_name: companyInput,
       job_title: jobInput,
+      target_length: characterCount,
       url: jobUrl,
     });
 
@@ -228,6 +244,7 @@ export default function GenerationOpenPage() {
     setCompanyInput("");
     setJobInput("");
     setQuestionInput("");
+    setCharacterCount("");
     setJobUrl("");
     setCurrentStep(1)
     setTab("essay")
@@ -296,6 +313,17 @@ export default function GenerationOpenPage() {
                       placeholder="문항을 입력하세요"
                       className={styles.formField}
                       required
+                    />
+                  </div>
+                  <div className="w-full flex items-center gap-2">
+                    <label className="w-[5ch]">자수:</label>
+                    <input
+                      type="number"
+                      pattern="[0-9]*"
+                      value={characterCount}
+                      onChange={e => setCharacterCount(e.target.value)}
+                      placeholder="원하는 자소서 글자 수 입력하세요 (예: 700)"
+                      className={`${styles.formField} noticker`}
                     />
                   </div>
                   <div className="w-full flex items-center gap-2">
