@@ -283,7 +283,7 @@ export default function GenerationOpenPage() {
               {currentStep === 1 &&
                 <form id="basicInfoForm" onSubmit={handleSubmitBasicInfo} className={styles.sectionctn}>
                   <div className="w-full flex items-center gap-2">
-                    <label className="w-[5ch]">회사:</label>
+                    <label className="w-[7ch]">회사:</label>
                     <input
                       type="text"
                       value={companyInput}
@@ -294,7 +294,7 @@ export default function GenerationOpenPage() {
                     />
                   </div>
                   <div className="w-full flex items-center gap-2">
-                    <label className="w-[5ch]">직무:</label>
+                    <label className="w-[7ch]">직무:</label>
                     <input
                       type="text"
                       value={jobInput}
@@ -305,7 +305,7 @@ export default function GenerationOpenPage() {
                     />
                   </div>
                   <div className="w-full flex items-center gap-2">
-                    <label className="w-[5ch]">문항:</label>
+                    <label className="w-[7ch]">문항:</label>
                     <input
                       type="text"
                       value={questionInput}
@@ -316,7 +316,7 @@ export default function GenerationOpenPage() {
                     />
                   </div>
                   <div className="w-full flex items-center gap-2">
-                    <label className="w-[5ch]">자수:</label>
+                    <label className="w-[7ch]">글자수:</label>
                     <input
                       type="number"
                       pattern="[0-9]*"
@@ -327,7 +327,7 @@ export default function GenerationOpenPage() {
                     />
                   </div>
                   <div className="w-full flex items-center gap-2">
-                    <label className="w-[5ch]">URL:</label>
+                    <label className="w-[7ch]">URL:</label>
                     <input
                       type="text"
                       value={jobUrl}

@@ -141,7 +141,7 @@ export default function JobBoard() {
         <div className={`${revStyles.section} sm:w-3/5 2xl:w-1/2 mx-auto`}>
           <form onSubmit={handleSubmitBasicInfo} className="px-2 sm:px-8 pt-6 pb-4 flex flex-col gap-2">
             <div className="w-full flex items-center gap-2">
-              <label className="w-[5ch]">회사:</label>
+              <label className="w-[7ch]">회사:</label>
               <input
                 type="text"
                 value={companyInput}
@@ -152,7 +152,7 @@ export default function JobBoard() {
               />
             </div>
             <div className="w-full flex items-center gap-2">
-              <label className="w-[5ch]">직무:</label>
+              <label className="w-[7ch]">직무:</label>
               <input
                 type="text"
                 value={jobInput}
@@ -163,7 +163,7 @@ export default function JobBoard() {
               />
             </div>
             <div className="w-full flex items-center gap-2">
-              <label className="w-[5ch]">문항:</label>
+              <label className="w-[7ch]">문항:</label>
               <input
                 type="text"
                 value={questionInput}
@@ -174,7 +174,7 @@ export default function JobBoard() {
               />
             </div>
             <div className="w-full flex items-center gap-2">
-              <label className="w-[5ch]">자수:</label>
+              <label className="w-[7ch]">글자수:</label>
               <input
                 type="number"
                 pattern="[0-9]*"
@@ -185,7 +185,7 @@ export default function JobBoard() {
               />
             </div>
             <div className="w-full flex items-center gap-2">
-              <label className="w-[5ch]">URL:</label>
+              <label className="w-[7ch]">URL:</label>
               <input
                 type="text"
                 value={jobUrl}
