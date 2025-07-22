@@ -502,6 +502,7 @@ export default function GenerationOpenPage() {
                   </button>
 
                   <button
+                    data-track="generate-click"
                     onClick={handleSubmitFollowup}
                     className={styles.btn}
                     disabled={waiting2}

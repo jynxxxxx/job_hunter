@@ -489,6 +489,7 @@ export default function RevisionPage() {
                     이전
                   </button>
                   <button
+                    data-track="generate-click"
                     onClick={handleSubmitFollowup} 
                     className={styles.btn}
                     disabled={waiting2}

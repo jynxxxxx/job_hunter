@@ -8,6 +8,7 @@ import Footer from "@/components/layoutSections/Footer";
 import Script from 'next/script';
 import { Analytics } from "@vercel/analytics/next"
 import { ScrollToTopOnRouteChange } from "@/components/layoutSections/ScollToTop";
+import ExitPopUp from "@/components/ExitPopUp";
 
 export const metadata: Metadata = {
   title: "AI 취업 코파일럿 바로지원 | 자기소개서, 이력서, 면접 합격",
@@ -75,16 +76,17 @@ export default function RootLayout({
         />
         <AuthProvider>
           <UserDataProvider>
-            <Toaster position="top-center" />
-            <div className="min-h-screen relative">
-              <Header />
-                <div className="pt-[4rem] pb-[12rem] sm:pb-[12rem]">
-                  <ScrollToTopOnRouteChange />
-                  {children}
-                  <Analytics />
-                </div>
-              <Footer />
-            </div>
+              <Toaster position="top-center" />
+              <ExitPopUp />
+              <div className="min-h-screen relative">
+                <Header />
+                  <div className="pt-[4rem] pb-[12rem] sm:pb-[12rem]">
+                    <ScrollToTopOnRouteChange />
+                    {children}
+                    <Analytics />
+                  </div>
+                <Footer />
+              </div>
           </UserDataProvider>
         </AuthProvider>
       </body>

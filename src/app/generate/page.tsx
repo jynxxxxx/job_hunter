@@ -104,7 +104,7 @@ export default function JobBoard() {
     e.preventDefault();
     sessionStorage.removeItem('openGenData');
     sessionStorage.removeItem('openGenDataTimestamp');
-
+    
     const formData = {
       company: companyInput,
       job: jobInput,

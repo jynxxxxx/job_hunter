@@ -383,6 +383,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
                     </button>
                   ) : (
                     <button
+                      data-track="generate-click"
                       onClick={handleSubmit}
                       className={revStyles.btn}
                       disabled={waiting || running}

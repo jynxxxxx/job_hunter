@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase/client'; // adjust path as needed
+import { supabase } from '@/lib/supabase/client';
 import { useAuth } from '@/context/AuthContext';
 import { toast } from 'sonner';
 

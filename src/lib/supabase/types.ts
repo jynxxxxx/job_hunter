@@ -47,6 +47,28 @@ export type Database = {
           user_name: string;
         };
       };
+      exit_data: {
+        Row: {
+          id: string;
+          page: string;
+          reason: string;
+          email: string;
+          user_id: string;
+          created_at: string;
+        }
+        Insert: {
+          page: string;
+          reason: string;
+          email: string;
+          user_id: string;
+        };
+        Update: {
+          page?: string;
+          reason?: string;
+          email?: string;
+          user_id?: string;
+        };
+      },
     }
     Views: {
       [_ in never]: never
