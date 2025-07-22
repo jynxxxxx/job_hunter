@@ -15,7 +15,7 @@ export default function CoPilotPage() {
 
   useEffect(() => {
     const currentWord = words[wordIndex];
-    let typingSpeed = isDeleting ? 100 : 90;
+    const typingSpeed = isDeleting ? 100 : 90;
 
     const timeout = setTimeout(() => {
       if (isDeleting) {
