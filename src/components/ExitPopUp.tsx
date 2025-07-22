@@ -44,9 +44,6 @@ export default function ExitPopUp() {
         toast.success('피드백 주셔서 감사합니다.');
       }
 
-      console.log("Exit Survey Submitted:", { reason: reasonToSend, page: pathname });
-      // send reasonToSend to backend or analytics here
-
       setShowSurvey(false);
       setSelectedReason("");
       setOtherReason("");
@@ -257,6 +254,7 @@ export default function ExitPopUp() {
             setShowSurvey(false);
             setSelectedReason("");
             setOtherReason("");
+            localStorage.setItem("exitSurveyLastShown", Date.now().toString());
             document.body.style.overflow = "";
           }}
           style={{
