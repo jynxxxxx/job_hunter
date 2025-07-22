@@ -19,7 +19,7 @@ type UserDataContextType = {
   jobTemplates: any[];
 };
 
-type ActivePage = 'generation' | 'history' | 'home' | 'revision' | 'pricing';
+type ActivePage = 'generation' | 'history' | 'home' | 'revision' | 'pricing' | 'copilot';
 
 const UserDataContext = createContext<UserDataContextType>({
   userData: null,

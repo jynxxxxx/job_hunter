@@ -27,6 +27,8 @@ const Header = () => {
       setActivePage('generation');
     } else if (pathname === '/history') {
       setActivePage('history');
+    } else if (pathname === '/copilot') {
+      setActivePage('copilot');
     } else {
       setActivePage('home');
     }
@@ -94,23 +96,36 @@ const Header = () => {
 
       
       {pathname === '/login' ? null : (
-        <div className={`w-full pl-4 sm:pl-0 md:pt:12 flex items-end justify-start`}>
+        <div className={`w-full pl-4 sm:pl-0 md:pt:12 flex items-end justify-start gap-4`}>
           <>
-          {isAuthenticated && (
-            <>
-              <div 
-                onClick={() => {
-                  if (pathname !== '/revision') {
-                    router.push('/revision');
-                  }
-                  setActivePage("revision")
-                }}
-                className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
-                  activePage === 'revision' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-                }`}
-              >
-                <span>자기소개서 첨삭</span>
-              </div>
+            <div 
+              onClick={() => {
+                if (pathname !== '/copilot') {
+                  router.push('/copilot');
+                }
+                setActivePage("copilot")
+              }}
+              className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                activePage === 'copilot' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+              }`}
+            >
+              <span>컨설팅<span className='hidden sm:inline'>&nbsp;서비스</span></span>
+            </div>
+            {isAuthenticated && (
+              <>
+                <div 
+                  onClick={() => {
+                    if (pathname !== '/revision') {
+                      router.push('/revision');
+                    }
+                    setActivePage("revision")
+                  }}
+                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                    activePage === 'revision' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  }`}
+                >
+                  <span><span className='hidden sm:inline'>자기소개서&nbsp;</span>첨삭</span>
+                </div>
                 <div 
                   onClick={() => {
                     if (pathname !== '/generate') {
@@ -122,7 +137,7 @@ const Header = () => {
                     activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
-                  <span>자기소개서 생성</span>
+                  <span><span className='hidden sm:inline'>자기소개서&nbsp;</span>생성</span>
                 </div>
                 <div
                   onClick={() => {
@@ -135,7 +150,7 @@ const Header = () => {
                     activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
-                  <span>자기소개서 기록</span>
+                  <span><span className='hidden sm:inline'>자기소개서&nbsp;</span>기록</span>
                 </div>
               </>
             )}

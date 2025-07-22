@@ -37,7 +37,6 @@ const HeroSection = () => {
           </div>
           <div className={heroStyles.subtext}>
             치열해진 서류경쟁, AI Copilot 기술과&nbsp;<br className="sm:hidden" />3000건의 합격 데이터로
-            
             &nbsp;<br className="hidden xl:block" />채용담당자 눈에 띄는&nbsp;<br className="sm:hidden" />자기소개서를 완성하세요
           </div>
           <div className='grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 sm:w-fit gap-2 sm:gap-4 mt-10 px-12 sm:px-0 mb-8 sm:mb-0'>

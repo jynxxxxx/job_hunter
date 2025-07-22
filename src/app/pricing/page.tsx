@@ -18,7 +18,7 @@ export default function PricingPage() {
   return (
     <AuthCheck>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
+        <div className="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-xl">
           <header className="text-center mb-10">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-4">월간 구독</h1>
             <p className="text-lg text-gray-600 leading-relaxed">
@@ -31,7 +31,7 @@ export default function PricingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
             {[
               { tier: "1차 얼리버드", price: 10000, spotsLeft: 0 },
-              { tier: "2차 얼리버드", price: 20000, spotsLeft: 8 },
+              { tier: "2차 얼리버드", price: 20000, spotsLeft: 4 },
               { tier: "3차 얼리버드", price: 30000, spotsLeft: 10 },
             ].map((pkg, i) => (
               <div
@@ -62,6 +62,54 @@ export default function PricingPage() {
                 </button>
               </div>
             ))}
+          </div>
+
+          <div className='border-t border-gray-300 pt-16 flex flex-col justify-center items-center'>
+            <h2 className="text-4xl text-center text-gray-900 font-extrabold">컨설팅 서비스</h2>
+            <h3 className="w-fit bg-[#1447E6] text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold">월 50,000원</h3>
+            <div className={`pt-8 pb-16 text-gray-900  items-center sm:gap-8 w-full sm:px-16`}>
+              <div className="space-y-2 mb-6">
+                <div>
+                  <p className="font-semibold text-gray-800 mb-2">
+                    <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">1단계</span>
+                    아래 계좌로 위 금액을 송금해주세요.
+                  </p>
+                  <div className="flex justify-around items-center bg-gray-100 p-4 rounded-md text-center">
+                    <div>
+                      <p className="text-sm text-gray-700">카카오뱅크</p>
+                      <p className="font-extrabold text-xl text-gray-900 mb-1">3333058317631</p>
+                      <p className="text-sm text-gray-700">예금주: 박근철</p>
+                    </div>
+                    <div className='flex justify-center'>
+                      <div className="w-32 h-32 relative border border-gray-200 rounded-md p-2">
+                        <Image
+                          src="/qr.png"
+                          alt="QR Code"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div>
+                  <p className="font-semibold text-gray-800 mb-2">
+                    <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">2단계</span>
+                    송금 후, 아래 정보와 함께&nbsp;<br className="sm:hidden" />010-8961-1918로 보내주세요.
+                  </p>
+                  <div className="bg-gray-100 p-2 rounded-md text-center">
+                    <p className="font-bold text-gray-900 mb-1">
+                      [입금자명] / [귀하의 서비스 로그인 이메일]&nbsp;<br className="sm:hidden" />/ [가능한 1차 상담 날짜/시간] 
+                    </p>
+                  </div>
+                </div>
+        
+                <p className="text-center text-blue-700 font-semibold mt-6">
+                  결제 완료 확인 후 <span className="text-base">1시간 내</span> 1차 상담 확인 이메일 나갑니다.
+                </p>
+              </div>
+            </div>     
           </div>
 
           <div className="text-center text-gray-500 text-sm mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">

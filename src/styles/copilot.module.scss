@@ -1,0 +1,12 @@
+@keyframes blink-cursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blinkingCursor {
+  animation: blink-cursor 1s steps(1, start) infinite;
+}

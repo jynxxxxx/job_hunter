@@ -23,7 +23,7 @@
 .underlineAnimate {
   position: relative;
   display: inline-block;
-  font-weight: 800;
+
   color: gray;
   transition: color 0.3s ease;
 
@@ -39,6 +39,7 @@
     background-color: $dark; // or any color you want
     border-radius: 9999px;
     transition: transform 0.3s ease;
+    font-weight: 800;
   }
 
   &:hover {
