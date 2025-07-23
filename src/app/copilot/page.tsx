@@ -59,7 +59,8 @@ export default function CoPilotPage() {
         "구직자 유형별(신입, 전직, 경단녀 등) 맞춤형 컨설팅 프로그램 기획",
         "최신 채용 트렌드와 인사 담당자 관점을 반영한 실전형 피드백 제공",
         "취업 전문 교육기관 및 커리어 플랫폼 자문 경험 보유",
-      ]
+      ],
+      link: "https://calendly.com/teambarojiwon/30"
     },
     {
       img:"/expert2.png",
@@ -71,11 +72,12 @@ export default function CoPilotPage() {
         "면접관으로 100번 이상 참여 및 코딩테스트 설계",
         "진로설계부터 면접 대비 컨설팅 경험",
         "AI, Machine Learning Engineering의 멘토로 2년간 교육 진행",
-      ]
+      ],
+      link: "https://calendly.com/teambarojiwon/30-clone"
     },
     {
       img:"/expert3.png",
-      title:"기획 및 해외기업 커리어 전문가",
+      title:"해외기업 커리어 전문가",
       subtitle: "글로벌 무대에서 경쟁력 있는 커리어 경로를 함께 설계해드립니다",
       certs:[
         "UCLA Psychobiology 학부 졸업, bilingual(English, Korean)",
@@ -83,7 +85,8 @@ export default function CoPilotPage() {
         "해외 비즈니스 개발 및 파트너십 구축 경험 다수 (미국, 유럽 시장 중심)",
         "다국적 기업 문화 이해 및 글로벌 팀 협업 프로젝트 리드",
         "영어 비즈니스 커뮤니케이션 및 프레젠테이션 전문가",
-      ]
+      ],
+      link: "https://calendly.com/teambarojiwon/30-clone-1"
     }
   ];
 
@@ -244,13 +247,20 @@ export default function CoPilotPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="relative w-full h-[13rem] sm:h-[20rem] sm:w-[20vw]">
-                  <Image
-                    src={expert.img}
-                    alt={expert.title}
-                    fill
-                    className="object-contain"
-                  />
+                <div className="flex flex-col justify-center items-center">
+                  <div className="relative w-full h-[13rem] sm:h-[20rem] sm:w-[20vw]">
+                    <Image
+                      src={expert.img}
+                      alt={expert.title}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <button
+                    className="bg-extraDark text-white py-2 px-4 mt-4 rounded hover:scale-103"
+                  >
+                    <a href={expert.link}>이 전문가와 무료 상담 예약하기</a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -312,9 +322,28 @@ export default function CoPilotPage() {
           ))}
         </div>
       </section>
-      
+
+      {/* Free Consulting */} 
+      <section id="pricing" className='pb-16' >
+        <h2 className="pt-16 text-2xl sm:text-4xl text-center text-gray-900 font-extrabold">30분 무료 상담</h2>
+        <div className="flex w-4/5 gap-8 justify-center mx-auto">
+          {experts.map((expert, idx) => (
+            <div
+              key={idx}
+              className=""
+            >
+              <button
+                className="bg-blue-500 text-white py-2 px-4 mt-4 rounded hover:scale-103 w-[15rem] shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
+              >
+                <a href={expert.link}>{expert.title}와<br/>무료 상담 예약하기</a>
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Payment Info */} 
-      <section id="pricing" className='bg-white flex flex-col w-full justify-center items-center px-4 pb-16' >
+      <section className='bg-white flex flex-col w-full justify-center items-center px-4 pb-16' >
         <h2 className="pt-16 text-2xl sm:text-4xl text-center text-gray-900 font-extrabold">취업 컨설팅 신청 및 문의</h2>
         <h3 className="text-center text-gray-700 text-md sm:text-xl mt-4">
           전략부터 실행까지, 3달만에 100명의 고객이 선택한 채용전문가 + AI 기반 통합 컨설팅<br/>
