@@ -46,14 +46,45 @@ export default function CoPilotPage() {
     }
   };
 
-  const highlights = [
-    "UCLA HR Management Certificate",
-    "미시간주립대(MSU) Hospitality Business 전공",
-    "이력서부터 면접 대비까지 전 과정 컨설팅으로 구직자 약 200명 취업 성공",
-    "진로설계부터 면접 대비까지 전 과정을 아우르는 1:1 컨설팅 경험",
-    "구직자 유형별(신입, 전직, 경단녀 등) 맞춤형 컨설팅 프로그램 기획",
-    "최신 채용 트렌드와 인사 담당자 관점을 반영한 실전형 피드백 제공",
-    "취업 전문 교육기관 및 커리어 플랫폼 자문 경험 보유",
+  const experts = [
+    {
+      img:"/expert1.png",
+      title:"15년 경력의 커리어 전문가",
+      subtitle: "수많은 지원자의 취업을 이끈, 커리어 컨설턴트와 1:1 미팅을 진행하세요",
+      certs:[
+        "UCLA HR Management Certificate",
+        "미시간주립대(MSU) Hospitality Business 전공",
+        "이력서부터 면접 대비까지 전 과정 컨설팅으로 구직자 약 200명 취업 성공",
+        "진로설계부터 면접 대비까지 전 과정을 아우르는 1:1 컨설팅 경험",
+        "구직자 유형별(신입, 전직, 경단녀 등) 맞춤형 컨설팅 프로그램 기획",
+        "최신 채용 트렌드와 인사 담당자 관점을 반영한 실전형 피드백 제공",
+        "취업 전문 교육기관 및 커리어 플랫폼 자문 경험 보유",
+      ]
+    },
+    {
+      img:"/expert2.png",
+      title:"IT분야 커리어 전문가",
+      subtitle: "AI, IT 업계의 합격을 이끌어낸 커리어 전문가와 함께 상담하세요",
+      certs:[
+        "KAIST 학부, 석사 졸업(AI Lab)",
+        "스타트업 창업, 카카오, 네이버 합격 경험",
+        "면접관으로 100번 이상 참여 및 코딩테스트 설계",
+        "진로설계부터 면접 대비 컨설팅 경험",
+        "AI, Machine Learning Engineering의 멘토로 2년간 교육 진행",
+      ]
+    },
+    {
+      img:"/expert3.png",
+      title:"기획 및 해외기업 커리어 전문가",
+      subtitle: "글로벌 무대에서 경쟁력 있는 커리어 경로를 함께 설계해드립니다",
+      certs:[
+        "UCLA Psychobiology 학부 졸업, bilingual(English, Korean)",
+        "미국/국내 실리콘밸리 스타트업에서 3년간 전략 기획 및 시장 분석 업무 수행",
+        "해외 비즈니스 개발 및 파트너십 구축 경험 다수 (미국, 유럽 시장 중심)",
+        "다국적 기업 문화 이해 및 글로벌 팀 협업 프로젝트 리드",
+        "영어 비즈니스 커뮤니케이션 및 프레젠테이션 전문가",
+      ]
+    }
   ];
 
   const revisionFeatures = [
@@ -195,29 +226,34 @@ export default function CoPilotPage() {
 
       {/* Expert Intro */}
       <section className='bg-white flex w-full justify-center py-16' >
-        <div className={`bg-gray-200/50 py-8 px-4 sm:px-12 rounded-xl text-gray-900 grid grid-rows-[1.5fr_1fr] sm:grid-rows-1 sm:grid-cols-[1.5fr_1fr] items-center w-9/10 sm:w-4/5 2xl:w-1/2`}>
-          <div className="flex flex-col gap-4">
-            <div className="text-gray-900 text-center text-3xl font-extrabold">
-              15년 경력의&nbsp;<br className="lg:hidden" />커리어 전문가
-            </div>
-            <div className="text-gray-700 text-xl font-bold">
-              수많은 지원자의 취업을 이끈, 커리어 컨설턴트와 1:1 미팅을 진행하세요
-            </div>
-            <div className="text-gray-500">
-              <ul className="list-disc pl-5 space-y-2 text-base leading-relaxed">
-                {highlights.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          </div> 
-          <div className="relative w-full h-[40vh] sm:h-[60vh] sm:w-full pb-6">
-            <Image
-              src="/expert.png"
-              alt="resume"
-              fill
-              className="object-contain"
-            />
+        <div className={`bg-gray-200/50 pt-8 sm:py-8 px-4 sm:px-12 rounded-xl text-gray-900 w-9/10 sm:w-4/5 2xl:w-1/2`}>
+          <div className="space-y-12 w-fit mx-auto">
+            {experts.map((expert, idx) => (
+              <div
+                key={idx}
+                className={`flex flex-col md:flex-row items-center gap-2 sm:gap-8 mb-16 ${
+                  idx % 2 === 1 ? 'md:flex-row-reverse' : ''
+                }`}
+              >
+                <div className="w-full md:w-7/10 text-gray-800">
+                  <h3 className="text-xl font-bold mb-2">{expert.title}</h3>
+                  <p className="text-base text-gray-600 mb-4">{expert.subtitle}</p>
+                  <ul className="list-disc pl-5 space-y-2 text-base leading-relaxed text-gray-500">
+                    {expert.certs.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="relative w-full h-[13rem] sm:h-[20rem] sm:w-[20vw]">
+                  <Image
+                    src={expert.img}
+                    alt={expert.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>     
       </section>
