@@ -326,14 +326,14 @@ export default function CoPilotPage() {
       {/* Free Consulting */} 
       <section id="pricing" className='pb-16' >
         <h2 className="pt-16 text-2xl sm:text-4xl text-center text-gray-900 font-extrabold">30분 무료 상담</h2>
-        <div className="flex w-4/5 gap-8 justify-center mx-auto">
+        <div className="flex flex-col sm:flex-row w-fit gap-2 sm:gap-8 justify-center mx-auto">
           {experts.map((expert, idx) => (
             <div
               key={idx}
-              className=""
+              className=" "
             >
               <button
-                className="bg-blue-500 text-white py-2 px-4 mt-4 rounded hover:scale-103 w-[15rem] shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
+                className="w-4/5 bg-blue-500 text-white py-2 px-4 mt-4 rounded hover:scale-103 w-[15rem] shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
               >
                 <a href={expert.link}>{expert.title}와<br/>무료 상담 예약하기</a>
               </button>
