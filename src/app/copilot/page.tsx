@@ -347,7 +347,8 @@ export default function CoPilotPage() {
         <h2 className="pt-16 text-2xl sm:text-4xl text-center text-gray-900 font-extrabold">취업 컨설팅 신청 및 문의</h2>
         <h3 className="text-center text-gray-700 text-md sm:text-xl mt-4">
           전략부터 실행까지, 3달만에 100명의 고객이 선택한 채용전문가 + AI 기반 통합 컨설팅<br/>
-          KAIST 연구원의 AI Agent기술 도입으로, 고객의 전략적 취업 성공과 탄탄한 커리어를 설계합니다.
+          KAIST 연구원의 AI Agent기술 도입으로, 고객의 전략적 취업 성공과 탄탄한 커리어를 설계합니다.<br/>
+          전화 문의: 010-8961-1918
         </h3>
         <button
           className={`${heroStyles.herobtn} bg-blue-500 text-white w-fit mt-4`}
