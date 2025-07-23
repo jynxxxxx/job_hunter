@@ -335,6 +335,8 @@ export default function CoPilotPage() {
             <div className='bg-white flex flex-col w-full justify-center items-center' >
               <h2 className="pt-8 text-4xl text-center text-gray-900 font-extrabold">결제 안내</h2>
               <h3 className="bg-bright text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold">월 50,000원</h3>
+              <div className="text-md sm:text-2xl">1달 이내 서류합격 못할시 100% 전액 환불</div>
+              <div className="text-xs">*단, 컨설턴트와 최소 2회 미팅(및 첨삭) 및 3곳 이상 지원시</div>
               <div className={`pt-8 pb-16 text-gray-900  items-center sm:gap-8 2xl:gap-16`}>
                 <div className="space-y-2 mb-6">
                   <div>

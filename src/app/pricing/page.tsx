@@ -67,6 +67,8 @@ export default function PricingPage() {
           <div className='border-t border-gray-300 pt-16 flex flex-col justify-center items-center'>
             <h2 className="text-4xl text-center text-gray-900 font-extrabold">컨설팅 서비스</h2>
             <h3 className="w-fit bg-[#1447E6] text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold">월 50,000원</h3>
+            <div className="text-md sm:text-2xl">1달 이내 서류합격 못할시 100% 전액 환불</div>
+            <div className="text-xs">*단, 컨설턴트와 최소 2회 미팅(및 첨삭) 및 3곳 이상 지원시</div>
             <div className={`pt-8 pb-16 text-gray-900  items-center sm:gap-8 w-full sm:px-16`}>
               <div className="space-y-2 mb-6">
                 <div>
