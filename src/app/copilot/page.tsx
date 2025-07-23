@@ -269,13 +269,13 @@ export default function CoPilotPage() {
       </section>
 
       {/* Revision Section */} 
-      <section className='bg-bright/5 flex w-full justify-center' >
+      {/* <section className='bg-bright/5 flex w-full justify-center' >
         <div className={`py-16 text-gray-900  items-center sm:gap-8 w-9/10 sm:w-7/10 2xl:w-1/2 2xl:gap-16`}>
           <div className="flex flex-col gap-4">
             <div className="text-center text-3xl font-extrabold">
-              지원 회사/직무를 반영한&nbsp;<br className="sm:hidden" />맞춤 설계형 자소서
+              지원 회사/직무를 반영한&nbsp;<br className="sm:hidden" />맞춤 설계형 자소서 */}
               {/* &nbsp;<br className="sm:hidden" /> */}
-            </div>
+            {/* </div>
             <div className="text-lg font-bold text-gray-700">
               커리어 컨설턴트가 지원 회사/직무 맞춤형 자기소개서를 작성 및 첨삭해줍니다.&nbsp;<br className="sm:hidden" />
               지원자의 경험을 녹여내기 위해, 1회 미팅이 진행됩니다.
@@ -293,7 +293,7 @@ export default function CoPilotPage() {
             </div>
           </div> 
         </div>     
-      </section>
+      </section> */}
 
       {/* Services description */}
       <section className='flex flex-col w-full justify-center items-center gap-8 py-16' >
@@ -363,11 +363,12 @@ export default function CoPilotPage() {
           <div className={`relative ${genStyles.paywallMessage}`}>
             <div className='bg-white flex flex-col w-full justify-center items-center' >
               <h2 className="pt-8 text-4xl text-center text-gray-900 font-extrabold">결제 안내</h2>
-              <h3 className="bg-bright text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold">월 50,000원</h3>
-              <div className="text-md sm:text-2xl">1달 이내 서류합격 못할시 100% 전액 환불</div>
+              <h3 className="bg-blue-500 text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold mb-4"><span className="line-through">200,000원</span> → 50,000원</h3>
+              <div className="text-sm text-center">단, 선착순 10명에게 한달 제공, 주1회 설문조사 및 후기 제공 필요</div>
+              <div className="text-sm text-center">1달 이내 서류 합격 못할 시 100% 전액 환불, 1주 이내 불만족시 100% 전액 환불</div>
               <div className="text-xs">*단, 컨설턴트와 최소 2회 미팅(및 첨삭) 및 3곳 이상 지원시</div>
               <div className={`pt-8 pb-16 text-gray-900  items-center sm:gap-8 2xl:gap-16`}>
-                <div className="space-y-2 mb-6">
+                <div className="space-y-6 mb-6">
                   <div>
                     <p className="font-semibold text-gray-800 mb-2  text-left">
                       <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">1단계</span>
@@ -393,19 +394,19 @@ export default function CoPilotPage() {
                   </div>
 
                   <div>
-                    <p className="font-semibold text-gray-800 mb-2 text-left">
+                    <p className="font-semibold text-gray-800 mb-2 text-left mt-2">
                       <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">2단계</span>
                       송금 후, 아래 정보와 함께&nbsp;<br className="sm:hidden" />010-8961-1918로 보내주세요.
                     </p>
                     <div className="bg-gray-100 p-2 rounded-md text-center">
                       <p className="font-bold text-gray-900 mb-1">
-                        [입금자명] / [귀하의 서비스 로그인 이메일] /&nbsp;<br className="sm:hidden" />[가능한 1차 상담 날짜/시간] 
+                        [입금자명] / [귀하의 서비스 로그인 이메일] /&nbsp;<br className="sm:hidden" />[가능한 1차 상담 날짜, 시간] 
                       </p>
                     </div>
                   </div>
           
                   <p className="text-center text-blue-700 font-semibold pt-6 sm:pt-12">
-                    결제 완료 확인 후 <span className="text-base">1시간 내</span> 1차 상담 확인 이메일 나갑니다.
+                    결제 완료 후, 1시간 이내로 1차 상담 안내 이메일이 발송됩니다.
                   </p>
                 </div>
               </div>   
