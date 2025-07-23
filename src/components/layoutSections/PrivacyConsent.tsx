@@ -8,7 +8,7 @@ import PrivacyPolicy from './PrivacyForm';
 
 export default function PrivacyAgreementModal() {
   const { authUser } = useAuth(); // must return firebase.User | null
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
