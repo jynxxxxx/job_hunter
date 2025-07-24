@@ -141,15 +141,15 @@ export default function CoPilotPage() {
       <ApplicationPosting />
       {/* Hero Section */}
       <div className='bg-gradient-to-r from-dark via-dark to-blue-600 flex w-full justify-center'>
-        <section className={`${heroStyles.ctn} grid grid-rows-2 sm:grid-rows-[1fr] sm:grid-cols-[1.2fr_1fr] w-fit`}>
+        <section className={`${heroStyles.ctn} grid grid-rows-2 sm:grid-rows-[1fr] sm:grid-cols-[1.4fr_1fr] md:w-4/5 2xl:w-7/10`}>
           <div className='flex flex-col justify-center'>
             <div className={heroStyles.title}>
               나도 몰랐던 합격의 기회.<br/>
               커리어 전문가와 AI와 함께
             </div>
             <div className={heroStyles.subtext}>
-              지금까지 놓쳐온 기회, 발견하지 못했던 가능성 AI와 커리어 <br />전문가가 함께 찾아드립니다.
-              이제, 당신만의 커리어를 시작하세요.
+              계속 서탈 중이라면, 뭐가 문제인지 분석해드립니다.<br/>
+              1달이내 서류 합격률 93%, 2달이내 최종 합격률 78%
               {/* 치열해진 서류경쟁, AI Copilot 기술과&nbsp;<br className="sm:hidden" />3000건의 합격 데이터로
               
               &nbsp;<br className="hidden xl:block" />채용담당자 눈에 띄는&nbsp;<br className="sm:hidden" />자기소개서를 완성하세요 */}
