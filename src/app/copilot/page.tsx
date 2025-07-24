@@ -186,7 +186,7 @@ export default function CoPilotPage() {
           </div>
         </div>
         <div className="w-fit flex flex-col gap-2 text-center pt-4 pb-4">
-          <div className="text-lg sm:text-2xl">1달 이내 서류합격 못할시&nbsp;<br className="sm:hidden" /><strong className="text-bright">100% 전액(5만원) 환불</strong></div>
+          <div className="text-lg sm:text-2xl">1달 이내 서류합격 못할시&nbsp;<br className="sm:hidden" /><strong className="text-bright">100% 전액 환불</strong></div>
           <div className="text-xs">*단, 컨설턴트와 최소 2회 미팅(및 첨삭) 및 3곳 이상 지원시</div>
         </div>
         <div className="relative w-full h-[50vh] pb-6">
