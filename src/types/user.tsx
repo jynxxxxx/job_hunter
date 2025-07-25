@@ -1,3 +1,5 @@
+import { FieldValue } from "firebase-admin/firestore";
+
 export interface ParsedResume {
   이름?: {
     성?: string;
@@ -50,4 +52,13 @@ export interface CustomUserProfile {
     startDate:string,
     endDate:string,
   }
+  school: {
+    name: string
+    major: string
+    graduated: boolean
+  }
+  createdAt?: string;
+  updatedAt?: FieldValue | string;
+  referralCode?: string;
+  referralCount?: number;
 }

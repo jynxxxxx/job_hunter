@@ -45,7 +45,7 @@ export default function KakaoCallback() {
               setError("로그인 실패: 사용자 정보 없음");
               return; // Stop execution
             }
-            const storedRedirect = localStorage.getItem('postLoginRedirect') || '/generate';
+            const storedRedirect = localStorage.getItem('postLoginRedirect') || '/revision';
             router.push(storedRedirect);
             localStorage.removeItem('postLoginRedirect');
           } else {

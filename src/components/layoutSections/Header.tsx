@@ -98,21 +98,21 @@ const Header = () => {
       {pathname === '/login' ? null : (
         <div className={`w-full pl-4 sm:pl-0 md:pt:12 flex items-end justify-start gap-4`}>
           <>
-            <div 
-              onClick={() => {
-                if (pathname !== '/copilot') {
-                  router.push('/copilot');
-                }
-                setActivePage("copilot")
-              }}
-              className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
-                activePage === 'copilot' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
-              }`}
-            >
-              <span>컨설팅<span className='hidden sm:inline'>&nbsp;서비스</span></span>
-            </div>
             {isAuthenticated && (
               <>
+                <div 
+                  onClick={() => {
+                    if (pathname !== '/feedback') {
+                      router.push('/feedback');
+                    }
+                    setActivePage("feedback")
+                  }}
+                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                    activePage === 'feedback' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                  }`}
+                >
+                  <span><span className='hidden sm:inline'>자기소개서&nbsp;</span>첨삭</span>
+                </div>
                 <div 
                   onClick={() => {
                     if (pathname !== '/revision') {
@@ -154,6 +154,19 @@ const Header = () => {
                 </div>
               </>
             )}
+            <div 
+              onClick={() => {
+                if (pathname !== '/copilot') {
+                  router.push('/copilot');
+                }
+                setActivePage("copilot")
+              }}
+              className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                activePage === 'copilot' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+              }`}
+            >
+              <span>컨설팅<span className='hidden sm:inline'>&nbsp;서비스</span></span>
+            </div>
           </>
           {!isAuthenticated ? (
             <div
@@ -176,6 +189,17 @@ const Header = () => {
                 >
                   <div
                     onClick={() => {
+                      if (pathname !== '/profile') {
+                        router.push('/profile');
+                      }
+                      setActivePage("home")
+                    }}
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                  >
+                    <span>마이 페이지</span>
+                  </div> 
+                  {/* <div
+                    onClick={() => {
                       if (pathname !== '/pricing') {
                         router.push('/pricing');
                       }
@@ -184,7 +208,7 @@ const Header = () => {
                     className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                   >
                     <span>구독안내</span>
-                  </div> 
+                  </div>  */}
                   <div
                     onClick={handleLogoutClick}
                     className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"

@@ -1,9 +1,14 @@
-import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, setDoc, addDoc, serverTimestamp, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+
+import { customAlphabet } from 'nanoid';
+
 
 export const ensureUserProfile = async (user: any, name: string, eventSourceUrl?: string) => {
     const userDocRef = doc(db, 'users', user.uid);
     const docSnap = await getDoc(userDocRef);
+    const generateReferralCode = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 10);
+    const referral_code = generateReferralCode();
 
     if (!docSnap.exists()) {
       await setDoc(
@@ -14,6 +19,8 @@ export const ensureUserProfile = async (user: any, name: string, eventSourceUrl?
           hasPaid: {},
           subscription: {active: false},
           createdAt: serverTimestamp(),
+          referralCode: referral_code,
+          referralCount: 0,
         },
         { merge: true } // Use merge: true to avoid overwriting if partial data exists
       );
