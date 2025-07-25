@@ -10,7 +10,7 @@ interface UploadParams<T> {
   job_id: string;
   authUser: any;
   userData: any;
-  freePassUsed: boolean;
+  // freePassUsed: boolean;
   setWaiting: (b: boolean) => void;
   setRunning: (b: boolean) => void; // Optional prop to indicate if generation is running
   setEssay: (essay: any) => void;
@@ -25,7 +25,7 @@ export async function handleUpload<T>({
   job_id,
   userData,
   authUser,
-  freePassUsed,
+  // freePassUsed,
   setWaiting,
   setRunning,
   setEssay,
@@ -68,19 +68,18 @@ export async function handleUpload<T>({
   try {
     const userRef = doc(db, "users", authUser.uid);
     const userSnap = await getDoc(userRef);
-
-    const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
-
     const jobId = String(job_id);
-    const jobHasPaid = hasPaidMap[jobId] === true || userData?.subscription?.active === true;
 
-    if (!jobHasPaid && freePassUsed) {
-      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-      setWaiting(false);
-      return;
-    }
+    // const hasPaidMap = userSnap.exists() ? userSnap.data().hasPaid || {} : {};
+    // const jobHasPaid = hasPaidMap[jobId] === true || userData?.subscription?.active === true;
 
-    if (!jobHasPaid) {
+    // if (!jobHasPaid && freePassUsed) {
+    //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+    //   setWaiting(false);
+    //   return;
+    // }
+
+    if (userSnap.exists() && (userSnap.data().generation_count?.['jobId'] ?? 0) < 1) {
       // meta conversion api call
       await fetch('/api/meta', {
         method: 'POST',

@@ -39,7 +39,7 @@ export default function GenerationOpenPage() {
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const [stageIndex, setStageIndex] = useState(0);
   const [running, setRunning] = useState(false);
-  const [paywall, setPaywall] = useState(false);
+  // const [paywall, setPaywall] = useState(false);
   const [tab, setTab] = useState("essay");
 
   useEffect(() => {
@@ -117,16 +117,16 @@ export default function GenerationOpenPage() {
       return;
     }
 
-    const userRef = doc(db, "users", authUser?.uid);
-    const userSnap = await getDoc(userRef);
+    // const userRef = doc(db, "users", authUser?.uid);
+    // const userSnap = await getDoc(userRef);
 
-    const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    const freePassUsed =  userSnap.exists() && ((userSnap.data().generation_count?.['open'] ?? 0) > 0);
+    // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
+    // const freePassUsed =  userSnap.exists() && ((userSnap.data().generation_count?.['open'] ?? 0) > 0);
 
-    if (!hasSubscribed && freePassUsed) {
-      setPaywall(true)
-      return;
-    }
+    // if (!hasSubscribed && freePassUsed) {
+    //   setPaywall(true)
+    //   return;
+    // }
 
     const input = {
       company_name: data?.company_name ?? companyInput,
@@ -167,15 +167,15 @@ export default function GenerationOpenPage() {
     const userRef = doc(db, "users", authUser?.uid);
     const userSnap = await getDoc(userRef);
 
-    const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    const freePassUsed =  userSnap.exists() && ((userSnap.data().generation_count?.['open'] ?? 0) > 0);
+    // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
+    // const freePassUsed =  userSnap.exists() && ((userSnap.data().generation_count?.['open'] ?? 0) > 0);
     
-    if (!hasSubscribed && freePassUsed) {
-      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-      return;
-    }
+    // if (!hasSubscribed && freePassUsed) {
+    //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+    //   return;
+    // }
 
-    if (!hasSubscribed) {
+    if (userSnap.exists() && (userSnap.data().generation_count?.['open'] ?? 0) < 1) {
       // meta conversion api call
       await fetch('/api/meta', {
         method: 'POST',
@@ -531,7 +531,7 @@ export default function GenerationOpenPage() {
               )}
             </div>
           </div>
-          {paywall && (
+          {/* {paywall && (
             <>
               <div className={genStyles.paywallOverlay}></div>
               <div className={genStyles.paywallMessage}>
@@ -539,7 +539,7 @@ export default function GenerationOpenPage() {
                 <Paywall />
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </AuthCheck>

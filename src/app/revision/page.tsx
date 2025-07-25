@@ -9,8 +9,6 @@ import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp 
 import { db } from "@/lib/firebase";
 import styles from "@/styles/revisions.module.scss"
 import { useAuth } from "@/context/AuthContext";
-import Paywall from "@/components/Paywall";
-import genStyles from "@/styles/generation.module.scss"
 import { DotSpinner } from "@/components/layoutSections/DotSpinner";
 import { Copy, RefreshCw } from "lucide-react";
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
@@ -31,7 +29,7 @@ export default function RevisionPage() {
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const [stageIndex, setStageIndex] = useState(0);
   const [running, setRunning] = useState(false);
-  const [paywall, setPaywall] = useState(false);
+  // const [paywall, setPaywall] = useState(false);
   const [tab, setTab] = useState("essay");
 
   useEffect(() => {
@@ -96,16 +94,16 @@ export default function RevisionPage() {
       return;
     }
 
-    const userRef = doc(db, "users", authUser?.uid);
-    const userSnap = await getDoc(userRef);
+    // const userRef = doc(db, "users", authUser?.uid);
+    // const userSnap = await getDoc(userRef);
 
-    const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    const freePassUsed = userSnap.exists() && userSnap.data().revision_count > 0;
+    // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
+    // const freePassUsed = userSnap.exists() && userSnap.data().revision_count > 0;
 
-    if (!hasSubscribed && freePassUsed) {
-      setPaywall(true);
-      return;
-    }
+    // if (!hasSubscribed && freePassUsed) {
+    //   setPaywall(true);
+    //   return;
+    // }
 
     setCurrentStep(currentStep + 1)
   }
@@ -122,15 +120,15 @@ export default function RevisionPage() {
     const userRef = doc(db, "users", authUser?.uid);
     const userSnap = await getDoc(userRef);
 
-    const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    const freePassUsed =  userSnap.exists() && userSnap.data().revision_count > 0
+    // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
+    // const freePassUsed =  userSnap.exists() && userSnap.data().revision_count > 0
     
-    if (!hasSubscribed && freePassUsed) {
-      toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
-      return;
-    }
+    // if (!hasSubscribed && freePassUsed) {
+    //   toast.error("접근이 제한되었습니다. 이 콘텐츠를 이용하시려면 결제가 필요합니다.");
+    //   return;
+    // }
 
-    if (!hasSubscribed) {
+    if (userSnap.exists() && userSnap.data().revision_count < 1) {
       // meta conversion api call
       await fetch('/api/meta', {
         method: 'POST',
@@ -521,7 +519,7 @@ export default function RevisionPage() {
         </div>
       </div>
 
-      {paywall && (
+      {/* {paywall && (
         <>
           <div className={genStyles.paywallOverlay}></div>
           <div className={`relative ${genStyles.paywallMessage}`}>
@@ -538,7 +536,7 @@ export default function RevisionPage() {
             </button>
           </div>
         </>
-      )}
+      )} */}
     </AuthCheck>
   );
 }

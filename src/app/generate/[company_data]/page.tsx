@@ -14,13 +14,13 @@ import { DotSpinner } from '@/components/layoutSections/DotSpinner';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/context/AuthContext';
-import Paywall from '@/components/Paywall';
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
 import { Copy, RefreshCw } from 'lucide-react';
 import { QuestionFormRef } from '@/templates/QuestionForm';
 import { imageMap } from '@/templates/imageMap';
 import Loading from '@/app/loading';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 function GenerationDynamicPage({ company, title }: { company: string; title: string }) {
   const { authUser } = useAuth()
@@ -32,12 +32,12 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
   const [template, setTemplate] = useState<any>("");
   const [templateQuestions, setTemplateQuestions] = useState<{ question: string; key: string }[]>([]);
   const [selectedQuestionKey, setSelectedQuestionKey] = useState("");
-  const [paywall, setPaywall] = useState(false);
+  // const [paywall, setPaywall] = useState(false);
   const [stageIndex, setStageIndex] = useState(0);
   const stageSetRef = useRef<{ text: string; duration: number }[] | null>(null);
   const [running, setRunning] = useState(false);
-  const [freePassUsed, setFreePassUsed] = useState(false);
-  const [userHasPaid, setUserHasPaid] = useState(false);
+  // const [freePassUsed, setFreePassUsed] = useState(false);
+  // const [userHasPaid, setUserHasPaid] = useState(false);
   const [guide, setGuide] = useState<GuideOutputProps | null>(null);
   const [essay, setEssay] = useState<EssayOutputProps | null>(null);
   const [waiting, setWaiting] = useState(false);
@@ -45,62 +45,62 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
   const [lastStep, setLastStep] = useState(false);
   const companyImageSrc = imageMap[company as keyof typeof imageMap];
   
+  // useEffect(() => {
+  //   const paidCheck = userData?.hasPaid?.[template.job_id] === true || userData?.subscription?.active === true;
+  //   setUserHasPaid(paidCheck)
+  // }, [template]);
+  
+  // useEffect(() => {
+  //   const fetchGenerationCount = async () => {
+  //     if (authUser){
+  //       try {
+  //         const userRef = doc(db, "users", authUser.uid);
+  //         const userSnap = await getDoc(userRef);
+
+  //         const generations = userSnap.exists() ? userSnap.data().generation_count || {} : {};
+  //         const generationCount = generations[template.job_id] ?? 0;
+
+  //         const freePassUsed = generationCount > 0;
+  //         setFreePassUsed(freePassUsed);
+  //       } catch (error) {
+  //         console.error('Failed to fetch generation count:', error);
+  //       }
+  //     }
+  //   };
+
+  //   if (userData?.hasPaid?.[template.job_id] === true){
+  //     return
+  //   }
+  //   fetchGenerationCount();
+  // }, [authUser, template.job_id, template]);
+
   useEffect(() => {
-    const paidCheck = userData?.hasPaid?.[template.job_id] === true || userData?.subscription?.active === true;
-    setUserHasPaid(paidCheck)
-  }, [template]);
-  
-    useEffect(() => {
-      const fetchGenerationCount = async () => {
-        if (authUser){
-          try {
-            const userRef = doc(db, "users", authUser.uid);
-            const userSnap = await getDoc(userRef);
-  
-            const generations = userSnap.exists() ? userSnap.data().generation_count || {} : {};
-            const generationCount = generations[template.job_id] ?? 0;
-  
-            const freePassUsed = generationCount > 0;
-            setFreePassUsed(freePassUsed);
-          } catch (error) {
-            console.error('Failed to fetch generation count:', error);
-          }
-        }
-      };
-  
-      if (userData?.hasPaid?.[template.job_id] === true){
-        return
-      }
-      fetchGenerationCount();
-    }, [authUser, template.job_id, template]);
-  
-    useEffect(() => {
-      if (waiting && !running) {
-        stageSetRef.current = [
-          { text: '고객님의 정보를 안전하게 접수했습니다.', duration: 2000 + Math.random() * 1000 },
-          { text: '입력하신 내용을 분석 중입니다.', duration: 10000 + Math.random() * 5000 },
-          { text: `${selectedJob.company} 합격 자기소개서 데이터를 참고하고 있습니다.`, duration: 10000 + Math.random() * 5000 },
-          { text: '고객님 맞춤형 자기소개서 가이드를 작성하고 있습니다.', duration: 13000 + Math.random() * 5000 },
-          { text: '최종 결과물을 준비 중입니다. 곧 확인하실 수 있습니다.', duration: 15000 + Math.random() * 5000 }
-        ];
-        setRunning(true);
-        setStageIndex(0);
-      }
-    }, [waiting, running, selectedJob.company]);
-  
-    useEffect(() => {
-      if (!running || !stageSetRef.current) return;
-      const stages = stageSetRef.current;
-      if (stageIndex >= stages.length - 1) {
-        setPreview('guide');
-        setRunning(false);
-        return;
-      }
-      const timer = setTimeout(() => {
-        setStageIndex(stageIndex + 1);
-      }, stages[stageIndex].duration);
-      return () => clearTimeout(timer);
-    }, [running, stageIndex]);
+    if (waiting && !running) {
+      stageSetRef.current = [
+        { text: '고객님의 정보를 안전하게 접수했습니다.', duration: 2000 + Math.random() * 1000 },
+        { text: '입력하신 내용을 분석 중입니다.', duration: 10000 + Math.random() * 5000 },
+        { text: `${selectedJob.company} 합격 자기소개서 데이터를 참고하고 있습니다.`, duration: 10000 + Math.random() * 5000 },
+        { text: '고객님 맞춤형 자기소개서 가이드를 작성하고 있습니다.', duration: 13000 + Math.random() * 5000 },
+        { text: '최종 결과물을 준비 중입니다. 곧 확인하실 수 있습니다.', duration: 15000 + Math.random() * 5000 }
+      ];
+      setRunning(true);
+      setStageIndex(0);
+    }
+  }, [waiting, running, selectedJob.company]);
+
+  useEffect(() => {
+    if (!running || !stageSetRef.current) return;
+    const stages = stageSetRef.current;
+    if (stageIndex >= stages.length - 1) {
+      setPreview('guide');
+      setRunning(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setStageIndex(stageIndex + 1);
+    }, stages[stageIndex].duration);
+    return () => clearTimeout(timer);
+  }, [running, stageIndex]);
 
   const handleJobChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const position = e.target.value
@@ -173,11 +173,11 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
     setTemplate(null);
     setTemplateQuestions([]);
     setSelectedQuestionKey("");
-    setPaywall(false);
+    // setPaywall(false);
     setStageIndex(0);
     setRunning(false);
-    setFreePassUsed(false);
-    setUserHasPaid(false);
+    // setFreePassUsed(false);
+    // setUserHasPaid(false);
     setGuide(null);
     setEssay(null);
     setWaiting(false);
@@ -190,7 +190,12 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
   };
 
   const handleCopy = () => {
-
+    if (!essay) {
+      toast.error("복사 실패 했습니다!");
+      return
+    }
+    navigator.clipboard.writeText(essay.essay);
+    toast.success("복사되었습니다!");
   };
 
   return (
@@ -274,7 +279,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
                   setWaiting={setWaiting}
                   setRunning={setRunning}
                   running={running}
-                  freePassUsed={freePassUsed}
+                  // freePassUsed={freePassUsed}
                   setLastStep={setLastStep}
                 />
               )}
@@ -349,11 +354,11 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
               {currentStep == 1 && (
                 <button
                   onClick={() => {
-                    if(!userHasPaid && freePassUsed){
-                      setPaywall(true)
-                    } else{
+                    // if(!userHasPaid && freePassUsed){
+                    //   setPaywall(true)
+                    // } else{
                       setCurrentStep(currentStep + 1)
-                    } 
+                    // } 
                   }}
                   className={revStyles.btn}
                   disabled = {!selectedJob || !selectedQuestionKey}
@@ -416,7 +421,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
               )}
             </div>
           </div>
-          {paywall && (
+          {/* {paywall && (
             <>
               <div className={genStyles.paywallOverlay}></div>
               <div className={genStyles.paywallMessage}>
@@ -424,7 +429,7 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
                 <Paywall />
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </AuthCheck>

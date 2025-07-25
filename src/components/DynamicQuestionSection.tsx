@@ -15,7 +15,7 @@ interface DynamicQuestionSectionProps {
   waiting: boolean;
   setWaiting: (waiting: boolean) => void;
   setRunning: (running: boolean) => void; // Function to set running state
-  freePassUsed: boolean;
+  // freePassUsed: boolean;
   running?: boolean; // Optional prop to indicate if generation is running
   setLastStep: (lastStep: boolean) => void;
 }
@@ -31,7 +31,7 @@ const DynamicQuestionSection = forwardRef<QuestionFormRef, DynamicQuestionSectio
       waiting,
       setWaiting,
       setRunning,
-      freePassUsed,
+      // freePassUsed,
       running,
       setLastStep
     },
@@ -78,7 +78,7 @@ const DynamicQuestionSection = forwardRef<QuestionFormRef, DynamicQuestionSectio
       question_id,
       draft,
       requiredFields,
-      freePassUsed,
+      // freePassUsed,
       setWaiting,
       setRunning,
       setEssay,
@@ -95,7 +95,7 @@ const DynamicQuestionSection = forwardRef<QuestionFormRef, DynamicQuestionSectio
       setForm={setForm}
       draft={draft}
       setDraft={setDraft}
-      disabled={Boolean(waiting || running || (freePassUsed && userData?.hasPaid?.[job_id] == false))}
+      disabled={Boolean(waiting || running)}
       onSubmit={handleSubmit}
       setLastStep={setLastStep}
       {...(hasJobOptions && {
