@@ -55,7 +55,7 @@ export interface CustomUserProfile {
   school: {
     name: string
     major: string
-    graduated: boolean
+    graduation_status: string
   }
   createdAt?: string;
   updatedAt?: FieldValue | string;

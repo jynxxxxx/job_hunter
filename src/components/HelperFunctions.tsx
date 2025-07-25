@@ -25,6 +25,12 @@ export const ensureUserProfile = async (user: any, name: string, eventSourceUrl?
         { merge: true } // Use merge: true to avoid overwriting if partial data exists
       );
 
+      const referralDocRef = doc(db, 'referral_codes', referral_code);
+      await setDoc(referralDocRef, {
+        ownerId: user.uid,
+        referralCount: 0,
+        referredUserIds: [],
+      });
       // meta conversion api call
       if (eventSourceUrl) {
       await fetch('/api/meta', {

@@ -15,7 +15,7 @@ const ApplicationPosting = () => {
   }
 
   return (
-    <div className={`${styles.announcementBanner} bg-[#465974]`}>
+    <div className={`${styles.announcementBanner} bg-[#465974]/80`}>
       <div className="ml-auto md:ml-0 absolute top-2 right-4">
         <button className={styles.dismissButton} onClick={handleDismiss}>
           &times;
@@ -23,12 +23,12 @@ const ApplicationPosting = () => {
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
         <div className="w-full sm:w-4/5">
-          <div className="flex justify-center items-center gap-4 text-10 sm:text-[1.2rem]">
-            <p>
-              29일까지 <strong className={styles.strongText}>&lt;30분 무료 자소서 컨설팅&gt;</strong>&nbsp;<br className="sm:hidden" /><span className="text-8 sm:text-[1.2rem]">15년 경력 인사담당자와 1:1로 만나보세요!</span>
-              <br/>
-              <a href="https://calendly.com/teambarojiwon/30" className="text-[0.8rem] hover:text-[0.85rem]">https://calendly.com/teambarojiwon/30</a>
-            </p>
+          <div className="flex flex-col justify-center items-center gap-2 text-10 sm:text-[1.2rem] text-white">
+            <span className="text-lg font-semibold">🎉 친구 초대 이벤트 진행 중!</span>
+            <div className="flex flex-col text-sm">
+              <span>• 📩 추천코드 3명 이상 초대 또는 카카오톡 단톡방(5명 이상)&nbsp;<br className="sm:hidden" />공유 + 스크린샷 인증 시 → <span className="font-semibold text-green-400">스타벅스 쿠폰</span> 제공!</span>
+              <span>• 🏆 추천 1등에게는 → <span className="font-semibold text-blue-400">에어팟 프로 2세대</span>!</span>
+            </div>
           </div>
         </div>
       </div>
