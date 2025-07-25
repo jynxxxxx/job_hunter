@@ -10,7 +10,6 @@ import { db } from "@/lib/firebase";
 import styles from "@/styles/revisions.module.scss"
 import { DotSpinner } from "@/components/layoutSections/DotSpinner";
 import { useAuth } from "@/context/AuthContext";
-import Paywall from "@/components/Paywall";
 import genStyles from "@/styles/generation.module.scss"
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
 import { Copy, RefreshCw } from "lucide-react";

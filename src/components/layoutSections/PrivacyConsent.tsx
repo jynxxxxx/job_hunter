@@ -2,11 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { 
-  collection,
-  query,
-  where,
   getDoc,
-  getDocs,
   arrayUnion,
   doc,
   setDoc,

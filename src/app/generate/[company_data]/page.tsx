@@ -11,9 +11,6 @@ import revStyles from "@/styles/revisions.module.scss";
 import GuideResult from '@/components/layoutSections/GuideResults';
 import { EssayOutputProps, GuideOutputProps } from '@/types/forms';
 import { DotSpinner } from '@/components/layoutSections/DotSpinner';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
-import { useAuth } from '@/context/AuthContext';
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
 import { Copy, RefreshCw } from 'lucide-react';
 import { QuestionFormRef } from '@/templates/QuestionForm';
@@ -23,8 +20,7 @@ import Image from 'next/image';
 import { toast } from 'sonner';
 
 function GenerationDynamicPage({ company, title }: { company: string; title: string }) {
-  const { authUser } = useAuth()
-  const { jobList, jobTemplates, userData } = useUserData();
+  const { jobList, jobTemplates } = useUserData();
   const questionFormRef = useRef<QuestionFormRef>(null);
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedJob, setSelectedJob] = useState<any>("");
