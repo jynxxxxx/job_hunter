@@ -72,3 +72,29 @@ export interface SubQuestions {
   };
   prompts: Record<string, Record<string, string>>;
 }
+
+export interface FeedbackCategory {
+  점수: number;
+  설명: string;
+  피드백: string;
+};
+
+export interface FeedbackDict {
+  항목별_평가: {
+    질문_적합도: FeedbackCategory;
+    경험_연결력: FeedbackCategory;
+    직무_키워드_반영: FeedbackCategory;
+    표현력과_문장력: FeedbackCategory;
+    개성과_차별성: FeedbackCategory;
+  };
+  총괄_피드백: string;
+};
+
+export interface EvaluateResponse {
+  final_score: number;
+  feedback_dict: FeedbackDict;
+};
+
+export interface PersonaResponse {
+  persona_feedback: string;
+};

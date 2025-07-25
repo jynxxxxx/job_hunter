@@ -29,6 +29,8 @@ const Header = () => {
       setActivePage('history');
     } else if (pathname === '/copilot') {
       setActivePage('copilot');
+    } else if (pathname === '/feedback') {
+      setActivePage('feedback');
     } else {
       setActivePage('home');
     }
@@ -111,7 +113,7 @@ const Header = () => {
                     activePage === 'feedback' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
-                  <span><span className='hidden sm:inline'>자기소개서&nbsp;</span>첨삭</span>
+                  <span><span className='hidden sm:inline'>키워드&nbsp;</span>피드백</span>
                 </div>
                 <div 
                   onClick={() => {

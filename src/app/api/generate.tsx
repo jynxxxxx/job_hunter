@@ -114,5 +114,48 @@ export async function generateFreeEssay(payload: any) {
   const data = await response.json();
   return data;
 }
+
+export async function getFeedback(payload: any) {
+  const response = await fetch("https://api.barojiwon.com/evaluate-essay-with-feedback", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+
+  if (!response.ok) {
+    // Parse the JSON error body
+    const errorData = await response.json();
+    throw new Error(`API 호출 실패: ${JSON.stringify(errorData)}`);
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export async function getPersonaFeedback(payload: any) {
+  const response = await fetch("https://api.barojiwon.com/generate-persona-feedback", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+
+  if (!response.ok) {
+    // Parse the JSON error body
+    const errorData = await response.json();
+    throw new Error(`API 호출 실패: ${JSON.stringify(errorData)}`);
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+
+
 // https://api.barojiwon.com/generate
 // http://3.149.237.144
