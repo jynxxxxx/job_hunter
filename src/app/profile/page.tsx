@@ -47,11 +47,13 @@ export default function ProfilePage() {
   const handleSave = async () => {
     if (!userData || !authUser) return;
 
-    const digitsOnly = formState.phoneNumber.replace(/\D/g, '');
+    if (formState.phoneNumber !== "") {
+      const digitsOnly = formState.phoneNumber.replace(/\D/g, '');
 
-    if (digitsOnly.length < 11) {
-      toast.error('전화번호는 최소 11자리 숫자여야 합니다.');
-      return
+      if (digitsOnly.length < 11) {
+        toast.error('전화번호는 최소 11자리 숫자여야 합니다.');
+        return
+      }
     }
 
     const updates: Partial<typeof userData> = {};

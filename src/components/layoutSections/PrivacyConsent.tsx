@@ -33,16 +33,18 @@ export default function PrivacyAgreementModal() {
   const handleNext = async() => {
     if (!authUser) return;
 
-    if (!form.schoolName || !form.graduationStatus || !form.major || !form.phoneNumber) {
+    if (!form.schoolName || !form.graduationStatus || !form.major) {
       toast.error('모든 항목을 입력해주세요.');
       return;
     }
 
-    const digitsOnly = form.phoneNumber.replace(/\D/g, '');
+    if(form.phoneNumber) {
+      const digitsOnly = form.phoneNumber.replace(/\D/g, '');
 
-    if (digitsOnly.length < 11) {
-      toast.error('전화번호는 최소 11자리 숫자여야 합니다.');
-      return
+      if (digitsOnly.length < 11) {
+        toast.error('전화번호는 최소 11자리 숫자여야 합니다.');
+        return
+      }
     }
 
     const referralCode = form.referralCode?.trim().toUpperCase();;
@@ -122,15 +124,6 @@ export default function PrivacyAgreementModal() {
             <h2 className="text-lg font-semibold mb-4">기본 정보 입력</h2>
             <div className="space-y-3 text-gray-700 text-sm">
               <div>
-                <label className="block mb-1">전화번호</label>
-                <input
-                  type="text"
-                  value={form.phoneNumber}
-                  onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })}
-                  className="w-full border rounded px-3 py-2"
-                />
-              </div>
-              <div>
                 <label className="block mb-1">학교 이름</label>
                 <input
                   type="text"
@@ -160,6 +153,15 @@ export default function PrivacyAgreementModal() {
                   <option value="졸업예정">졸업예정</option>
                   <option value="졸업">졸업</option>
                 </select>
+              </div>
+              <div>
+                <label className="block mb-1">전화번호 (선택)</label>
+                <input
+                  type="text"
+                  value={form.phoneNumber}
+                  onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })}
+                  className="w-full border rounded px-3 py-2"
+                />
               </div>
               <div>
                 <label className="block mb-1">친구 추천코드 (선택)</label>
