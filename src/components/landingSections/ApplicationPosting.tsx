@@ -22,7 +22,7 @@ const ApplicationPosting = () => {
         </button>
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-        <div className="w-full sm:w-4/5 bg-[#465974]/90">
+        <div className="w-full sm:w-4/5 bg-[#465974]/90 rounded-xl">
           <div className="flex flex-col justify-center items-center gap-2 text-white">
             <span className="text-lg font-semibold">🎉 친구 초대 이벤트 진행 중!</span>
               <span className="text-md">🏆 추천 1등에게는 → <span className="font-semibold text-blue-400">에어팟 프로 2세대</span>!
@@ -31,10 +31,6 @@ const ApplicationPosting = () => {
             <span className="text-md">
               📩 친구 3명 이상이 내 추천코드를 입력하고 회원 가입하면&nbsp;<br className="sm:hidden" /><span className="font-semibold text-green-400">스타벅스 쿠폰</span> 제공
               <p className="text-xs">추천 코드는 우측 상단 마이 페이지에 있어요.</p>
-            </span>
-            <span className="text-md">
-              📩 카카오톡 단톡방(5명 이상)에 바로지원 사이트를 공유하면&nbsp;<br className="sm:hidden" /><span className="font-semibold text-green-400">스타벅스 쿠폰</span> 제공
-              <p className="text-xs">스크린샷을 teambarojiwon@gmail.com으로 보내주세요.</p>
             </span>
           </div>
         </div>
