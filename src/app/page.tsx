@@ -2,14 +2,12 @@
 
 import HeroSection from '../components/landingSections/HeroSection';
 import Testimonials from '../components/landingSections/Testimonials';
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Instructions from '@/components/landingSections/Instructions';
 import Features from '@/components/landingSections/Features';
 import Image from 'next/image';
 
 export default function Home() {
-  const router = useRouter();
   const { setJustSignedOut } = useAuth();
   setJustSignedOut(false); // reset flag if redirected from logout
 
