@@ -113,7 +113,7 @@ const Header = () => {
                     activePage === 'feedback' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
-                  <span><span className='hidden sm:inline'>페르소나&nbsp;</span>피드백</span>
+                  <span><span className='hidden sm:inline'>페르소나&nbsp;</span>피드백 (Beta)</span>
                 </div>
                 <div 
                   onClick={() => {
