@@ -14,9 +14,11 @@ import { useAuth } from '@/context/AuthContext'; // assumes you use a custom hoo
 import { db } from '@/lib/firebase';
 import PrivacyPolicy from './PrivacyForm';
 import { toast } from 'sonner';
+import { useUserData } from '@/context/UserDataContext';
 
 export default function PrivacyAgreementModal() {
-  const { authUser } = useAuth(); // must return firebase.User | null
+  const { authUser } = useAuth(); 
+  const {refetchUserData} = useUserData()
   const [step, setStep] = useState<'form' | 'policy'>('form');
   const [showModal, setShowModal] = useState(false);
   const [checking, setChecking] = useState(true);
@@ -106,6 +108,8 @@ export default function PrivacyAgreementModal() {
       { merge: true }
     );
     setShowModal(false);
+
+    await refetchUserData();
   };
 
   if (checking || !showModal) return null;
