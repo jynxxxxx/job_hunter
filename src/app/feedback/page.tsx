@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { Star, Smile, Frown, Meh, PenTool } from "lucide-react";
 import { EvaluateResponse } from "@/types/forms";
 import { getFeedback, getPersonaFeedback } from "../api/generate";
-import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import AuthCheck from "@/components/AuthCheck";
 import { toast } from "sonner";
@@ -57,7 +57,7 @@ export default function FeedbackPage() {
       }, 100);
 
       const userRef = doc(db, "users", authUser?.uid);
-      
+
       await addDoc(collection(db, "users", authUser.uid, "feedback"), {
         createdAt: serverTimestamp(),
         ...input,
