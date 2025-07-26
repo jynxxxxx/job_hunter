@@ -5,7 +5,6 @@ import Testimonials from '../components/landingSections/Testimonials';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Instructions from '@/components/landingSections/Instructions';
-import JobCarousel from '@/components/landingSections/JobCarousel';
 import Features from '@/components/landingSections/Features';
 
 export default function Home() {
@@ -18,7 +17,7 @@ export default function Home() {
       <HeroSection />
       <Instructions />
       <Features />
-      <JobCarousel />
+      {/* <JobCarousel /> */}
       <Testimonials />
       <div className="h-fit bg-bright/5 px-6 py-16 text-gray-900">
         <div className="max-w-5xl mx-auto text-center">
