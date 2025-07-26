@@ -22,13 +22,12 @@ export default function Home() {
       <Testimonials />
       <div className="h-fit bg-bright/5 px-6 py-16 text-gray-900">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-4">자기소개서, 합격 가능성을 높이는 3가지 방법!</h1>
+          {/* <h1 className="text-2xl sm:text-3xl font-bold mb-4">자기소개서, 합격 가능성을 높이는 3가지 방법!</h1>
           <p className="text-gray-600 mb-8 text-lg">
             바로지원에서는 3가지 방식으로 자소서를 빠르게 해결할 수 있어요.
           </p>
 
           <div className="grid gap-6 sm:grid-cols-3 text-left">
-            {/* Service 1 */}
             <div className="bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl p-6 transition">
               <h2 className="text-xl font-semibold mb-2">🔥 인기 채용 공고 자소서 작성</h2>
               <p className="text-sm text-gray-600 mb-4">
@@ -42,7 +41,6 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Service 2 */}
             <div className="bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl p-6 transition">
               <h2 className="text-xl font-semibold mb-2">✍️ 그 외 자소서 작성</h2>
               <p className="text-sm text-gray-600 mb-4">
@@ -56,7 +54,6 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Service 3 */}
             <div className="bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl p-6 transition">
               <h2 className="text-xl font-semibold mb-2">🛠 내 자소서 첨삭</h2>
               <p className="text-sm text-gray-600 mb-4">
@@ -69,9 +66,9 @@ export default function Home() {
                 첨삭하러가기 →
               </button>
             </div>
-          </div>
+          </div> */}
 
-          <p className="text-gray-700 font-bold text-sm mt-12 mb-4">
+          <p className="text-gray-700 font-bold text-sm mb-4">
             Built by
           </p>
           <div className='grid grid-cols-3 gap-8 max-w-2xl mx-auto justify-center'>
