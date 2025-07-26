@@ -284,7 +284,7 @@ export default function RevisionPage() {
                   <div className="w-full col-span-2">
                     <div className="flex items-center gap-2">
                       <ExternalLink className="w-4 h-4 text-bright" />
-                      <label className="w-full">채용 공고 URL (성댁사항)</label>
+                      <label className="w-full">채용 공고 URL (선택 사항)</label>
                     </div>
                     <input
                         type="text"

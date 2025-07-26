@@ -352,7 +352,7 @@ export default function GenerationOpenPage() {
                   <div className="w-full">
                     <div className="flex items-center gap-2">
                       <ExternalLink className="w-4 h-4 text-bright" />
-                      <label className="w-full">채용 공고 URL (성댁사항)</label>
+                      <label className="w-full">채용 공고 URL <span className="hidden sm:inline">(선택 사항)</span></label>
                     </div>
                     <input
                       type="text"
