@@ -91,27 +91,27 @@ export default function RevisionPage() {
     }
   };
 
-  const handleSeeQuestions = async (e: any) => {
-    e.preventDefault();
-    if (!authUser) {
-      toast.error("로그인이 필요합니다.");
-      setWaiting2(false);
-      return;
-    }
+  // const handleSeeQuestions = async (e: any) => {
+  //   e.preventDefault();
+  //   if (!authUser) {
+  //     toast.error("로그인이 필요합니다.");
+  //     setWaiting2(false);
+  //     return;
+  //   }
 
-    // const userRef = doc(db, "users", authUser?.uid);
-    // const userSnap = await getDoc(userRef);
+  //   // const userRef = doc(db, "users", authUser?.uid);
+  //   // const userSnap = await getDoc(userRef);
 
-    // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
-    // const freePassUsed = userSnap.exists() && userSnap.data().revision_count > 0;
+  //   // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
+  //   // const freePassUsed = userSnap.exists() && userSnap.data().revision_count > 0;
 
-    // if (!hasSubscribed && freePassUsed) {
-    //   setPaywall(true);
-    //   return;
-    // }
+  //   // if (!hasSubscribed && freePassUsed) {
+  //   //   setPaywall(true);
+  //   //   return;
+  //   // }
 
-    setCurrentStep(currentStep + 1)
-  }
+  //   setCurrentStep(currentStep + 1)
+  // }
 
   const handleSubmitFollowup = async (e: any) => {
     e.preventDefault();
