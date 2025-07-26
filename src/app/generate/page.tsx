@@ -12,7 +12,7 @@ import { DotSpinner } from "@/components/layoutSections/DotSpinner";
 import { useAuth } from "@/context/AuthContext";
 import genStyles from "@/styles/generation.module.scss"
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
-import { Copy, RefreshCw } from "lucide-react";
+import { Copy, RefreshCw, FileText, Building2, Hash, ClipboardList, Users2, ExternalLink,  } from "lucide-react";
 
 type BasicInfoInput = {
   company_name: string;
@@ -40,6 +40,11 @@ export default function GenerationOpenPage() {
   const [running, setRunning] = useState(false);
   // const [paywall, setPaywall] = useState(false);
   const [tab, setTab] = useState("essay");
+  const stepLabels=[
+    "지원 정보 입력",
+    "세부 질문 답변",
+    "자기소개서 완성"
+  ]
 
   useEffect(() => {
     if (!authUser) {
@@ -260,29 +265,49 @@ export default function GenerationOpenPage() {
 
   return (
     <AuthCheck>
-      <div className="min-h-[80vh] bg-primary/30">
-        <div className={`w-[90vw] md:w-[60vw] mx-auto pb-12 ${currentStep==1 ? "2xl:w-1/3" : "2xl:w-1/2"}`}>
-          <div className='flex flex-col items-center justify-center pt-8'>
-            <div className='text-gray-700 font-bold text-2xl pt-12'>자기소개서 생성</div>
+      <div className="min-h-[80vh] bg-gray-50 ">
+        <div className={`w-[90vw] md:w-[60vw] mx-auto pt-8 pb-12 ${currentStep==1 ? "2xl:w-1/3" : "2xl:w-1/2"}`}>
+          <div className="bg-dark rounded-t-xl pb-8 px-8">
+            {currentStep==1 ? (
+              <>
+                <div className='flex items-center pt-8 gap-2'>  
+                  <FileText className="w-8 h-8 text-white" />
+                  <div className='text-white font-bold text-2xl '>자기소개서 생성</div>
+                </div>
+                <div className="text-sm text-white pt-4">
+                  지원하고자 하는 기업과 직무 정보를 입력하면 맞춤형 자기소개서를 생성해드립니다
+                </div>
+              </>
+            ):(
+              <>
+                <div className='flex items-center pt-8 gap-2'>  
+                  <Building2 className="w-8 h-8 text-white" />
+                  <div className='text-white font-bold text-2xl '>{companyInput} - {jobInput} 직무</div>
+                </div>
+                <div className="flex items-center pt-4 pl-2 gap-2 text-md text-white pt-4">
+                  <ClipboardList className="w-6 h-6 text-white" />
+                  <div>문항:</div>
+                  <div>{questionInput}</div>
+                </div>
+              </>
+            )}
           </div>
-          <div className="h-fit">
-            <div className="container mx-auto px-4 pt-8">
-              <div className="max-w-3xl mx-auto">
-                <ProgressIndicator currentStep={currentStep} />
+          <div className="bg-white px-2 sm:px-8 py-8 rounded-b-lg border border-gray-300">
+            <div className="h-fit">
+              <div className="container mx-auto px-4">
+                <div className="max-w-3xl mx-auto">
+                  <ProgressIndicator currentStep={currentStep} stepLabels={stepLabels} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="bg-white px-2 sm:px-8 py-8 rounded-lg border border-gray-300">
-            <h2 className="text-3xl font-bold text-center">
-              {currentStep==1 && "지원 정보 입력"}
-              {currentStep==2 && "세부 질문 답변"}
-              {currentStep==3 && "자기소개서 완성"}
-            </h2>
             <div className="min-h-4/5 sm:px-8 sm:pt-8">
               {currentStep === 1 &&
-                <form id="basicInfoForm" onSubmit={handleSubmitBasicInfo} className={styles.sectionctn}>
-                  <div className="w-full flex items-center gap-2">
-                    <label className="w-[7ch]">회사:</label>
+                <form id="basicInfoForm" onSubmit={handleSubmitBasicInfo} className="grid grid-cols-2 gap-2 sm:gap-4">
+                  <div className="w-full">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="w-4 h-4 text-bright" />
+                      <label className="w-[7ch]">회사:</label>
+                    </div>
                     <input
                       type="text"
                       value={companyInput}
@@ -292,8 +317,11 @@ export default function GenerationOpenPage() {
                       required
                     />
                   </div>
-                  <div className="w-full flex items-center gap-2">
-                    <label className="w-[7ch]">직무:</label>
+                  <div className="w-full">
+                    <div className="flex items-center gap-2">
+                      <Users2 className="w-4 h-4 text-bright" />
+                      <label className="w-[7ch]">직무:</label>
+                    </div>
                     <input
                       type="text"
                       value={jobInput}
@@ -303,8 +331,11 @@ export default function GenerationOpenPage() {
                       required
                     />
                   </div>
-                  <div className="w-full flex items-center gap-2">
-                    <label className="w-[7ch]">문항:</label>
+                  <div className="w-full">
+                    <div className="flex items-center gap-2">
+                      <ClipboardList className="w-4 h-4 text-bright" />
+                      <label className="w-[7ch]">문항:</label>
+                    </div>
                     <input
                       type="text"
                       value={questionInput}
@@ -314,8 +345,11 @@ export default function GenerationOpenPage() {
                       required
                     />
                   </div>
-                  <div className="w-full flex items-center gap-2">
-                    <label className="w-[7ch]">글자수:</label>
+                  <div className="w-full">
+                    <div className="flex items-center gap-2">
+                      <Hash className="w-4 h-4 text-bright" />
+                      <label className="w-[7ch]">글자수:</label>
+                    </div>
                     <input
                       type="number"
                       pattern="[0-9]*"
@@ -325,8 +359,11 @@ export default function GenerationOpenPage() {
                       className={`${styles.formField} noticker`}
                     />
                   </div>
-                  <div className="w-full flex items-center gap-2">
-                    <label className="w-[7ch]">URL:</label>
+                 <div className="w-full col-span-2">
+                    <div className="flex items-center gap-2">
+                      <ExternalLink className="w-4 h-4 text-bright" />
+                      <label className="w-[7ch]">URL:</label>
+                    </div>
                     <input
                       type="text"
                       value={jobUrl}
@@ -366,7 +403,7 @@ export default function GenerationOpenPage() {
                       subQuestions?.subquestion?.["1"] &&
                         Object.keys(subQuestions.subquestion["1"].sub_question_list || {}).length > 0 && (
                         <>
-                          <h2 className="text-lg font-bold">
+                          <h2 className="text-lg font-bold py-4 sm:pt-0 sm:pb-4">
                             추가 질문으로 더 정교하게 보완하기
                             &nbsp;<div className="h-px sm:hidden"><br/></div>
                             (선택 사항)
@@ -374,7 +411,7 @@ export default function GenerationOpenPage() {
                           <div className="space-y-4">
                             {Object.entries(subQuestions.subquestion["1"].sub_question_list).map(([key, item]) => (
                               <div key={key}>
-                                <label className="block font-medium mb-1">{item.sub_question}</label>
+                                <label className="block font-medium mb-2">{key}. {item.sub_question}</label>
                                 <textarea
                                   rows={3}
                                   placeholder={item.suggested_inputs?.join(', ') || ''}
@@ -448,7 +485,9 @@ export default function GenerationOpenPage() {
                         </div>
                         {tab ==="essay" &&
                           <div className="whitespace-pre-wrap border border-gray-200 rounded-xl p-8">
-                            {finalEssay.essay}
+                            {finalEssay.essay.split('\n').map((line, index) => (
+                              <p key={index}>{line}</p>
+                            ))}
                             <div className='w-[fit-content] mt-4 ml-auto text-gray-400'>{finalEssay?.length}자</div>
                           </div>
                         }

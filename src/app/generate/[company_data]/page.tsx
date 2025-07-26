@@ -40,7 +40,12 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
   const [preview, setPreview] = useState<'guide'|'essay'>('guide');
   const [lastStep, setLastStep] = useState(false);
   const companyImageSrc = imageMap[company as keyof typeof imageMap];
-  
+  const stepLabels=[
+    "지원 정보 입력",
+    "세부 질문 답변",
+    "자기소개서 완성"
+  ]
+
   // useEffect(() => {
   //   const paidCheck = userData?.hasPaid?.[template.job_id] === true || userData?.subscription?.active === true;
   //   setUserHasPaid(paidCheck)
@@ -212,16 +217,11 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
           <div className="h-fit">
             <div className="container mx-auto px-4 pt-8">
               <div className="max-w-3xl mx-auto">
-                <ProgressIndicator currentStep={currentStep} />
+                <ProgressIndicator currentStep={currentStep}  stepLabels={stepLabels}/>
               </div>
             </div>
           </div>
           <div className="bg-white px-2 sm:px-8 py-8 rounded-lg border border-gray-300">
-            <h2 className="text-3xl font-bold text-center">
-              {currentStep==1 && "지원 정보 입력"}
-              {currentStep==2 && "세부 질문 답변"}
-              {currentStep==3 && "자기소개서 완성"}
-            </h2>
             <div className="min-h-[25vh] px-8 pt-8 flex flex-col gap-2">
               {currentStep === 1 && (
                 <>

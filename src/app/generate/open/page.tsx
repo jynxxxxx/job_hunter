@@ -40,6 +40,11 @@ export default function GenerationOpenPage() {
   const [running, setRunning] = useState(false);
   // const [paywall, setPaywall] = useState(false);
   const [tab, setTab] = useState("essay");
+  const stepLabels=[
+    "지원 정보 입력",
+    "세부 질문 답변",
+    "자기소개서 완성"
+  ]
 
   useEffect(() => {
     if (!authUser) {
@@ -268,7 +273,7 @@ export default function GenerationOpenPage() {
           <div className="h-fit">
             <div className="container mx-auto px-4 pt-8">
               <div className="max-w-3xl mx-auto">
-                <ProgressIndicator currentStep={currentStep} />
+                <ProgressIndicator currentStep={currentStep} stepLabels={stepLabels} />
               </div>
             </div>
           </div>
