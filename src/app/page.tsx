@@ -81,18 +81,16 @@ export default function Home() {
                   className="object-contain"
                 />
               </div>
-              <div>Kaist</div>
             </div>
             <div className='flex flex-col items-center justify-center w-fit gap-2 mx-auto'>
-              <div className="relative w-[5rem] h-[5rem] pb-6 border border-gray-200 rounded shadow-lg bg-[#EB4748]">
+              <div className="relative w-[5rem] h-[5rem] pb-6 border border-gray-200 rounded shadow-lg">
                 <Image
                   src="/antler.png"
                   alt="resume"
                   fill
-                  className="object-contain rounded"
+                  className="object-contain rounded px-2"
                 />
               </div>
-              <div>Antler</div>
             </div>
             <div className='flex flex-col items-center justify-center w-fit gap-2 mx-auto'>
               <div className="relative w-[5rem] h-[5rem] pb-6 border border-gray-200 rounded shadow-lg bg-[#2875AF]">
@@ -103,7 +101,6 @@ export default function Home() {
                   className="object-contain"
                 />
               </div>
-              <div>UCLA</div>
             </div>
           </div>
         </div>

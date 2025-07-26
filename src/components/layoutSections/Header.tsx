@@ -104,16 +104,16 @@ const Header = () => {
               <>
                 <div 
                   onClick={() => {
-                    if (pathname !== '/feedback') {
-                      router.push('/feedback');
+                    if (pathname !== '/generate') {
+                      router.push('/generate');
                     }
-                    setActivePage("feedback")
+                    setActivePage("generation")
                   }}
                   className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
-                    activePage === 'feedback' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                    activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
-                  <span><span className='hidden sm:inline'>페르소나&nbsp;</span>피드백 (Beta)</span>
+                  <span><span className='hidden sm:inline'>자기소개서&nbsp;</span>생성</span>
                 </div>
                 <div 
                   onClick={() => {
@@ -130,16 +130,16 @@ const Header = () => {
                 </div>
                 <div 
                   onClick={() => {
-                    if (pathname !== '/generate') {
-                      router.push('/generate');
+                    if (pathname !== '/feedback') {
+                      router.push('/feedback');
                     }
-                    setActivePage("generation")
+                    setActivePage("feedback")
                   }}
                   className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
-                    activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
+                    activePage === 'feedback' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
-                  <span><span className='hidden sm:inline'>자기소개서&nbsp;</span>생성</span>
+                  <span><span className='hidden sm:inline'>페르소나&nbsp;</span>피드백 (Beta)</span>
                 </div>
                 <div
                   onClick={() => {

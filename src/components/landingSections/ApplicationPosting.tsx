@@ -15,20 +15,27 @@ const ApplicationPosting = () => {
   }
 
   return (
-    <div className={`${styles.announcementBanner} bg-[#465974]/80`}>
+    <div className={`${styles.announcementBanner} bg-[#465974]/90`}>
       <div className="ml-auto md:ml-0 absolute top-2 right-4">
         <button className={styles.dismissButton} onClick={handleDismiss}>
           &times;
         </button>
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-        <div className="w-full sm:w-4/5">
-          <div className="flex flex-col justify-center items-center gap-2 text-10 sm:text-[1.2rem] text-white">
+        <div className="w-full sm:w-4/5 bg-[#465974]/90">
+          <div className="flex flex-col justify-center items-center gap-2 text-white">
             <span className="text-lg font-semibold">🎉 친구 초대 이벤트 진행 중!</span>
-            <div className="flex flex-col text-sm">
-              <span>• 📩 추천코드 3명 이상 초대 또는 카카오톡 단톡방(5명 이상)&nbsp;<br className="sm:hidden" />공유 + 스크린샷 인증 시 → <span className="font-semibold text-green-400">스타벅스 쿠폰</span> 제공!</span>
-              <span>• 🏆 추천 1등에게는 → <span className="font-semibold text-blue-400">에어팟 프로 2세대</span>!</span>
-            </div>
+              <span className="text-md">🏆 추천 1등에게는 → <span className="font-semibold text-blue-400">에어팟 프로 2세대</span>!
+              <p className="text-xs">추천 1등 → 추천 코드가 가장 많이 등록된 분</p>
+            </span>
+            <span className="text-md">
+              📩 친구 3명 이상이 내 추천코드를 입력하고 회원 가입하면&nbsp;<br className="sm:hidden" /><span className="font-semibold text-green-400">스타벅스 쿠폰</span> 제공
+              <p className="text-xs">추천 코드는 우측 상단 마이 페이지에 있어요.</p>
+            </span>
+            <span className="text-md">
+              📩 카카오톡 단톡방(5명 이상)에 바로지원 사이트를 공유하면&nbsp;<br className="sm:hidden" /><span className="font-semibold text-green-400">스타벅스 쿠폰</span> 제공
+              <p className="text-xs">스크린샷을 teambarojiwon@gmail.com으로 보내주세요.</p>
+            </span>
           </div>
         </div>
       </div>
