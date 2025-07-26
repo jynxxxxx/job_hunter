@@ -129,6 +129,7 @@ export default function FeedbackPage() {
           </select>
 
           <button
+            data-track="generate-click"
             onClick={handleEvaluate}
             disabled={loading || !questionText || !essayText}
             className={`w-full py-3 font-bold rounded-full text-white shadow-lg transition-transform
