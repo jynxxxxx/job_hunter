@@ -169,7 +169,9 @@ export default function FeedbackPage() {
                 <div>
                   <section className="bg-blue-50 rounded-lg p-5 font-semibold shadow-md animate-fadeIn">
                     <h3 className="mb-2 ">✨ {feedbackStyle} 피드백 ✨</h3>
-                    <p>{personaResult}</p>
+                    {personaResult.split('\n').map((line, index) => (
+                      <p key={index}>{line}</p>
+                    ))}
                   </section>
                   <blockquote className="italic pl-4 mt-6">
                     {result.feedback_dict.총괄_피드백}
