@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Instructions from '@/components/landingSections/Instructions';
 import Features from '@/components/landingSections/Features';
+import Image from 'next/image';
 
 export default function Home() {
   const router = useRouter();
@@ -70,9 +71,44 @@ export default function Home() {
             </div>
           </div>
 
-          <p className="text-gray-500 text-sm mt-12">
-            원하는 기능이 보이지 않나요? <span className="underline cursor-pointer">teambarojiwon@gmail.com</span> 으로 이메일 요청 보내주세요
+          <p className="text-gray-700 font-bold text-sm mt-12 mb-4">
+            Built by
           </p>
+          <div className='grid grid-cols-3 gap-8 max-w-2xl mx-auto justify-center'>
+            <div className='flex flex-col items-center justify-center w-fit gap-2 mx-auto'>
+              <div className="relative w-[5rem] h-[5rem] pb-6 border border-gray-200 rounded shadow-lg">
+                <Image
+                  src="/kaist.png"
+                  alt="resume"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div>Kaist</div>
+            </div>
+            <div className='flex flex-col items-center justify-center w-fit gap-2 mx-auto'>
+              <div className="relative w-[5rem] h-[5rem] pb-6 border border-gray-200 rounded shadow-lg bg-[#EB4748]">
+                <Image
+                  src="/antler.png"
+                  alt="resume"
+                  fill
+                  className="object-contain rounded"
+                />
+              </div>
+              <div>Antler</div>
+            </div>
+            <div className='flex flex-col items-center justify-center w-fit gap-2 mx-auto'>
+              <div className="relative w-[5rem] h-[5rem] pb-6 border border-gray-200 rounded shadow-lg bg-[#2875AF]">
+                <Image
+                  src="/ucla.png"
+                  alt="resume"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div>UCLA</div>
+            </div>
+          </div>
         </div>
       </div>
     </>
