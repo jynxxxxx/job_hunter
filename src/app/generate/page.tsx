@@ -345,7 +345,7 @@ export default function GenerationOpenPage() {
                       pattern="[0-9]*"
                       value={characterCount}
                       onChange={e => setCharacterCount(e.target.value)}
-                      placeholder="예: 1000)"
+                      placeholder="예: 1000"
                       className={`${styles.formField} noticker`}
                     />
                   </div>
@@ -371,7 +371,7 @@ export default function GenerationOpenPage() {
                       type="text"
                       value={questionInput}
                       onChange={e => setQuestionInput(e.target.value)}
-                      placeholder="예: 본인의 강점과 이를 직무에 어떻게 활용할 수 있을지 작성사세요."
+                      placeholder="예: 본인의 강점과 이를 직무에 어떻게 활용할 수 있을지 작성하세요."
                       className={styles.formField}
                       required
                     />
