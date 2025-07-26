@@ -13,6 +13,7 @@ import { useAuth } from "@/context/AuthContext";
 import genStyles from "@/styles/generation.module.scss"
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
 import { Copy, RefreshCw, FileText, Building2, Hash, ClipboardList, Users2, ExternalLink,  } from "lucide-react";
+import GenCharacteristics from "@/components/genCharacteristics";
 
 type BasicInfoInput = {
   company_name: string;
@@ -304,7 +305,7 @@ export default function GenerationOpenPage() {
                 </div>
               </div>
             </div>
-            <div className="min-h-4/5 sm:px-8 sm:pt-8">
+            <div className="min-h-4/5 sm:px-8 pt-8">
               {currentStep === 1 &&
                 <form id="basicInfoForm" onSubmit={handleSubmitBasicInfo} className="grid grid-cols-2 gap-2 sm:gap-4">
                   <div className="w-full">
@@ -582,6 +583,9 @@ export default function GenerationOpenPage() {
               </div>
             </>
           )} */}
+        </div>
+        <div className="w-9/10 sm:w-7/10 mx-auto mb-16">
+          <GenCharacteristics />
         </div>
       </div>
     </AuthCheck>
