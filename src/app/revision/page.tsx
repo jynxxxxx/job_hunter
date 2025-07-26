@@ -212,7 +212,7 @@ export default function RevisionPage() {
 
   return (
     <AuthCheck>
-      <div className="min-h-[80vh] bg-gray-50">
+      <div className="min-h-[80vh] bg-gray-50 pb-4">
         <div className={`w-[90vw] md:w-[60vw] mx-auto pt-8 pb-12 ${currentStep==1 ? "2xl:w-2/5" : "2xl:w-1/2"}`}>
           <div className="bg-dark rounded-t-xl pb-8 px-8">
             {currentStep==1 ? (
@@ -222,7 +222,8 @@ export default function RevisionPage() {
                   <div className='text-white font-bold text-2xl '>자기소개서 첨삭</div>
                 </div>
                 <div className="text-sm text-white pt-4">
-                  지원하고자 하는 기업과 직무 정보를 입력하면 맞춤형 자기소개서를 생성해드립니다
+                  <span className="">&#x1F512; 자소서는 사용자 본인의 피드백 제공에만 활용되며,
+                  &nbsp;<br className="sm:hidden" />그 외 어디에도 공개/재사용되지 않습니다</span>
                 </div>
               </>
             ):(

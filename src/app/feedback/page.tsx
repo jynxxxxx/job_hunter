@@ -77,12 +77,18 @@ export default function FeedbackPage() {
     <AuthCheck>
       <div className="my-8 select-none h-full">
         <div className="max-w-3xl mx-4 sm:mx-auto py-8 px-8 md:px-20 rounded-xl bg-bright/5 text-gray-800">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-black mb-8 gap-2 flex items-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-bright rounded-full float-animation">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-black gap-2 flex items-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 sm:w-15 sm:h-15 bg-bright rounded-full float-animation">
               <PenTool className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            자기소개서 피드백
+            <div>
+              자기소개서 피드백
+            </div>
           </h1>
+          <p className="text-sm text-gray-600 mb-8 mt-2">
+            &#x1F512; 자소서는 사용자 본인의 피드백 제공에만 활용되며,
+            &nbsp;<br className="sm:hidden" />그 외 어디에도 공개/재사용되지 않습니다
+          </p>
 
           <label className="block mb-2 font-semibold">
             자기소개서 문항
