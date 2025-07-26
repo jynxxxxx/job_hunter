@@ -256,13 +256,13 @@ export default function RevisionPage() {
                   <div className="w-full">
                     <div className="flex items-center gap-2">
                       <Building2 className="w-4 h-4 text-bright" />
-                      <label className="w-[7ch]">회사:</label>
+                      <label className="w-full">회사명</label>
                     </div>
                     <input
                       type="text"
                       value={companyInput}
                       onChange={e => setCompanyInput(e.target.value)}
-                      placeholder="회사를 입력하세요"
+                      placeholder="예: 삼성전자"
                       className={styles.formField}
                       required
                     />
@@ -270,48 +270,48 @@ export default function RevisionPage() {
                   <div className="w-full">
                     <div className="flex items-center gap-2">
                       <Users2 className="w-4 h-4 text-bright" />
-                      <label className="w-[7ch]">직무:</label>
+                      <label className="w-full">직무명</label>
                     </div>
                     <input
                       type="text"
                       value={jobInput}
                       onChange={e => setJobInput(e.target.value)}
-                      placeholder="직무를 입력하세요"
+                      placeholder="예: 마케팅"
                       className={styles.formField}
                       required
                     />
                   </div>  
-                  <div className="w-full">
-                    <div className="flex items-center gap-2">
-                      <ClipboardList className="w-4 h-4 text-bright" />
-                      <label className="w-[7ch]">문항:</label>
-                    </div>
-                    <input
-                      type="text"
-                      value={questionInput}
-                      onChange={e => setQuestionInput(e.target.value)}
-                      placeholder="문항을 입력하세요"
-                      className={styles.formField}
-                      required
-                    />
-                  </div>
-                 <div className="w-full">
+                  <div className="w-full col-span-2">
                     <div className="flex items-center gap-2">
                       <ExternalLink className="w-4 h-4 text-bright" />
-                      <label className="w-[7ch]">URL:</label>
+                      <label className="w-full">채용 공고 URL (성댁사항)</label>
                     </div>
                     <input
                         type="text"
                         value={jobUrl}
                         onChange={e => setJobUrl(e.target.value)}
-                        placeholder="공고 url 입력하세요 (선택 사항)"
+                        placeholder="예: https://careers.company.com/job/1234"
                         className={styles.formField}
                       />
                   </div>
-                 <div className="w-full col-span-2">
+                  <div className="w-full col-span-2">
+                    <div className="flex items-center gap-2">
+                      <ClipboardList className="w-4 h-4 text-bright" />
+                      <label className="w-full">자기소개서 문항</label>
+                    </div>
+                    <input
+                      type="text"
+                      value={questionInput}
+                      onChange={e => setQuestionInput(e.target.value)}
+                      placeholder="예: 본인의 강점과 이를 직무에 어떻게 활용할 수 있을지 작성사세요."
+                      className={styles.formField}
+                      required
+                    />
+                  </div>
+                  <div className="w-full col-span-2">
                     <div className="flex items-center gap-2">
                       <FilePen className="w-4 h-4 text-bright" />
-                      <label className="w-[7ch]">초안:</label>
+                      <label className="w-full">자기소개서 초안</label>
                     </div>
                     <textarea
                       rows={6}
