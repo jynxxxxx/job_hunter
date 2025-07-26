@@ -4,10 +4,14 @@ import React, { useRef, useState } from "react";
 import { Star, Smile, Frown, Meh, PenTool } from "lucide-react";
 import { EvaluateResponse } from "@/types/forms";
 import { getFeedback, getPersonaFeedback } from "../api/generate";
+import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import AuthCheck from "@/components/AuthCheck";
 import { toast } from "sonner";
+import { useAuth } from "@/context/AuthContext";
 
 export default function FeedbackPage() {
+  const { authUser } = useAuth()
   const [questionText, setQuestionText] = useState("");
   const [essayText, setEssayText] = useState("");
   const [feedbackStyle, setFeedbackStyle] = useState("럭키비키");
@@ -23,6 +27,7 @@ export default function FeedbackPage() {
   };
 
   const handleEvaluate = async () => {
+    if (!authUser) { return }
     setLoading(true);
     setResult(null);
     setPersonaResult(null);
@@ -50,6 +55,18 @@ export default function FeedbackPage() {
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }, 100);
+
+      const userRef = doc(db, "users", authUser?.uid);
+      
+      await addDoc(collection(db, "users", authUser.uid, "feedback"), {
+        createdAt: serverTimestamp(),
+        ...input,
+      });
+  
+
+      await updateDoc(userRef, {
+        ['feedback_count']: increment(1),
+      });
     } catch {
       toast.error("에러가 발생했어요! 다시 시도해주세요.");
     }

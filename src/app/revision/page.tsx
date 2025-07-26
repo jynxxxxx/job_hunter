@@ -179,7 +179,7 @@ export default function RevisionPage() {
       revision_explanation: revision.revision_explanation
     });
 
-      await updateDoc(userRef, {
+    await updateDoc(userRef, {
       ['revision_count']: increment(1),
     });
   };
