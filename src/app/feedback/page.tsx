@@ -114,8 +114,8 @@ export default function FeedbackPage() {
             value={feedbackStyle}
             onChange={(e) => setFeedbackStyle(e.target.value)}
           >
-            <option value="MBTI-T">MBTI-T 🧠</option>
-            <option value="MBTI-I">MBTI-I 🔍</option>
+            <option value="T형 전문가">T형 전문가 🧠</option>
+            <option value="F형 전문가">F형 전문가 🔍</option>
             <option value="럭키비키">럭키비키 🦄</option>
             <option value="오은영">오은영 🧸</option>
             <option value="백종원">백종원 🍳</option>
