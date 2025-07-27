@@ -73,7 +73,7 @@ export default function RequestForm() {
       <button
         type="submit"
         disabled={loading}
-        className=" ml-auto mt-auto min-w-fit h-fit bg-bright text-white font-semibold py-2 px-4 rounded hover:bg-dark disabled:opacity-50"
+        className=" ml-auto mt-auto min-w-fit h-fit bg-primary text-white font-semibold py-2 px-4 rounded hover:bg-dark disabled:opacity-50"
       >
         {loading ? '요청 중...' : '요청 하기'}
       </button>

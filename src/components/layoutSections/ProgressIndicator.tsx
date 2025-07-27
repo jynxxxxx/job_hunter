@@ -21,13 +21,13 @@ const ProgressIndicator = ({ currentStep, stepLabels, totalSteps = 3 }: Progress
               {/* Step bubble */}
               <div
                 className={`relative w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                  isActive ? "bg-dark text-white" : "bg-gray-200 text-gray-500"
+                  isActive ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-500"
                 }`}
               >
                 {isCompleted ? <Check className="w-4 h-4" /> : step}
                 <div 
                   className={`absolute bottom-[-1.5rem] text-center w-40 ${
-                    isCompleted? "text-sm text-dark/60" : isActive ? "font-bold text-dark" : "text-gray-600 text-xs"
+                    isCompleted? "text-xs text-blue-400" : isActive ? " text-sm font-bold text-blue-500" : "text-gray-600 text-xs"
                   }`}
                 >
                   {label}
@@ -36,10 +36,10 @@ const ProgressIndicator = ({ currentStep, stepLabels, totalSteps = 3 }: Progress
 
               {/* Line after step (except for last) */}
               {step !== totalSteps && (
-                <div className="w-18 sm:w-32 h-0.5 bg-gray-200 mx-2 sm:mx-3">
+                <div className="w-16 sm:w-32 h-0.5 bg-gray-200 mx-2 sm:mx-3">
                   <div
                     className={`h-full transition-all duration-300 ${
-                      currentStep > step ? "bg-dark w-full" : "w-0"
+                      currentStep > step ? "bg-blue-500 w-full" : "w-0"
                     }`}
                   />
                 </div>

@@ -110,7 +110,7 @@ const JobCarousel = () => {
         인기 기업 공고
       </h1>
       <div className="relative py-10">
-        <div className="absolute bottom-0 w-full bg-bright/40 h-[8rem]"></div>
+        <div className="absolute bottom-0 w-full bg-primary/40 h-[8rem]"></div>
         <button className="custom-prev absolute z-10 top-1/2 left-2 lg:left-4 transform -translate-y-1/2"><ChevronLeft width={32} height={32} className="p-2 bg-primary/60 rounded-3xl"/></button>
         <button className="custom-next absolute z-10 top-1/2 right-2 lg:right-4 transform -translate-y-1/2"><ChevronRight width={32} height={32} className="p-2 bg-primary/60 rounded-3xl"/></button>
         <Swiper
@@ -152,7 +152,7 @@ const JobCarousel = () => {
                     )}
                   </div>
                   <div className="w-fit py-1 px-2 mt-2 text-xs font-semibold bg-gray-200 rounded-4xl">{company.d_days < 1 ? "오늘 마감" : `D-${company.d_days}`}</div>
-                  <div className="mt-2 text-md font-semibold">{company.company}</div>
+                  <div className="mt-2 text-base font-semibold">{company.company}</div>
                   <div className="mt-2 text-sm text-gray-500">{company.title}</div>
                   <div className="text-xs text-gray-500">
                     {company.startDate} - {company.endDate}

@@ -107,8 +107,8 @@ export default function HistoryPage() {
 
   return (
     <AuthCheck>
-      <div className="pt-[4rem] min-h-[85vh]">
-        <h1 className="text-2xl font-bold mb-4 px-12 pb-6 pt-4">생성한 자기소개서 기록</h1>
+      <div className="min-h-[85vh]">
+        <h1 className="text-dark text-2xl font-extrabold mb-8 px-12 sm:pl-24 pt-8">자기소개서 기록</h1>
           <div className="flex h-fit relative">
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -120,13 +120,13 @@ export default function HistoryPage() {
             {/* Sidebar */}
             <div
               className={`
-                h-[85vh] transition-width duration-300 ease-in-out
+                h-[85vh] mb-4 transition-width duration-300 ease-in-out
                 ${collapsed ? 'w-0' : 'w-[100vw]'}
                 sm:max-w-[300px] min-w-fit flex-shrink-0
               `}
             >
               {!collapsed && (
-                <div className="overflow-y-scroll h-full pr-2 bg-primary/80 border-r py-8 pl-6 sm:min-w-[25vw] sm:max-w-[30vw]">
+                <div className="overflow-y-scroll h-full pr-2 bg-gray-100 border-r py-2 pl-6 sm:min-w-[25vw] sm:max-w-[30vw]">
                   {generations.length === 0 ? (
                     <div className='text-center pt-4'>기록이 없습니다.</div>
                   ) : (
@@ -145,8 +145,8 @@ export default function HistoryPage() {
                             }}
                             className="py-2 border-b"
                           >
-                            <div className={`ml-2 px-4 py-2 hover:bg-dark/25 cursor-pointer rounded ${isSelected ? 'bg-[#FEF3C6] font-bold mr-[-0.5rem]' : ''}`}>
-                              <div className="font-semibold text-md text-gray-900">
+                            <div className={`ml-2 px-4 py-2 cursor-pointer rounded-l ${isSelected ? 'bg-primary/20 font-bold mr-[-0.5rem]' : 'hover:bg-primary/10'}`}>
+                              <div className="font-semibold text-base text-gray-900">
                                 {jobInfo ? `${jobInfo.company} - ${jobInfo.title}` : (gen.job_id ? `Job ${gen.job_id}` : '회사 미지정')}
                                 <br /><span className='text-sm text-gray-700'>{gen.question_id ? `${gen.question_id}번 문항` : '질문 없음'}</span>
                               </div>
@@ -166,8 +166,8 @@ export default function HistoryPage() {
                             }}
                             className="py-2 border-b"
                           >
-                            <div className={`ml-2 px-4 py-2 hover:bg-dark/25 cursor-pointer rounded ${isSelected ? 'bg-[#FEF3C6] font-bold mr-[-0.5rem]' : ''}`}>
-                              <div className="font-semibold text-md text-gray-900">
+                            <div className={`ml-2 px-4 py-2 cursor-pointer rounded-l ${isSelected ? 'bg-primary/20 font-bold mr-[-0.5rem]' : 'hover:bg-primary/10'}`}>
+                              <div className="font-semibold text-base text-gray-900">
                                 {gen.company_name} - {gen.job_title}
                                 <br /><span className='text-sm text-gray-700'>문항: {gen.question_text}</span>
                               </div>
@@ -187,8 +187,8 @@ export default function HistoryPage() {
                             }}
                             className="py-2 border-b"
                           >
-                            <div className={`ml-2 px-4 py-2 hover:bg-dark/25 cursor-pointer rounded ${isSelected ? 'bg-[#FEF3C6] font-bold mr-[-0.5rem]' : ''}`}>
-                              <div className="font-semibold text-md text-gray-900">
+                            <div className={`ml-2 px-4 py-2 cursor-pointer rounded-l ${isSelected ? 'bg-primary/20 font-bold mr-[-0.5rem]' : 'hover:bg-primary/10'}`}>
+                              <div className="font-semibold text-base text-gray-900">
                                 {gen.company_name} - {gen.job_title}
                                 <br /><span className='text-sm text-gray-700'>문항: {gen.question_text}</span>
                               </div>
@@ -204,135 +204,137 @@ export default function HistoryPage() {
             </div>
 
             {/* Content area */}
-            <div className={`flex flex-col items-center justify-start flex-grow mb-12 transition-all duration-300 ease-in-out ${collapsed ? 'w-[100vw]' : 'w-[60vw]'}`}>
-              <div className={`flex bg-gray-300 p-[0.2rem] rounded-t-lg border border-gray-500 ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[60vw]'}`}>
-                <div
-                  className={`${genStyles.resultTab} ${preview === 'essay' ? genStyles.active : ''}`}
-                  onClick={() => setPreview("essay")}
-                >
-                  자기소개서
+            <div className={`h-[85vh] flex flex-col items-center justify-start flex-grow transition-all duration-300 ease-in-out ${collapsed ? 'w-[100vw]' : 'w-[60vw]'}`}>
+              <div className={`popped flex flex-col rounded-lg border border-gray-500 ${collapsed ? 'w-[95vw] sm:w-[60vw]' : 'w-[60vw]'} `}>
+                <div className={`flex bg-primary/60 p-[0.2rem] rounded-t-lg border-b border-gray-500`}>
+                  <div
+                    className={`${genStyles.resultTab} ${preview === 'essay' ? genStyles.active : ''}`}
+                    onClick={() => setPreview("essay")}
+                  >
+                    자기소개서
+                  </div>
+                  { (selectedGen == null || selectedGen.type == "job" ) && (
+                  <div
+                    className={`${genStyles.resultTab} ${preview === 'guide' ? genStyles.active : ''}`}
+                    onClick={() => setPreview("guide")}
+                  >
+                    가이드
+                  </div>
+                  )}
+                  { selectedGen?.type == "open" && (
+                  <div
+                    className={`${genStyles.resultTab} ${preview === 'answers' ? genStyles.active : ''}`}
+                    onClick={() => setPreview("answers")}
+                  >
+                    질문 답변
+                  </div>
+                  )}
+                  { selectedGen?.type == "revision" && (
+                  <div
+                    className={`${genStyles.resultTab} ${preview === 'feedback' ? genStyles.active : ''}`}
+                    onClick={() => setPreview("feedback")}
+                  >
+                    피드백
+                  </div>
+                  )}
                 </div>
-                { (selectedGen == null || selectedGen.type == "job" ) && (
-                <div
-                  className={`${genStyles.resultTab} ${preview === 'guide' ? genStyles.active : ''}`}
-                  onClick={() => setPreview("guide")}
-                >
-                  가이드
-                </div>
-                )}
-                { selectedGen?.type == "open" && (
-                <div
-                  className={`${genStyles.resultTab} ${preview === 'answers' ? genStyles.active : ''}`}
-                  onClick={() => setPreview("answers")}
-                >
-                  질문 답변
-                </div>
-                )}
-                { selectedGen?.type == "revision" && (
-                <div
-                  className={`${genStyles.resultTab} ${preview === 'feedback' ? genStyles.active : ''}`}
-                  onClick={() => setPreview("feedback")}
-                >
-                  피드백
-                </div>
-                )}
-              </div>
-              <div className={`bg-[#d1d5dc46] border border-gray-700 min-h-[60vh] ${collapsed ? 'ml-0 w-[90%]' : 'ml-6 w-[60vw]'} rounded-b-lg`}>
-                {selectedGen ? (
-                  <div className="bg-white/70 py-8 px-4 sm:px-16 h-[60vh] rounded-b-lg flex flex-col gap-8 overflow-y-scroll">
-                    <div className="text-gray-700 text-lg">
-                      {selectedGen.type === "job" && (() => {
-                        const jobInfo = jobList.find(j => String(j.job_id) === String(selectedGen.job_id));
-                        return (
-                          <>
-                            <strong>지원 회사:</strong> {jobInfo ? `${jobInfo.company} - ${jobInfo.title}` : 'N/A'}
-                          </>
-                        );
-                      })()}
-                      { (selectedGen.type === "revision" || selectedGen.type === "open") && (
-                        <div>
-                          <strong>지원 회사:</strong> {selectedGen.company_name}
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-gray-700 text-lg">
-                      {selectedGen.type === "job" && (() => {
-                        const template = getQuestionTemplate(selectedGen.job_id || '', jobTemplates);
-                        const qid = selectedGen.question_id || selectedGen.input?.question_id;
-                        const questionText = qid ? (template as any)?.[`question${qid}`] : undefined;
-                        return (
-                          <>
-                            <strong>{qid ? `${qid}번 문항:` : ""}</strong> {questionText || "알 수 없는 질문"}
-                          </>
-                        );
-                      })()}
-                      { (selectedGen.type === "revision" || selectedGen.type === "open") && (
-                        <div>
-                          <strong>문항:</strong> {selectedGen.question_text}
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      {preview === "answers" && (
-                        <div className="whitespace-pre-line mt-1">
-                          <div className="space-y-6 border border-gray-200 rounded-xl p-8">
-                            {selectedGen.input.subquestions.map((question: any, index: any) => (
-                              <div key={index} className="pb-4 border-b border-gray-300">
-                                <h3 className="font-semibold mb-1">{question}</h3>
-                                <div className="whitespace-pre-wrap p-2">
-                                  {selectedGen.input.user_input?.[index]
-                                    ? selectedGen.input.user_input[index]
-                                    : <span className="text-gray-400 italic">답변 없었습니다</span>}
+                <div className={`bg-light rounded-b-lg`}>
+                  {selectedGen ? (
+                    <div className="bg-white py-8 px-4 sm:px-16 h-[75vh] rounded-b-lg flex flex-col gap-2 sm:gap-8 overflow-y-scroll">
+                      <div className="text-gray-700 text-lg">
+                        {selectedGen.type === "job" && (() => {
+                          const jobInfo = jobList.find(j => String(j.job_id) === String(selectedGen.job_id));
+                          return (
+                            <>
+                              <strong>지원 회사:</strong> {jobInfo ? `${jobInfo.company} - ${jobInfo.title}` : 'N/A'}
+                            </>
+                          );
+                        })()}
+                        { (selectedGen.type === "revision" || selectedGen.type === "open") && (
+                          <div>
+                            <strong>지원 회사:</strong> {selectedGen.company_name}
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-gray-700 text-lg">
+                        {selectedGen.type === "job" && (() => {
+                          const template = getQuestionTemplate(selectedGen.job_id || '', jobTemplates);
+                          const qid = selectedGen.question_id || selectedGen.input?.question_id;
+                          const questionText = qid ? (template as any)?.[`question${qid}`] : undefined;
+                          return (
+                            <>
+                              <strong>{qid ? `${qid}번 문항:` : ""}</strong> {questionText || "알 수 없는 질문"}
+                            </>
+                          );
+                        })()}
+                        { (selectedGen.type === "revision" || selectedGen.type === "open") && (
+                          <div>
+                            <strong>문항:</strong> {selectedGen.question_text}
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        {preview === "answers" && (
+                          <div className="whitespace-pre-line mt-1">
+                            <div className="space-y-6 border border-gray-200 rounded-xl p-8">
+                              {selectedGen.input.subquestions.map((question: any, index: any) => (
+                                <div key={index} className="pb-4 border-b border-gray-300">
+                                  <h3 className="font-semibold mb-1">{question}</h3>
+                                  <div className="whitespace-pre-wrap p-2">
+                                    {selectedGen.input.user_input?.[index]
+                                      ? selectedGen.input.user_input[index]
+                                      : <span className="text-gray-400 italic">답변 없었습니다</span>}
+                                  </div>
                                 </div>
-                              </div>
-                            ))}
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      )}
-                       {preview === "feedback" && (
-                        <div className="whitespace-pre-line mt-1">
-                          {selectedGen?.feedback?.map((msg: any, i:any) => (
-                          <div key={i} className='mb-4 border border-gray-400 p-4 rounded'>{msg}</div>
-                        ))}
-                        </div>
-                      )}
-                      {preview === "guide" && (
-                        <div className="whitespace-pre-line mt-1">
-                          <GuideResult guideline={selectedGen.guide} />
-                        </div>
-                      )}
-                      {preview === "essay" && (
-                        selectedGen.essay ? (
-                          <div className="text-bold text-lg whitespace-pre-line mt-1 pb-8">
-                            {selectedGen.essay.split('\n').map((line, i) => (
-                              <React.Fragment key={i}>
-                                {line}
-                                <br />
-                              </React.Fragment>
-                            ))}
+                        )}
+                        {preview === "feedback" && (
+                          <div className="whitespace-pre-line mt-1">
+                            {selectedGen?.feedback?.map((msg: any, i:any) => (
+                            <div key={i} className='mb-4 border border-gray-400 p-4 rounded'>{msg}</div>
+                          ))}
                           </div>
-                        ) : selectedGen.revision ? (
-                          <div className="text-bold text-lg whitespace-pre-line mt-1 pb-8">
-                            {selectedGen.revision.split('\n').map((line, i) => (
-                              <React.Fragment key={i}>
-                                {line}
-                                <br />
-                              </React.Fragment>
-                            ))}
+                        )}
+                        {preview === "guide" && (
+                          <div className="whitespace-pre-line mt-1">
+                            <GuideResult guideline={selectedGen.guide} />
                           </div>
-                        ) : (
-                          <div className="text-center pt-12 text-black text-lg">
-                            이 생성 기록에는 저장된 자소서가 없습니다.
-                          </div>
-                        )
-                      )}
+                        )}
+                        {preview === "essay" && (
+                          selectedGen.essay ? (
+                            <div className="text-bold text-lg whitespace-pre-line mt-1 pb-8">
+                              {selectedGen.essay.split('\n').map((line, i) => (
+                                <React.Fragment key={i}>
+                                  {line}
+                                  <br />
+                                </React.Fragment>
+                              ))}
+                            </div>
+                          ) : selectedGen.revision ? (
+                            <div className="text-bold text-lg whitespace-pre-line mt-1 pb-8">
+                              {selectedGen.revision.split('\n').map((line, i) => (
+                                <React.Fragment key={i}>
+                                  {line}
+                                  <br />
+                                </React.Fragment>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center pt-12 text-black text-lg">
+                              이 생성 기록에는 저장된 자소서가 없습니다.
+                            </div>
+                          )
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="bg-white/70 py-8 px-16 min-h-[60vh] rounded-b-lg text-center pt-12 text-black text-lg">
-                    왼쪽에서 자소서를 선택해주세요.
-                  </div>
-                )}
+                  ) : (
+                    <div className="bg-white/70 py-8 px-16 min-h-[60vh] rounded-b-lg text-center pt-12 text-black text-lg">
+                      왼쪽에서 자소서를 선택해주세요.
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

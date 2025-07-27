@@ -2,12 +2,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #e0ebf3;
-  --color-light: #f9f9f9;
-  --color-dark: #082f70;
-   /* --color-bright: #c7f1ff; */
-  --color-bright: #26bcd4;
-  --color-extraDark: #153052
+  --color-primary: #489DFF;
+  --color-light: #F9FCFF;
+  --color-dark: #004FC7;
 }
 
 :root {
@@ -31,7 +28,7 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: rgb(30, 30, 30);
   background: var(--background);
   font-family: var(--font-noto-sans);
   -webkit-font-smoothing: antialiased;
@@ -56,6 +53,16 @@ a {
 
 .noticker {
   -moz-appearance: textfield; /* Firefox */
+}
+
+.popped {
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08),
+              -8px -8px 16px rgba(240, 240, 240, 1);
+}
+
+.depressed {
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1),
+              inset -1px -1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* @media (prefers-color-scheme: dark) {

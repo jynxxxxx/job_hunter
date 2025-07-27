@@ -24,7 +24,7 @@ const Instructions = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="min-h-fit flex flex-col justify-center gap-8 py-16 md:py-32 max-w-[1200px]">
+      <div className="flex flex-col justify-center gap-8 py-16 md:py-24 max-w-[1200px]">
         <h1 className="font-extrabold text-3xl mlg:text-5xl text-gray-700 px-4 xl:px-32">
           AI Copilot과&nbsp;<div className="h-px sm:hidden"><br/></div>함께 작성하세요
         </h1>
@@ -42,7 +42,7 @@ const Instructions = () => {
               <h2 className="font-extrabold text-xl px-6 py-2">
                 {card.title}
               </h2>
-              <h4 className="text-md text-gray-500 px-6 pb-4">
+              <h4 className="text-base text-gray-500 px-6 pb-4">
                 {card.description}
               </h4>
             </div>

@@ -244,7 +244,7 @@ function QuestionFormComponent<T>(
         </div>
         <div className="w-full bg-gray-200 h-2 rounded mb-4 mx-auto">
           <div
-            className=" h-full bg-bright rounded transition-all duration-300"
+            className=" h-full bg-primary rounded transition-all duration-300"
             style={{ width: `${((step + 1) / (totalSteps+1)) * 100}%` }}
           />
         </div>

@@ -66,7 +66,7 @@ export default function PricingPage() {
 
           <div className='border-t border-gray-300 pt-16 flex flex-col justify-center items-center'>
             <h2 className="text-4xl text-center text-gray-900 font-extrabold">컨설팅 서비스</h2>
-            <h3 className="bg-blue-500 text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold mb-4"><span className="line-through">200,000원</span> → 50,000원</h3>
+            <h3 className="bg-primary text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold mb-4"><span className="line-through">200,000원</span> → 50,000원</h3>
             <div className="text-sm text-center">단, 선착순 10명에게 한달 제공, 주1회 설문조사 및 후기 제공 필요</div>
             <div className="text-sm text-center">1달 이내 서류 합격 못할 시 100% 전액 환불, 1주 이내 불만족시 100% 전액 환불</div>
             <div className="text-xs">*단, 컨설턴트와 최소 2회 미팅(및 첨삭) 및 3곳 이상 지원시</div>

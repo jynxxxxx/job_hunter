@@ -228,12 +228,12 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
                   <select
                     value={selectedJob.position || ""}
                     onChange={handleJobChange}
-                    className="border rounded px-3 py-2 text-md w-full"
+                    className="border rounded px-3 py-2 text-base w-full"
                   >
                     <option value="" disabled hidden>직무/공고 선택</option>
                     {jobOptions.map(item => (
                       <option 
-                        className="text-md" 
+                        className="text-base" 
                         key={item.position} 
                         value={item.position}
                       >
@@ -244,12 +244,12 @@ function GenerationDynamicPage({ company, title }: { company: string; title: str
                   <select
                     value={selectedQuestionKey || ""}
                     onChange={e => setSelectedQuestionKey(e.target.value)}
-                    className="border rounded px-3 py-2 text-md w-full"
+                    className="border rounded px-3 py-2 text-base w-full"
                   >
                     <option value="" disabled hidden>문항 선택</option>
                     {templateQuestions.map(({ key, question }) => (
                       <option 
-                        className="text-md" 
+                        className="text-base" 
                         key={key} 
                         value={key}
                       >

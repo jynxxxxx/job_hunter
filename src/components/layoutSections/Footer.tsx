@@ -6,9 +6,9 @@ const Footer = () => {
     <footer className={footerStyles.ctn}>
       <div className={footerStyles.topSection}>
         <div className={footerStyles.title}>
-          <div className={`${footerStyles.logo} h-[2.5rem] w-[9rem] relative`}>
+          <div className={`${footerStyles.logo} h-[1.5rem] w-[6rem] relative`}>
             <Image
-              src="/logo_white.png"
+              src="/logo1.png"
               alt="바로지원"
               fill
               className="object-contain"

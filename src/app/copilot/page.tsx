@@ -140,7 +140,7 @@ export default function CoPilotPage() {
     <>
       <ApplicationPosting />
       {/* Hero Section */}
-      <div className='bg-gradient-to-r from-dark via-dark to-blue-600 flex w-full justify-center'>
+      <div className='bg-gradient-to-r from-[#082f70] via-[#082f70] to-blue-600 flex w-full justify-center'>
         <section className={`${heroStyles.ctn} grid grid-rows-2 sm:grid-rows-[1fr] sm:grid-cols-[1.4fr_1fr] md:w-4/5 2xl:w-7/10`}>
           <div className='flex flex-col justify-center'>
             <div className={heroStyles.title}>
@@ -156,7 +156,7 @@ export default function CoPilotPage() {
             </div>
             <div className='grid grid-rows-1 sm:grid-cols-2 sm:w-fit gap-2 sm:gap-4 mt-10 px-12 sm:px-0 mb-8 sm:mb-0'>
               <button
-                className={`${heroStyles.herobtn} bg-blue-500 text-white w-full`}
+                className={`${heroStyles.herobtn} bg-primary text-white w-full`}
                 onClick={handleStart}
               >
                 신청하기
@@ -186,7 +186,7 @@ export default function CoPilotPage() {
           </div>
         </div>
         <div className="w-fit flex flex-col gap-2 text-center pt-4 pb-4">
-          <div className="text-lg sm:text-2xl">1달 이내 서류합격 못할시&nbsp;<br className="sm:hidden" /><strong className="text-bright">100% 전액 환불</strong></div>
+          <div className="text-lg sm:text-2xl">1달 이내 서류합격 못할시&nbsp;<br className="sm:hidden" /><strong className="text-primary">100% 전액 환불</strong></div>
           <div className="text-xs">*단, 컨설턴트와 최소 2회 미팅(및 첨삭) 및 3곳 이상 지원시</div>
         </div>
         <div className="relative w-full h-[50vh] pb-6">
@@ -200,7 +200,7 @@ export default function CoPilotPage() {
       </section>
 
       {/* Explanation Section */} 
-      <section className='bg-bright/5 flex w-full justify-center' >
+      <section className='bg-primary/5 flex w-full justify-center' >
         <div className={`py-16 text-gray-900 grid grid-rows-1 sm:grid-cols-[1fr_1.2fr] items-center sm:gap-8 w-4/5 2xl:w-7/10 2xl:gap-16`}>
           <div className="hidden sm:block relative w-full h-[60vh] sm:w-full pb-6">
             <Image
@@ -257,7 +257,7 @@ export default function CoPilotPage() {
                     />
                   </div>
                   <button
-                    className="bg-extraDark text-white py-2 px-4 mt-4 rounded hover:scale-103"
+                    className="bg-dark text-white py-2 px-4 mt-4 rounded hover:scale-103"
                   >
                     <a href={expert.link}>이 전문가와 무료 상담 예약하기</a>
                   </button>
@@ -269,7 +269,7 @@ export default function CoPilotPage() {
       </section>
 
       {/* Revision Section */} 
-      {/* <section className='bg-bright/5 flex w-full justify-center' >
+      {/* <section className='bg-primary/5 flex w-full justify-center' >
         <div className={`py-16 text-gray-900  items-center sm:gap-8 w-9/10 sm:w-7/10 2xl:w-1/2 2xl:gap-16`}>
           <div className="flex flex-col gap-4">
             <div className="text-center text-3xl font-extrabold">
@@ -333,7 +333,7 @@ export default function CoPilotPage() {
               className=" "
             >
               <button
-                className="w-4/5 bg-blue-500 text-white py-2 px-4 mt-4 rounded hover:scale-103 w-[15rem] shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
+                className="w-4/5 bg-primary text-white py-2 px-4 mt-4 rounded hover:scale-103 w-[15rem] shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
               >
                 <a href={expert.link}>{expert.title}와<br/>무료 상담 예약하기</a>
               </button>
@@ -345,13 +345,13 @@ export default function CoPilotPage() {
       {/* Payment Info */} 
       <section className='bg-white flex flex-col w-full justify-center items-center px-4 pb-16' >
         <h2 className="pt-16 text-2xl sm:text-4xl text-center text-gray-900 font-extrabold">취업 컨설팅 신청 및 문의</h2>
-        <h3 className="text-center text-gray-700 text-md sm:text-xl mt-4">
+        <h3 className="text-center text-gray-700 text-base sm:text-xl mt-4">
           전략부터 실행까지, 3달만에 100명의 고객이 선택한 채용전문가 + AI 기반 통합 컨설팅<br/>
           KAIST 연구원의 AI Agent기술 도입으로, 고객의 전략적 취업 성공과 탄탄한 커리어를 설계합니다.<br/>
           전화 문의: 010-8961-1918
         </h3>
         <button
-          className={`${heroStyles.herobtn} bg-blue-500 text-white w-fit mt-4`}
+          className={`${heroStyles.herobtn} bg-primary text-white w-fit mt-4`}
           onClick={()=>setOpen(true)}
         >
           신청하기
@@ -364,7 +364,7 @@ export default function CoPilotPage() {
           <div className={`relative ${genStyles.paywallMessage}`}>
             <div className='bg-white flex flex-col w-full justify-center items-center' >
               <h2 className="pt-8 text-4xl text-center text-gray-900 font-extrabold">결제 안내</h2>
-              <h3 className="bg-blue-500 text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold mb-4"><span className="line-through">200,000원</span> → 50,000원</h3>
+              <h3 className="bg-primary text-white rounded-3xl py-2 px-8 text-xl mt-4 font-extrabold mb-4"><span className="line-through">200,000원</span> → 50,000원</h3>
               <div className="text-sm text-center">단, 선착순 10명에게 한달 제공, 주1회 설문조사 및 후기 제공 필요</div>
               <div className="text-sm text-center">1달 이내 서류 합격 못할 시 100% 전액 환불, 1주 이내 불만족시 100% 전액 환불</div>
               <div className="text-xs">*단, 컨설턴트와 최소 2회 미팅(및 첨삭) 및 3곳 이상 지원시</div>
@@ -372,7 +372,7 @@ export default function CoPilotPage() {
                 <div className="space-y-6 mb-6">
                   <div>
                     <p className="font-semibold text-gray-800 mb-2  text-left">
-                      <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">1단계</span>
+                      <span className="bg-primary text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">1단계</span>
                       아래 계좌로 위 금액을 송금해주세요.
                     </p>
                     <div className="flex justify-around items-center bg-gray-100 p-4 rounded-md text-center">

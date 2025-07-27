@@ -4,8 +4,8 @@ export default function GenCharacteristics() {
   return (
     <div className="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 w-full gap-2 sm:gap-8">
       <div className="p-4 w-full bg-white rounded-lg shadow-lg flex sm:flex-col sm:justify-center items-center gap-2">
-        <div className="p-4 bg-primary rounded-4xl">
-          <Sparkles className="w-6 h-6" />
+        <div className="p-4 bg-blue-500 rounded-4xl">
+          <Sparkles className="w-6 h-6 text-white" />
         </div>
         <div className="flex flex-col">
           <div className="font-extrabold text-gray-900 sm:text-center">AI 기반생성</div>
@@ -16,8 +16,8 @@ export default function GenCharacteristics() {
         </div>
       </div>
       <div className="p-4 w-full bg-white rounded-lg shadow-lg flex sm:flex-col sm:justify-center items-center gap-2">
-        <div className="p-4 bg-primary rounded-4xl">
-          <FileText className="w-6 h-6" />
+        <div className="p-4 bg-blue-500 rounded-4xl">
+          <FileText className="w-6 h-6 text-white" />
         </div>
         <div className="flex flex-col">
           <div className="font-extrabold text-gray-900 sm:text-center">맞춤형 내용</div>
@@ -28,8 +28,8 @@ export default function GenCharacteristics() {
         </div>
       </div>
       <div className="p-4 w-full bg-white rounded-lg shadow-lg flex sm:flex-col sm:justify-center items-center gap-2">
-        <div className="p-4 bg-primary rounded-4xl">
-          <MousePointerClick className="w-6 h-6" />
+        <div className="p-4 bg-blue-500 rounded-4xl">
+          <MousePointerClick className="w-6 h-6 text-white" />
         </div>
         <div className="flex flex-col">
         <div className="font-extrabold text-gray-900 sm:text-center">간편한 사용</div>

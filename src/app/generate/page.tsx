@@ -266,38 +266,43 @@ export default function GenerationOpenPage() {
 
   return (
     <AuthCheck>
-      <div className="relative min-h-[80vh] bg-gray-50 pb-4">
+      <div className="relative min-h-[85vh] bg-light pb-4 pt-12">
         <div className="absolute bottom-2 text-center w-full">
-          &#x1F512; 자소서는 사용자 본인의 피드백 제공에만 활용되며,
+          &#x1F512;자기소개서는 사용자 본인의 피드백 제공에만 활용되며,
           &nbsp;<br className="sm:hidden" />그 외 어디에도 공개/재사용되지 않습니다
         </div>
-        <div className={`w-[90vw] md:w-[60vw] mx-auto pt-8 pb-12 ${currentStep==1 ? "2xl:w-1/3" : "2xl:w-1/2"}`}>
-          <div className="bg-dark rounded-t-xl pb-8 px-8">
+        <div 
+          className={`w-[90vw] md:w-[60vw] mx-auto mb-12 rounded-2xl bg-[#F9FCFF] border border-gray-200
+            ${currentStep == 1 ? "2xl:w-1/3" : "2xl:w-1/2"}
+            popped
+          `}
+        >
+          <div className="bg-primary rounded-t-2xl p-4 sm:p-6">
             {currentStep==1 ? (
               <>
-                <div className='flex items-center pt-8 gap-2'>  
-                  <FileText className="w-8 h-8 text-white" />
-                  <div className='text-white font-bold text-2xl '>자기소개서 생성</div>
+                <div className='flex items-center gap-2'>  
+                  <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  <div className='text-white font-bold text-xl'>자기소개서 생성</div>
                 </div>
-                <div className="text-sm text-white pt-4">
+                <div className="text-xs sm:text-sm text-white pt-2">
                   지원하고자 하는 기업과 직무 정보를 입력하면 맞춤형 자기소개서를 생성해드립니다
                 </div>
               </>
             ):(
               <>
-                <div className='flex items-center pt-8 gap-2'>  
-                  <Building2 className="w-8 h-8 text-white" />
-                  <div className='text-white font-bold text-2xl '>{companyInput} - {jobInput} 직무</div>
+                <div className='flex items-center gap-2'>  
+                  <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  <div className='text-white font-bold text-xl'>{companyInput} - {jobInput} 직무</div>
                 </div>
-                <div className="flex items-center pt-4 pl-2 gap-2 text-md text-white pt-4">
-                  <ClipboardList className="w-6 h-6 text-white" />
+                <div className="flex items-center pl-2 gap-2 text-base text-white pt-2">
+                  <ClipboardList className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                   <div>문항:</div>
                   <div>{questionInput}</div>
                 </div>
               </>
             )}
           </div>
-          <div className="bg-white px-2 sm:px-8 py-8 rounded-b-lg border border-gray-300">
+          <div className="bg-white px-4 sm:px-8 py-8 rounded-b-2xl">
             <div className="h-fit">
               <div className="container mx-auto px-4">
                 <div className="max-w-3xl mx-auto">
@@ -310,7 +315,7 @@ export default function GenerationOpenPage() {
                 <form id="basicInfoForm" onSubmit={handleSubmitBasicInfo} className="grid grid-cols-2 gap-2 sm:gap-4">
                   <div className="w-full">
                     <div className="flex items-center gap-2">
-                      <Building2 className="w-4 h-4 text-bright" />
+                      <Building2 className="w-4 h-4 text-primary" />
                       <label className="w-full">회사명</label>
                     </div>
                     <input
@@ -324,7 +329,7 @@ export default function GenerationOpenPage() {
                   </div>
                   <div className="w-full">
                     <div className="flex items-center gap-2">
-                      <Users2 className="w-4 h-4 text-bright" />
+                      <Users2 className="w-4 h-4 text-primary" />
                       <label className="w-full">직무명</label>
                     </div>
                     <input
@@ -338,7 +343,7 @@ export default function GenerationOpenPage() {
                   </div>
                   <div className="w-full">
                     <div className="flex items-center gap-2">
-                      <Hash className="w-4 h-4 text-bright" />
+                      <Hash className="w-4 h-4 text-primary" />
                       <label className="w-full">글자 수 제한</label>
                     </div>
                     <input
@@ -352,7 +357,7 @@ export default function GenerationOpenPage() {
                   </div>
                   <div className="w-full">
                     <div className="flex items-center gap-2">
-                      <ExternalLink className="w-4 h-4 text-bright" />
+                      <ExternalLink className="w-4 h-4 text-primary" />
                       <label className="w-full">채용 공고 URL <span className="hidden sm:inline">(선택 사항)</span></label>
                     </div>
                     <input
@@ -365,7 +370,7 @@ export default function GenerationOpenPage() {
                   </div>
                   <div className="w-full col-span-2">
                     <div className="flex items-center gap-2">
-                      <ClipboardList className="w-4 h-4 text-bright" />
+                      <ClipboardList className="w-4 h-4 text-primary" />
                       <label className="w-full">자기소개서 문항</label>
                     </div>
                     <input
@@ -408,7 +413,7 @@ export default function GenerationOpenPage() {
                       subQuestions?.subquestion?.["1"] &&
                         Object.keys(subQuestions.subquestion["1"].sub_question_list || {}).length > 0 && (
                         <>
-                          <h2 className="text-lg font-bold py-4 sm:pt-0 sm:pb-4">
+                          <h2 className="text-lg font-bold pt-0 pb-4">
                             추가 질문으로 더 정교하게 보완하기
                             &nbsp;<div className="h-px sm:hidden"><br/></div>
                             (선택 사항)
@@ -474,22 +479,22 @@ export default function GenerationOpenPage() {
                   ) : (
                     finalEssay ? (
                       <>
-                        <div className="mt-6 grid w-full grid-cols-2 mb-6 py-1 px-1 rounded-lg items-center justify-center bg-dark/10">
+                        <div className="grid w-full grid-cols-2 mb-4 py-1 px-1 rounded-lg items-center justify-center bg-gray-200">
                           <div 
-                            className={`text-center py-2 rounded-lg cursor-pointer ${tab==="essay" ? "bg-white" : ""}`}
+                            className={`text-center py-2 rounded-lg cursor-pointer text-sm sm:text-base ${tab==="essay" ? "bg-white" : ""}`}
                             onClick={()=> setTab("essay")}
                           >
                             최종 결과
                           </div>
                           <div 
-                            className={`text-center py-2 rounded-lg cursor-pointer ${tab==="answers" ? "bg-white" : ""}`}
+                            className={`text-center py-2 rounded-lg cursor-pointer text-sm sm:text-base ${tab==="answers" ? "bg-white" : ""}`}
                             onClick={()=> setTab("answers")}
                           >
                             질문 답변
                           </div>
                         </div>
                         {tab ==="essay" &&
-                          <div className="whitespace-pre-wrap border border-gray-200 rounded-xl p-8">
+                          <div className="whitespace-pre-wrap border border-dark/10 rounded-xl p-8 bg-light p-8 text-sm sm:text-base">
                             {finalEssay.essay.split('\n').map((line, index) => (
                               <p key={index}>{line}</p>
                             ))}
@@ -497,10 +502,10 @@ export default function GenerationOpenPage() {
                           </div>
                         }
                         {tab === "answers" && (
-                          <div className="space-y-6 border border-gray-200 rounded-xl p-8">
+                          <div className="space-y-6 border border-dark/10 rounded-xl p-8 bg-light">
                             {subQuestions?.subquestion?.["1"] &&
                               Object.entries(subQuestions.subquestion["1"].sub_question_list || {}).map(([key, item]) => (
-                                <div key={key} className="pb-4 border-b border-gray-300">
+                                <div key={key} className="pb-4 border-b border-gray-300 text-sm sm:text-base">
                                   <h3 className="font-semibold mb-1">{item.sub_question}</h3>
                                   <div className="whitespace-pre-wrap p-2">
                                     {followupAnswers[key]?.free_text || <span className="text-gray-400 italic">답변 없었습니다</span>}
@@ -558,14 +563,14 @@ export default function GenerationOpenPage() {
                 <div className="w-full grid grid-cols-2 gap-4">
                   <button
                     onClick={handleCopy}
-                    className="flex items-center justify-center py-2 border border-dark/20 rounded-lg hover:bg-dark/10"
+                    className="flex items-center justify-center py-2 border border-gray-200 rounded-lg bg-gray-100 hover:bg-gray-200 text-sm sm:text-base"
                   >
                     <Copy className="w-4 h-4 mr-2" />
                     복사하기
                   </button>
                   <button
                     onClick={handleRestart}
-                    className="flex items-center justify-center py-2 border border-dark/20 rounded-lg hover:bg-dark/10"
+                    className="flex items-center justify-center py-2 border border-gray-200 rounded-lg bg-gray-100 hover:bg-gray-200 text-sm sm:text-base"
                   >
                     <RefreshCw className="w-4 h-4 mr-2" />
                     다시 생성
@@ -584,7 +589,7 @@ export default function GenerationOpenPage() {
             </>
           )} */}
         </div>
-        <div className="w-9/10 sm:w-7/10 mx-auto mb-16">
+        <div className="w-9/10 sm:w-7/10 max-w-5xl mx-auto mb-16">
           <GenCharacteristics />
         </div>
       </div>

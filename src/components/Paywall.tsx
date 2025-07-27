@@ -16,7 +16,7 @@ export default function Paywall() {
 
               <a
                 href="/pricing" 
-                className="mt-6 inline-block bg-bright hover:bg-bright/70 font-semibold py-3 px-6 rounded-lg transition"
+                className="mt-6 inline-block bg-primary hover:bg-primary/70 font-semibold py-3 px-6 rounded-lg transition"
                 style={{color:'white'}}
               >
                 구독 안내 보기

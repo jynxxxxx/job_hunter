@@ -75,19 +75,21 @@ export default function FeedbackPage() {
 
   return (
     <AuthCheck>
-      <div className="my-8 select-none h-full">
-        <div className="max-w-3xl mx-4 sm:mx-auto py-8 px-8 md:px-20 rounded-xl bg-bright/5 text-gray-800">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-black gap-2 flex items-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 sm:w-15 sm:h-15 bg-bright rounded-full float-animation">
-              <PenTool className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+      <div className="mb-16 mt-8 select-none h-full">
+        <div 
+          className="max-w-3xl mx-4 sm:mx-auto py-8 sm:pt-16 px-6 sm:px-8 md:px-20 rounded-xl bg-light text-gray-800 popped"
+        >
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-black gap-2 flex items-center">
+            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full float-animation">
+              <PenTool className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
             </div>
             <div>
               자기소개서 피드백
             </div>
           </h1>
           <p className="text-sm text-gray-600 mb-8 mt-2">
-            &#x1F512; 자소서는 사용자 본인의 피드백 제공에만 활용되며,
-            &nbsp;<br className="sm:hidden" />그 외 어디에도 공개/재사용되지 않습니다
+            &#x1F512;자기소개서는 사용자 본인의 피드백 제공에만&nbsp;<br className="sm:hidden" />
+            활용되며, 그 외 어디에도 공개/재사용되지 않습니다
           </p>
 
           <label className="block mb-2 font-semibold">
@@ -136,16 +138,16 @@ export default function FeedbackPage() {
               ${
                 loading
                   ? "bg-gray-400 cursor-wait"
-                  : "bg-dark hover:scale-103 "
+                  : "bg-blue-500 hover:scale-103 "
               }`}
           >
-            {loading ? "피드백 생성 중... (최대 1분)" : "펀 피드백 받기!"}
+            {loading ? "피드백 생성 중... (최대 1분)" : "피드백 받기!"}
           </button>
         </div>
         <div ref={resultRef}>
         {result && personaResult && (
-          <div className="max-w-3xl mx-auto">
-            <section className="mt-10 bg-white rounded-xl shadow-lg p-6 space-y-6">
+          <div className="max-w-3xl mx-4 sm:mx-auto">
+            <section className="mt-10 bg-white rounded-xl p-6 space-y-6 shadow-[8px_8px_16px_rgba(0,0,0,0.08),-8px_-8px_16px_rgba(240,240,240,1)]">
               <h2 className="text-xl font-bold text-blue-600">
                 최종 점수: 
                 <p className="flex items-center text-3xl gap-2">{result.final_score}/100점 {getScoreIcon(result.final_score)}</p>
@@ -159,8 +161,8 @@ export default function FeedbackPage() {
                         className="px-4 py-2 rounded-lg border border-blue-200 shadow-sm hover:shadow-lg transition cursor-pointer"
                         title={val.피드백}
                       >
-                        <h3 className="flex gap-2 font-semibold text-md mb-1 text-gray-700">
-                          {key.replace(/_/g, ' ')}:<span className="font-bold text-md flex items-center">{[...Array(5)].map((_, i) => (
+                        <h3 className="flex gap-2 font-semibold text-base mb-1 text-gray-700">
+                          {key.replace(/_/g, ' ')}:<span className="font-bold text-base flex items-center">{[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
                             size={16}

@@ -76,29 +76,29 @@ const Header = () => {
 
   return (
     <div 
-      className={`fixed bg-white w-full top-0 left-0 h-[5rem] sm:h-[4rem] font-bold text-dark flex flex-col sm:items-center sm:flex-row`}
+      className={`fixed bg-white w-full top-0 left-0 h-[4.5rem] sm:h-[4rem] text-dark flex flex-col sm:items-center sm:flex-row border border-b border-[#ecf1f5]`}
       style={{ zIndex: 1000 }}
     >
       <div 
-        className="pt-2 px-6 md:px-[2.5rem] sm:pt-0 cursor-pointer" 
+        className="pt-2 px-6 md:pl-[2.5rem] sm:pt-0 cursor-pointer" 
         onClick={() => {
           router.push('/')
           setActivePage("home");
         }}
       >
-        <div className="h-[2.5rem] w-[8rem] relative">
+        <div className="h-[2rem] sm:h-[2.5rem] w-[8rem] relative">
           <Image
-            src="/logo.png"
+            src="/logo1.png"
             alt="바로지원"
             fill
-            className="object-contain"
+            className="h-[1.5rem] object-contain"
           />
         </div>
       </div>
 
       
       {pathname === '/login' ? null : (
-        <div className={`w-full pl-4 sm:pl-0 md:pt:12 flex items-end justify-start gap-4`}>
+        <div className={`w-full pl-4 sm:pl-0 flex items-end justify-start`}>
           <>
             {isAuthenticated && (
               <>
@@ -109,7 +109,7 @@ const Header = () => {
                     }
                     setActivePage("generation")
                   }}
-                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                  className={`w-fit text-sm px-4 sm:px-2 py-1 sm:py-2 cursor-pointer ${
                     activePage === 'generation' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -122,7 +122,7 @@ const Header = () => {
                     }
                     setActivePage("revision")
                   }}
-                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                  className={`w-fit text-sm px-2 py-1 sm:py-2 cursor-pointer ${
                     activePage === 'revision' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -135,7 +135,7 @@ const Header = () => {
                     }
                     setActivePage("feedback")
                   }}
-                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                  className={`w-fit text-sm px-2 py-1 sm:py-2 cursor-pointer ${
                     activePage === 'feedback' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -148,7 +148,7 @@ const Header = () => {
                     }
                     setActivePage("history")
                   }}
-                  className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+                  className={`w-fit text-sm px-2 py-1 sm:py-2 cursor-pointer ${
                     activePage === 'history' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
                   }`}
                 >
@@ -163,7 +163,7 @@ const Header = () => {
                 }
                 setActivePage("copilot")
               }}
-              className={`w-fit text-sm px-2 md:px-4 py-2 cursor-pointer ${
+              className={`w-fit text-sm px-2 py-1 sm:py-2 cursor-pointer ${
                 activePage === 'copilot' ? `${headerStyles.active}` : `${headerStyles.underlineAnimate}`
               }`}
             >
@@ -173,17 +173,17 @@ const Header = () => {
           {!isAuthenticated ? (
             <div
               onClick={handleLoginClick}
-              className="z-[1000] absolute top-6 sm:top-1/2 transform -translate-y-1/2 right-4 md:right-[1rem] text-sm font-semibold hover:scale-110 cursor-pointer"
+              className="z-[1000] absolute top-6 sm:top-1/2 transform -translate-y-1/2 right-4 md:right-[1rem] text-sm font-semibold hover:scale-105 cursor-pointer"
             >
               로그인
             </div>
           ):(
             <div 
-              className="z-[1000] absolute top-6 sm:top-1/2 transform -translate-y-1/2 right-4 md:right-[1rem] text-sm font-semibold hover:scale-110 cursor-pointer" 
+              className="z-[1000] absolute top-6 sm:top-1/2 transform -translate-y-1/2 right-4 md:right-[1rem] text-sm font-semibold cursor-pointer" 
               ref={profileRef}  
               onClick={() => setIsProfileTabOpen(prev => !prev)}
             >
-              <CircleUserRound size={28} className="hover:scale-110"/>
+              <CircleUserRound size={28} className="text-dark hover:scale-105"/>
               {isProfileTabOpen && (
                 <div 
                   className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg"

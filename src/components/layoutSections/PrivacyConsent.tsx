@@ -175,7 +175,7 @@ export default function PrivacyAgreementModal() {
             </div>
             <button
               onClick={handleNext}
-              className="mt-4 w-full bg-bright text-white text-lg px-4 py-2 rounded hover:brightness-90"
+              className="mt-4 w-full bg-primary text-white text-lg px-4 py-2 rounded hover:primaryness-90"
             >
               다음
             </button>
@@ -190,7 +190,7 @@ export default function PrivacyAgreementModal() {
             </div>
             <button
               onClick={handleAgree}
-              className="bg-bright text-white text-lg px-4 py-2 rounded hover:brightness-90 w-full"
+              className="bg-primary text-white text-lg px-4 py-2 rounded hover:primaryness-90 w-full"
             >
               동의하고 계속하기
             </button>

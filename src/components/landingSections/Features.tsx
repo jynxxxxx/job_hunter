@@ -20,7 +20,7 @@ const Features = () => {
   ]
 
   return (
-    <div className="flex justify-center bg-bright/5">
+    <div className="flex justify-center bg-primary/5">
       <div className="min-h-fit grid grid-cols-1 md:grid-cols-2 px-8 py-16 justify-center items-center max-w-[1500px]">
         <div className="hidden md:inline relative w-[45vw] h-[45vw] 2xl:h-[40vw] 2xl:w-[40vw] p-4">
           <Image
@@ -39,7 +39,7 @@ const Features = () => {
               <h2 className="text-gray-900 font-extrabold text-xl px-6 py-2">
                 {card.title}
               </h2>
-              <h4 className="text-md text-gray-500 px-6 pb-4">
+              <h4 className="text-base text-gray-500 px-6 pb-4">
                 {card.description}
               </h4>
             </div>

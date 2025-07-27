@@ -18,7 +18,7 @@ export default function Home() {
       <Features />
       {/* <JobCarousel /> */}
       <Testimonials />
-      <div className="h-fit bg-bright/5 px-6 py-16 text-gray-900">
+      <div className="h-fit bg-primary/5 px-6 py-16 text-gray-900">
         <div className="max-w-5xl mx-auto text-center">
           {/* <h1 className="text-2xl sm:text-3xl font-bold mb-4">자기소개서, 합격 가능성을 높이는 3가지 방법!</h1>
           <p className="text-gray-600 mb-8 text-lg">

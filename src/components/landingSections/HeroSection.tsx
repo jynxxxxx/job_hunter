@@ -29,7 +29,13 @@ const HeroSection = () => {
   return (
     <>
     <ApplicationPosting />
-    <div className='bg-extraDark flex w-full justify-center'>
+    <div 
+      className='bg-gradient-to-b flex w-full justify-center'
+        style={{
+          backgroundImage:
+            'linear-gradient(to bottom, #082f70 0%, #082f70 40%, #2563eb 70%, white 100%)'
+        }}
+    >
       <section className={`${heroStyles.ctn} grid grid-rows-2 sm:grid-rows-[1fr] sm:grid-cols-[1.2fr_1fr] w-fit`}>
         <div className='flex flex-col justify-center'>
           <div className={heroStyles.title}>
@@ -41,7 +47,7 @@ const HeroSection = () => {
           </div>
           <div className='grid grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 sm:w-fit gap-2 sm:gap-4 mt-10 px-12 sm:px-0 mb-8 sm:mb-0'>
             <button
-              className={`${heroStyles.herobtn} bg-bright/80 text-white w-full`}
+              className={`${heroStyles.herobtn} bg-primary text-white w-full`}
               onClick={handleStart}
             >
               작성하기
