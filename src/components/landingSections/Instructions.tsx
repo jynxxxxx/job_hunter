@@ -30,7 +30,7 @@ const Instructions = () => {
         </h1>
         <div className="px-8 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-4 xl:gap-8">
           {cards.map((card, idx) => (
-            <div key={idx} className="flex flex-col gap-2 bg-light h-full w-full border border-dark/40 rounded-2xl">
+            <div key={idx} className="flex flex-col gap-2 bg-light h-full w-full border border-gray-200 rounded-2xl">
               <div className="relative w-full h-[13rem] xl:h-[15rem] bg-[#D6F4FF] rounded-t-2xl">
                 <Image
                   src={card.image}
