@@ -74,7 +74,7 @@ export default function FeedbackPopup() {
         </p>
       </div>
       <p className="text-sm text-gray-600 mb-3">
-        간단한 피드백을 남겨주시면 개선에 큰 도움이 됩니다.
+        간단한 피드백을 남겨주시면 <strong>10,000원 배민 쿠폰</strong> 제공합니다.
       </p>
       <a
         href="https://forms.gle/GbM51Xcud3ZdyRM47"
