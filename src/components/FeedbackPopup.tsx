@@ -70,11 +70,11 @@ export default function FeedbackPopup() {
     <div className="fixed bottom-4 right-4 z-500 bg-white border border-gray-200 rounded-2xl shadow-xl p-4 w-85 animate-slide-up transition-all">
       <div className="flex justify-between items-start mb-2">
         <p className="text-sm text-gray-900 font-medium">
-          오늘 서비스는 어땠나요?
+          여러분의 소중한 의견을 들려주세요!
         </p>
       </div>
       <p className="text-sm text-gray-600 mb-3 text-center">
-        간단한 피드백을 남겨주시면<br /> <strong>10,000원 배민 쿠폰</strong> 제공합니다.
+        간단한 설문에 참여해 주시면<br /> <strong>10,000원 배민 쿠폰</strong>을 드립니다.
         <p className="text-xs text-gray-500 mt-1 text-center">쿠폰 발송을 위해 마이페이지에 전화번호를 꼭 입력해주세요!</p>
       </p>
       <a
@@ -83,9 +83,9 @@ export default function FeedbackPopup() {
         rel="noopener noreferrer"
         className="block w-full text-center bg-dark text-white text-sm font-semibold py-2 px-4 rounded-xl hover:bg-blue-800 transition"
       >
-        피드백 남기기
+        설문 참여하기
       </a>
-      <p className="text-xs text-gray-500 mt-1 text-center">구글 폼이 새 창에서 열립니다</p>
+      <p className="text-xs text-gray-500 mt-1 text-center">구글폼이 새 창에서 열립니다.</p>
       <div className="flex justify-between items-center mt-4">
         <label className="text-xs flex items-center gap-2">
           <input
