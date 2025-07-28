@@ -28,7 +28,7 @@ const ApplicationPosting = () => {
               <span className="text-base">🏆 추천 1등에게는 → <span className="font-semibold text-blue-400">에어팟 프로 2세대</span>!
             </span>
             <span className="text-base">
-              📩 친구 3명 이상이 내 추천코드를 입력하고 &nbsp;<br className="sm:hidden" />회원 가입하면 <span className="font-semibold text-green-400">스타벅스 2만원 쿠폰</span> 제공
+              📩 친구 3명 이상이 내 추천코드를 입력하고 &nbsp;<br className="sm:hidden" />회원 가입하면 <span className="font-semibold text-green-400">배민 2만원 쿠폰</span> 제공
               <p className="text-xs">추천 코드는 우측 상단 마이 페이지에 있어요.</p>
             </span>
           </div>
