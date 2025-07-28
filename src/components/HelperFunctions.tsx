@@ -30,7 +30,8 @@ export const ensureUserProfile = async (user: any, name: string, eventSourceUrl?
         ownerId: user.uid,
         referralCount: 0,
         referredUserIds: [],
-      });
+      },
+      { merge: true });
       // meta conversion api call
       if (eventSourceUrl) {
       await fetch('/api/meta', {
