@@ -39,6 +39,19 @@ export default function RootLayout({
                 })(window, document, "clarity", "script", "sbjgikhecb");`
               }}
             />
+            {/* <!-- GA4 Code --> */}
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-QJTS7MRG3D"
+              strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-QJTS7MRG3D');
+              `}
+            </Script>
             {/* <!-- Meta Pixel Code --> */}
             <Script
               id="fb-pixel"
