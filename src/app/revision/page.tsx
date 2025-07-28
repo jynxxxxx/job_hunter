@@ -545,9 +545,9 @@ export default function RevisionPage() {
             </div>
             <div className="sm:px-8 flex justify-between mt-4">
               {currentStep == 1 && (
-                <div className="ml-auto flex justify-end gap-2">
+                <div className="flex flex-col w-full sm:w-fit sm:ml-auto sm:flex-row sm:justify-end gap-2">
                   <button
-                    className='flex items-center gap-2 min-w-fit text-[0.8rem] font-bold text-white px-5 py-2 rounded-lg bg-gray-700 transition-all duration-200 ease-in-out hover:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500'
+                    className='flex items-center justify-center gap-2 min-w-fit w-full sm:w-fit text-[0.8rem] font-bold text-white px-5 py-2 rounded-lg bg-gray-700 transition-all duration-200 ease-in-out hover:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500'
                     onClick={handleRedirectToChat}
                     disabled={waiting1}
                   >
@@ -557,10 +557,10 @@ export default function RevisionPage() {
                   <button
                     form="basicInfoForm"
                     type="submit"
-                    className={styles.btn}
+                    className={`w-full sm:w-fit ${styles.btn}`}
                     disabled={waiting1}
                   >
-                    폼으로 첨삭받기
+                    질문 답변으로 첨삭받기
                   </button>
                 </div>
               )} 
