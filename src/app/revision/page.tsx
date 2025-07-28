@@ -10,11 +10,13 @@ import { db } from "@/lib/firebase";
 import styles from "@/styles/revisions.module.scss"
 import { useAuth } from "@/context/AuthContext";
 import { DotSpinner } from "@/components/layoutSections/DotSpinner";
-import { Copy, RefreshCw, FileText, Building2, FilePen, ClipboardList, Users2, ExternalLink, } from "lucide-react";
+import { Copy, RefreshCw, FileText, Building2, FilePen, ClipboardList, Users2, ExternalLink, Sparkles, } from "lucide-react";
 import ProgressIndicator from "@/components/layoutSections/ProgressIndicator";
 import GenCharacteristics from "@/components/genCharacteristics";
+import { useRouter } from "next/navigation";
 
 export default function RevisionPage() {
+  const router = useRouter()
   const {authUser} = useAuth()
   const [currentStep, setCurrentStep] = useState(1)
   const [draft, setDraft] = useState('');
@@ -189,6 +191,22 @@ export default function RevisionPage() {
       ['revision_count']: increment(1),
     });
   };
+  
+  const handleRedirectToChat = async (e: any) => {
+    e.preventDefault()
+    if (!jobInput || !companyInput || !questionInput || !draft) {
+      toast.error("필수 항목이 누락되었습니다")
+      return
+    }
+    localStorage.setItem('chatData', JSON.stringify({
+      company: companyInput,
+      job: jobInput,
+      question: questionInput,
+      draft: draft,
+    }));
+
+    router.push('/revision/chat');
+  }
 
   const handleRestart = () => {
     setDraft('');
@@ -527,14 +545,24 @@ export default function RevisionPage() {
             </div>
             <div className="sm:px-8 flex justify-between mt-4">
               {currentStep == 1 && (
-                <button
-                  form="basicInfoForm"
-                  type="submit"
-                  className={styles.btn}
-                  disabled={waiting1}
-                >
-                  피드백 받기
-                </button>
+                <div className="ml-auto flex justify-end gap-2">
+                  <button
+                    className='flex items-center gap-2 min-w-fit text-[0.8rem] font-bold text-white px-5 py-2 rounded-lg bg-gray-700 transition-all duration-200 ease-in-out hover:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500'
+                    onClick={handleRedirectToChat}
+                    disabled={waiting1}
+                  >
+                    <Sparkles className="w-4 h-4 text-white" />
+                    AI 챗으로 첨삭받기 (beta)
+                  </button>
+                  <button
+                    form="basicInfoForm"
+                    type="submit"
+                    className={styles.btn}
+                    disabled={waiting1}
+                  >
+                    폼으로 첨삭받기
+                  </button>
+                </div>
               )} 
               {currentStep == 2 && (
                 <>

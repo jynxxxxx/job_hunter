@@ -21,7 +21,7 @@ const Header = () => {
   const profileRef = useRef(null);
 
   useEffect(() => {
-    if (pathname === '/revision') {
+    if (pathname.startsWith('/revision')) {
       setActivePage('revision');
     } else if (pathname.startsWith('/generate')) {
       setActivePage('generation');

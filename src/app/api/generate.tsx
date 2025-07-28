@@ -155,6 +155,27 @@ export async function getPersonaFeedback(payload: any) {
   return data;
 }
 
+export async function chatBotRevision(payload: any) {
+  const response = await fetch("https://api.barojiwon.com/revise_with_chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+
+  if (!response.ok) {
+    // Parse the JSON error body
+    const errorData = await response.json();
+    throw new Error(`API 호출 실패: ${JSON.stringify(errorData)}`);
+  }
+  
+  const data = await response.json();
+  console.log('data', data)
+  return data;
+}
+
 
 
 // https://api.barojiwon.com/generate
