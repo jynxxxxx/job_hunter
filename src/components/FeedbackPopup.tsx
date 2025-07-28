@@ -54,7 +54,7 @@ export default function FeedbackPopup() {
     return () => {
       document.removeEventListener("click", handleGenerateClick);
     };
-  }, [authUser, pathname, isPathExcluded, openPopup]);
+  }, [authUser, pathname, isPathExcluded]);
 
   const handleDismiss = () => {
     const today = new Date().toISOString().split("T")[0];
