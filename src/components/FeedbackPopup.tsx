@@ -67,14 +67,15 @@ export default function FeedbackPopup() {
   if (!openPopup) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-500 bg-white border border-gray-200 rounded-2xl shadow-xl p-4 w-80 animate-slide-up transition-all">
+    <div className="fixed bottom-4 right-4 z-500 bg-white border border-gray-200 rounded-2xl shadow-xl p-4 w-85 animate-slide-up transition-all">
       <div className="flex justify-between items-start mb-2">
         <p className="text-sm text-gray-900 font-medium">
           오늘 서비스는 어땠나요?
         </p>
       </div>
-      <p className="text-sm text-gray-600 mb-3">
-        간단한 피드백을 남겨주시면 <strong>10,000원 배민 쿠폰</strong> 제공합니다.
+      <p className="text-sm text-gray-600 mb-3 text-center">
+        간단한 피드백을 남겨주시면<br /> <strong>10,000원 배민 쿠폰</strong> 제공합니다.
+        <p className="text-xs text-gray-500 mt-1 text-center">쿠폰 발송을 위해 마이페이지에 전화번호를 꼭 입력해주세요!</p>
       </p>
       <a
         href="https://forms.gle/GbM51Xcud3ZdyRM47"
