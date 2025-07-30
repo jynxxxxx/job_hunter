@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import styles from '@/styles/copilot.module.scss'
 import heroStyles from '@/styles/hero.module.scss'
 import genStyles from '@/styles/generation.module.scss'
-import ApplicationPosting from "@/components/landingSections/ApplicationPosting";
+// import ApplicationPosting from "@/components/landingSections/ApplicationPosting";
 
 export default function CoPilotPage() {
   const words = ["서류 합격", "면접 합격", "취업 성공", "맞춤 공고"];
@@ -138,7 +138,7 @@ export default function CoPilotPage() {
 
   return (
     <>
-      <ApplicationPosting />
+      {/* <ApplicationPosting /> */}
       {/* Hero Section */}
       <div className='bg-gradient-to-r from-[#082f70] via-[#082f70] to-blue-600 flex w-full justify-center'>
         <section className={`${heroStyles.ctn} grid grid-rows-2 sm:grid-rows-[1fr] sm:grid-cols-[1.4fr_1fr] md:w-4/5 2xl:w-7/10`}>
