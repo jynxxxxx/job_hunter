@@ -8,6 +8,7 @@ import Footer from "@/components/layoutSections/Footer";
 import Script from 'next/script';
 import { Analytics } from "@vercel/analytics/next"
 import { ScrollToTopOnRouteChange } from "@/components/layoutSections/ScollToTop";
+import ApplicationPosting from "@/components/landingSections/ApplicationPosting";
 // import ExitPopUp from "@/components/ExitPopUp";
 // import FeedbackPopup from "@/components/FeedbackPopup";
 
@@ -93,6 +94,7 @@ export default function RootLayout({
               <Toaster position="top-center" />
               {/* <ExitPopUp /> */}
               {/* <FeedbackPopup /> */}
+              <ApplicationPosting />
               <div className="min-h-screen relative">
                 <Header />
                   <div className="pt-[4rem] pb-[11rem]">
