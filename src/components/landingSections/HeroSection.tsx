@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import heroStyles from "@/styles/hero.module.scss";
 import { useAuth } from '@/context/AuthContext';
 import Image from 'next/image';
-import ApplicationPosting from './ApplicationPosting';
+// import ApplicationPosting from './ApplicationPosting';
 
 const HeroSection = () => {
   const router = useRouter();
@@ -28,7 +28,7 @@ const HeroSection = () => {
 
   return (
     <>
-    <ApplicationPosting />
+    {/* <ApplicationPosting /> */}
     <div 
       className='bg-gradient-to-b flex w-full justify-center'
         style={{
