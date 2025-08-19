@@ -33,10 +33,8 @@ export default function LoginForm() {
     try {
       sessionStorage.setItem('googleLoginAttempted', 'true');
       const provider = new GoogleAuthProvider();
-      console.log("starting with", provider, "and" , auth);
       await signInWithRedirect(auth, provider);
     } catch (err: any) {
-      console.log("Error initiating Google login:", err);
       console.error("Error initiating Google redirect login:", err);
       sessionStorage.removeItem('googleLoginAttempted');
       toast.error(err.message || 'Google 로그인 리디렉션 시작 중 오류가 발생했습니다.');
@@ -45,29 +43,18 @@ export default function LoginForm() {
  
   useEffect(() => {
     const handleRedirectResultOnLoad = async () => {
-       console.log("useEffect triggered on mount");
       const loginAttempted = sessionStorage.getItem('googleLoginAttempted');
-      console.log("googleLoginAttempted flag:", loginAttempted);
-      if (!loginAttempted) {
-        console.log("No Google login attempted, exiting useEffect");
-        return; 
-      }// don't run unless user clicked login
-
-       console.log("Google login initiated, waiting for redirect result...");
+      if (!loginAttempted) return; // don't run unless user clicked login
 
       try {
         const result = await getRedirectResult(auth); // <--- KEY: Get the result after redirect   
-        console.log("getRedirectResult returned:", result);
         if (result) {
-          console.log("User info:", result.user);
           await ensureUserProfile(result.user, name);
           await afterLoginRedirect();
         } else {
-          console.log('No result from getRedirectResult');
           toast.error('Google 로그인에 실패했습니다. 사용자 정보를 가져올 수 없습니다.');
         }
       } catch (error: any) {
-        console.log("Error during Google redirect sign-in:", error);
         console.error("Error during Google redirect sign-in:", error);
         if (error.code === 'auth/cancelled-pop-up' || error.code === 'auth/popup-closed-by-user') {
           toast.error('Google 로그인 리디렉션이 사용자 또는 브라우저에 의해 취소되었습니다.');
@@ -80,7 +67,6 @@ export default function LoginForm() {
           toast.error(error.message || 'Google 로그인 중 알 수 없는 오류가 발생했습니다.');
         }
       } finally {
-        console.log("Cleaning up googleLoginAttempted flag");
         sessionStorage.removeItem('googleLoginAttempted');
       }
     };
