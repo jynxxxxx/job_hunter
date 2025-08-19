@@ -1,12 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { auth } from '@/lib/firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult, 
 } from 'firebase/auth';
 import { KakaoLoginButton } from '@/components/layoutSections/KakaoLoginButton';
 import { ensureUserProfile } from '@/components/HelperFunctions';
@@ -26,55 +29,64 @@ export default function LoginForm() {
     await router.push(redirect);
   };
 
-  // const googleLogin = async () => {
-  //   try {
-  //     sessionStorage.setItem('googleLoginAttempted', 'true');
-  //     const provider = new GoogleAuthProvider();
-
-  //     await signInWithRedirect(auth, provider);
-  //   } catch (err: any) {
-  //     console.error("Error initiating Google redirect login:", err);
-  //     sessionStorage.removeItem('googleLoginAttempted');
-  //     toast.error(err.message || 'Google 로그인 리디렉션 시작 중 오류가 발생했습니다.');
-  //   }
-  // };
+  const googleLogin = async () => {
+    try {
+      sessionStorage.setItem('googleLoginAttempted', 'true');
+      const provider = new GoogleAuthProvider();
+      console.log("starting with", provider, "and" , auth);
+      await signInWithRedirect(auth, provider);
+    } catch (err: any) {
+      console.log("Error initiating Google login:", err);
+      console.error("Error initiating Google redirect login:", err);
+      sessionStorage.removeItem('googleLoginAttempted');
+      toast.error(err.message || 'Google 로그인 리디렉션 시작 중 오류가 발생했습니다.');
+    }
+  };
  
-  // useEffect(() => {
-  //   const handleRedirectResultOnLoad = async () => {
-  //     const loginAttempted = sessionStorage.getItem('googleLoginAttempted');
-  //     if (!loginAttempted) return; // don't run unless user clicked login
+  useEffect(() => {
+    const handleRedirectResultOnLoad = async () => {
+       console.log("useEffect triggered on mount");
+      const loginAttempted = sessionStorage.getItem('googleLoginAttempted');
+      console.log("googleLoginAttempted flag:", loginAttempted);
+      if (!loginAttempted) {
+        console.log("No Google login attempted, exiting useEffect");
+        return; 
+      }// don't run unless user clicked login
 
-  //     // Clear the flag so this only runs once
-  //     sessionStorage.removeItem('googleLoginAttempted');
+       console.log("Google login initiated, waiting for redirect result...");
 
-  //     setWaiting(true)
-  //     try {
-  //       const result = await getRedirectResult(auth); // <--- KEY: Get the result after redirect   
-  //       if (result) {
-  //         await ensureUserProfile(result.user, name);
-  //         await afterLoginRedirect();
-  //       } else {
-  //         toast.error('Google 로그인에 실패했습니다. 사용자 정보를 가져올 수 없습니다.');
-  //       }
-  //     } catch (error: any) {
-  //       console.error("Error during Google redirect sign-in:", error);
-  //       if (error.code === 'auth/cancelled-pop-up' || error.code === 'auth/popup-closed-by-user') {
-  //         toast.error('Google 로그인 리디렉션이 사용자 또는 브라우저에 의해 취소되었습니다.');
-  //       } else if (error.code === 'auth/auth-domain-config-error') {
-  //         toast.error('Firebase 인증 도메인 설정 오류: Firebase 콘솔에서 웹 도메인을 확인하세요.');
-  //       } else if (error.code === 'auth/credential-already-in-use') {
-  //         toast.error('이미 다른 방식으로 가입된 이메일입니다. 다른 로그인 방법을 사용하거나 기존 계정으로 로그인해주세요.');
-  //       }
-  //       else {
-  //         toast.error(error.message || 'Google 로그인 중 알 수 없는 오류가 발생했습니다.');
-  //       }
-  //     } finally {
-  //       setWaiting(false)
-  //     }
-  //   };
+      try {
+        const result = await getRedirectResult(auth); // <--- KEY: Get the result after redirect   
+        console.log("getRedirectResult returned:", result);
+        if (result) {
+          console.log("User info:", result.user);
+          await ensureUserProfile(result.user, name);
+          await afterLoginRedirect();
+        } else {
+          console.log('No result from getRedirectResult');
+          toast.error('Google 로그인에 실패했습니다. 사용자 정보를 가져올 수 없습니다.');
+        }
+      } catch (error: any) {
+        console.log("Error during Google redirect sign-in:", error);
+        console.error("Error during Google redirect sign-in:", error);
+        if (error.code === 'auth/cancelled-pop-up' || error.code === 'auth/popup-closed-by-user') {
+          toast.error('Google 로그인 리디렉션이 사용자 또는 브라우저에 의해 취소되었습니다.');
+        } else if (error.code === 'auth/auth-domain-config-error') {
+          toast.error('Firebase 인증 도메인 설정 오류: Firebase 콘솔에서 웹 도메인을 확인하세요.');
+        } else if (error.code === 'auth/credential-already-in-use') {
+          toast.error('이미 다른 방식으로 가입된 이메일입니다. 다른 로그인 방법을 사용하거나 기존 계정으로 로그인해주세요.');
+        }
+        else {
+          toast.error(error.message || 'Google 로그인 중 알 수 없는 오류가 발생했습니다.');
+        }
+      } finally {
+        console.log("Cleaning up googleLoginAttempted flag");
+        sessionStorage.removeItem('googleLoginAttempted');
+      }
+    };
 
-  //   handleRedirectResultOnLoad(); 
-  // }, [auth, ensureUserProfile, afterLoginRedirect]);
+    handleRedirectResultOnLoad(); 
+  }, [auth, ensureUserProfile, afterLoginRedirect]);
 
   const emailSignup = async () => {
     try {
@@ -125,15 +137,15 @@ export default function LoginForm() {
         {mode === 'signup' ? '회원가입' : '로그인'}
       </h2>
 
-      {/* <div className=''>
+      <div className=''>
         <button
           onClick={googleLogin}
-          className="mx-auto flex gap-2 justify-center items-center w-4/5 mb-4 text-dark border border-dark py-2 rounded-3xl hover:scale-103 transform transition-transform duration-200"
+          className="mx-auto flex gap-2 justify-center items-center w-full sm:w-4/5 mb-4 border py-2 rounded-3xl hover:scale-103 transform transition-transform duration-200"
         >
           <img alt="googlelogo" src="/icons/google-icon.svg" className="h-[1rem]" />
           Google 계정으로 계속하기
         </button>
-      </div> */}
+      </div>
       <div className='pb-[2rem] border-b border-gray-500'>
         <KakaoLoginButton />
       </div>
