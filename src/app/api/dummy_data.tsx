@@ -1,10 +1,23 @@
 export async function generateOutline(_formData: any) {
-  const data = ""
+  const data = {
+    guideline: {
+      core_keywords: [],
+      key_experiences: [],
+      applicant_character: "",
+      outline: [],
+      review_from_interviewer: [],
+    }
+  }
   return data;
 }
 
 export async function generateEssay(_payload: any) {
-  const data = ""
+  const data = {
+    essay: {
+      "essay": "This is would have been an AI generated 자기소개서 (self-introduction essay) based on the provided question text.",
+      "length": "108",
+    }
+  }
   return data;
 }
 
