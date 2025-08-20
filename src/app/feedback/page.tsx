@@ -3,9 +3,9 @@
 import React, { useRef, useState } from "react";
 import { Star, Smile, Frown, Meh, PenTool } from "lucide-react";
 import { EvaluateResponse } from "@/types/forms";
-import { getFeedback, getPersonaFeedback } from "../api/generate";
-import { doc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { getFeedback, getPersonaFeedback } from "../api/dummy_data";
+// import { doc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
+// import { db } from "@/lib/firebase";
 import AuthCheck from "@/components/AuthCheck";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
@@ -56,17 +56,16 @@ export default function FeedbackPage() {
         }
       }, 100);
 
-      const userRef = doc(db, "users", authUser?.uid);
+      // const userRef = doc(db, "users", authUser?.uid);
 
-      await addDoc(collection(db, "users", authUser.uid, "feedback"), {
-        createdAt: serverTimestamp(),
-        ...input,
-      });
+      // await addDoc(collection(db, "users", authUser.uid, "feedback"), {
+      //   createdAt: serverTimestamp(),
+      //   ...input,
+      // });
   
-
-      await updateDoc(userRef, {
-        ['feedback_count']: increment(1),
-      });
+      // await updateDoc(userRef, {
+      //   ['feedback_count']: increment(1),
+      // });
     } catch {
       toast.error("에러가 발생했어요! 다시 시도해주세요.");
     }
@@ -183,7 +182,9 @@ export default function FeedbackPage() {
                     ))}
                   </section>
                   <blockquote className="italic pl-4 mt-6">
-                    {result.feedback_dict.총괄_피드백}
+                    {result.feedback_dict.총괄_피드백.split('\n').map((line, index) => (
+                      <p key={index}>{line}</p>
+                    ))}
                   </blockquote>
                 </div>
               </div>  

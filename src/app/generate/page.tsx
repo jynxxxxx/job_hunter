@@ -3,10 +3,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import AuthCheck from "@/components/AuthCheck";
 import { EssayOutputProps, SubQuestions } from "@/types/forms";
-import { generateFreeEssay, generateSubQuestions } from "@/app/api/generate";
+import { generateFreeEssay, generateSubQuestions } from "@/app/api/dummy_data";
 import { toast } from "sonner";
-import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+// import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
+// import { db } from "@/lib/firebase";
 import styles from "@/styles/revisions.module.scss"
 import { DotSpinner } from "@/components/layoutSections/DotSpinner";
 import { useAuth } from "@/context/AuthContext";
@@ -169,8 +169,8 @@ export default function GenerationOpenPage() {
       return;
     }
 
-    const userRef = doc(db, "users", authUser?.uid);
-    const userSnap = await getDoc(userRef);
+    // const userRef = doc(db, "users", authUser?.uid);
+    // const userSnap = await getDoc(userRef);
 
     // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
     // const freePassUsed =  userSnap.exists() && ((userSnap.data().generation_count?.['open'] ?? 0) > 0);
@@ -180,21 +180,21 @@ export default function GenerationOpenPage() {
     //   return;
     // }
 
-    if (userSnap.exists() && (userSnap.data().generation_count?.['open'] ?? 0) < 1) {
-      // meta conversion api call
-      await fetch('/api/meta', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          eventName: 'Lead',
-          eventSourceUrl: window.location.href,
-          email: authUser?.email, // optional
-          customData: {
-            content_name: '프리 자기소개서 생성 클릭', // or any relevant label
-          },
-        }),
-      });
-    } 
+    // if (userSnap.exists() && (userSnap.data().generation_count?.['open'] ?? 0) < 1) {
+    //   // meta conversion api call
+    //   await fetch('/api/meta', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //       eventName: 'Lead',
+    //       eventSourceUrl: window.location.href,
+    //       email: authUser?.email, // optional
+    //       customData: {
+    //         content_name: '프리 자기소개서 생성 클릭', // or any relevant label
+    //       },
+    //     }),
+    //   });
+    // } 
 
     const input = {
       ...subQuestions,
@@ -217,26 +217,26 @@ export default function GenerationOpenPage() {
       setWaiting2(false)   
     }
 
-    await addDoc(collection(db, "users", authUser.uid, "generations"), {
-      createdAt: serverTimestamp(),
-      input: {
-        subquestions: Object.values(input.subquestion?.["1"]?.sub_question_list ?? {}).map(
-        (item) => item.sub_question
-        ),
-        user_input: Object.values(followupAnswers).map((ans) => ans.free_text),
-      },
-      essay: essay.essay,
-      job_id: 'open',
-      question_text: questionInput,
-      company_name: companyInput,
-      job_title: jobInput,
-      target_length: characterCount,
-      url: jobUrl,
-    });
+    // await addDoc(collection(db, "users", authUser.uid, "generations"), {
+    //   createdAt: serverTimestamp(),
+    //   input: {
+    //     subquestions: Object.values(input.subquestion?.["1"]?.sub_question_list ?? {}).map(
+    //     (item) => item.sub_question
+    //     ),
+    //     user_input: Object.values(followupAnswers).map((ans) => ans.free_text),
+    //   },
+    //   essay: essay.essay,
+    //   job_id: 'open',
+    //   question_text: questionInput,
+    //   company_name: companyInput,
+    //   job_title: jobInput,
+    //   target_length: characterCount,
+    //   url: jobUrl,
+    // });
 
-     await updateDoc(userRef, {
-      [`generation_count.open`]: increment(1),
-    });
+    //  await updateDoc(userRef, {
+    //   [`generation_count.open`]: increment(1),
+    // });
 
     sessionStorage.removeItem('openGenData');
     sessionStorage.removeItem('openGenDataTimestamp');

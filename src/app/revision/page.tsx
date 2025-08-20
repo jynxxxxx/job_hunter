@@ -3,10 +3,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import AuthCheck from "@/components/AuthCheck";
 import { Feedback, Revision } from "@/types/forms";
-import { generateFeedback, generateRevision } from "@/app/api/generate";
+import { generateFeedback, generateRevision } from "@/app/api/dummy_data";
 import { toast } from "sonner";
-import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+// import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
+// import { db } from "@/lib/firebase";
 import styles from "@/styles/revisions.module.scss"
 import { useAuth } from "@/context/AuthContext";
 import { DotSpinner } from "@/components/layoutSections/DotSpinner";
@@ -125,8 +125,8 @@ export default function RevisionPage() {
       return;
     }
 
-    const userRef = doc(db, "users", authUser?.uid);
-    const userSnap = await getDoc(userRef);
+    // const userRef = doc(db, "users", authUser?.uid);
+    // const userSnap = await getDoc(userRef);
 
     // const hasSubscribed = userSnap.exists() && userSnap.data().subscription?.active === true;
     // const freePassUsed =  userSnap.exists() && userSnap.data().revision_count > 0
@@ -136,21 +136,21 @@ export default function RevisionPage() {
     //   return;
     // }
 
-    if (userSnap.exists() && userSnap.data().revision_count < 1) {
-      // meta conversion api call
-      await fetch('/api/meta', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          eventName: 'Lead',
-          eventSourceUrl: window.location.href,
-          email: authUser?.email, // optional
-          customData: {
-            content_name: '프리 자기소개서 첨삭 클릭', // or any relevant label
-          },
-        }),
-      });
-    } 
+    // if (userSnap.exists() && userSnap.data().revision_count < 1) {
+    //   // meta conversion api call
+    //   await fetch('/api/meta', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //       eventName: 'Lead',
+    //       eventSourceUrl: window.location.href,
+    //       email: authUser?.email, // optional
+    //       customData: {
+    //         content_name: '프리 자기소개서 첨삭 클릭', // or any relevant label
+    //       },
+    //     }),
+    //   });
+    // } 
 
     setCurrentStep(currentStep + 1)
 
@@ -175,21 +175,22 @@ export default function RevisionPage() {
       setRunning(false)
       toast.error('최종 자소서 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
+      setRunning(false)
       setWaiting2(false)   
     }
 
-    await addDoc(collection(db, "users", authUser.uid, "revisions"), {
-      createdAt: serverTimestamp(),
-      ...input,
-      feedback: feedback?.feedback,
-      additional_questions: feedback?.additional_info_request.questions,
-      revision: revision.revised_essay,
-      revision_explanation: revision.revision_explanation
-    });
+    // await addDoc(collection(db, "users", authUser.uid, "revisions"), {
+    //   createdAt: serverTimestamp(),
+    //   ...input,
+    //   feedback: feedback?.feedback,
+    //   additional_questions: feedback?.additional_info_request.questions,
+    //   revision: revision.revised_essay,
+    //   revision_explanation: revision.revision_explanation
+    // });
 
-    await updateDoc(userRef, {
-      ['revision_count']: increment(1),
-    });
+    // await updateDoc(userRef, {
+    //   ['revision_count']: increment(1),
+    // });
   };
   
   const handleRedirectToChat = async (e: any) => {

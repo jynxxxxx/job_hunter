@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUp, ChevronDown, Copy } from 'lucide-react';
-import { chatBotRevision } from '@/app/api/generate';
+import { chatBotRevision } from '@/app/api/dummy_data';
 import { toast } from 'sonner';
 import { useAuth } from '@/context/AuthContext';
 import { collection, doc, setDoc, serverTimestamp, updateDoc } from "firebase/firestore";
@@ -120,36 +120,37 @@ export default function Chatbot({ company, job, question, draft }: Props) {
     if (!authUser) return;
     if (qaPairsRef.current.length === 0) return;
 
-    try {
-      if (!chatId) {
-        // Create new chat doc with auto ID
-        const chatsColRef = collection(db, "revision_chats");
-        const newDocRef = doc(chatsColRef);
-        await setDoc(newDocRef, {
-          userId: authUser.uid,
-          chat: qaPairsRef.current,
-          createdAt: serverTimestamp(),
-          output: aiMessages[selectedRevisionIdx].edited_essay,
-          company_name: company,
-          job_name: job,
-          question_text: question,
-          input_draft: draft
-        });
-        setChatId(newDocRef.id);
-      } else {
-        await updateDoc(
-          doc(db, "revision_chats", chatId),
-          {
-            chat: qaPairsRef.current,
-            updatedAt: serverTimestamp(),
-            output: aiMessages[selectedRevisionIdx].edited_essay,
-          },
-        );
-      }
-      unsavedCountRef.current = 0; // reset unsaved count after save
-    } catch (e) {
-      console.error("Failed to save chat:", e);
-    }
+    console.log("Auto-saving chat with qaPairs:", qaPairsRef.current);
+    // try {
+    //   if (!chatId) {
+    //     // Create new chat doc with auto ID
+    //     const chatsColRef = collection(db, "revision_chats");
+    //     const newDocRef = doc(chatsColRef);
+    //     await setDoc(newDocRef, {
+    //       userId: authUser.uid,
+    //       chat: qaPairsRef.current,
+    //       createdAt: serverTimestamp(),
+    //       output: aiMessages[selectedRevisionIdx].edited_essay,
+    //       company_name: company,
+    //       job_name: job,
+    //       question_text: question,
+    //       input_draft: draft
+    //     });
+    //     setChatId(newDocRef.id);
+    //   } else {
+    //     await updateDoc(
+    //       doc(db, "revision_chats", chatId),
+    //       {
+    //         chat: qaPairsRef.current,
+    //         updatedAt: serverTimestamp(),
+    //         output: aiMessages[selectedRevisionIdx].edited_essay,
+    //       },
+    //     );
+    //   }
+    //   unsavedCountRef.current = 0; // reset unsaved count after save
+    // } catch (e) {
+    //   console.error("Failed to save chat:", e);
+    // }
   }
 
   function scheduleSave() {

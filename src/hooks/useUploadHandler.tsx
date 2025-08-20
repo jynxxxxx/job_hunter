@@ -1,7 +1,7 @@
 import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "sonner";
 import { db } from "@/lib/firebase";
-import { generateEssay, generateOutline } from "@/app/api/generate";
+import { generateEssay, generateOutline } from "@/app/api/dummy_data";
 import { EssayOutputProps, GuideOutputProps } from "@/types/forms";
 
 interface UploadParams<T> {
