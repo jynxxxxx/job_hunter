@@ -5,8 +5,8 @@ import { ArrowUp, ChevronDown, Copy } from 'lucide-react';
 import { chatBotRevision } from '@/app/api/dummy_data';
 import { toast } from 'sonner';
 import { useAuth } from '@/context/AuthContext';
-import { collection, doc, setDoc, serverTimestamp, updateDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+// import { collection, doc, setDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+// import { db } from "@/lib/firebase";
 import TypingDots from './TypingDots';
 
 type UserMessage = { role: 'user'; content: string };
@@ -29,7 +29,7 @@ export default function Chatbot({ company, job, question, draft }: Props) {
   const aiMessages = messages.filter((m) => m.role === 'ai');
   const [selectedRevisionIdx, setSelectedRevisionIdx] = useState(aiMessages.length - 1);
   const qaPairsRef = useRef<{ question: string; answer: string }[]>([]);
-  const [chatId, setChatId] = useState<string | null>(null);
+  // const [chatId, setChatId] = useState<string | null>(null);
   const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
   const unsavedCountRef = useRef(0);
 
@@ -196,10 +196,10 @@ export default function Chatbot({ company, job, question, draft }: Props) {
 
       const payload = { 
         chat: qaPairsRef.current,
-        updatedAt: serverTimestamp(),
+        updatedAt: "current_timestamp",
         output: aiMessages[selectedRevisionIdx].edited_essay,
         userId: authUser.uid,
-        chatId: chatId
+        chatId: "123", // dummy chatId for now
       }
       const blob = new Blob([JSON.stringify(payload)], {
         type: 'application/json',
