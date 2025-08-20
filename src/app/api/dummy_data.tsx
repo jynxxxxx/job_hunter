@@ -1,14 +1,14 @@
-export async function generateOutline(formData: any) {
+export async function generateOutline() {
   const data = ""
   return data;
 }
 
-export async function generateEssay(payload: any) {
+export async function generateEssay() {
   const data = ""
   return data;
 }
 
-export async function generateFeedback(payload: any) {
+export async function generateFeedback() {
   const data = {
     "feedback": [
       "Your explanation was very clear and easy to follow. You provided a strong, cohesive example.",
@@ -27,7 +27,7 @@ export async function generateFeedback(payload: any) {
   return data;
 }
 
-export async function generateRevision(payload: any) {
+export async function generateRevision() {
   const data = {
     "revised_essay": "The revised essay would have appeared here. This version would be a polished final draft, incorporating the feedback on your original essay and integrating the additional details you provided through the sub-questions. We would have refined the language, strengthened the narrative, and ensured the essay directly addresses the prompt with clear, impactful examples.",
     "revision_explanation": [
@@ -84,7 +84,7 @@ export async function generateSubQuestions(payload: any) {
   return data;
 }
 
-export async function generateFreeEssay(payload: any) {
+export async function generateFreeEssay() {
   const data = {
     "essay": "This is would have been an AI generated 자기소개서 (self-introduction essay) based on the provided question text.",
     "length": "108",
@@ -92,7 +92,7 @@ export async function generateFreeEssay(payload: any) {
   return data;
 }
 
-export async function getFeedback(payload: any) {
+export async function getFeedback() {
   const data = {
     "final_score": 82,
     "feedback_dict": {
@@ -139,7 +139,7 @@ export async function getPersonaFeedback(payload: any) {
   return data;
 }
 
-export async function chatBotRevision(payload: any) {
+export async function chatBotRevision() {
   const data = {
     "user_insight_target": "This is where we would show a line or two showing that we understood the user's intent and what was fixed.",
     "edited_essay": "This would have been the newly revised essay, updated in real-time based on your last response. we would have incorporated your feedback and made the necessary revisions. It would be a more polished version, showing how your input had improved the overall content and tone. The updated draft would have appeared on the right or below depending on whether this is viewed on a laptop or mobile.",
