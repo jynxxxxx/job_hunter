@@ -14,6 +14,7 @@ import {
 import { KakaoLoginButton } from '@/components/layoutSections/KakaoLoginButton';
 import { ensureUserProfile } from '@/components/HelperFunctions';
 import { toast } from 'sonner'; 
+import { DotSpinner } from './DotSpinner';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -24,6 +25,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState<'signup' | 'login'>('login');
+  const [waiting, setWaiting] = useState(false);
 
   const afterLoginRedirect = async () => {
     await router.push(redirect);
@@ -47,6 +49,7 @@ export default function LoginForm() {
       if (!loginAttempted) return; // don't run unless user clicked login
 
       try {
+        setWaiting(true);
         const result = await getRedirectResult(auth); // <--- KEY: Get the result after redirect   
         if (result) {
           await ensureUserProfile(result.user, name);
@@ -67,6 +70,7 @@ export default function LoginForm() {
           toast.error(error.message || 'Google 로그인 중 알 수 없는 오류가 발생했습니다.');
         }
       } finally {
+        setWaiting(false);
         sessionStorage.removeItem('googleLoginAttempted');
       }
     };
@@ -117,6 +121,16 @@ export default function LoginForm() {
     }
   };
 
+  if (waiting) {
+    return (
+    <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gray-100">
+      <div className="p-8 pb-16 bg-white rounded-lg shadow-md text-center">
+        <h1 className="text-2xl font-bold mb-4">로그인 중입니다</h1>
+        <DotSpinner />
+      </div>
+    </div>)
+  }
+  
   return (
     <>
       <h2 className="text-2xl font-bold mb-6 text-center">
